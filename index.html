@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyKitch – Découvrez les saveurs du monde</title>
+  <meta name="description" content="Plus de 100 000 recettes authentiques des quatre coins du globe. Cuisinez comme un chef, partout, tout le temps.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <!-- PWA & Mobile -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#e63946">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="container flex-between">
+    <a href="#" class="logo" onclick="App.navigate('home')" id="logo-link">
+      <span class="logo-icon">🍳</span>
+      <span>My<span style="color:#e63946">Kitch</span></span>
+    </a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a class="nav-link active" data-i18n="nav_home" onclick="App.navigate('home')">Accueil</a></li>
+      <li><a class="nav-link" data-i18n="nav_recipes" onclick="App.navigate('search')">Recettes</a></li>
+      <li><a class="nav-link" data-i18n="nav_categories" onclick="App.navigate('categories')">Catégories</a></li>
+      <li><a class="nav-link" data-i18n="nav_favorites" onclick="App.navigate('favorites')">Favoris</a></li>
+      <li><a class="nav-link" data-i18n="nav_shopping" onclick="App.navigate('shopping')">Liste de courses</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="search-bar">
+        <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Rechercher une recette..." id="search-input">
+        <button onclick="App.navigate('search', {query: document.getElementById('search-input').value})">🔍</button>
+      </div>
+      <button class="btn btn-primary" onclick="App.navigate('login')" data-i18n="btn_login">Connexion</button>
+      <div class="lang-selector">
+        <button class="lang-btn" onclick="i18n.setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="i18n.setLang('ar')">AR</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="app-root">
+  <div class="spinner"></div>
+</main>
+
+<div id="toast-container"></div>
+
+<!-- CSS (with cache buster) -->
+<link rel="stylesheet" href="css/style.css?v=1.2">
+<style>
+  :root { --primary: #e63946; --bg: #fffcf9; --text: #1d3557; --border: #eee; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .navbar { background: white; padding: 20px 0; border-bottom: 1px solid var(--border); sticky: top; top: 0; z-index: 100; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; }
+  .nav-links { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
+  .nav-link { text-decoration: none; color: #444; font-weight: 600; cursor: pointer; }
+  .nav-link.active { color: var(--primary); }
+  .btn { padding: 12px 24px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-secondary { background: #eee; color: #333; }
+  .grid { display: grid; gap: 30px; }
+  .grid-4 { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .recipe-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+  .recipe-card:hover { transform: translateY(-5px); }
+  .card-img { width: 100%; height: 200px; object-fit: cover; }
+  .card-body { padding: 20px; }
+  .spinner { width: 50px; height: 50px; border: 5px solid #eee; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 100px auto; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .adsense-placeholder { background: #f0f0f0; border: 1px dashed #ccc; }
+  .lang-btn { background: none; border: 1px solid #ccc; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-left: 5px; }
+  @media (max-width: 900px) {
+    .nav-links, .nav-actions { display: none; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- Scripts (with cache buster) -->
+<script src="js/i18n.js?v=1.2"></script>
+<script src="app.js?v=1.2"></script>
+<script>
+  // Force unregister old service worker to clear cache
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) { registration.unregister(); }
+    });
+  }
+</script>
+</body>
+</html>
