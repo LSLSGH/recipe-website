@@ -1058,7 +1058,7 @@ const Render = {
         <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
           <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_about')}</a>
           <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_privacy_link')}</a>
-          <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">Contact</a>
+          <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">${T('footer_contact')}</a>
         </div>
         <p>${T('footer_copyright')}</p>
       </footer>`;
