@@ -1465,37 +1465,110 @@ const Render = {
     if (!currentUser) return Render.login();
     if (!currentProfile?.goal) return Render.profileSetup();
     const p = currentProfile;
-    const meals = await API.getBatch(21);
-    const targetCal = p.daily_calories || 2000;
-    const mealCal = Math.round(targetCal / 3);
-    const days = [T('day_0'),T('day_1'),T('day_2'),T('day_3'),T('day_4'),T('day_5'),T('day_6')];
-    const slots = [T('meal_breakfast'),T('meal_lunch'),T('meal_dinner')];
+    const targetCal  = p.daily_calories || 2000;
+    const targetProt = p.daily_protein  || 0;
+
+    // Per-meal calorie targets
+    const bfCal  = Math.round(targetCal * 0.25);
+    const lnCal  = Math.round(targetCal * 0.35);
+    const dnCal  = Math.round(targetCal * 0.30);
+
+    // Goal → Spoonacular filter params
+    const goalExtras = {
+      lose_weight:  `&maxCalories=${Math.round(lnCal * 1.15)}&diet=`,
+      maintain:     ``,
+      gain_weight:  `&minCalories=${Math.round(lnCal * 0.85)}`,
+      gain_muscle:  `&minCalories=${Math.round(lnCal * 0.85)}&minProtein=28`
+    };
+    const extra = goalExtras[p.goal] ?? '';
+
+    const cacheKey = `walkart_menu_${p.goal}_${targetCal}`;
+
+    let menuData = null;
+    try {
+      const raw = sessionStorage.getItem(cacheKey);
+      if (raw) {
+        menuData = JSON.parse(raw);
+        Object.values(menuData).flat().forEach(r => r?.idMeal && RecipeStore.set(r.idMeal, r));
+      }
+    } catch {}
+
+    if (!menuData) {
+      const spoonFetch = async (type, n, extraP = '') => {
+        try {
+          const url = `${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&number=${n}&type=${encodeURIComponent(type)}&addRecipeInformation=true&addRecipeNutrition=true${extraP}`;
+          const res = await fetch(url);
+          if (!res.ok) return [];
+          const d = await res.json();
+          const recipes = (d.results || []).map(SpoonRecipes._normalize);
+          recipes.forEach(r => RecipeStore.set(r.idMeal, r));
+          return recipes;
+        } catch { return []; }
+      };
+
+      const bfExtra = p.goal === 'lose_weight'
+        ? `&maxCalories=${Math.round(bfCal * 1.2)}`
+        : p.goal === 'gain_muscle' ? `&minProtein=15` : '';
+
+      const [breakfasts, mains] = await Promise.all([
+        spoonFetch('breakfast', 7, bfExtra),
+        spoonFetch('main course', 14, extra)
+      ]);
+
+      // Fallback: TheMealDB random if Spoonacular didn't return enough
+      const needed = Math.max(0, 21 - breakfasts.length - mains.length);
+      const fallback = needed > 0 ? await API.getBatch(needed) : [];
+
+      menuData = { breakfasts, mains, fallback };
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(menuData)); } catch {}
+    }
+
+    const { breakfasts = [], mains = [], fallback = [] } = menuData;
+    const days  = [T('day_0'),T('day_1'),T('day_2'),T('day_3'),T('day_4'),T('day_5'),T('day_6')];
+    const slots = [T('meal_breakfast'), T('meal_lunch'), T('meal_dinner')];
+
+    const getMeal = (di, si) => {
+      if (si === 0) return breakfasts[di] || fallback[di] || null;
+      const idx = di * 2 + (si - 1);
+      return mains[idx] || fallback[7 + idx] || null;
+    };
+    const calTargets = [bfCal, lnCal, dnCal];
+
     let html = `
       <div class="container" style="padding:24px 16px;">
         <div style="text-align:center; margin-bottom:24px;">
           <h2 style="font-size:1.6rem;">📅 ${T('my_menu_title')}</h2>
-          <p style="color:var(--text-muted);">${Nutrition.goalLabel(p.goal)} · ${targetCal} kcal/jour · ${p.daily_protein}g protéines</p>
+          <p style="color:var(--text-muted);">
+            ${Nutrition.goalLabel(p.goal)} · ${targetCal} ${T('kcal_per_day')}${targetProt ? ' · ' + targetProt + 'g ' + (T('protein') || 'prot.') : ''}
+          </p>
         </div>`;
+
     days.forEach((day, di) => {
       html += `<div class="menu-day-card"><div class="menu-day-header">${day}</div><div class="menu-slots">`;
       slots.forEach((slot, si) => {
-        const meal = meals[di * 3 + si];
+        const meal = getMeal(di, si);
+        const tgt  = calTargets[si];
         if (meal) {
+          const cal  = meal._calories || tgt;
+          const prot = meal._protein  ? ` · ${Math.round(meal._protein)}g` : '';
           html += `
             <div class="menu-slot" onclick="App.navigate('recipe',{id:'${meal.idMeal}'})">
               <img src="${Safe.attr(meal.strMealThumb)}" class="menu-slot-img" loading="lazy">
               <div class="menu-slot-info">
                 <span class="menu-slot-label">${slot}</span>
                 <span class="menu-slot-title">${Safe.html(meal.strMeal)}</span>
-                <span class="menu-slot-cal">~${mealCal} kcal</span>
+                <span class="menu-slot-cal">~${cal} kcal${prot}</span>
               </div>
             </div>`;
         }
       });
       html += `</div></div>`;
     });
+
     html += `
-        <button class="btn btn-primary btn-full" onclick="Render.myMenu().then(h=>{document.getElementById('app-root').innerHTML=h})" style="margin-top:24px;">
+        <button class="btn btn-primary btn-full"
+          onclick="sessionStorage.removeItem('${cacheKey}'); App.navigate('my-menu');"
+          style="margin-top:24px;">
           🔄 ${T('new_menu')}
         </button>
       </div>`;
