@@ -18,6 +18,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -29,6 +30,7 @@
     </a>
     <div style="display:flex; align-items:center; gap:10px;">
       <button id="pwa-install-btn" class="btn-pwa-install" onclick="Actions.installPWA()" style="display:none;" aria-label="Install app">📲</button>
+      <button id="auth-btn" class="btn-settings" onclick="App.navigate('login')" style="font-size:0.85rem; padding:6px 14px;">🔐 Connexion</button>
       <button class="btn-settings" onclick="UI.toggleSettings()" aria-label="Paramètres">
         ⚙️ <span id="current-lang-text" class="settings-lang-badge">FR</span>
       </button>

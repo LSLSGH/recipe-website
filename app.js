@@ -1,6 +1,123 @@
 /* =====================================================
-   MYKITCH - V22 - Actions Drawer + Country Names Translation
+   WALKART - V23 - Supabase Auth + Personalized Menus
    ===================================================== */
+
+// ---- SUPABASE CLIENT ----
+const SUPA_URL = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
+const SUPA_KEY = 'sb_publishable_nUoUhdHUw_Al5fjjswltOQ_mE5phw-u';
+const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// ---- AUTH STATE ----
+let currentUser = null;
+let currentProfile = null;
+
+const Auth = {
+  init: async () => {
+    const { data: { session } } = await supa.auth.getSession();
+    if (session?.user) {
+      currentUser = session.user;
+      await Auth.loadProfile();
+    }
+    supa.auth.onAuthStateChange(async (_event, session) => {
+      currentUser = session?.user || null;
+      if (currentUser) await Auth.loadProfile();
+      else currentProfile = null;
+      Auth.updateHeader();
+    });
+    Auth.updateHeader();
+  },
+
+  loadProfile: async () => {
+    if (!currentUser) return;
+    const { data } = await supa.from('profiles').select('*').eq('id', currentUser.id).single();
+    currentProfile = data;
+  },
+
+  updateHeader: () => {
+    const btn = document.getElementById('auth-btn');
+    if (!btn) return;
+    if (currentUser) {
+      const name = currentProfile?.full_name || currentUser.email?.split('@')[0] || 'Profil';
+      btn.textContent = '👤 ' + name;
+      btn.onclick = () => App.navigate('profile');
+    } else {
+      btn.textContent = '🔐 Connexion';
+      btn.onclick = () => App.navigate('login');
+    }
+  },
+
+  register: async (email, password, fullName) => {
+    const { error } = await supa.auth.signUp({
+      email, password,
+      options: { data: { full_name: fullName } }
+    });
+    return error;
+  },
+
+  login: async (email, password) => {
+    const { error } = await supa.auth.signInWithPassword({ email, password });
+    return error;
+  },
+
+  logout: async () => {
+    await supa.auth.signOut();
+    currentUser = null;
+    currentProfile = null;
+    App.navigate('home');
+  },
+
+  saveProfile: async (data) => {
+    if (!currentUser) return { error: 'Non connecté' };
+    const calories = Nutrition.calcCalories(data);
+    const protein  = Nutrition.calcProtein(data);
+    const { error } = await supa.from('profiles').upsert({
+      id: currentUser.id,
+      ...data,
+      daily_calories: calories,
+      daily_protein: protein,
+      updated_at: new Date().toISOString()
+    });
+    if (!error) {
+      currentProfile = { ...currentProfile, ...data, daily_calories: calories, daily_protein: protein };
+    }
+    return { error, calories, protein };
+  }
+};
+
+// ---- NUTRITION CALCULATOR ----
+const Nutrition = {
+  calcCalories: ({ weight_kg, height_cm, age, gender, activity_level, goal }) => {
+    if (!weight_kg || !height_cm || !age || !gender) return null;
+    // Mifflin-St Jeor BMR
+    let bmr = 10 * weight_kg + 6.25 * height_cm - 5 * age;
+    bmr += gender === 'male' ? 5 : -161;
+    const multipliers = { sedentary:1.2, light:1.375, moderate:1.55, active:1.725, very_active:1.9 };
+    let tdee = bmr * (multipliers[activity_level] || 1.55);
+    const adjustments = { lose_weight:-500, maintain:0, gain_weight:+500, gain_muscle:+250 };
+    return Math.round(tdee + (adjustments[goal] || 0));
+  },
+
+  calcProtein: ({ weight_kg, goal }) => {
+    if (!weight_kg) return null;
+    const ratio = { lose_weight:1.8, maintain:1.2, gain_weight:1.4, gain_muscle:2.2 };
+    return Math.round(weight_kg * (ratio[goal] || 1.4));
+  },
+
+  goalLabel: (goal) => ({
+    lose_weight: '🔥 Perte de poids',
+    maintain: '⚖️ Maintien',
+    gain_weight: '📈 Prise de masse',
+    gain_muscle: '💪 Prise de muscle'
+  }[goal] || goal),
+
+  activityLabel: (a) => ({
+    sedentary: 'Sédentaire (peu/pas de sport)',
+    light: 'Légère (1-3j/sem)',
+    moderate: 'Modérée (3-5j/sem)',
+    active: 'Active (6-7j/sem)',
+    very_active: 'Très active (2x/jour)'
+  }[a] || a)
+};
 
 const API_BASE = 'https://www.themealdb.com/api/json/v1/1';
 
@@ -445,6 +562,7 @@ const App = {
     }
 
     updateFavBadge();
+    await Auth.init();
     await API.loadInitialData();
 
     // Parse hash — supports #recipe/ID, #area/NAME, or plain #route
@@ -566,6 +684,16 @@ const App = {
           RecipeStore.set(recipe.idMeal, recipe);
           RecentlyViewed.add(recipe);
           html = await Render.recipeDetail(recipe);
+        } else if (route === 'login') {
+          html = Render.login();
+        } else if (route === 'register') {
+          html = Render.register();
+        } else if (route === 'profile') {
+          html = await Render.profile();
+        } else if (route === 'profile-setup') {
+          html = Render.profileSetup();
+        } else if (route === 'my-menu') {
+          html = await Render.myMenu();
         } else if (route === 'privacy') {
           html = Render.privacy();
         } else if (route === 'about') {
@@ -1048,6 +1176,215 @@ const Render = {
           </div>
         </div>
       </div>`;
+  },
+
+  login: () => `
+    <div class="auth-page">
+      <div class="auth-card">
+        <img src="logo.svg" class="auth-logo" alt="Walkart">
+        <h2 class="auth-title">Connexion</h2>
+        <p class="auth-sub">Accédez à vos menus personnalisés</p>
+        <div id="auth-error" class="auth-error" style="display:none;"></div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="vous@exemple.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" id="auth-password" class="form-input" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary btn-full" id="login-btn" onclick="Actions.doLogin()">🔐 Se connecter</button>
+        <div class="auth-divider">ou</div>
+        <button class="btn btn-secondary btn-full" onclick="App.navigate('register')">✉️ Créer un compte</button>
+      </div>
+    </div>`,
+
+  register: () => `
+    <div class="auth-page">
+      <div class="auth-card">
+        <img src="logo.svg" class="auth-logo" alt="Walkart">
+        <h2 class="auth-title">Créer un compte</h2>
+        <p class="auth-sub">Obtenez des menus adaptés à vos objectifs</p>
+        <div id="auth-error" class="auth-error" style="display:none;"></div>
+        <div id="auth-success" class="auth-success" style="display:none;"></div>
+        <div class="form-group">
+          <label class="form-label">Prénom & Nom</label>
+          <input type="text" id="auth-name" class="form-input" placeholder="Jean Dupont" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="vous@exemple.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" id="auth-password" class="form-input" placeholder="8 caractères minimum" autocomplete="new-password">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="Actions.doRegister()">🚀 Créer mon compte</button>
+        <div class="auth-divider">ou</div>
+        <button class="btn btn-secondary btn-full" onclick="App.navigate('login')">🔐 J'ai déjà un compte</button>
+      </div>
+    </div>`,
+
+  profileSetup: () => {
+    const p = currentProfile || {};
+    return `
+    <div class="auth-page">
+      <div class="auth-card" style="max-width:520px;">
+        <h2 class="auth-title">🎯 Mon objectif</h2>
+        <p class="auth-sub">Complétez votre profil pour des menus personnalisés</p>
+        <div id="profile-error" class="auth-error" style="display:none;"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Âge</label>
+            <input type="number" id="p-age" class="form-input" placeholder="25" min="10" max="100" value="${p.age||''}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sexe</label>
+            <select id="p-gender" class="form-input">
+              <option value="">-- Choisir --</option>
+              <option value="male" ${p.gender==='male'?'selected':''}>Homme</option>
+              <option value="female" ${p.gender==='female'?'selected':''}>Femme</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Poids (kg)</label>
+            <input type="number" id="p-weight" class="form-input" placeholder="70" min="20" max="300" step="0.1" value="${p.weight_kg||''}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Taille (cm)</label>
+            <input type="number" id="p-height" class="form-input" placeholder="175" min="50" max="250" value="${p.height_cm||''}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Niveau d'activité</label>
+          <select id="p-activity" class="form-input">
+            <option value="sedentary"   ${p.activity_level==='sedentary'  ?'selected':''}>🪑 Sédentaire (peu/pas de sport)</option>
+            <option value="light"       ${p.activity_level==='light'      ?'selected':''}>🚶 Légère (1-3j/sem)</option>
+            <option value="moderate"    ${p.activity_level==='moderate'   ?'selected':''}>🏃 Modérée (3-5j/sem)</option>
+            <option value="active"      ${p.activity_level==='active'     ?'selected':''}>⚡ Active (6-7j/sem)</option>
+            <option value="very_active" ${p.activity_level==='very_active'?'selected':''}>🔥 Très active (2x/jour)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mon objectif</label>
+          <div class="goal-grid">
+            ${[
+              ['lose_weight',  '🔥', 'Perte de poids',  'Déficit calorique'],
+              ['maintain',     '⚖️', 'Maintien',         'Équilibre calorique'],
+              ['gain_weight',  '📈', 'Prise de masse',   'Surplus calorique'],
+              ['gain_muscle',  '💪', 'Prise de muscle',  'Surplus + protéines']
+            ].map(([val, icon, label, sub]) => `
+              <div class="goal-card ${p.goal===val?'active':''}" onclick="Actions.selectGoal('${val}')">
+                <span class="goal-icon">${icon}</span>
+                <span class="goal-label">${label}</span>
+                <span class="goal-sub">${sub}</span>
+              </div>`).join('')}
+          </div>
+          <input type="hidden" id="p-goal" value="${p.goal||'maintain'}">
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="Actions.saveProfile()" style="margin-top:8px;">
+          💾 Sauvegarder & Voir mon menu
+        </button>
+      </div>
+    </div>`;
+  },
+
+  profile: async () => {
+    if (!currentUser) return Render.login();
+    const p = currentProfile;
+    const name = p?.full_name || currentUser.email?.split('@')[0] || 'Utilisateur';
+    return `
+    <div class="container" style="padding:32px 20px; max-width:600px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:32px;">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--primary); color:#fff; font-size:2rem; display:flex; align-items:center; justify-content:center; margin:0 auto 12px;">
+          ${name.charAt(0).toUpperCase()}
+        </div>
+        <h2 style="font-size:1.6rem;">${Safe.html(name)}</h2>
+        <p style="color:var(--text-muted);">${Safe.html(currentUser.email)}</p>
+      </div>
+
+      ${p?.daily_calories ? `
+      <div class="profile-stats-grid">
+        <div class="profile-stat-card">
+          <span class="profile-stat-icon">🔥</span>
+          <span class="profile-stat-val">${p.daily_calories}</span>
+          <span class="profile-stat-lbl">kcal/jour</span>
+        </div>
+        <div class="profile-stat-card">
+          <span class="profile-stat-icon">🥩</span>
+          <span class="profile-stat-val">${p.daily_protein}g</span>
+          <span class="profile-stat-lbl">protéines/jour</span>
+        </div>
+        <div class="profile-stat-card">
+          <span class="profile-stat-icon">⚖️</span>
+          <span class="profile-stat-val">${p.weight_kg}kg</span>
+          <span class="profile-stat-lbl">poids actuel</span>
+        </div>
+        <div class="profile-stat-card">
+          <span class="profile-stat-icon">🎯</span>
+          <span class="profile-stat-val" style="font-size:0.9rem;">${Nutrition.goalLabel(p.goal)}</span>
+          <span class="profile-stat-lbl">objectif</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="App.navigate('my-menu')" style="margin:20px 0 8px;">
+        📅 Voir mon menu personnalisé
+      </button>` : `
+      <div style="text-align:center; padding:24px; background:var(--surface); border-radius:16px; margin-bottom:20px;">
+        <p style="font-size:1.1rem; margin-bottom:16px;">Complétez votre profil pour obtenir un menu personnalisé !</p>
+        <button class="btn btn-primary" onclick="App.navigate('profile-setup')">🎯 Définir mon objectif</button>
+      </div>`}
+
+      <button class="btn btn-secondary btn-full" onclick="App.navigate('profile-setup')">✏️ Modifier mon profil</button>
+      <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:8px; color:#e53935;">🚪 Se déconnecter</button>
+    </div>`;
+  },
+
+  myMenu: async () => {
+    if (!currentUser) return Render.login();
+    if (!currentProfile?.goal) return Render.profileSetup();
+    const p = currentProfile;
+    const meals = await API.getBatch(21);
+    const targetCal = p.daily_calories || 2000;
+    const mealCal = Math.round(targetCal / 3);
+    const days = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+    const slots = ['🌅 Petit-déj','☀️ Déjeuner','🌙 Dîner'];
+    let html = `
+      <div class="container" style="padding:24px 16px;">
+        <div style="text-align:center; margin-bottom:24px;">
+          <h2 style="font-size:1.6rem;">📅 Mon Menu Personnalisé</h2>
+          <p style="color:var(--text-muted);">${Nutrition.goalLabel(p.goal)} · ${targetCal} kcal/jour · ${p.daily_protein}g protéines</p>
+        </div>`;
+    days.forEach((day, di) => {
+      html += `<div class="menu-day-card"><div class="menu-day-header">${day}</div><div class="menu-slots">`;
+      slots.forEach((slot, si) => {
+        const meal = meals[di * 3 + si];
+        if (meal) {
+          html += `
+            <div class="menu-slot" onclick="App.navigate('recipe',{id:'${meal.idMeal}'})">
+              <img src="${Safe.attr(meal.strMealThumb)}" class="menu-slot-img" loading="lazy">
+              <div class="menu-slot-info">
+                <span class="menu-slot-label">${slot}</span>
+                <span class="menu-slot-title">${Safe.html(meal.strMeal)}</span>
+                <span class="menu-slot-cal">~${mealCal} kcal</span>
+              </div>
+            </div>`;
+        }
+      });
+      html += `</div></div>`;
+    });
+    html += `
+        <button class="btn btn-primary btn-full" onclick="Render.myMenu().then(h=>{document.getElementById('app-root').innerHTML=h})" style="margin-top:24px;">
+          🔄 Nouveau menu
+        </button>
+      </div>`;
+    return html;
   },
 
   privacy: () => `
@@ -1923,6 +2260,79 @@ const Actions = {
     if (!confirm(msg)) return;
     Object.keys(localStorage).filter(k => k.startsWith('walkart_')).forEach(k => localStorage.removeItem(k));
     window.location.reload();
+  },
+
+  doLogin: async () => {
+    const btn = document.getElementById('login-btn');
+    const email = document.getElementById('auth-email')?.value?.trim();
+    const password = document.getElementById('auth-password')?.value;
+    const errEl = document.getElementById('auth-error');
+    if (!email || !password) { errEl.textContent = 'Remplissez tous les champs.'; errEl.style.display='block'; return; }
+    if (btn) { btn.textContent = '⏳ Connexion...'; btn.disabled = true; }
+    const error = await Auth.login(email, password);
+    if (error) {
+      errEl.textContent = error.message.includes('Invalid') ? 'Email ou mot de passe incorrect.' : error.message;
+      errEl.style.display = 'block';
+      if (btn) { btn.textContent = '🔐 Se connecter'; btn.disabled = false; }
+    } else {
+      await Auth.loadProfile();
+      if (!currentProfile?.goal) App.navigate('profile-setup');
+      else App.navigate('my-menu');
+    }
+  },
+
+  doRegister: async () => {
+    const name = document.getElementById('auth-name')?.value?.trim();
+    const email = document.getElementById('auth-email')?.value?.trim();
+    const password = document.getElementById('auth-password')?.value;
+    const errEl = document.getElementById('auth-error');
+    const okEl = document.getElementById('auth-success');
+    if (!name || !email || !password) { errEl.textContent = 'Remplissez tous les champs.'; errEl.style.display='block'; return; }
+    if (password.length < 8) { errEl.textContent = 'Mot de passe : 8 caractères minimum.'; errEl.style.display='block'; return; }
+    const error = await Auth.register(email, password, name);
+    if (error) {
+      errEl.textContent = error.message.includes('already') ? 'Cet email est déjà utilisé.' : error.message;
+      errEl.style.display = 'block';
+    } else {
+      errEl.style.display = 'none';
+      okEl.innerHTML = '✅ Compte créé ! Vérifiez votre email pour confirmer, puis connectez-vous.';
+      okEl.style.display = 'block';
+    }
+  },
+
+  doLogout: async () => {
+    await Auth.logout();
+    Toast.show('👋 Déconnecté');
+  },
+
+  selectGoal: (val) => {
+    document.getElementById('p-goal').value = val;
+    document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  },
+
+  saveProfile: async () => {
+    const data = {
+      full_name: currentProfile?.full_name || currentUser?.email?.split('@')[0],
+      age: parseInt(document.getElementById('p-age')?.value),
+      gender: document.getElementById('p-gender')?.value,
+      weight_kg: parseFloat(document.getElementById('p-weight')?.value),
+      height_cm: parseFloat(document.getElementById('p-height')?.value),
+      activity_level: document.getElementById('p-activity')?.value,
+      goal: document.getElementById('p-goal')?.value || 'maintain'
+    };
+    const errEl = document.getElementById('profile-error');
+    if (!data.age || !data.gender || !data.weight_kg || !data.height_cm) {
+      if (errEl) { errEl.textContent = 'Remplissez tous les champs.'; errEl.style.display = 'block'; }
+      return;
+    }
+    const { error } = await Auth.saveProfile(data);
+    if (error) {
+      if (errEl) { errEl.textContent = 'Erreur: ' + error.message; errEl.style.display = 'block'; }
+    } else {
+      Toast.show('✅ Profil sauvegardé !');
+      App.navigate('my-menu');
+    }
   },
 
   loadMore: async () => {
