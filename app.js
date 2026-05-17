@@ -566,6 +566,10 @@ const App = {
           RecipeStore.set(recipe.idMeal, recipe);
           RecentlyViewed.add(recipe);
           html = await Render.recipeDetail(recipe);
+        } else if (route === 'privacy') {
+          html = Render.privacy();
+        } else if (route === 'about') {
+          html = Render.about();
         } else {
           html = await Render.home();
         }
@@ -807,7 +811,22 @@ const Render = {
         ${areaHTML}
         <h2 class="section-title">✨ ${Safe.html(t_popular)}</h2>
         <div class="recipe-grid">${moreCards.join('')}</div>
-      </div>`;
+        <div style="text-align:center; margin:32px 0;">
+          <button class="btn btn-primary" onclick="Actions.loadMore()" id="load-more-btn" style="padding:14px 40px; font-size:1rem;">
+            🔄 Charger plus de recettes
+          </button>
+        </div>
+        <div id="load-more-grid" class="recipe-grid" style="margin-bottom:16px;"></div>
+      </div>
+      <footer style="background:var(--surface,#1a1a2e); color:var(--text-muted,#aaa); text-align:center; padding:32px 20px; margin-top:40px; border-top:1px solid var(--border,#333); font-size:0.85rem;">
+        <p style="margin-bottom:12px; font-weight:700; color:var(--text,#fff);">🍳 MyKitch</p>
+        <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
+          <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">À propos</a>
+          <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">Politique de confidentialité</a>
+          <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">Contact</a>
+        </div>
+        <p>© ${new Date().getFullYear()} MyKitch · Recettes par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
+      </footer>`;
   },
 
   worldCuisines: async (t_world, t_seeAll) => {
@@ -1030,6 +1049,63 @@ const Render = {
         </div>
       </div>`;
   },
+
+  privacy: () => `
+    <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
+      <button class="btn btn-ghost" onclick="history.back()" style="margin-bottom:24px;">← Retour</button>
+      <h1 style="font-size:1.8rem; margin-bottom:8px;">🔒 Politique de confidentialité</h1>
+      <p style="color:var(--text-muted); margin-bottom:32px;">Dernière mise à jour : ${new Date().toLocaleDateString('fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">1. Informations collectées</h2>
+      <p>MyKitch ne collecte aucune donnée personnelle identifiable. Nous utilisons le stockage local de votre navigateur (localStorage) uniquement pour sauvegarder vos préférences, favoris et historique de recherche sur votre appareil.</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">2. Cookies et publicités</h2>
+      <p>Ce site utilise Google AdSense pour afficher des publicités. Google peut utiliser des cookies pour personnaliser les annonces en fonction de vos visites sur ce site et d'autres sites. Vous pouvez désactiver la personnalisation des annonces sur <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--primary);">Google Ads Settings</a>.</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">3. API tierce partie</h2>
+      <p>Les recettes proviennent de <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary);">TheMealDB</a>, une API publique. Nous ne partageons aucune donnée personnelle avec ce service.</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">4. Traduction</h2>
+      <p>Le service de traduction utilise l'API Google Translate de manière anonyme. Les textes traduits sont mis en cache localement dans votre navigateur.</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">5. Vos droits</h2>
+      <p>Vous pouvez effacer toutes les données locales à tout moment via le menu Paramètres ⚙️ de l'application (option "Réinitialiser l'application").</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">6. Contact</h2>
+      <p>Pour toute question concernant cette politique, contactez-nous à : <a href="mailto:contact@walkart.us" style="color:var(--primary);">contact@walkart.us</a></p>
+    </div>`,
+
+  about: () => `
+    <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
+      <button class="btn btn-ghost" onclick="history.back()" style="margin-bottom:24px;">← Retour</button>
+      <div style="text-align:center; margin-bottom:40px;">
+        <img src="logo.png" alt="MyKitch" style="width:80px; border-radius:20px; margin-bottom:16px;">
+        <h1 style="font-size:2rem;">MyKitch</h1>
+        <p style="color:var(--text-muted); font-size:1.1rem;">Découvrez les saveurs du monde entier</p>
+      </div>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">🍳 Notre mission</h2>
+      <p>MyKitch rassemble des milliers de recettes authentiques des quatre coins du globe, accessibles dans plusieurs langues. Notre objectif : rendre la cuisine du monde accessible à tous.</p>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">✨ Fonctionnalités</h2>
+      <ul style="line-height:2; padding-left:20px;">
+        <li>Plus de 300 recettes du monde entier</li>
+        <li>Disponible en 6 langues (FR, EN, AR, ES, IT, JA)</li>
+        <li>Mode cuisine étape par étape</li>
+        <li>Planificateur de repas hebdomadaire</li>
+        <li>Liste de courses automatique</li>
+        <li>Favoris synchronisés</li>
+      </ul>
+
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">📬 Contact</h2>
+      <p>Une question ou une suggestion ? Écrivez-nous :</p>
+      <a href="mailto:contact@walkart.us" style="display:inline-block; margin-top:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:8px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
+
+      <div style="margin-top:48px; padding:20px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.85rem;">
+        <p>© ${new Date().getFullYear()} MyKitch · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">Politique de confidentialité</a></p>
+        <p style="margin-top:4px;">Recettes fournies par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary);">TheMealDB</a></p>
+      </div>
+    </div>`,
 
   updateIngredientsList: async () => {
     const r = state.currentRecipe;
@@ -1847,6 +1923,24 @@ const Actions = {
     if (!confirm(msg)) return;
     Object.keys(localStorage).filter(k => k.startsWith('mykitch_')).forEach(k => localStorage.removeItem(k));
     window.location.reload();
+  },
+
+  loadMore: async () => {
+    const btn = document.getElementById('load-more-btn');
+    const grid = document.getElementById('load-more-grid');
+    if (!btn || !grid) return;
+    btn.textContent = '⏳ Chargement...';
+    btn.disabled = true;
+    try {
+      const meals = await API.getBatch(12);
+      const cards = await Promise.all(meals.map(r => Render.recipeCard(r)));
+      grid.innerHTML += cards.join('');
+      btn.textContent = '🔄 Charger encore plus';
+      btn.disabled = false;
+    } catch (e) {
+      btn.textContent = '🔄 Charger plus de recettes';
+      btn.disabled = false;
+    }
   },
 
   confirmAddToPlanner: async (date, slot, recipeId) => {
