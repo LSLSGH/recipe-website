@@ -595,12 +595,12 @@ const App = {
     } else {
       App.navigate(seg || 'home');
     }
-    // Re-render when browser back/forward or URL hash changes
+    // Re-render only on external hash changes (browser back/forward, manual URL edit)
     window.addEventListener('hashchange', () => {
+      if (state._navigating) return; // ignore hash changes caused by App.navigate itself
       const raw = window.location.hash.replace('#', '') || 'home';
       const [seg, ...rest] = raw.split('/');
       const param = rest.join('/');
-      if (seg === state.currentRoute && !param) return; // already on this route
       if (seg === 'recipe' && param) App.navigate('recipe', { id: param });
       else if (seg === 'area' && param) App.navigate('area', { a: decodeURIComponent(param) });
       else if (seg === 'category' && param) App.navigate('category', { c: decodeURIComponent(param) });
@@ -654,6 +654,7 @@ const App = {
     state.prevRoute = state.currentRoute;
     state.currentRoute = route;
     const renderToken = ++state._renderToken;
+    state._navigating = true;
     // Encode deep routes so URLs are shareable
     if (route === 'recipe' && params?.id) {
       window.location.hash = `recipe/${params.id}`;
@@ -664,6 +665,7 @@ const App = {
     } else {
       window.location.hash = route;
     }
+    state._navigating = false;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     document.querySelectorAll('.tab-item').forEach(el => {
