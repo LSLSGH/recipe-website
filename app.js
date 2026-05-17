@@ -37,11 +37,11 @@ const Auth = {
     const btn = document.getElementById('auth-btn');
     if (!btn) return;
     if (currentUser) {
-      const name = currentProfile?.full_name || currentUser.email?.split('@')[0] || 'Profil';
+      const name = currentProfile?.full_name || currentUser.email?.split('@')[0] || T('nav_profile');
       btn.textContent = '👤 ' + name;
       btn.onclick = () => App.navigate('profile');
     } else {
-      btn.textContent = '🔐 Connexion';
+      btn.textContent = '🔐 ' + T('connexion');
       btn.onclick = () => App.navigate('login');
     }
   },
@@ -396,6 +396,9 @@ const state = {
   dailyFeed: null
 };
 
+// ---- i18n shorthand (synchronous, no API calls) ----
+const T = k => i18n.t(k);
+
 // ---- TOAST (with undo) ----
 const Toast = {
   _timeout: null,
@@ -549,6 +552,7 @@ const App = {
     window.addEventListener('offline', () => Toast.show('📶 Connexion perdue', 4000));
     window.addEventListener('online', () => Toast.show('✅ Connexion rétablie', 3000));
 
+    i18n.set(state.lang || 'fr');
     document.getElementById('current-lang-text').textContent = state.langName;
     document.documentElement.setAttribute('lang', state.lang);
     if (state.lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
@@ -648,7 +652,7 @@ const App = {
         </div>
       </div>`;
 
-    setTimeout(async () => {
+    (async () => {
       try {
         let html = '';
         if (route === 'home') {
@@ -704,21 +708,17 @@ const App = {
 
         root.innerHTML = html;
         if (route === 'recipe') await Render.updateIngredientsList();
-        await Translator.translateUI();
       } catch (e) {
         console.error('Navigation error:', e);
-        const [t_err, t_net, t_retry] = await Translator.all(
-          'Oops, an error occurred', 'Check your connection and try again.', 'Try again'
-        );
         root.innerHTML = `
           <div class="container error-state">
             <div class="error-icon">😕</div>
-            <h2>${Safe.html(t_err)}</h2>
-            <p>${Safe.html(t_net)}</p>
-            <button class="btn btn-primary" onclick="App.navigate('${route}')">${Safe.html(t_retry)}</button>
+            <h2>${Safe.html(T('toast_error'))}</h2>
+            <p>Vérifiez votre connexion et réessayez.</p>
+            <button class="btn btn-primary" onclick="App.navigate('${route}')">${Safe.html(T('back'))}</button>
           </div>`;
       }
-    }, 300);
+    })();
   },
 
   changeLang: async (code, name) => {
@@ -726,6 +726,7 @@ const App = {
     state.langName = name;
     localStorage.setItem('walkart_lang', code);
     localStorage.setItem('walkart_lang_name', name);
+    i18n.set(code);
     document.getElementById('current-lang-text').textContent = name;
     document.documentElement.setAttribute('lang', code);
     if (code === 'ar') document.documentElement.setAttribute('dir', 'rtl');
@@ -861,10 +862,10 @@ const Render = {
     const b = state.collections.billboard;
     if (!b) return '<div class="container"><div class="spinner"></div></div>';
 
-    const [bt, t_featured, t_cook, t_surprise, t_recent, t_today, t_popular, t_world, t_seeAll, t_categories] = await Translator.all(
-      b.strMeal, 'Featured', 'Cook now', 'Surprise me', 'Recently viewed',
-      "Today's Picks", 'You may also like', 'World Cuisines', 'See all', 'Categories'
-    );
+    const bt = await Translator.t(b.strMeal);
+    const t_featured = T('featured'), t_cook = T('cook_now'), t_surprise = T('surprise_me'),
+      t_recent = T('recently_viewed'), t_today = T('todays_picks'), t_popular = T('you_may_like'),
+      t_world = T('section_world'), t_seeAll = T('see_all'), t_categories = T('section_categories');
     const isFav = state.favorites.some(f => f.idMeal === b.idMeal);
 
     // ---- Category chips (all categories) ----
@@ -941,7 +942,7 @@ const Render = {
         <div class="recipe-grid">${moreCards.join('')}</div>
         <div style="text-align:center; margin:32px 0;">
           <button class="btn btn-primary" onclick="Actions.loadMore()" id="load-more-btn" style="padding:14px 40px; font-size:1rem;">
-            🔄 Charger plus de recettes
+            🔄 ${T('load_more')}
           </button>
         </div>
         <div id="load-more-grid" class="recipe-grid" style="margin-bottom:16px;"></div>
@@ -949,11 +950,11 @@ const Render = {
       <footer style="background:var(--surface,#1a1a2e); color:var(--text-muted,#aaa); text-align:center; padding:32px 20px; margin-top:40px; border-top:1px solid var(--border,#333); font-size:0.85rem;">
         <p style="margin-bottom:12px; font-weight:700; color:var(--text,#fff);">🍳 Walkart</p>
         <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
-          <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">À propos</a>
-          <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">Politique de confidentialité</a>
+          <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_about')}</a>
+          <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_privacy_link')}</a>
           <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">Contact</a>
         </div>
-        <p>© ${new Date().getFullYear()} Walkart · Recettes par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
+        <p>${T('footer_copyright')} · <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
       </footer>`;
   },
 
@@ -1004,7 +1005,7 @@ const Render = {
     // Empty query: show history + popular
     if (!query) {
       const hist = SearchHistory.get();
-      const [t_hist, t_clear, t_popular] = await Translator.all('Recent searches', 'Clear', 'Popular');
+      const t_hist = T('recent_searches'), t_clear = T('clear_all'), t_popular = T('section_popular');
 
       const histSection = hist.length ? `
         <div class="search-history-section">
@@ -1035,9 +1036,8 @@ const Render = {
       ? results.filter(r => r.strCategory === state.searchFilter)
       : results;
 
-    const [t_results, t_empty, t_explore, t_all] = await Translator.all(
-      'results', 'No recipe found', 'Explore categories', 'All'
-    );
+    const t_results = T('search_results'), t_empty = T('no_results'),
+      t_explore = T('explore_categories'), t_all = T('filter_all');
 
     const categories = [...new Set(results.map(r => r.strCategory).filter(Boolean))];
     const filterBar = categories.length > 1 ? `
@@ -1071,14 +1071,11 @@ const Render = {
 
   recipeDetail: async (r) => {
     const stepsRaw = Instructions.parse(r.strInstructions);
-    const [
-      tName, tCategory, tArea,
-      t_ing, t_prep, t_start, t_share, t_servings, t_source, t_print, t_rating, t_addAll, t_addPlan
-    ] = await Translator.all(
-      r.strMeal, r.strCategory || '', r.strArea || '',
-      'Ingredients', 'Preparation', 'START COOKING',
-      'Share', 'Servings', 'Source', 'Print', 'Your rating', 'Add all', 'Add to plan'
-    );
+    const [tName, tCategory, tArea] = await Translator.all(r.strMeal, r.strCategory || '', r.strArea || '');
+    const t_ing = T('ingredients'), t_prep = T('preparation'), t_start = T('start_cooking'),
+      t_share = T('share'), t_servings = T('servings'), t_source = T('source'),
+      t_print = T('print'), t_rating = T('your_rating'), t_addAll = T('add_all'),
+      t_addPlan = T('add_to_plan');
 
     const steps = await Promise.all(stepsRaw.map(s => Translator.t(s)));
     const isFav = state.favorites.some(f => f.idMeal === r.idMeal);
@@ -1182,20 +1179,20 @@ const Render = {
     <div class="auth-page">
       <div class="auth-card">
         <img src="logo.svg" class="auth-logo" alt="Walkart">
-        <h2 class="auth-title">Connexion</h2>
-        <p class="auth-sub">Accédez à vos menus personnalisés</p>
+        <h2 class="auth-title">${T('connexion')}</h2>
+        <p class="auth-sub">${T('login_access')}</p>
         <div id="auth-error" class="auth-error" style="display:none;"></div>
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" id="auth-email" class="form-input" placeholder="vous@exemple.com" autocomplete="email">
+          <label class="form-label">${T('email')}</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="${T('email_placeholder')}" autocomplete="email">
         </div>
         <div class="form-group">
-          <label class="form-label">Mot de passe</label>
+          <label class="form-label">${T('password')}</label>
           <input type="password" id="auth-password" class="form-input" placeholder="••••••••" autocomplete="current-password">
         </div>
-        <button class="btn btn-primary btn-full" id="login-btn" onclick="Actions.doLogin()">🔐 Se connecter</button>
-        <div class="auth-divider">ou</div>
-        <button class="btn btn-secondary btn-full" onclick="App.navigate('register')">✉️ Créer un compte</button>
+        <button class="btn btn-primary btn-full" id="login-btn" onclick="Actions.doLogin()">🔐 ${T('btn_login')}</button>
+        <div class="auth-divider">${T('or')}</div>
+        <button class="btn btn-secondary btn-full" onclick="App.navigate('register')">✉️ ${T('create_account')}</button>
       </div>
     </div>`,
 
@@ -1203,25 +1200,25 @@ const Render = {
     <div class="auth-page">
       <div class="auth-card">
         <img src="logo.svg" class="auth-logo" alt="Walkart">
-        <h2 class="auth-title">Créer un compte</h2>
-        <p class="auth-sub">Obtenez des menus adaptés à vos objectifs</p>
+        <h2 class="auth-title">${T('create_account')}</h2>
+        <p class="auth-sub">${T('register_access')}</p>
         <div id="auth-error" class="auth-error" style="display:none;"></div>
         <div id="auth-success" class="auth-success" style="display:none;"></div>
         <div class="form-group">
-          <label class="form-label">Prénom & Nom</label>
-          <input type="text" id="auth-name" class="form-input" placeholder="Jean Dupont" autocomplete="name">
+          <label class="form-label">${T('full_name')}</label>
+          <input type="text" id="auth-name" class="form-input" placeholder="${T('full_name_placeholder')}" autocomplete="name">
         </div>
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" id="auth-email" class="form-input" placeholder="vous@exemple.com" autocomplete="email">
+          <label class="form-label">${T('email')}</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="${T('email_placeholder')}" autocomplete="email">
         </div>
         <div class="form-group">
-          <label class="form-label">Mot de passe</label>
-          <input type="password" id="auth-password" class="form-input" placeholder="8 caractères minimum" autocomplete="new-password">
+          <label class="form-label">${T('password')}</label>
+          <input type="password" id="auth-password" class="form-input" placeholder="••••••••" autocomplete="new-password">
         </div>
-        <button class="btn btn-primary btn-full" onclick="Actions.doRegister()">🚀 Créer mon compte</button>
-        <div class="auth-divider">ou</div>
-        <button class="btn btn-secondary btn-full" onclick="App.navigate('login')">🔐 J'ai déjà un compte</button>
+        <button class="btn btn-primary btn-full" onclick="Actions.doRegister()">🚀 ${T('btn_register')}</button>
+        <div class="auth-divider">${T('or')}</div>
+        <button class="btn btn-secondary btn-full" onclick="App.navigate('login')">🔐 ${T('already_account')}</button>
       </div>
     </div>`,
 
@@ -1230,55 +1227,55 @@ const Render = {
     return `
     <div class="auth-page">
       <div class="auth-card" style="max-width:520px;">
-        <h2 class="auth-title">🎯 Mon objectif</h2>
-        <p class="auth-sub">Complétez votre profil pour des menus personnalisés</p>
+        <h2 class="auth-title">🎯 ${T('my_goal')}</h2>
+        <p class="auth-sub">${T('profile_hint')}</p>
         <div id="profile-error" class="auth-error" style="display:none;"></div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Âge</label>
+            <label class="form-label">${T('age')}</label>
             <input type="number" id="p-age" class="form-input" placeholder="25" min="10" max="100" value="${p.age||''}">
           </div>
           <div class="form-group">
-            <label class="form-label">Sexe</label>
+            <label class="form-label">${T('gender_label')}</label>
             <select id="p-gender" class="form-input">
-              <option value="">-- Choisir --</option>
-              <option value="male" ${p.gender==='male'?'selected':''}>Homme</option>
-              <option value="female" ${p.gender==='female'?'selected':''}>Femme</option>
+              <option value="">--</option>
+              <option value="male" ${p.gender==='male'?'selected':''}>${T('male')}</option>
+              <option value="female" ${p.gender==='female'?'selected':''}>${T('female')}</option>
             </select>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Poids (kg)</label>
+            <label class="form-label">${T('weight')}</label>
             <input type="number" id="p-weight" class="form-input" placeholder="70" min="20" max="300" step="0.1" value="${p.weight_kg||''}">
           </div>
           <div class="form-group">
-            <label class="form-label">Taille (cm)</label>
+            <label class="form-label">${T('height')}</label>
             <input type="number" id="p-height" class="form-input" placeholder="175" min="50" max="250" value="${p.height_cm||''}">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Niveau d'activité</label>
+          <label class="form-label">${T('activity_label')}</label>
           <select id="p-activity" class="form-input">
-            <option value="sedentary"   ${p.activity_level==='sedentary'  ?'selected':''}>🪑 Sédentaire (peu/pas de sport)</option>
-            <option value="light"       ${p.activity_level==='light'      ?'selected':''}>🚶 Légère (1-3j/sem)</option>
-            <option value="moderate"    ${p.activity_level==='moderate'   ?'selected':''}>🏃 Modérée (3-5j/sem)</option>
-            <option value="active"      ${p.activity_level==='active'     ?'selected':''}>⚡ Active (6-7j/sem)</option>
-            <option value="very_active" ${p.activity_level==='very_active'?'selected':''}>🔥 Très active (2x/jour)</option>
+            <option value="sedentary"   ${p.activity_level==='sedentary'  ?'selected':''}>${T('act_sedentary')}</option>
+            <option value="light"       ${p.activity_level==='light'      ?'selected':''}>${T('act_light')}</option>
+            <option value="moderate"    ${p.activity_level==='moderate'   ?'selected':''}>${T('act_moderate')}</option>
+            <option value="active"      ${p.activity_level==='active'     ?'selected':''}>${T('act_active')}</option>
+            <option value="very_active" ${p.activity_level==='very_active'?'selected':''}>${T('act_very_active')}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Mon objectif</label>
+          <label class="form-label">${T('goal_label')}</label>
           <div class="goal-grid">
             ${[
-              ['lose_weight',  '🔥', 'Perte de poids',  'Déficit calorique'],
-              ['maintain',     '⚖️', 'Maintien',         'Équilibre calorique'],
-              ['gain_weight',  '📈', 'Prise de masse',   'Surplus calorique'],
-              ['gain_muscle',  '💪', 'Prise de muscle',  'Surplus + protéines']
+              ['lose_weight',  '🔥', T('goal_lose_label'),    T('goal_lose_sub')],
+              ['maintain',     '⚖️', T('goal_maintain_label'), T('goal_maintain_sub')],
+              ['gain_weight',  '📈', T('goal_gain_label'),    T('goal_gain_sub')],
+              ['gain_muscle',  '💪', T('goal_muscle_label'),  T('goal_muscle_sub')]
             ].map(([val, icon, label, sub]) => `
               <div class="goal-card ${p.goal===val?'active':''}" onclick="Actions.selectGoal('${val}')">
                 <span class="goal-icon">${icon}</span>
@@ -1290,7 +1287,7 @@ const Render = {
         </div>
 
         <button class="btn btn-primary btn-full" onclick="Actions.saveProfile()" style="margin-top:8px;">
-          💾 Sauvegarder & Voir mon menu
+          💾 ${T('save_and_menu')}
         </button>
       </div>
     </div>`;
@@ -1315,34 +1312,34 @@ const Render = {
         <div class="profile-stat-card">
           <span class="profile-stat-icon">🔥</span>
           <span class="profile-stat-val">${p.daily_calories}</span>
-          <span class="profile-stat-lbl">kcal/jour</span>
+          <span class="profile-stat-lbl">${T('kcal_per_day')}</span>
         </div>
         <div class="profile-stat-card">
           <span class="profile-stat-icon">🥩</span>
           <span class="profile-stat-val">${p.daily_protein}g</span>
-          <span class="profile-stat-lbl">protéines/jour</span>
+          <span class="profile-stat-lbl">${T('protein_per_day')}</span>
         </div>
         <div class="profile-stat-card">
           <span class="profile-stat-icon">⚖️</span>
           <span class="profile-stat-val">${p.weight_kg}kg</span>
-          <span class="profile-stat-lbl">poids actuel</span>
+          <span class="profile-stat-lbl">${T('current_weight')}</span>
         </div>
         <div class="profile-stat-card">
           <span class="profile-stat-icon">🎯</span>
           <span class="profile-stat-val" style="font-size:0.9rem;">${Nutrition.goalLabel(p.goal)}</span>
-          <span class="profile-stat-lbl">objectif</span>
+          <span class="profile-stat-lbl">${T('objective')}</span>
         </div>
       </div>
       <button class="btn btn-primary btn-full" onclick="App.navigate('my-menu')" style="margin:20px 0 8px;">
-        📅 Voir mon menu personnalisé
+        📅 ${T('view_my_menu')}
       </button>` : `
       <div style="text-align:center; padding:24px; background:var(--surface); border-radius:16px; margin-bottom:20px;">
-        <p style="font-size:1.1rem; margin-bottom:16px;">Complétez votre profil pour obtenir un menu personnalisé !</p>
-        <button class="btn btn-primary" onclick="App.navigate('profile-setup')">🎯 Définir mon objectif</button>
+        <p style="font-size:1.1rem; margin-bottom:16px;">${T('complete_profile')}</p>
+        <button class="btn btn-primary" onclick="App.navigate('profile-setup')">🎯 ${T('set_goal')}</button>
       </div>`}
 
-      <button class="btn btn-secondary btn-full" onclick="App.navigate('profile-setup')">✏️ Modifier mon profil</button>
-      <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:8px; color:#e53935;">🚪 Se déconnecter</button>
+      <button class="btn btn-secondary btn-full" onclick="App.navigate('profile-setup')">✏️ ${T('edit_profile')}</button>
+      <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:8px; color:#e53935;">🚪 ${T('logout_btn')}</button>
     </div>`;
   },
 
@@ -1353,12 +1350,12 @@ const Render = {
     const meals = await API.getBatch(21);
     const targetCal = p.daily_calories || 2000;
     const mealCal = Math.round(targetCal / 3);
-    const days = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-    const slots = ['🌅 Petit-déj','☀️ Déjeuner','🌙 Dîner'];
+    const days = [T('day_0'),T('day_1'),T('day_2'),T('day_3'),T('day_4'),T('day_5'),T('day_6')];
+    const slots = [T('meal_breakfast'),T('meal_lunch'),T('meal_dinner')];
     let html = `
       <div class="container" style="padding:24px 16px;">
         <div style="text-align:center; margin-bottom:24px;">
-          <h2 style="font-size:1.6rem;">📅 Mon Menu Personnalisé</h2>
+          <h2 style="font-size:1.6rem;">📅 ${T('my_menu_title')}</h2>
           <p style="color:var(--text-muted);">${Nutrition.goalLabel(p.goal)} · ${targetCal} kcal/jour · ${p.daily_protein}g protéines</p>
         </div>`;
     days.forEach((day, di) => {
@@ -1381,7 +1378,7 @@ const Render = {
     });
     html += `
         <button class="btn btn-primary btn-full" onclick="Render.myMenu().then(h=>{document.getElementById('app-root').innerHTML=h})" style="margin-top:24px;">
-          🔄 Nouveau menu
+          🔄 ${T('new_menu')}
         </button>
       </div>`;
     return html;
@@ -1479,11 +1476,10 @@ const Render = {
   },
 
   shopping: async () => {
-    const [t_title, t_empty, t_clear, t_add_hint, t_discover, t_done, t_add_item, t_qty, t_share_list, t_clear_done] = await Translator.all(
-      'Shopping List', 'Your list is empty', 'Clear all',
-      'Add ingredients from a recipe.',
-      'Discover recipes', 'done', 'Add an item...', 'Qty', 'Share list', 'Clear done'
-    );
+    const t_title = T('shopping_title'), t_empty = T('no_items'), t_clear = T('clear_all'),
+      t_add_hint = T('shopping_hint'), t_discover = T('discover_recipes'), t_done = T('done'),
+      t_add_item = T('add_item_placeholder'), t_qty = T('qty'),
+      t_share_list = T('share_list'), t_clear_done = T('clear_done');
 
     const addForm = `
       <div class="shopping-add-form">
@@ -1539,7 +1535,7 @@ const Render = {
   },
 
   categories: async () => {
-    const t_cat = await Translator.t('Categories');
+    const t_cat = T('section_categories');
     const cats = await Promise.all(state.categories.map(async c => {
       const t = await Translator.t(c.strCategory);
       return `
@@ -1552,7 +1548,7 @@ const Render = {
   },
 
   categoryPage: async (category, meals) => {
-    const [t_cat, t_back] = await Translator.all(category, '← Back');
+    const t_cat = await Translator.t(category), t_back = T('back');
     // Show ALL recipes for this category
     const augmented = meals.map(m => ({ ...m, strCategory: category }));
     augmented.forEach(m => RecipeStore.set(m.idMeal, m));
@@ -1568,9 +1564,9 @@ const Render = {
   },
 
   areaPage: async (area, meals) => {
-    const [tArea, t_back, t_cuisine, t_empty, t_explore] = await Translator.all(
-      area, '← Back', 'Cuisine', 'No recipes found for this cuisine yet.', 'Explore all cuisines'
-    );
+    const tArea = await Translator.t(area);
+    const t_back = T('back'), t_cuisine = T('cuisine'),
+      t_empty = T('no_cuisine_recipes'), t_explore = T('explore_cuisines');
 
     if (!meals?.length) {
       return `
