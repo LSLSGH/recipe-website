@@ -2336,16 +2336,18 @@ const Actions = {
     const btn = document.getElementById('load-more-btn');
     const grid = document.getElementById('load-more-grid');
     if (!btn || !grid) return;
-    btn.textContent = '⏳ Chargement...';
+    btn.innerHTML = '⏳ ' + T('load_more') + '...';
     btn.disabled = true;
     try {
       const meals = await API.getBatch(12);
       const cards = await Promise.all(meals.map(r => Render.recipeCard(r)));
       grid.innerHTML += cards.join('');
-      btn.textContent = '🔄 Charger encore plus';
+      btn.innerHTML = '🔄 ' + T('load_more');
       btn.disabled = false;
+      // Move button below the newly loaded cards
+      grid.after(btn.parentElement);
     } catch (e) {
-      btn.textContent = '🔄 Charger plus de recettes';
+      btn.innerHTML = '🔄 ' + T('load_more');
       btn.disabled = false;
     }
   },
