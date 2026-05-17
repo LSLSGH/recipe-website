@@ -121,3 +121,128 @@ $$;
 
 CREATE TRIGGER profiles_updated_at BEFORE UPDATE ON public.profiles
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- =====================================================
+--  FEATURES v2 - New Tables
+-- =====================================================
+
+-- 5. COMMENTS (public read, user write)
+CREATE TABLE IF NOT EXISTS public.comments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  recipe_id TEXT NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_name TEXT,
+  text TEXT NOT NULL CHECK (char_length(text) BETWEEN 1 AND 1000),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "comments_read" ON public.comments FOR SELECT USING (true);
+CREATE POLICY "comments_insert" ON public.comments FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "comments_delete" ON public.comments FOR DELETE USING (auth.uid() = user_id);
+CREATE INDEX IF NOT EXISTS comments_recipe_id_idx ON public.comments (recipe_id);
+
+-- 6. COOKING PHOTOS (public read, user write)
+CREATE TABLE IF NOT EXISTS public.cooking_photos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  recipe_id TEXT NOT NULL,
+  photo_url TEXT NOT NULL,
+  caption TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.cooking_photos ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "photos_read" ON public.cooking_photos FOR SELECT USING (true);
+CREATE POLICY "photos_insert" ON public.cooking_photos FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "photos_delete" ON public.cooking_photos FOR DELETE USING (auth.uid() = user_id);
+CREATE INDEX IF NOT EXISTS photos_recipe_id_idx ON public.cooking_photos (recipe_id);
+
+-- 7. CUSTOM RECIPES (private per user)
+CREATE TABLE IF NOT EXISTS public.custom_recipes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  image_url TEXT DEFAULT '',
+  ingredients JSONB DEFAULT '[]',
+  instructions TEXT DEFAULT '',
+  calories INTEGER,
+  protein_g DECIMAL(6,1),
+  prep_time INTEGER,
+  servings INTEGER DEFAULT 4,
+  tags TEXT[] DEFAULT '{}',
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.custom_recipes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "custom_recipes_self" ON public.custom_recipes
+  USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE TRIGGER custom_recipes_updated_at BEFORE UPDATE ON public.custom_recipes
+  FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- 8. NUTRITION LOG (private per user)
+CREATE TABLE IF NOT EXISTS public.nutrition_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  log_date DATE NOT NULL,
+  calories INTEGER DEFAULT 0,
+  protein_g DECIMAL(6,1) DEFAULT 0,
+  carbs_g DECIMAL(6,1) DEFAULT 0,
+  fat_g DECIMAL(6,1) DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, log_date)
+);
+ALTER TABLE public.nutrition_log ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "nutrition_log_self" ON public.nutrition_log
+  USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+CREATE INDEX IF NOT EXISTS nutrition_log_user_date_idx ON public.nutrition_log (user_id, log_date);
+
+-- 9. FOLLOWS (social)
+CREATE TABLE IF NOT EXISTS public.follows (
+  follower_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  followed_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  PRIMARY KEY (follower_id, followed_id)
+);
+ALTER TABLE public.follows ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "follows_read" ON public.follows FOR SELECT USING (true);
+CREATE POLICY "follows_insert" ON public.follows FOR INSERT WITH CHECK (auth.uid() = follower_id);
+CREATE POLICY "follows_delete" ON public.follows FOR DELETE USING (auth.uid() = follower_id);
+
+-- Make profiles partially public (name only)
+CREATE POLICY "profiles_public_read" ON public.profiles FOR SELECT USING (true);
+
+-- 10. SHARED COLLECTIONS (public share via token)
+CREATE TABLE IF NOT EXISTS public.shared_collections (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  recipes JSONB DEFAULT '[]',
+  share_token TEXT UNIQUE NOT NULL,
+  is_public BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.shared_collections ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "shared_col_read" ON public.shared_collections FOR SELECT USING (is_public = true OR auth.uid() = user_id);
+CREATE POLICY "shared_col_insert" ON public.shared_collections FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "shared_col_delete" ON public.shared_collections FOR DELETE USING (auth.uid() = user_id);
+
+-- 11. RECIPE VIEWS (leaderboard)
+CREATE TABLE IF NOT EXISTS public.recipe_views (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  recipe_id TEXT UNIQUE NOT NULL,
+  recipe_title TEXT,
+  recipe_thumb TEXT,
+  total_views INTEGER DEFAULT 0,
+  last_seen TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.recipe_views ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "recipe_views_read" ON public.recipe_views FOR SELECT USING (true);
+CREATE POLICY "recipe_views_insert" ON public.recipe_views FOR INSERT WITH CHECK (true);
+CREATE POLICY "recipe_views_update" ON public.recipe_views FOR UPDATE USING (true);
+
+-- =====================================================
+--  SUPABASE STORAGE - cooking-photos bucket
+--  Run this in the Supabase Storage dashboard or SQL:
+-- =====================================================
+-- INSERT INTO storage.buckets (id, name, public) VALUES ('cooking-photos', 'cooking-photos', true);
+-- CREATE POLICY "anyone can upload" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'cooking-photos');
+-- CREATE POLICY "photos are public" ON storage.objects FOR SELECT USING (bucket_id = 'cooking-photos');

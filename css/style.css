@@ -2020,7 +2020,7 @@ body.dark-mode .toast-undo { border-color: rgba(255,255,255,0.4); }
   opacity: 0;
 }
 .actions-drawer.open {
-  max-height: 200px;
+  max-height: 400px;
   opacity: 1;
 }
 
@@ -2686,4 +2686,165 @@ body.dark-mode .menu-day-card {
   transition: opacity 0.15s;
 }
 .collection-delete:hover { opacity: 1; }
+
+/* =====================================================
+   FEATURES v1 — New CSS
+   ===================================================== */
+
+/* --- DISCOVER SECTION (home) --- */
+.discover-section { margin: 24px 0; }
+.discover-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.discover-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 16px 8px;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.discover-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.discover-card:active { transform: scale(0.97); }
+.discover-icon { font-size: 1.8rem; line-height: 1; }
+.discover-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
+
+/* --- COMMENTS --- */
+.feature-section {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+.comments-list { display: flex; flex-direction: column; gap: 10px; }
+.comment-item {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 12px;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.comment-author { font-weight: 700; font-size: 0.85rem; }
+.comment-date { color: var(--text-muted); font-size: 0.75rem; margin-left: auto; }
+.comment-text { font-size: 0.9rem; line-height: 1.5; margin: 0; }
+
+/* --- PHOTOS --- */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.photo-card { border-radius: 12px; overflow: hidden; }
+.photo-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s;
+}
+.photo-thumb:hover { transform: scale(1.03); }
+.photo-caption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  margin: 0;
+  background: var(--surface);
+}
+
+/* --- CHALLENGES --- */
+.challenge-hero {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-md);
+}
+.challenge-hero-done {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+.challenge-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.challenge-card.challenge-done { opacity: 0.75; }
+.challenge-emoji { font-size: 2rem; flex-shrink: 0; }
+.challenge-info { flex: 1; }
+.challenge-info h4 { font-size: 0.95rem; margin-bottom: 2px; }
+.progress-bar {
+  background: var(--bg);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+  margin: 6px 0 4px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.challenge-hero .progress-bar { background: rgba(255,255,255,0.3); }
+.challenge-hero .progress-fill { background: #fff; }
+
+/* --- NUTRITION TRACKER STATS --- */
+.stat-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.stat-val { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: block; }
+.stat-lbl { font-size: 0.75rem; color: var(--text-muted); }
+
+/* --- ALLERGEN FILTER --- */
+.allergen-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.allergen-btn:hover { border-color: var(--primary); }
+.allergen-btn-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* --- SCANNER --- */
+#scanner-video { border-radius: 16px; }
+
+/* --- RECIPE FEATURE SECTIONS (injected into detail) --- */
+#recipe-feature-sections { padding: 0 4px; }
+
+/* Dark mode adjustments */
+body.dark-mode .discover-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .comment-item { background: rgba(255,255,255,0.04); }
+body.dark-mode .challenge-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .stat-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .allergen-btn { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.12); }
+
 

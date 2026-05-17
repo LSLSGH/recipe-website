@@ -702,7 +702,11 @@ const App = {
             state.searchFilter = '';
           }
           if (!query) state.searchQuery = '';
-          html = await Render.searchResults(state.searchResults, query);
+          // Apply allergen filter if active
+          const displayResults = typeof AllergenFilter !== 'undefined'
+            ? AllergenFilter.filterRecipes(state.searchResults)
+            : state.searchResults;
+          html = await Render.searchResults(displayResults, query);
         } else if (route === 'categories') {
           html = await Render.categories();
         } else if (route === 'shopping') {
@@ -787,7 +791,14 @@ const App = {
         }
 
         root.innerHTML = html;
-        if (route === 'recipe') await Render.updateIngredientsList();
+        if (route === 'recipe') {
+          await Render.updateIngredientsList();
+          // Trigger feature sections injection (comments, photos, leaderboard, challenges)
+          const recipeId = params?.id || state.currentRecipe?.idMeal;
+          if (recipeId && typeof FeatureRender !== 'undefined') {
+            document.dispatchEvent(new CustomEvent('_recipeRendered', { detail: { id: recipeId } }));
+          }
+        }
         if (route === 'home') App._setupInfiniteScroll();
       } catch (e) {
         if (renderToken !== state._renderToken) return;
@@ -1030,6 +1041,13 @@ const API = {
     return meals;
   },
   getRecipe: async (id) => {
+    if (id.startsWith('custom_')) {
+      if (typeof CustomRecipes !== 'undefined') {
+        const r = await CustomRecipes.getById(id.replace('custom_', ''));
+        return r ? CustomRecipes.toMealFormat(r) : null;
+      }
+      return null;
+    }
     if (id.startsWith('spoon_')) return SpoonRecipes.getById(id.replace('spoon_', ''));
     if (id.startsWith('mealdb_')) {
       const supaR = await SupaRecipes.getById(id);
@@ -1349,6 +1367,17 @@ const Render = {
         <div class="chips-row">${catChips}</div>
         ${recentSection}
         ${worldSection}
+        <div class="discover-section">
+          <h2 class="section-title" style="margin-bottom:12px;">✨ Découvrir</h2>
+          <div class="discover-grid">
+            <div class="discover-card" onclick="App.navigate('fridge-mode')"><span class="discover-icon">🧊</span><span class="discover-label">Vider le frigo</span></div>
+            <div class="discover-card" onclick="App.navigate('challenges')"><span class="discover-icon">🏆</span><span class="discover-label">Défis culinaires</span></div>
+            <div class="discover-card" onclick="App.navigate('leaderboard')"><span class="discover-icon">📈</span><span class="discover-label">Top recettes</span></div>
+            <div class="discover-card" onclick="App.navigate('barcode-scanner')"><span class="discover-icon">📷</span><span class="discover-label">Scanner produit</span></div>
+            <div class="discover-card" onclick="App.navigate('custom-recipes')"><span class="discover-icon">🍽️</span><span class="discover-label">Mes recettes</span></div>
+            <div class="discover-card" onclick="App.navigate('nutrition-tracker')"><span class="discover-icon">📊</span><span class="discover-label">Nutrition</span></div>
+          </div>
+        </div>
         <h2 class="section-title">🔥 ${Safe.html(t_today)}</h2>
         <div class="recipe-grid">${todayCards.join('')}</div>
         ${areaHTML}
@@ -1496,6 +1525,7 @@ const Render = {
             <button class="btn btn-primary" style="flex:1;" onclick="Actions.applyFilters('${Safe.attr(query)}')">${Safe.html(t_apply)}</button>
             <button class="btn btn-ghost" onclick="Actions.resetFilters('${Safe.attr(query)}')">${Safe.html(t_reset)}</button>
           </div>
+          ${typeof FeatureRender !== 'undefined' ? FeatureRender.allergenPicker() : ''}
         </div>
       </div>`;
 
@@ -1816,8 +1846,17 @@ const Render = {
       </div>`}
 
       <button class="btn btn-secondary btn-full" onclick="App.navigate('profile-setup')">✏️ ${T('edit_profile')}</button>
-      <button class="btn btn-ghost btn-full" onclick="App.navigate('collections')" style="margin-top:8px;">📁 ${T('my_collections') || 'Mes Collections'}</button>
-      <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:8px; color:#e53935;">🚪 ${T('logout_btn')}</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+        <button class="btn btn-ghost" onclick="App.navigate('custom-recipes')">🍽️ Mes recettes</button>
+        <button class="btn btn-ghost" onclick="App.navigate('collections')">📁 Collections</button>
+        <button class="btn btn-ghost" onclick="App.navigate('challenges')">🏆 Défis</button>
+        <button class="btn btn-ghost" onclick="App.navigate('nutrition-tracker')">📊 Nutrition</button>
+        <button class="btn btn-ghost" onclick="App.navigate('social')">👥 Amis</button>
+        <button class="btn btn-ghost" onclick="App.navigate('leaderboard')">🥇 Classements</button>
+        <button class="btn btn-ghost" onclick="App.navigate('fridge-mode')">🧊 Vider le frigo</button>
+        <button class="btn btn-ghost" onclick="App.navigate('barcode-scanner')">📷 Scanner</button>
+      </div>
+      <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:12px; color:#e53935;">🚪 ${T('logout_btn')}</button>
 
       ${(() => {
         const history = CookingHistory.get();
@@ -2042,6 +2081,16 @@ const Render = {
       <button class="btn btn-ghost" onclick="App.goBack()" style="margin-bottom:16px;">${T('btn_back')}</button>
       <h1 style="margin-bottom:20px;">📁 ${Safe.html(t_title)}</h1>
       <div class="collections-grid">${colCards}</div>
+      ${typeof FeatureActions !== 'undefined' ? `
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Partagez une collection avec un lien public</p>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <select id="share-col-select" class="form-input" style="flex:1;">
+            ${names.map(n => `<option value="${Safe.attr(n)}">${Safe.html(n)}</option>`).join('')}
+          </select>
+          <button class="btn btn-secondary" onclick="FeatureActions.shareCollection(document.getElementById('share-col-select').value)">🔗 Partager</button>
+        </div>
+      </div>` : ''}
     </div>`;
   },
 
@@ -2314,7 +2363,11 @@ const Render = {
           </div>
           <button class="btn btn-ghost planner-nav-btn" onclick="Actions.plannerNextWeek()">›</button>
         </div>
-        <p style="color:var(--text-muted); font-size:0.85rem; margin:0 0 20px;">${Safe.html(t_tip)}</p>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:0 0 12px;">${Safe.html(t_tip)}</p>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+          ${typeof FeatureActions !== 'undefined' ? `<button class="btn btn-secondary" onclick="FeatureActions.generatePlan()">✨ Générer automatiquement</button>` : ''}
+          <button class="btn btn-ghost" onclick="App.navigate('plan-share')">🔗 Partager mon plan</button>
+        </div>
         <div class="planner-scroll"><div class="planner-grid">${dayCols}</div></div>
       </div>`;
   },
