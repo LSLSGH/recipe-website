@@ -597,7 +597,7 @@ const App = {
     }
     // Re-render only on external hash changes (browser back/forward, manual URL edit)
     window.addEventListener('hashchange', () => {
-      if (state._navigating) return; // ignore hash changes caused by App.navigate itself
+      if (window.location.hash === state._lastNavigatedHash) return; // triggered by App.navigate itself
       const raw = window.location.hash.replace('#', '') || 'home';
       const [seg, ...rest] = raw.split('/');
       const param = rest.join('/');
@@ -654,7 +654,6 @@ const App = {
     state.prevRoute = state.currentRoute;
     state.currentRoute = route;
     const renderToken = ++state._renderToken;
-    state._navigating = true;
     // Encode deep routes so URLs are shareable
     if (route === 'recipe' && params?.id) {
       window.location.hash = `recipe/${params.id}`;
@@ -665,7 +664,7 @@ const App = {
     } else {
       window.location.hash = route;
     }
-    state._navigating = false;
+    state._lastNavigatedHash = window.location.hash;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     document.querySelectorAll('.tab-item').forEach(el => {
