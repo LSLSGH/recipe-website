@@ -375,6 +375,7 @@ const Planner = {
 const state = {
   currentRoute: 'home',
   prevRoute: 'home',
+  _renderToken: 0,
   collections: { billboard: null, popular: [] },
   categories: [],
   shoppingList: JSON.parse(localStorage.getItem('walkart_shopping') || '[]'),
@@ -640,6 +641,7 @@ const App = {
   navigate: (route, params = null) => {
     state.prevRoute = state.currentRoute;
     state.currentRoute = route;
+    const renderToken = ++state._renderToken;
     // Encode deep routes so URLs are shareable
     if (route === 'recipe' && params?.id) {
       window.location.hash = `recipe/${params.id}`;
@@ -721,9 +723,11 @@ const App = {
           html = await Render.home();
         }
 
+        if (renderToken !== state._renderToken) return;
         root.innerHTML = html;
         if (route === 'recipe') await Render.updateIngredientsList();
       } catch (e) {
+        if (renderToken !== state._renderToken) return;
         console.error('Navigation error:', e);
         root.innerHTML = `
           <div class="container error-state">
