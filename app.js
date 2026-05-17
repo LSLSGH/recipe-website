@@ -1060,7 +1060,7 @@ const Render = {
           <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_privacy_link')}</a>
           <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">Contact</a>
         </div>
-        <p>${T('footer_copyright')} · <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
+        <p>${T('footer_copyright')}</p>
       </footer>`;
   },
 
