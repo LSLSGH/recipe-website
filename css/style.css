@@ -264,6 +264,36 @@ body.dark-mode .logo-img {
   gap: 4px;
   box-shadow: var(--shadow-sm);
 }
+.badge-cal {
+  background: rgba(255,77,109,0.92);
+  color: #fff;
+}
+.nutrition-strip {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0 4px;
+  padding: 10px 14px;
+  background: var(--surface-2, rgba(255,77,109,0.08));
+  border-radius: 12px;
+  flex-wrap: wrap;
+}
+.nutr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+.nutr-val {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary, #FF4D6D);
+}
+.nutr-lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 .card-body {
   padding: 20px;

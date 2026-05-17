@@ -7,6 +7,10 @@ const SUPA_URL = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
 const SUPA_KEY = 'sb_publishable_nUoUhdHUw_Al5fjjswltOQ_mE5phw-u';
 const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 
+// ---- SPOONACULAR ----
+const SPOON_KEY = '2fa467ffb8794b7d9c21b76327acc1e1';
+const SPOON_BASE = 'https://api.spoonacular.com/recipes';
+
 // ---- AUTH STATE ----
 let currentUser = null;
 let currentProfile = null;
@@ -444,6 +448,12 @@ const Scale = {
     if (frac) display += (display ? ' ' : '') + frac[1];
     else if (decPart > 0.06) display = `${Math.round(rounded * 10) / 10}`;
     return `${display || Math.round(rounded)} ${unit}`.trim();
+  },
+  scaleNum: (num, factor) => {
+    if (!num) return '';
+    const scaled = num * factor;
+    const rounded = Math.round(scaled * 100) / 100;
+    return rounded % 1 === 0 ? String(Math.round(rounded)) : String(rounded);
   }
 };
 
@@ -803,14 +813,15 @@ const API = {
   search: async (q) => {
     if (!q) return API.getBatch(10);
     const en = await Translator.translate(q, 'en');
-    const [byName, byIng] = await Promise.all([
+    const [byName, byIng, spoonResults] = await Promise.all([
       fetchWithRetry(`${API_BASE}/search.php?s=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null })),
-      fetchWithRetry(`${API_BASE}/filter.php?i=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null }))
+      fetchWithRetry(`${API_BASE}/filter.php?i=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null })),
+      SpoonRecipes.search(q)
     ]);
-    const results = [...(byName.meals || []), ...(byIng.meals || [])];
-    const unique = Array.from(new Map(results.map(m => [m.idMeal, m])).values());
+    const mealResults = [...(byName.meals || []), ...(byIng.meals || [])];
+    const unique = Array.from(new Map(mealResults.map(m => [m.idMeal, m])).values());
     unique.forEach(m => RecipeStore.set(m.idMeal, m));
-    return unique;
+    return [...unique, ...spoonResults];
   },
   getByCategory: async (c) => {
     const data = await fetchWithRetry(`${API_BASE}/filter.php?c=${encodeURIComponent(c)}`).then(r => r.json());
@@ -825,10 +836,94 @@ const API = {
     return meals;
   },
   getRecipe: async (id) => {
+    if (id.startsWith('spoon_')) return SpoonRecipes.getById(id.replace('spoon_', ''));
     const data = await fetchWithRetry(`${API_BASE}/lookup.php?i=${id}`).then(r => r.json());
     const meal = data.meals?.[0];
     if (meal) RecipeStore.set(meal.idMeal, meal);
     return meal;
+  }
+};
+
+// ---- SPOONACULAR INTEGRATION ----
+const SpoonRecipes = {
+  _normalize: (r) => ({
+    idMeal: 'spoon_' + r.id,
+    strMeal: r.title,
+    strMealThumb: r.image || '',
+    strCategory: r.dishTypes?.[0] || '',
+    strArea: r.cuisines?.[0] || '',
+    strInstructions: r.analyzedInstructions?.length
+      ? r.analyzedInstructions.flatMap(s => s.steps.map(st => st.step)).join('\n\n')
+      : (r.instructions || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+    strTags: r.diets?.join(',') || '',
+    strSource: r.sourceUrl || '',
+    strYoutube: '',
+    _spoon: true,
+    _calories: Math.round(r.nutrition?.nutrients?.find(n => n.name === 'Calories')?.amount || 0) || null,
+    _protein: r.nutrition?.nutrients?.find(n => n.name === 'Protein')?.amount || null,
+    _fat: r.nutrition?.nutrients?.find(n => n.name === 'Fat')?.amount || null,
+    _carbs: r.nutrition?.nutrients?.find(n => n.name === 'Carbohydrates')?.amount || null,
+    _readyIn: r.readyInMinutes || null,
+    _servings: r.servings || 4,
+    _spoonIngredients: (r.extendedIngredients || []).map(i => ({
+      name: i.name, amount: i.amount, unit: i.unit, original: i.original
+    }))
+  }),
+
+  feed: async (number = 6) => {
+    const cacheKey = 'walkart_spoon_feed';
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        const recipes = JSON.parse(cached);
+        recipes.forEach(r => RecipeStore.set(r.idMeal, r));
+        return recipes;
+      }
+    } catch {}
+    try {
+      const res = await fetch(`${SPOON_BASE}/random?apiKey=${SPOON_KEY}&number=${number}&addRecipeInformation=true&addRecipeNutrition=true`);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const recipes = (data.recipes || []).map(SpoonRecipes._normalize);
+      recipes.forEach(r => RecipeStore.set(r.idMeal, r));
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(recipes)); } catch {}
+      return recipes;
+    } catch (e) { console.warn('Spoonacular feed:', e); return []; }
+  },
+
+  search: async (query, number = 8) => {
+    const cacheKey = 'walkart_spoon_s_' + query.toLowerCase().trim();
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        const recipes = JSON.parse(cached);
+        recipes.forEach(r => RecipeStore.set(r.idMeal, r));
+        return recipes;
+      }
+    } catch {}
+    try {
+      const res = await fetch(`${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&query=${encodeURIComponent(query)}&number=${number}&addRecipeInformation=true&addRecipeNutrition=true`);
+      if (!res.ok) return [];
+      const data = await res.json();
+      const recipes = (data.results || []).map(SpoonRecipes._normalize);
+      recipes.forEach(r => RecipeStore.set(r.idMeal, r));
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(recipes)); } catch {}
+      return recipes;
+    } catch (e) { console.warn('Spoonacular search:', e); return []; }
+  },
+
+  getById: async (spoonId) => {
+    const mealId = 'spoon_' + spoonId;
+    const cached = RecipeStore.get(mealId);
+    if (cached?._spoonIngredients) return cached;
+    try {
+      const res = await fetch(`${SPOON_BASE}/${spoonId}/information?apiKey=${SPOON_KEY}&includeNutrition=true`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      const recipe = SpoonRecipes._normalize(data);
+      RecipeStore.set(recipe.idMeal, recipe);
+      return recipe;
+    } catch (e) { console.warn('Spoonacular getById:', e); return null; }
   }
 };
 
@@ -844,6 +939,7 @@ const Render = {
           <img src="${Safe.attr(r.strMealThumb)}" class="card-img" loading="lazy" decoding="async" alt="${Safe.attr(tName)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2248%22 text-anchor=%22middle%22 dy=%22.3em%22%3E🍽️%3C/text%3E%3C/svg%3E'">
           <div class="card-overlay">
             ${tArea ? `<div class="badge">🌍 ${Safe.html(tArea)}</div>` : ''}
+            ${r._calories ? `<div class="badge badge-cal">🔥 ${r._calories} kcal</div>` : ''}
           </div>
           <button class="fav-btn ${isFav ? 'active' : ''}"
             onclick="event.stopPropagation(); Actions.toggleFavorite('${r.idMeal}')">
@@ -914,6 +1010,14 @@ const Render = {
     const moreMeals = state.dailyFeed?.todayPicks?.slice(6, 12) || state.collections.popular;
     const moreCards = await Promise.all(moreMeals.map(r => Render.recipeCard(r)));
 
+    // ---- Spoonacular trending (cached per session) ----
+    const spoonMeals = await SpoonRecipes.feed(6);
+    const spoonCards = await Promise.all(spoonMeals.map(r => Render.recipeCard(r)));
+    const t_trending = T('spoon_trending') || 'Trending · With Nutrition';
+    const spoonSection = spoonCards.length ? `
+      <h2 class="section-title">⚡ ${Safe.html(t_trending)}</h2>
+      <div class="recipe-grid">${spoonCards.join('')}</div>` : '';
+
     return `
       <div class="billboard" style="background-image: url('${Safe.attr(b.strMealThumb)}')">
         <div class="billboard-overlay"></div>
@@ -941,6 +1045,7 @@ const Render = {
         ${areaHTML}
         <h2 class="section-title">✨ ${Safe.html(t_popular)}</h2>
         <div class="recipe-grid">${moreCards.join('')}</div>
+        ${spoonSection}
         <div style="text-align:center; margin:32px 0;">
           <button class="btn btn-primary" onclick="Actions.loadMore()" id="load-more-btn" style="padding:14px 40px; font-size:1rem;">
             🔄 ${T('load_more')}
@@ -1114,8 +1219,16 @@ const Render = {
               <div class="detail-badges">
                 ${tCategory ? `<span class="detail-badge">🥗 ${Safe.html(tCategory)}</span>` : ''}
                 ${tArea     ? `<span class="detail-badge">📍 ${Safe.html(tArea)}</span>`     : ''}
+                ${r._readyIn ? `<span class="detail-badge">⏱️ ${r._readyIn} min</span>` : ''}
                 ${tagBadges}
               </div>
+              ${r._calories ? `
+              <div class="nutrition-strip">
+                <div class="nutr-item"><span class="nutr-val">${r._calories}</span><span class="nutr-lbl">kcal</span></div>
+                ${r._protein != null ? `<div class="nutr-item"><span class="nutr-val">${Math.round(r._protein)}g</span><span class="nutr-lbl">${T('protein') || 'Protein'}</span></div>` : ''}
+                ${r._carbs  != null ? `<div class="nutr-item"><span class="nutr-val">${Math.round(r._carbs)}g</span><span class="nutr-lbl">${T('carbs') || 'Carbs'}</span></div>` : ''}
+                ${r._fat    != null ? `<div class="nutr-item"><span class="nutr-val">${Math.round(r._fat)}g</span><span class="nutr-lbl">${T('fat') || 'Fat'}</span></div>` : ''}
+              </div>` : ''}
               <div class="star-rating" title="${Safe.attr(t_rating)}">${stars}</div>
               <div class="serving-control">
                 <span class="serving-label">${Safe.html(t_servings)}</span>
@@ -1445,31 +1558,57 @@ const Render = {
   updateIngredientsList: async () => {
     const r = state.currentRecipe;
     if (!r) return;
-    const factor = state.servings / 4;
+    const factor = state.servings / (r._servings || 4);
     let html = '';
-    for (let i = 1; i <= 20; i++) {
-      const n = r[`strIngredient${i}`], m = r[`strMeasure${i}`];
-      if (n?.trim()) {
-        const tn = await Translator.t(n);
-        const scaledM = Scale.scale(m, factor);
-        const tm = scaledM ? await Translator.t(scaledM) : '';
-        const img = `https://www.themealdb.com/images/ingredients/${encodeURIComponent(n)}-small.png`;
+
+    if (r._spoon && r._spoonIngredients?.length) {
+      for (const ing of r._spoonIngredients) {
+        const tn = await Translator.t(ing.name);
+        const scaledAmt = ing.amount ? Scale.scaleNum(ing.amount, factor) : '';
+        const measure = scaledAmt ? `${scaledAmt} ${ing.unit || ''}`.trim() : (ing.original || '');
+        const img = `https://spoonacular.com/cdn/ingredients_100x100/${encodeURIComponent(ing.name.toLowerCase().replace(/\s+/g,'-'))}.jpg`;
         html += `
           <div class="ingredient-row">
             <div style="display:flex; align-items:center; gap:15px;">
               <div class="ing-img-wrap">
-                <img src="${Safe.attr(img)}" style="width:40px; height:40px; object-fit:contain;" loading="lazy" decoding="async" alt="${Safe.attr(tn)}">
+                <img src="${Safe.attr(img)}" style="width:40px; height:40px; object-fit:contain;" loading="lazy" decoding="async" alt="${Safe.attr(tn)}" onerror="this.style.display='none'">
               </div>
               <div>
                 <p style="font-weight:700; margin:0; font-size:1rem;">${Safe.html(tn)}</p>
-                <p style="color:var(--text-muted); margin:0; font-size:0.85rem;">${Safe.html(tm || '–')}</p>
+                <p style="color:var(--text-muted); margin:0; font-size:0.85rem;">${Safe.html(measure || '–')}</p>
               </div>
             </div>
             <button class="btn add-ing-btn"
               data-name="${Safe.attr(tn)}"
-              data-measure="${Safe.attr(tm)}"
+              data-measure="${Safe.attr(measure)}"
               onclick="Actions.addIngToShopping(this)">+</button>
           </div>`;
+      }
+    } else {
+      for (let i = 1; i <= 20; i++) {
+        const n = r[`strIngredient${i}`], m = r[`strMeasure${i}`];
+        if (n?.trim()) {
+          const tn = await Translator.t(n);
+          const scaledM = Scale.scale(m, factor);
+          const tm = scaledM ? await Translator.t(scaledM) : '';
+          const img = `https://www.themealdb.com/images/ingredients/${encodeURIComponent(n)}-small.png`;
+          html += `
+            <div class="ingredient-row">
+              <div style="display:flex; align-items:center; gap:15px;">
+                <div class="ing-img-wrap">
+                  <img src="${Safe.attr(img)}" style="width:40px; height:40px; object-fit:contain;" loading="lazy" decoding="async" alt="${Safe.attr(tn)}">
+                </div>
+                <div>
+                  <p style="font-weight:700; margin:0; font-size:1rem;">${Safe.html(tn)}</p>
+                  <p style="color:var(--text-muted); margin:0; font-size:0.85rem;">${Safe.html(tm || '–')}</p>
+                </div>
+              </div>
+              <button class="btn add-ing-btn"
+                data-name="${Safe.attr(tn)}"
+                data-measure="${Safe.attr(tm)}"
+                onclick="Actions.addIngToShopping(this)">+</button>
+            </div>`;
+        }
       }
     }
     const el = document.getElementById('dynamic-ingredients');
@@ -2140,14 +2279,25 @@ const Actions = {
   addAllIngToShopping: async (recipeId) => {
     const r = RecipeStore.get(recipeId) || state.currentRecipe;
     if (!r) return;
-    const factor = state.servings / 4;
+    const factor = state.servings / (r._servings || 4);
     let count = 0;
-    for (let i = 1; i <= 20; i++) {
-      const n = r[`strIngredient${i}`], m = r[`strMeasure${i}`];
-      if (n?.trim()) {
-        const scaledM = Scale.scale(m, factor);
-        state.shoppingList.push({ id: Date.now() + i, name: n.trim(), measure: scaledM, done: false });
-        count++;
+    if (r._spoon && r._spoonIngredients?.length) {
+      r._spoonIngredients.forEach((ing, i) => {
+        if (ing.name) {
+          const scaledAmt = ing.amount ? Scale.scaleNum(ing.amount, factor) : '';
+          const measure = scaledAmt ? `${scaledAmt} ${ing.unit || ''}`.trim() : (ing.original || '');
+          state.shoppingList.push({ id: Date.now() + i, name: ing.name, measure, done: false });
+          count++;
+        }
+      });
+    } else {
+      for (let i = 1; i <= 20; i++) {
+        const n = r[`strIngredient${i}`], m = r[`strMeasure${i}`];
+        if (n?.trim()) {
+          const scaledM = Scale.scale(m, factor);
+          state.shoppingList.push({ id: Date.now() + i, name: n.trim(), measure: scaledM, done: false });
+          count++;
+        }
       }
     }
     localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
