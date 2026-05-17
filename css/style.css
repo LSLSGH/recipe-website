@@ -2714,6 +2714,7 @@ body.dark-mode .menu-day-card {
 .discover-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .discover-card:active { transform: scale(0.97); }
 .discover-icon { font-size: 1.8rem; line-height: 1; }
+.discover-svg { width: 36px; height: 36px; display: block; margin: 0 auto 4px; }
 .discover-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
 
 /* --- COMMENTS --- */

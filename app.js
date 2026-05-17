@@ -1368,14 +1368,59 @@ const Render = {
         ${recentSection}
         ${worldSection}
         <div class="discover-section">
-          <h2 class="section-title" style="margin-bottom:12px;">✨ Découvrir</h2>
+          <h2 class="section-title" style="margin-bottom:12px;">✨ ${T('discover')}</h2>
           <div class="discover-grid">
-            <div class="discover-card" onclick="App.navigate('fridge-mode')"><span class="discover-icon">🧊</span><span class="discover-label">Vider le frigo</span></div>
-            <div class="discover-card" onclick="App.navigate('challenges')"><span class="discover-icon">🏆</span><span class="discover-label">Défis culinaires</span></div>
-            <div class="discover-card" onclick="App.navigate('leaderboard')"><span class="discover-icon">📈</span><span class="discover-label">Top recettes</span></div>
-            <div class="discover-card" onclick="App.navigate('barcode-scanner')"><span class="discover-icon">📷</span><span class="discover-label">Scanner produit</span></div>
-            <div class="discover-card" onclick="App.navigate('custom-recipes')"><span class="discover-icon">🍽️</span><span class="discover-label">Mes recettes</span></div>
-            <div class="discover-card" onclick="App.navigate('nutrition-tracker')"><span class="discover-icon">📊</span><span class="discover-label">Nutrition</span></div>
+            <div class="discover-card" onclick="App.navigate('fridge-mode')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="4" width="28" height="40" rx="5" stroke="currentColor" stroke-width="3"/>
+                <line x1="10" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="3"/>
+                <line x1="18" y1="10" x2="18" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="18" y1="24" x2="18" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span class="discover-label">${T('discover_fridge')}</span>
+            </div>
+            <div class="discover-card" onclick="App.navigate('challenges')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 4L29 16H42L32 24L36 37L24 29L12 37L16 24L6 16H19L24 4Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+              </svg>
+              <span class="discover-label">${T('discover_challenges')}</span>
+            </div>
+            <div class="discover-card" onclick="App.navigate('leaderboard')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="28" width="10" height="16" rx="2" stroke="currentColor" stroke-width="3"/>
+                <rect x="19" y="18" width="10" height="26" rx="2" stroke="currentColor" stroke-width="3"/>
+                <rect x="32" y="8" width="10" height="36" rx="2" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="discover-label">${T('discover_leaderboard')}</span>
+            </div>
+            <div class="discover-card" onclick="App.navigate('barcode-scanner')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+              <span class="discover-label">${T('discover_scanner')}</span>
+            </div>
+            <div class="discover-card" onclick="App.navigate('custom-recipes')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 6C18 6 13 11 13 17c0 4 2 7.5 5 9.5V30h12v-3.5c3-2 5-5.5 5-9.5 0-6-5-11-11-11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                <rect x="16" y="30" width="16" height="4" rx="2" stroke="currentColor" stroke-width="2.5"/>
+                <rect x="18" y="34" width="12" height="8" rx="2" stroke="currentColor" stroke-width="2.5"/>
+              </svg>
+              <span class="discover-label">${T('discover_myrecipes')}</span>
+            </div>
+            <div class="discover-card" onclick="App.navigate('nutrition-tracker')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/>
+                <path d="M24 24V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M24 24L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3" fill="currentColor"/>
+              </svg>
+              <span class="discover-label">${T('discover_nutrition')}</span>
+            </div>
           </div>
         </div>
         <h2 class="section-title">🔥 ${Safe.html(t_today)}</h2>
