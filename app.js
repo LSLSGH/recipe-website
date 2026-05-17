@@ -374,6 +374,7 @@ const Planner = {
 // ---- STATE ----
 const state = {
   currentRoute: 'home',
+  prevRoute: 'home',
   collections: { billboard: null, popular: [] },
   categories: [],
   shoppingList: JSON.parse(localStorage.getItem('walkart_shopping') || '[]'),
@@ -634,7 +635,10 @@ const App = {
     });
   },
 
+  goBack: () => App.navigate(state.prevRoute || 'home'),
+
   navigate: (route, params = null) => {
+    state.prevRoute = state.currentRoute;
     state.currentRoute = route;
     // Encode deep routes so URLs are shareable
     if (route === 'recipe' && params?.id) {
@@ -1500,58 +1504,57 @@ const Render = {
 
   privacy: () => `
     <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
-      <button class="btn btn-ghost" onclick="history.back()" style="margin-bottom:24px;">← Retour</button>
-      <h1 style="font-size:1.8rem; margin-bottom:8px;">🔒 Politique de confidentialité</h1>
-      <p style="color:var(--text-muted); margin-bottom:32px;">Dernière mise à jour : ${new Date().toLocaleDateString('fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p>
+      <button class="btn btn-ghost" onclick="App.goBack()" style="margin-bottom:24px;">${T('btn_back')}</button>
+      <h1 style="font-size:1.8rem; margin-bottom:8px;">🔒 ${T('privacy_title')}</h1>
+      <p style="color:var(--text-muted); margin-bottom:32px;">${T('privacy_updated')} : ${new Date().toLocaleDateString(state.lang === 'ar' ? 'ar-SA' : state.lang === 'ja' ? 'ja-JP' : state.lang === 'fr' ? 'fr-FR' : 'en-US', {year:'numeric',month:'long',day:'numeric'})}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">1. Informations collectées</h2>
-      <p>Walkart ne collecte aucune donnée personnelle identifiable. Nous utilisons le stockage local de votre navigateur (localStorage) uniquement pour sauvegarder vos préférences, favoris et historique de recherche sur votre appareil.</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s1_title')}</h2>
+      <p>${T('privacy_s1_body')}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">2. Cookies et publicités</h2>
-      <p>Ce site utilise Google AdSense pour afficher des publicités. Google peut utiliser des cookies pour personnaliser les annonces en fonction de vos visites sur ce site et d'autres sites. Vous pouvez désactiver la personnalisation des annonces sur <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--primary);">Google Ads Settings</a>.</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s2_title')}</h2>
+      <p>${T('privacy_s2_body')} <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--primary);">Google Ads Settings</a>.</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">3. API tierce partie</h2>
-      <p>Les recettes proviennent de bases de données publiques. Nous ne partageons aucune donnée personnelle avec ces services.</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s3_title')}</h2>
+      <p>${T('privacy_s3_body')}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">4. Traduction</h2>
-      <p>Le service de traduction utilise l'API Google Translate de manière anonyme. Les textes traduits sont mis en cache localement dans votre navigateur.</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s4_title')}</h2>
+      <p>${T('privacy_s4_body')}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">5. Vos droits</h2>
-      <p>Vous pouvez effacer toutes les données locales à tout moment via le menu Paramètres ⚙️ de l'application (option "Réinitialiser l'application").</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s5_title')}</h2>
+      <p>${T('privacy_s5_body')}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">6. Contact</h2>
-      <p>Pour toute question concernant cette politique, contactez-nous à : <a href="mailto:contact@walkart.us" style="color:var(--primary);">contact@walkart.us</a></p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('privacy_s6_title')}</h2>
+      <p>${T('privacy_s6_body')} <a href="mailto:contact@walkart.us" style="color:var(--primary);">contact@walkart.us</a></p>
     </div>`,
 
   about: () => `
     <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
-      <button class="btn btn-ghost" onclick="history.back()" style="margin-bottom:24px;">← Retour</button>
+      <button class="btn btn-ghost" onclick="App.goBack()" style="margin-bottom:24px;">${T('btn_back')}</button>
       <div style="text-align:center; margin-bottom:40px;">
         <img src="logo.svg" alt="Walkart" style="width:80px; border-radius:20px; margin-bottom:16px;">
         <h1 style="font-size:2rem;">Walkart</h1>
-        <p style="color:var(--text-muted); font-size:1.1rem;">Découvrez les saveurs du monde entier</p>
+        <p style="color:var(--text-muted); font-size:1.1rem;">${T('about_tagline')}</p>
       </div>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">🍳 Notre mission</h2>
-      <p>Walkart rassemble des milliers de recettes authentiques des quatre coins du globe, accessibles dans plusieurs langues. Notre objectif : rendre la cuisine du monde accessible à tous.</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_mission_title')}</h2>
+      <p>${T('about_mission_body')}</p>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">✨ Fonctionnalités</h2>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_features_title')}</h2>
       <ul style="line-height:2; padding-left:20px;">
-        <li>Plus de 300 recettes du monde entier</li>
-        <li>Disponible en 6 langues (FR, EN, AR, ES, IT, JA)</li>
-        <li>Mode cuisine étape par étape</li>
-        <li>Planificateur de repas hebdomadaire</li>
-        <li>Liste de courses automatique</li>
-        <li>Favoris synchronisés</li>
+        <li>${T('about_feature_1')}</li>
+        <li>${T('about_feature_2')}</li>
+        <li>${T('about_feature_3')}</li>
+        <li>${T('about_feature_4')}</li>
+        <li>${T('about_feature_5')}</li>
+        <li>${T('about_feature_6')}</li>
       </ul>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">📬 Contact</h2>
-      <p>Une question ou une suggestion ? Écrivez-nous :</p>
+      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_contact_title')}</h2>
+      <p>${T('about_contact_body')}</p>
       <a href="mailto:contact@walkart.us" style="display:inline-block; margin-top:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:8px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
 
       <div style="margin-top:48px; padding:20px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.85rem;">
-        <p>© ${new Date().getFullYear()} Walkart · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">Politique de confidentialité</a></p>
-        <p style="margin-top:4px;">© ${new Date().getFullYear()} Walkart</p>
+        <p>${T('footer_copyright')} · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">${T('privacy_title')}</a></p>
       </div>
     </div>`,
 
