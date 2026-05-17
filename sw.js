@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mykitch-v1';
+const CACHE_NAME = 'walkart-v23';
 const ASSETS = [
   '/',
   '/index.html',
