@@ -600,8 +600,20 @@ const FeatureRender = {
             <input id="cr-title" class="form-input" placeholder="Ex: Tarte aux pommes maison" value="${Safe.attr(r.title || '')}">
           </div>
           <div class="form-group">
-            <label class="form-label">Image (URL)</label>
-            <input id="cr-image" class="form-input" placeholder="https://..." value="${Safe.attr(r.image_url || '')}">
+            <label class="form-label">Image</label>
+            <div class="cr-image-row">
+              <div class="cr-image-preview" id="cr-image-preview" ${r.image_url ? `style="background-image:url('${Safe.attr(r.image_url)}')"` : ''}>
+                ${r.image_url ? '' : '<span class="cr-image-placeholder">📷</span>'}
+              </div>
+              <div class="cr-image-actions">
+                <label class="btn btn-outline cr-upload-btn" for="cr-image-file">
+                  📁 Depuis l'appareil
+                  <input type="file" id="cr-image-file" accept="image/*" style="display:none" onchange="FeatureActions.previewRecipeImage(this)">
+                </label>
+                <span class="cr-image-or">ou</span>
+                <input id="cr-image-url" class="form-input" placeholder="URL de l'image..." value="${Safe.attr(r.image_url || '')}">
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label class="form-label">Ingrédients</label>
@@ -1040,11 +1052,24 @@ const FeatureActions = {
     const errEl = document.getElementById('cr-error');
     if (!title) { if (errEl) { errEl.textContent = 'Le nom est requis.'; errEl.style.display = 'block'; } return; }
     if (!instructions) { if (errEl) { errEl.textContent = 'Les instructions sont requises.'; errEl.style.display = 'block'; } return; }
+
+    // Handle image: uploaded file takes priority over URL
+    let image_url = document.getElementById('cr-image-url')?.value?.trim() || '';
+    const fileInput = document.getElementById('cr-image-file');
+    if (fileInput?.files?.[0]) {
+      const file = fileInput.files[0];
+      const ext = file.name.split('.').pop();
+      const path = `custom/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: upErr } = await supa.storage.from('cooking-photos').upload(path, file, { upsert: true });
+      if (!upErr) {
+        const { data: urlData } = supa.storage.from('cooking-photos').getPublicUrl(path);
+        image_url = urlData?.publicUrl || image_url;
+      }
+    }
+
     const ingredients = FeatureActions._customIngredients.filter(i => i && i.name?.trim());
     const recipe = {
-      id, title,
-      image_url: document.getElementById('cr-image')?.value?.trim() || '',
-      ingredients, instructions,
+      id, title, image_url, ingredients, instructions,
       calories: document.getElementById('cr-calories')?.value || null,
       protein_g: document.getElementById('cr-protein')?.value || null,
       prep_time: document.getElementById('cr-time')?.value || null,
@@ -1054,6 +1079,19 @@ const FeatureActions = {
     if (error) { if (errEl) { errEl.textContent = 'Erreur: ' + error.message; errEl.style.display = 'block'; } return; }
     Toast.show('✅ Recette sauvegardée !');
     App.navigate('custom-recipes');
+  },
+
+  previewRecipeImage: (input) => {
+    const file = input?.files?.[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const prev = document.getElementById('cr-image-preview');
+      if (prev) { prev.style.backgroundImage = `url('${e.target.result}')`; prev.innerHTML = ''; }
+      // Clear URL input since file takes priority
+      const urlInp = document.getElementById('cr-image-url');
+      if (urlInp) urlInp.value = '';
+    };
+    reader.readAsDataURL(file);
   },
 
   deleteCustomRecipe: async (id) => {

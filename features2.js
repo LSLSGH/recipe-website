@@ -139,7 +139,13 @@ const TVMode = {
     document.documentElement.requestFullscreen?.().catch(()=>{});
     requestAnimationFrame(() => el.classList.add('show'));
   },
-  close: () => { document.getElementById('tv-mode')?.remove(); if (document.fullscreenElement) document.exitFullscreen?.(); }
+  close: () => { document.getElementById('tv-mode')?.remove(); if (document.fullscreenElement) document.exitFullscreen?.(); },
+  openFromGlobal: () => {
+    const r = window._currentDetailRecipe; if (!r) return;
+    const ingLines = [];
+    for (let i=1;i<=20;i++) { const v=r[`strIngredient${i}`]?.trim(); const m=r[`strMeasure${i}`]?.trim(); if(v) ingLines.push(`<li>${m?m+' ':''} ${v}</li>`); }
+    TVMode.open(r.strMeal, `<ul>${ingLines.join('')}</ul>`, r.strInstructions||'');
+  }
 };
 
 // ============================================================
@@ -854,34 +860,26 @@ document.addEventListener('_recipeRendered', async (e) => {
   for (let i=1;i<=20;i++) { const v=recipe[`strIngredient${i}`]; if(v&&v.trim()) ingLines.push(v); }
   const ingText = ingLines.join('\n');
 
-  // Build ingredients HTML with data-qty for portion scaling
-  const buildIngHtml = () => {
-    const rows = [];
-    for (let i=1;i<=20;i++) {
-      const ing=recipe[`strIngredient${i}`]?.trim(); const mea=recipe[`strMeasure${i}`]?.trim();
-      if(!ing) continue;
-      const num = mea ? parseFloat(mea.replace(/[^0-9.\/]/g,'')) : NaN;
-      const numStr = isNaN(num) ? '' : `<span data-qty="${num}">${num}</span>`;
-      const unit = mea ? mea.replace(/^[\d.\/\s]+/,'').trim() : '';
-      rows.push(`<li>${numStr}${numStr&&unit?' ':''}${Safe.html(unit)} ${Safe.html(ing)}</li>`);
-    }
-    return rows.join('');
-  };
+  // Store recipe globally so onclick buttons can reference it safely
+  window._currentDetailRecipe = recipe;
 
   // Servings
   const servings = recipe.strServings ? parseInt(recipe.strServings) : 4;
+  const rid = Safe.attr(recipeId);
+  const rname = Safe.attr(recipe.strMeal||'');
+  const rthumb = Safe.attr(recipe.strMealThumb||'');
 
   // Extra action buttons
   const extraActions = `
-    <div class="recipe-extra-actions" data-recipe-id="${Safe.attr(recipeId)}">
-      <button class="recipe-action-btn" onclick="CookingMode.start(${JSON.stringify(recipe.strInstructions||'').replace(/"/g,'&quot;')})">👨‍🍳 Mode Cuisine</button>
-      <button class="recipe-action-btn" onclick="RecipeStories.open(${JSON.stringify({strMeal:recipe.strMeal,strInstructions:recipe.strInstructions}).replace(/"/g,'&quot;')})">📖 Stories</button>
-      <button class="recipe-action-btn" onclick="TVMode.open('${Safe.attr(recipe.strMeal)}','${buildIngHtml().replace(/'/g,'\\\'').replace(/\n/g,'')}','${(recipe.strInstructions||'').replace(/'/g,'\\\'').replace(/\n/g,' ')}')">📺 TV</button>
-      <button class="recipe-action-btn" onclick="ShareRecipe.native('${Safe.attr(recipe.strMeal)}','${Safe.attr(recipeId)}')">📤 Partager</button>
-      <button class="recipe-action-btn" onclick="ShareRecipe.whatsapp('${Safe.attr(recipe.strMeal)}','${Safe.attr(recipeId)}')">💬 WhatsApp</button>
+    <div class="recipe-extra-actions" data-recipe-id="${rid}">
+      <button class="recipe-action-btn" onclick="CookingMode.start(window._currentDetailRecipe?.strInstructions)">👨‍🍳 Mode Cuisine</button>
+      <button class="recipe-action-btn" onclick="RecipeStories.open(window._currentDetailRecipe)">📖 Stories</button>
+      <button class="recipe-action-btn" onclick="TVMode.openFromGlobal()">📺 TV</button>
+      <button class="recipe-action-btn" onclick="ShareRecipe.native('${rname}','${rid}')">📤 Partager</button>
+      <button class="recipe-action-btn" onclick="ShareRecipe.whatsapp('${rname}','${rid}')">💬 WhatsApp</button>
       <button class="recipe-action-btn" onclick="ShareRecipe.print()">🖨️ Imprimer</button>
-      <button class="recipe-action-btn wishlist-btn ${Wishlist.has(recipeId)?'active':''}" data-wishlist-id="${Safe.attr(recipeId)}" onclick="Wishlist.toggle('${Safe.attr(recipeId)}','${Safe.attr(recipe.strMeal||'')}','${Safe.attr(recipe.strMealThumb||'')}');this.classList.toggle('active')">✨ À essayer</button>
-      <button class="recipe-action-btn" onclick="CookingHistory.log('${Safe.attr(recipeId)}','${Safe.attr(recipe.strMeal||'')}','${Safe.attr(recipe.strMealThumb||'')}');UI.toast?.('✅ Marqué comme cuisiné !')">✅ J'ai cuisiné</button>
+      <button class="recipe-action-btn wishlist-btn ${Wishlist.has(recipeId)?'active':''}" data-wishlist-id="${rid}" onclick="Wishlist.toggle('${rid}','${rname}','${rthumb}');this.classList.toggle('active')">✨ À essayer</button>
+      <button class="recipe-action-btn" onclick="CookingHistory.log('${rid}','${rname}','${rthumb}');UI.toast?.('✅ Marqué comme cuisiné !')">✅ J'ai cuisiné</button>
     </div>
     ${PortionScale.renderControl(servings)}
     ${CostEstimate.render(recipe)}`;
@@ -948,7 +946,7 @@ document.addEventListener('_recipeRendered', async (e) => {
         document.getElementById('app-root').innerHTML += await TrendingRecipes.renderPage();
       },
     };
-    if (routes2[route]) { routes2[route](); return; }
+    if (routes2[route]) { try { await routes2[route](); } catch(e) { console.error('Feature route error:', route, e); } return; }
     _prev2(route, params);
   };
 })();

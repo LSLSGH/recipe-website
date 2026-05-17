@@ -2338,6 +2338,15 @@ body.dark-mode .form-input {
   border-color: rgba(255,255,255,0.12);
   color: #fff;
 }
+
+/* Custom recipe image upload */
+.cr-image-row { display:flex; gap:14px; align-items:flex-start; }
+.cr-image-preview { width:90px; height:90px; border-radius:14px; background:#f1f1f1 center/cover no-repeat; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:2px dashed var(--border); overflow:hidden; }
+.cr-image-placeholder { font-size:2rem; }
+.cr-image-actions { flex:1; display:flex; flex-direction:column; gap:8px; }
+.cr-upload-btn { display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:.85rem; justify-content:center; }
+.cr-image-or { font-size:.8rem; color:var(--text-muted); text-align:center; }
+body.dark-mode .cr-image-preview { background:#2a2a3e; border-color:rgba(255,255,255,.12); }
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
