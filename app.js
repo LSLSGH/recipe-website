@@ -1511,7 +1511,7 @@ const Render = {
       <p>Ce site utilise Google AdSense pour afficher des publicités. Google peut utiliser des cookies pour personnaliser les annonces en fonction de vos visites sur ce site et d'autres sites. Vous pouvez désactiver la personnalisation des annonces sur <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--primary);">Google Ads Settings</a>.</p>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">3. API tierce partie</h2>
-      <p>Les recettes proviennent de <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary);">TheMealDB</a>, une API publique. Nous ne partageons aucune donnée personnelle avec ce service.</p>
+      <p>Les recettes proviennent de bases de données publiques. Nous ne partageons aucune donnée personnelle avec ces services.</p>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">4. Traduction</h2>
       <p>Le service de traduction utilise l'API Google Translate de manière anonyme. Les textes traduits sont mis en cache localement dans votre navigateur.</p>
@@ -1551,7 +1551,7 @@ const Render = {
 
       <div style="margin-top:48px; padding:20px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.85rem;">
         <p>© ${new Date().getFullYear()} Walkart · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">Politique de confidentialité</a></p>
-        <p style="margin-top:4px;">Recettes fournies par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary);">TheMealDB</a></p>
+        <p style="margin-top:4px;">© ${new Date().getFullYear()} Walkart</p>
       </div>
     </div>`,
 
