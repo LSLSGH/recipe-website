@@ -8,6 +8,7 @@ const TRANSLATIONS = {
     // Navigation
     nav_home:'Accueil', nav_recipes:'Recettes', nav_categories:'Catégories',
     nav_favorites:'Favoris', nav_shopping:'Liste de courses', nav_login:'Connexion',
+    tab_explore:'Explorer', tab_plan:'Planning',
     nav_register:"S'inscrire", nav_profile:'Mon profil', nav_logout:'Déconnexion',
     nav_search_placeholder:'Rechercher une recette, un ingrédient...',
     // Hero / Home
@@ -82,6 +83,7 @@ const TRANSLATIONS = {
   en: {
     nav_home:'Home', nav_recipes:'Recipes', nav_categories:'Categories',
     nav_favorites:'Favorites', nav_shopping:'Shopping List', nav_login:'Login',
+    tab_explore:'Explore', tab_plan:'Plan',
     nav_register:'Sign Up', nav_profile:'My Profile', nav_logout:'Logout',
     nav_search_placeholder:'Search recipes, ingredients...',
     featured:'Featured', cook_now:'Cook now', surprise_me:'Surprise me',
@@ -144,6 +146,7 @@ const TRANSLATIONS = {
   es: {
     nav_home:'Inicio', nav_recipes:'Recetas', nav_categories:'Categorías',
     nav_favorites:'Favoritos', nav_shopping:'Lista de compras', nav_login:'Iniciar sesión',
+    tab_explore:'Explorar', tab_plan:'Planificar',
     nav_register:'Registrarse', nav_profile:'Mi perfil', nav_logout:'Cerrar sesión',
     nav_search_placeholder:'Buscar receta, ingrediente...',
     featured:'Destacadas', cook_now:'Cocinar ahora', surprise_me:'Sorpréndeme',
@@ -206,6 +209,7 @@ const TRANSLATIONS = {
   ar: {
     nav_home:'الرئيسية', nav_recipes:'الوصفات', nav_categories:'الفئات',
     nav_favorites:'المفضلة', nav_shopping:'قائمة التسوق', nav_login:'تسجيل الدخول',
+    tab_explore:'استكشاف', tab_plan:'التخطيط',
     nav_register:'إنشاء حساب', nav_profile:'ملفي الشخصي', nav_logout:'تسجيل الخروج',
     nav_search_placeholder:'ابحث عن وصفة أو مكون...',
     featured:'المميزة', cook_now:'اطبخ الآن', surprise_me:'فاجئني',
@@ -268,6 +272,7 @@ const TRANSLATIONS = {
   it: {
     nav_home:'Home', nav_recipes:'Ricette', nav_categories:'Categorie',
     nav_favorites:'Preferiti', nav_shopping:'Lista della spesa', nav_login:'Accedi',
+    tab_explore:'Esplora', tab_plan:'Pianifica',
     nav_register:'Registrati', nav_profile:'Il mio profilo', nav_logout:'Esci',
     nav_search_placeholder:'Cerca ricette, ingredienti...',
     featured:'In evidenza', cook_now:'Cucina ora', surprise_me:'Sorprendimi',
@@ -330,6 +335,7 @@ const TRANSLATIONS = {
   ja: {
     nav_home:'ホーム', nav_recipes:'レシピ', nav_categories:'カテゴリ',
     nav_favorites:'お気に入り', nav_shopping:'買い物リスト', nav_login:'ログイン',
+    tab_explore:'探索', tab_plan:'プラン',
     nav_register:'登録', nav_profile:'マイプロフィール', nav_logout:'ログアウト',
     nav_search_placeholder:'レシピ、食材を検索...',
     featured:'注目', cook_now:'今すぐ料理', surprise_me:'サプライズ',
@@ -414,6 +420,7 @@ class I18n {
     this.current = lang;
     localStorage.setItem('walkart_lang', lang);
     this.apply();
+    this.render();
   }
 
   apply() {
@@ -438,6 +445,21 @@ class I18n {
         document.head.appendChild(el);
       }
     }
+  }
+
+  render() {
+    // Update all [data-i18n] text elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = this.t(key);
+      if (val && val !== key) el.textContent = val;
+    });
+    // Update all [data-i18n-placeholder] inputs
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      const val = this.t(key);
+      if (val && val !== key) el.placeholder = val;
+    });
   }
 }
 

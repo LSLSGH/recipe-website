@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="search-bar-container">
-    <input type="text" id="header-search-input" class="search-input" placeholder="Search recipes, ingredients..." data-t data-t-orig="Search recipes, ingredients...">
+    <input type="text" id="header-search-input" class="search-input" placeholder="Search recipes, ingredients..." data-i18n-placeholder="nav_search_placeholder">
     <button onclick="App.navigate('search', {query: document.getElementById('header-search-input').value})" class="search-btn-icon">🔍</button>
   </div>
 </header>
@@ -46,7 +46,7 @@
 <!-- Language Selection Modal -->
 <div class="lang-modal" id="lang-modal" onclick="if(event.target===this) UI.toggleLangModal()">
   <div class="lang-content">
-    <h2 data-t data-t-orig="Choose language">Choose language</h2>
+    <h2 data-i18n="choose_lang">Choose language</h2>
     <div class="lang-grid">
       <div class="lang-item" onclick="App.changeLang('fr', 'FR')"><img src="https://flagcdn.com/w40/fr.png" class="lang-flag-img" alt="FR"><span>Français</span></div>
       <div class="lang-item" onclick="App.changeLang('ar', 'AR')"><img src="https://flagcdn.com/w40/sa.png" class="lang-flag-img" alt="AR"><span>العربية</span></div>
@@ -66,23 +66,23 @@
 <nav class="tab-bar">
   <a class="tab-item active" onclick="App.navigate('home')">
     <span class="tab-icon">🏠</span>
-    <span data-t>Home</span>
+    <span data-i18n="nav_home">Home</span>
   </a>
   <a class="tab-item" onclick="App.navigate('search')">
     <span class="tab-icon">🔍</span>
-    <span data-t>Explore</span>
+    <span data-i18n="tab_explore">Explore</span>
   </a>
   <a class="tab-item" onclick="App.navigate('planner')">
     <span class="tab-icon">📅</span>
-    <span data-t>Plan</span>
+    <span data-i18n="tab_plan">Plan</span>
   </a>
   <a class="tab-item" onclick="App.navigate('shopping')">
     <span class="tab-icon">🛒</span>
-    <span data-t>Shopping</span>
+    <span data-i18n="shopping_title">Shopping</span>
   </a>
   <a class="tab-item" style="position:relative;" onclick="App.navigate('favorites')">
     <span class="tab-icon">❤️</span>
-    <span data-t>Favorites</span>
+    <span data-i18n="nav_favorites">Favorites</span>
     <span class="fav-tab-badge" id="fav-tab-badge" style="display:none;"></span>
   </a>
 </nav>

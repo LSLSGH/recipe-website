@@ -104,18 +104,18 @@ const Nutrition = {
   },
 
   goalLabel: (goal) => ({
-    lose_weight: '🔥 Perte de poids',
-    maintain: '⚖️ Maintien',
-    gain_weight: '📈 Prise de masse',
-    gain_muscle: '💪 Prise de muscle'
+    lose_weight: '🔥 ' + T('goal_lose_label'),
+    maintain: '⚖️ ' + T('goal_maintain_label'),
+    gain_weight: '📈 ' + T('goal_gain_label'),
+    gain_muscle: '💪 ' + T('goal_muscle_label')
   }[goal] || goal),
 
   activityLabel: (a) => ({
-    sedentary: 'Sédentaire (peu/pas de sport)',
-    light: 'Légère (1-3j/sem)',
-    moderate: 'Modérée (3-5j/sem)',
-    active: 'Active (6-7j/sem)',
-    very_active: 'Très active (2x/jour)'
+    sedentary: T('act_sedentary'),
+    light: T('act_light'),
+    moderate: T('act_moderate'),
+    active: T('act_active'),
+    very_active: T('act_very_active')
   }[a] || a)
 };
 
@@ -553,6 +553,7 @@ const App = {
     window.addEventListener('online', () => Toast.show('✅ Connexion rétablie', 3000));
 
     i18n.set(state.lang || 'fr');
+    i18n.render();
     document.getElementById('current-lang-text').textContent = state.langName;
     document.documentElement.setAttribute('lang', state.lang);
     if (state.lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
