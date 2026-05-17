@@ -156,7 +156,7 @@ const FEATURED_AREAS_POOL = [
 
 // ---- DAILY FEED (date-based caching) ----
 const DailyFeed = {
-  _key: () => `mykitch_daily_${new Date().toISOString().split('T')[0]}`,
+  _key: () => `walkart_daily_${new Date().toISOString().split('T')[0]}`,
   get: () => {
     try { return JSON.parse(localStorage.getItem(DailyFeed._key()) || 'null'); } catch { return null; }
   },
@@ -164,7 +164,7 @@ const DailyFeed = {
     // Purge old daily keys (keep storage clean)
     const today = DailyFeed._key();
     Object.keys(localStorage)
-      .filter(k => k.startsWith('mykitch_daily_') && k !== today)
+      .filter(k => k.startsWith('walkart_daily_') && k !== today)
       .forEach(k => localStorage.removeItem(k));
     localStorage.setItem(today, JSON.stringify(data));
   }
@@ -192,50 +192,50 @@ const Instructions = {
 // ---- LOCAL DATA MODULES ----
 
 const RecentlyViewed = {
-  get: () => JSON.parse(localStorage.getItem('mykitch_recent') || '[]'),
+  get: () => JSON.parse(localStorage.getItem('walkart_recent') || '[]'),
   add: (r) => {
     if (!r?.idMeal) return;
     const list = RecentlyViewed.get().filter(x => x.idMeal !== r.idMeal);
     list.unshift({ idMeal: r.idMeal, strMeal: r.strMeal, strMealThumb: r.strMealThumb, strCategory: r.strCategory || '', strArea: r.strArea || '' });
-    localStorage.setItem('mykitch_recent', JSON.stringify(list.slice(0, 12)));
+    localStorage.setItem('walkart_recent', JSON.stringify(list.slice(0, 12)));
   }
 };
 
 const SearchHistory = {
-  get: () => JSON.parse(localStorage.getItem('mykitch_search_hist') || '[]'),
+  get: () => JSON.parse(localStorage.getItem('walkart_search_hist') || '[]'),
   add: (q) => {
     if (!q?.trim()) return;
     const hist = SearchHistory.get().filter(x => x !== q.trim());
     hist.unshift(q.trim());
-    localStorage.setItem('mykitch_search_hist', JSON.stringify(hist.slice(0, 6)));
+    localStorage.setItem('walkart_search_hist', JSON.stringify(hist.slice(0, 6)));
   },
   remove: (q) => {
-    localStorage.setItem('mykitch_search_hist', JSON.stringify(SearchHistory.get().filter(x => x !== q)));
+    localStorage.setItem('walkart_search_hist', JSON.stringify(SearchHistory.get().filter(x => x !== q)));
   },
-  clear: () => localStorage.removeItem('mykitch_search_hist')
+  clear: () => localStorage.removeItem('walkart_search_hist')
 };
 
 const Ratings = {
-  get: (id) => (JSON.parse(localStorage.getItem('mykitch_ratings') || '{}'))[id] || 0,
+  get: (id) => (JSON.parse(localStorage.getItem('walkart_ratings') || '{}'))[id] || 0,
   set: (id, stars) => {
-    const all = JSON.parse(localStorage.getItem('mykitch_ratings') || '{}');
+    const all = JSON.parse(localStorage.getItem('walkart_ratings') || '{}');
     all[id] = stars;
-    localStorage.setItem('mykitch_ratings', JSON.stringify(all));
+    localStorage.setItem('walkart_ratings', JSON.stringify(all));
   }
 };
 
 const Planner = {
-  get: () => JSON.parse(localStorage.getItem('mykitch_planner') || '{}'),
+  get: () => JSON.parse(localStorage.getItem('walkart_planner') || '{}'),
   setMeal: (date, slot, recipe) => {
     const p = Planner.get();
     if (!p[date]) p[date] = {};
     p[date][slot] = { idMeal: recipe.idMeal, strMeal: recipe.strMeal, strMealThumb: recipe.strMealThumb };
-    localStorage.setItem('mykitch_planner', JSON.stringify(p));
+    localStorage.setItem('walkart_planner', JSON.stringify(p));
   },
   removeMeal: (date, slot) => {
     const p = Planner.get();
     if (p[date]) { delete p[date][slot]; if (!Object.keys(p[date]).length) delete p[date]; }
-    localStorage.setItem('mykitch_planner', JSON.stringify(p));
+    localStorage.setItem('walkart_planner', JSON.stringify(p));
   },
   getWeekDates: (offset = 0) => {
     const today = new Date();
@@ -255,11 +255,11 @@ const state = {
   currentRoute: 'home',
   collections: { billboard: null, popular: [] },
   categories: [],
-  shoppingList: JSON.parse(localStorage.getItem('mykitch_shopping') || '[]'),
-  favorites: JSON.parse(localStorage.getItem('mykitch_favorites') || '[]'),
-  lang: localStorage.getItem('mykitch_lang') || 'fr',
-  langName: localStorage.getItem('mykitch_lang_name') || 'FR',
-  darkMode: localStorage.getItem('mykitch_dark') === 'true',
+  shoppingList: JSON.parse(localStorage.getItem('walkart_shopping') || '[]'),
+  favorites: JSON.parse(localStorage.getItem('walkart_favorites') || '[]'),
+  lang: localStorage.getItem('walkart_lang') || 'fr',
+  langName: localStorage.getItem('walkart_lang_name') || 'FR',
+  darkMode: localStorage.getItem('walkart_dark') === 'true',
   currentRecipe: null,
   currentRecipeName: '',
   currentRecipeThumb: '',
@@ -330,7 +330,7 @@ const Scale = {
 // ---- TRANSLATOR (with cache eviction) ----
 const TRANS_CACHE_MAX = 300;
 const Translator = {
-  cache: JSON.parse(localStorage.getItem('mykitch_trans_cache') || '{}'),
+  cache: JSON.parse(localStorage.getItem('walkart_trans_cache') || '{}'),
   translate: async (text, targetLang) => {
     if (!text || !text.trim()) return text || '';
     if (targetLang === 'en') return text;
@@ -343,7 +343,7 @@ const Translator = {
       Translator.cache[cacheKey] = translated;
       const keys = Object.keys(Translator.cache);
       if (keys.length > TRANS_CACHE_MAX) keys.slice(0, 50).forEach(k => delete Translator.cache[k]);
-      localStorage.setItem('mykitch_trans_cache', JSON.stringify(Translator.cache));
+      localStorage.setItem('walkart_trans_cache', JSON.stringify(Translator.cache));
       return translated;
     } catch { return text; }
   },
@@ -411,7 +411,7 @@ const updateFavBadge = () => {
 const App = {
   init: async () => {
     // Auto dark mode: detect system preference only if never manually set
-    if (localStorage.getItem('mykitch_dark') === null) {
+    if (localStorage.getItem('walkart_dark') === null) {
       state.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     const darkBtn = document.getElementById('dark-mode-btn');
@@ -421,7 +421,7 @@ const App = {
     }
     // React to system theme changes (only if user hasn't locked a preference)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (localStorage.getItem('mykitch_dark') !== null) return;
+      if (localStorage.getItem('walkart_dark') !== null) return;
       state.darkMode = e.matches;
       document.body.classList.toggle('dark-mode', e.matches);
       const btn = document.getElementById('dark-mode-btn');
@@ -437,7 +437,7 @@ const App = {
     if (state.lang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
 
     // First-time: show language picker before loading anything
-    if (!localStorage.getItem('mykitch_lang')) {
+    if (!localStorage.getItem('walkart_lang')) {
       await new Promise(resolve => { UI._welcomeResolve = resolve; UI.showWelcome(); });
       document.getElementById('current-lang-text').textContent = state.langName;
       document.documentElement.setAttribute('lang', state.lang);
@@ -596,8 +596,8 @@ const App = {
   changeLang: async (code, name) => {
     state.lang = code;
     state.langName = name;
-    localStorage.setItem('mykitch_lang', code);
-    localStorage.setItem('mykitch_lang_name', name);
+    localStorage.setItem('walkart_lang', code);
+    localStorage.setItem('walkart_lang_name', name);
     document.getElementById('current-lang-text').textContent = name;
     document.documentElement.setAttribute('lang', code);
     if (code === 'ar') document.documentElement.setAttribute('dir', 'rtl');
@@ -609,7 +609,7 @@ const App = {
   toggleDarkMode: () => {
     state.darkMode = !state.darkMode;
     document.body.classList.toggle('dark-mode', state.darkMode);
-    localStorage.setItem('mykitch_dark', String(state.darkMode));
+    localStorage.setItem('walkart_dark', String(state.darkMode));
     const btn = document.getElementById('dark-mode-btn');
     if (btn) btn.textContent = state.darkMode ? '☀️' : '🌙';
   }
@@ -819,13 +819,13 @@ const Render = {
         <div id="load-more-grid" class="recipe-grid" style="margin-bottom:16px;"></div>
       </div>
       <footer style="background:var(--surface,#1a1a2e); color:var(--text-muted,#aaa); text-align:center; padding:32px 20px; margin-top:40px; border-top:1px solid var(--border,#333); font-size:0.85rem;">
-        <p style="margin-bottom:12px; font-weight:700; color:var(--text,#fff);">🍳 MyKitch</p>
+        <p style="margin-bottom:12px; font-weight:700; color:var(--text,#fff);">🍳 Walkart</p>
         <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
           <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">À propos</a>
           <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">Politique de confidentialité</a>
           <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">Contact</a>
         </div>
-        <p>© ${new Date().getFullYear()} MyKitch · Recettes par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
+        <p>© ${new Date().getFullYear()} Walkart · Recettes par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary,#FF4D6D);">TheMealDB</a></p>
       </footer>`;
   },
 
@@ -1057,7 +1057,7 @@ const Render = {
       <p style="color:var(--text-muted); margin-bottom:32px;">Dernière mise à jour : ${new Date().toLocaleDateString('fr-FR', {year:'numeric',month:'long',day:'numeric'})}</p>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">1. Informations collectées</h2>
-      <p>MyKitch ne collecte aucune donnée personnelle identifiable. Nous utilisons le stockage local de votre navigateur (localStorage) uniquement pour sauvegarder vos préférences, favoris et historique de recherche sur votre appareil.</p>
+      <p>Walkart ne collecte aucune donnée personnelle identifiable. Nous utilisons le stockage local de votre navigateur (localStorage) uniquement pour sauvegarder vos préférences, favoris et historique de recherche sur votre appareil.</p>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">2. Cookies et publicités</h2>
       <p>Ce site utilise Google AdSense pour afficher des publicités. Google peut utiliser des cookies pour personnaliser les annonces en fonction de vos visites sur ce site et d'autres sites. Vous pouvez désactiver la personnalisation des annonces sur <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--primary);">Google Ads Settings</a>.</p>
@@ -1079,13 +1079,13 @@ const Render = {
     <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
       <button class="btn btn-ghost" onclick="history.back()" style="margin-bottom:24px;">← Retour</button>
       <div style="text-align:center; margin-bottom:40px;">
-        <img src="logo.png" alt="MyKitch" style="width:80px; border-radius:20px; margin-bottom:16px;">
-        <h1 style="font-size:2rem;">MyKitch</h1>
+        <img src="logo.svg" alt="Walkart" style="width:80px; border-radius:20px; margin-bottom:16px;">
+        <h1 style="font-size:2rem;">Walkart</h1>
         <p style="color:var(--text-muted); font-size:1.1rem;">Découvrez les saveurs du monde entier</p>
       </div>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">🍳 Notre mission</h2>
-      <p>MyKitch rassemble des milliers de recettes authentiques des quatre coins du globe, accessibles dans plusieurs langues. Notre objectif : rendre la cuisine du monde accessible à tous.</p>
+      <p>Walkart rassemble des milliers de recettes authentiques des quatre coins du globe, accessibles dans plusieurs langues. Notre objectif : rendre la cuisine du monde accessible à tous.</p>
 
       <h2 style="font-size:1.2rem; margin:24px 0 8px;">✨ Fonctionnalités</h2>
       <ul style="line-height:2; padding-left:20px;">
@@ -1102,7 +1102,7 @@ const Render = {
       <a href="mailto:contact@walkart.us" style="display:inline-block; margin-top:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:8px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
 
       <div style="margin-top:48px; padding:20px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.85rem;">
-        <p>© ${new Date().getFullYear()} MyKitch · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">Politique de confidentialité</a></p>
+        <p>© ${new Date().getFullYear()} Walkart · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">Politique de confidentialité</a></p>
         <p style="margin-top:4px;">Recettes fournies par <a href="https://www.themealdb.com" target="_blank" style="color:var(--primary);">TheMealDB</a></p>
       </div>
     </div>`,
@@ -1469,7 +1469,7 @@ const Render = {
 const Actions = {
   addToShopping: async (n, m) => {
     state.shoppingList.push({ id: Date.now(), name: n, measure: m, done: false });
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     const msg = await Translator.t('added to shopping');
     Toast.show(`✅ ${n} ${msg}`);
   },
@@ -1485,7 +1485,7 @@ const Actions = {
     const qty = qtyEl?.value.trim();
     if (!name) { nameEl?.focus(); return; }
     state.shoppingList.push({ id: Date.now(), name, measure: qty, done: false });
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     if (nameEl) nameEl.value = '';
     if (qtyEl) qtyEl.value = '';
     const msg = await Translator.t('added to shopping');
@@ -1496,14 +1496,14 @@ const Actions = {
   removeShopping: async (id) => {
     const item = state.shoppingList.find(x => x.id === id);
     state.shoppingList = state.shoppingList.filter(x => x.id !== id);
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     App.navigate('shopping');
     if (item) {
       const [del_msg, undo_msg] = await Translator.all('removed', 'Undo');
       Toast.show(`🗑️ ${item.name} ${del_msg}`, 5000, () => {
         state.shoppingList.push(item);
         state.shoppingList.sort((a, b) => a.id - b.id);
-        localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+        localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
         App.navigate('shopping');
       }, `↩ ${undo_msg}`);
     }
@@ -1512,7 +1512,7 @@ const Actions = {
   toggleShoppingDone: (id) => {
     const item = state.shoppingList.find(x => x.id === id);
     if (item) item.done = !item.done;
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     App.navigate('shopping');
   },
 
@@ -1520,11 +1520,11 @@ const Actions = {
     if (!state.shoppingList.length) return;
     const backup = [...state.shoppingList];
     state.shoppingList = [];
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     const [msg, undo_msg] = await Translator.all('List cleared', 'Undo');
     Toast.show(`🗑️ ${msg}`, 5000, () => {
       state.shoppingList = backup;
-      localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+      localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
       App.navigate('shopping');
     }, `↩ ${undo_msg}`);
     App.navigate('shopping');
@@ -1556,7 +1556,7 @@ const Actions = {
       const msg = await Translator.t('Added to favorites!');
       Toast.show(`❤️ ${msg}`);
     }
-    localStorage.setItem('mykitch_favorites', JSON.stringify(state.favorites));
+    localStorage.setItem('walkart_favorites', JSON.stringify(state.favorites));
     updateFavBadge();
     document.querySelectorAll('.fav-btn, .hero-fav-btn').forEach(btn => {
       if ((btn.getAttribute('onclick') || '').includes(`'${id}'`)) {
@@ -1816,7 +1816,7 @@ const Actions = {
         count++;
       }
     }
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     const msg = await Translator.t('ingredients added to shopping list');
     Toast.show(`🛒 ${count} ${msg}`);
   },
@@ -1826,12 +1826,12 @@ const Actions = {
     const removed = state.shoppingList.filter(i => i.done);
     const backup = [...state.shoppingList];
     state.shoppingList = state.shoppingList.filter(i => !i.done);
-    localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+    localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
     App.navigate('shopping');
     const [msg, undo_msg] = await Translator.all(`${removed.length} items removed`, 'Undo');
     Toast.show(`✓ ${msg}`, 5000, () => {
       state.shoppingList = backup;
-      localStorage.setItem('mykitch_shopping', JSON.stringify(state.shoppingList));
+      localStorage.setItem('walkart_shopping', JSON.stringify(state.shoppingList));
       App.navigate('shopping');
     }, `↩ ${undo_msg}`);
   },
@@ -1901,14 +1901,14 @@ const Actions = {
   },
 
   clearRecentlyViewed: async () => {
-    localStorage.removeItem('mykitch_recent');
+    localStorage.removeItem('walkart_recent');
     UI.closeSettings();
     const msg = await Translator.t('Recently viewed cleared');
     Toast.show(`🕐 ${msg}`);
   },
   clearTransCache: async () => {
     Translator.cache = {};
-    localStorage.removeItem('mykitch_trans_cache');
+    localStorage.removeItem('walkart_trans_cache');
     UI.closeSettings();
     const msg = await Translator.t('Translation cache cleared');
     Toast.show(`🗜️ ${msg}`);
@@ -1921,7 +1921,7 @@ const Actions = {
   resetApp: async () => {
     const msg = await Translator.t('Reset ALL app data? This cannot be undone.');
     if (!confirm(msg)) return;
-    Object.keys(localStorage).filter(k => k.startsWith('mykitch_')).forEach(k => localStorage.removeItem(k));
+    Object.keys(localStorage).filter(k => k.startsWith('walkart_')).forEach(k => localStorage.removeItem(k));
     window.location.reload();
   },
 
@@ -1966,8 +1966,8 @@ const UI = {
     el.className = 'welcome-modal';
     el.innerHTML = `
       <div class="welcome-content">
-        <img src="logo.png" class="welcome-logo" alt="MyKitch">
-        <h1 class="welcome-title">MyKitch</h1>
+        <img src="logo.svg" class="welcome-logo" alt="Walkart">
+        <h1 class="welcome-title">Walkart</h1>
         <p class="welcome-sub">Choose your language / Choisissez votre langue</p>
         <div class="lang-grid">
           <div class="lang-item" onclick="UI.welcomePickLang('fr','FR')">
@@ -2003,8 +2003,8 @@ const UI = {
   welcomePickLang: (code, name) => {
     state.lang = code;
     state.langName = name;
-    localStorage.setItem('mykitch_lang', code);
-    localStorage.setItem('mykitch_lang_name', name);
+    localStorage.setItem('walkart_lang', code);
+    localStorage.setItem('walkart_lang_name', name);
     const modal = document.getElementById('welcome-modal');
     if (modal) { modal.classList.add('welcome-exit'); setTimeout(() => modal.remove(), 400); }
     if (UI._welcomeResolve) { UI._welcomeResolve(); UI._welcomeResolve = null; }
@@ -2051,7 +2051,7 @@ const UI = {
           <span class="s-chevron" style="color:#ef4444;">›</span>
         </div>
       </div>
-      <p class="settings-version">MyKitch · ${Safe.html(t_ver)} 21</p>`;
+      <p class="settings-version">Walkart · ${Safe.html(t_ver)} 21</p>`;
     panel.classList.add('open');
   },
 

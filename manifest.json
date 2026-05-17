@@ -1,6 +1,6 @@
 {
-  "name": "MyKitch",
-  "short_name": "MyKitch",
+  "name": "Walkart",
+  "short_name": "Walkart",
   "description": "Découvrez des milliers de recettes du monde entier.",
   "start_url": "/index.html",
   "display": "standalone",
