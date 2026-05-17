@@ -595,6 +595,18 @@ const App = {
     } else {
       App.navigate(seg || 'home');
     }
+    // Re-render when browser back/forward or URL hash changes
+    window.addEventListener('hashchange', () => {
+      const raw = window.location.hash.replace('#', '') || 'home';
+      const [seg, ...rest] = raw.split('/');
+      const param = rest.join('/');
+      if (seg === state.currentRoute && !param) return; // already on this route
+      if (seg === 'recipe' && param) App.navigate('recipe', { id: param });
+      else if (seg === 'area' && param) App.navigate('area', { a: decodeURIComponent(param) });
+      else if (seg === 'category' && param) App.navigate('category', { c: decodeURIComponent(param) });
+      else App.navigate(seg || 'home');
+    });
+
     document.getElementById('header-search-input').addEventListener('keydown', e => {
       if (e.key === 'Enter') {
         const q = e.target.value.trim();
