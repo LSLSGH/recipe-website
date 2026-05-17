@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Walkart – Recettes du Monde</title>
+  <meta name="description" content="Découvrez des milliers de recettes authentiques du monde entier. Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas avec Walkart.">
+  <meta name="keywords" content="recettes, cuisine du monde, recettes faciles, planificateur repas, liste de courses, recettes healthy">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.walkart.us/" id="canonical-link">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Walkart">
+  <meta property="og:title" content="Walkart – Recettes du Monde">
+  <meta property="og:description" content="Découvrez des milliers de recettes authentiques du monde entier. Planifiez vos repas et cuisinez pas à pas.">
+  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:url" content="https://www.walkart.us/">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Walkart – Recettes du Monde">
+  <meta name="twitter:description" content="Des milliers de recettes authentiques du monde entier.">
+  <meta name="twitter:image" content="https://www.walkart.us/favicon.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css?v=20.0">
+  <!-- app version 25 -->
+  <meta name="theme-color" content="#FF4D6D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-top">
+    <a href="#" class="logo" onclick="App.navigate('home')">
+      <img src="logo.svg" alt="Walkart" class="logo-img">
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="pwa-install-btn" class="btn-pwa-install" onclick="Actions.installPWA()" style="display:none;" aria-label="Install app">📲</button>
+      <button id="auth-btn" class="btn-settings" onclick="App.navigate('login')" style="font-size:0.85rem; padding:6px 14px;">🔐 Connexion</button>
+      <button class="btn-settings" onclick="UI.toggleSettings()" aria-label="Paramètres">
+        ⚙️ <span id="current-lang-text" class="settings-lang-badge">FR</span>
+      </button>
+    </div>
+  </div>
+  <div class="search-bar-container">
+    <input type="text" id="header-search-input" class="search-input" placeholder="Search recipes, ingredients..." data-i18n-placeholder="nav_search_placeholder">
+    <button onclick="App.navigate('search', {query: document.getElementById('header-search-input').value})" class="search-btn-icon">🔍</button>
+  </div>
+</header>
+
+<!-- Language Selection Modal -->
+<div class="lang-modal" id="lang-modal" onclick="if(event.target===this) UI.toggleLangModal()">
+  <div class="lang-content">
+    <h2 data-i18n="choose_lang">Choose language</h2>
+    <div class="lang-grid">
+      <div class="lang-item" onclick="App.changeLang('fr', 'FR')"><img src="https://flagcdn.com/w40/fr.png" class="lang-flag-img" alt="FR"><span>Français</span></div>
+      <div class="lang-item" onclick="App.changeLang('ar', 'AR')"><img src="https://flagcdn.com/w40/sa.png" class="lang-flag-img" alt="AR"><span>العربية</span></div>
+      <div class="lang-item" onclick="App.changeLang('en', 'EN')"><img src="https://flagcdn.com/w40/us.png" class="lang-flag-img" alt="EN"><span>English</span></div>
+      <div class="lang-item" onclick="App.changeLang('es', 'ES')"><img src="https://flagcdn.com/w40/es.png" class="lang-flag-img" alt="ES"><span>Español</span></div>
+      <div class="lang-item" onclick="App.changeLang('it', 'IT')"><img src="https://flagcdn.com/w40/it.png" class="lang-flag-img" alt="IT"><span>Italiano</span></div>
+      <div class="lang-item" onclick="App.changeLang('ja', 'JA')"><img src="https://flagcdn.com/w40/jp.png" class="lang-flag-img" alt="JA"><span>日本語</span></div>
+    </div>
+  </div>
+</div>
+
+<main id="app-root">
+  <div class="container"><div class="spinner"></div></div>
+</main>
+
+<!-- Bottom Tab Bar -->
+<nav class="tab-bar">
+  <a class="tab-item active" onclick="App.navigate('home')">
+    <span class="tab-icon">🏠</span>
+    <span data-i18n="nav_home">Home</span>
+  </a>
+  <a class="tab-item" onclick="App.navigate('search')">
+    <span class="tab-icon">🔍</span>
+    <span data-i18n="tab_explore">Explore</span>
+  </a>
+  <a class="tab-item" onclick="App.navigate('planner')">
+    <span class="tab-icon">📅</span>
+    <span data-i18n="tab_plan">Plan</span>
+  </a>
+  <a class="tab-item" onclick="App.navigate('shopping')">
+    <span class="tab-icon">🛒</span>
+    <span data-i18n="shopping_title">Shopping</span>
+  </a>
+  <a class="tab-item" style="position:relative;" onclick="App.navigate('favorites')">
+    <span class="tab-icon">❤️</span>
+    <span data-i18n="nav_favorites">Favorites</span>
+    <span class="fav-tab-badge" id="fav-tab-badge" style="display:none;"></span>
+  </a>
+</nav>
+
+<!-- Settings Panel -->
+<div id="settings-panel" onclick="if(event.target===this)UI.closeSettings()">
+  <div class="settings-drawer">
+    <div class="settings-handle-bar"></div>
+    <h2 class="settings-title">⚙️ Paramètres</h2>
+    <div id="settings-content"></div>
+  </div>
+</div>
+
+<script src="js/i18n.js?v=12.0"></script>
+<script src="app.js?v=25.0"></script>
+</body>
+</html>

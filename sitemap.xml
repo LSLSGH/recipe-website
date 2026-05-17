@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.walkart.us/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.walkart.us/#home"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.walkart.us/#home"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.walkart.us/#home"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.walkart.us/#home"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.walkart.us/#home"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.walkart.us/#home"/>
+  </url>
+
+  <!-- Search -->
+  <url>
+    <loc>https://www.walkart.us/#search</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://www.walkart.us/#about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Privacy -->
+  <url>
+    <loc>https://www.walkart.us/#privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
