@@ -16,7 +16,7 @@
  * Relançable plusieurs fois — reprend là où il s'est arrêté.
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+const { readFileSync, writeFileSync, existsSync } = require('fs');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────
 const SPOON_KEY = '2fa467ffb8794b7d9c21b76327acc1e1';

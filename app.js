@@ -3,13 +3,9 @@
    ===================================================== */
 
 // ---- SUPABASE CLIENT ----
-const SUPA_URL = 'https://bhnslahybcqbfsdmhgsg.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJobnNsYWh5YmNxYmZzZG1oZ3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MDY2MDIsImV4cCI6MjA5MTQ4MjYwMn0.bU_gtdZc3o12OORJKEf05hdCME0WlO3slBmJsp8Y7zs';
+const SUPA_URL = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2eW5nc2twbnlpbXNucW5sYmNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTE2MTUsImV4cCI6MjA5NDU2NzYxNX0.QKRXufgv_bkTRdczwm4WTHIllqgDCRj3a5J1mx0cRF8';
 const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
-
-// ---- SPOONACULAR ----
-const SPOON_KEY = '2fa467ffb8794b7d9c21b76327acc1e1';
-const SPOON_BASE = 'https://api.spoonacular.com/recipes';
 
 // ---- AUTH STATE ----
 let currentUser = null;
@@ -1057,17 +1053,16 @@ const API = {
   search: async (q, filters = {}) => {
     if (!q && !Object.keys(filters).length) return API.getBatch(10);
     const en = q ? await Translator.translate(q, 'en') : '';
-    const [supaResults, byName, byIng, spoonResults] = await Promise.all([
+    const [supaResults, byName, byIng] = await Promise.all([
       SupaRecipes.search(en || q, filters),
       en ? fetchWithRetry(`${API_BASE}/search.php?s=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null })) : { meals: null },
-      en ? fetchWithRetry(`${API_BASE}/filter.php?i=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null })) : { meals: null },
-      q ? SpoonRecipes.search(q) : []
+      en ? fetchWithRetry(`${API_BASE}/filter.php?i=${encodeURIComponent(en)}`).then(r => r.json()).catch(() => ({ meals: null })) : { meals: null }
     ]);
     const mealResults = [...(byName.meals || []), ...(byIng.meals || [])];
     const unique = Array.from(new Map(mealResults.map(m => [m.idMeal, m])).values());
     unique.forEach(m => RecipeStore.set(m.idMeal, m));
     const seen = new Set(supaResults.map(r => r.idMeal));
-    const merged = [...supaResults, ...unique.filter(r => !seen.has(r.idMeal)), ...spoonResults.filter(r => !seen.has(r.idMeal))];
+    const merged = [...supaResults, ...unique.filter(r => !seen.has(r.idMeal))];
     return merged;
   },
   getByCategory: async (c) => {
@@ -1090,7 +1085,11 @@ const API = {
       }
       return null;
     }
-    if (id.startsWith('spoon_')) return SpoonRecipes.getById(id.replace('spoon_', ''));
+    if (id.startsWith('spoon_')) {
+      const supaSpoon = await SupaRecipes.getById(id);
+      if (supaSpoon) return supaSpoon;
+      return null;
+    }
     if (id.startsWith('mealdb_')) {
       const supaR = await SupaRecipes.getById(id);
       if (supaR) return supaR;
@@ -1103,89 +1102,6 @@ const API = {
     const meal = data.meals?.[0];
     if (meal) RecipeStore.set(meal.idMeal, meal);
     return meal;
-  }
-};
-
-// ---- SPOONACULAR INTEGRATION ----
-const SpoonRecipes = {
-  _normalize: (r) => ({
-    idMeal: 'spoon_' + r.id,
-    strMeal: r.title,
-    strMealThumb: r.image || '',
-    strCategory: r.dishTypes?.[0] || '',
-    strArea: r.cuisines?.[0] || '',
-    strInstructions: r.analyzedInstructions?.length
-      ? r.analyzedInstructions.flatMap(s => s.steps.map(st => st.step)).join('\n\n')
-      : (r.instructions || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-    strTags: r.diets?.join(',') || '',
-    strSource: r.sourceUrl || '',
-    strYoutube: '',
-    _spoon: true,
-    _calories: Math.round(r.nutrition?.nutrients?.find(n => n.name === 'Calories')?.amount || 0) || null,
-    _protein: r.nutrition?.nutrients?.find(n => n.name === 'Protein')?.amount || null,
-    _fat: r.nutrition?.nutrients?.find(n => n.name === 'Fat')?.amount || null,
-    _carbs: r.nutrition?.nutrients?.find(n => n.name === 'Carbohydrates')?.amount || null,
-    _readyIn: r.readyInMinutes || null,
-    _servings: r.servings || 4,
-    _spoonIngredients: (r.extendedIngredients || []).map(i => ({
-      name: i.name, amount: i.amount, unit: i.unit, original: i.original
-    }))
-  }),
-
-  feed: async (number = 6) => {
-    const cacheKey = 'walkart_spoon_feed';
-    try {
-      const cached = sessionStorage.getItem(cacheKey);
-      if (cached) {
-        const recipes = JSON.parse(cached);
-        recipes.forEach(r => RecipeStore.set(r.idMeal, r));
-        return recipes;
-      }
-    } catch {}
-    try {
-      const res = await fetch(`${SPOON_BASE}/random?apiKey=${SPOON_KEY}&number=${number}&addRecipeInformation=true&addRecipeNutrition=true`);
-      if (!res.ok) return [];
-      const data = await res.json();
-      const recipes = (data.recipes || []).map(SpoonRecipes._normalize);
-      recipes.forEach(r => RecipeStore.set(r.idMeal, r));
-      try { sessionStorage.setItem(cacheKey, JSON.stringify(recipes)); } catch {}
-      return recipes;
-    } catch (e) { console.warn('Spoonacular feed:', e); return []; }
-  },
-
-  search: async (query, number = 8) => {
-    const cacheKey = 'walkart_spoon_s_' + query.toLowerCase().trim();
-    try {
-      const cached = sessionStorage.getItem(cacheKey);
-      if (cached) {
-        const recipes = JSON.parse(cached);
-        recipes.forEach(r => RecipeStore.set(r.idMeal, r));
-        return recipes;
-      }
-    } catch {}
-    try {
-      const res = await fetch(`${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&query=${encodeURIComponent(query)}&number=${number}&addRecipeInformation=true&addRecipeNutrition=true`);
-      if (!res.ok) return [];
-      const data = await res.json();
-      const recipes = (data.results || []).map(SpoonRecipes._normalize);
-      recipes.forEach(r => RecipeStore.set(r.idMeal, r));
-      try { sessionStorage.setItem(cacheKey, JSON.stringify(recipes)); } catch {}
-      return recipes;
-    } catch (e) { console.warn('Spoonacular search:', e); return []; }
-  },
-
-  getById: async (spoonId) => {
-    const mealId = 'spoon_' + spoonId;
-    const cached = RecipeStore.get(mealId);
-    if (cached?._spoonIngredients) return cached;
-    try {
-      const res = await fetch(`${SPOON_BASE}/${spoonId}/information?apiKey=${SPOON_KEY}&includeNutrition=true`);
-      if (!res.ok) return null;
-      const data = await res.json();
-      const recipe = SpoonRecipes._normalize(data);
-      RecipeStore.set(recipe.idMeal, recipe);
-      return recipe;
-    } catch (e) { console.warn('Spoonacular getById:', e); return null; }
   }
 };
 
@@ -1380,12 +1296,7 @@ const Render = {
     const moreCards = await Promise.all(moreMeals.map(r => Render.recipeCard(r)));
 
     // ---- Spoonacular trending (cached per session) ----
-    const spoonMeals = await SpoonRecipes.feed(6);
-    const spoonCards = await Promise.all(spoonMeals.map(r => Render.recipeCard(r)));
-    const t_trending = T('spoon_trending') || 'Trending · With Nutrition';
-    const spoonSection = spoonCards.length ? `
-      <h2 class="section-title">⚡ ${Safe.html(t_trending)}</h2>
-      <div class="recipe-grid">${spoonCards.join('')}</div>` : '';
+    const spoonSection = '';
 
     return `
       <div class="billboard" style="background-image: url('${Safe.attr(b.strMealThumb)}')">
@@ -1998,28 +1909,12 @@ const Render = {
     } catch {}
 
     if (!menuData) {
-      const spoonFetch = async (type, n, extraP = '') => {
-        try {
-          const url = `${SPOON_BASE}/complexSearch?apiKey=${SPOON_KEY}&number=${n}&type=${encodeURIComponent(type)}&addRecipeInformation=true&addRecipeNutrition=true${extraP}`;
-          const res = await fetch(url);
-          if (!res.ok) return [];
-          const d = await res.json();
-          const recipes = (d.results || []).map(SpoonRecipes._normalize);
-          recipes.forEach(r => RecipeStore.set(r.idMeal, r));
-          return recipes;
-        } catch { return []; }
-      };
-
-      const bfExtra = p.goal === 'lose_weight'
-        ? `&maxCalories=${Math.round(bfCal * 1.2)}`
-        : p.goal === 'gain_muscle' ? `&minProtein=15` : '';
-
       const [breakfasts, mains] = await Promise.all([
-        spoonFetch('breakfast', 7, bfExtra),
-        spoonFetch('main course', 14, extra)
+        SupaRecipes.search('breakfast', { limit: 7 }),
+        SupaRecipes.search('main', { limit: 14 })
       ]);
 
-      // Fallback: TheMealDB random if Spoonacular didn't return enough
+      // Fallback: TheMealDB random if Supabase didn't return enough
       const needed = Math.max(0, 21 - breakfasts.length - mains.length);
       const fallback = needed > 0 ? await API.getBatch(needed) : [];
 
