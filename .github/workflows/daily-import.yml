@@ -1,0 +1,40 @@
+name: Import Spoonacular → Supabase (daily)
+
+on:
+  schedule:
+    # Chaque jour à 3h00 UTC (5h00 Paris)
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    # Permet aussi de lancer manuellement depuis GitHub
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run import
+        env:
+          SUPA_SERVICE_KEY: ${{ secrets.SUPA_SERVICE_KEY }}
+          SPOON_KEY: ${{ secrets.SPOON_KEY }}
+        run: node import-spoonacular.js
+
+      - name: Show summary
+        if: always()
+        run: |
+          if [ -f import-progress.json ]; then
+            echo "📊 Progression :"
+            cat import-progress.json | node -e "
+              const d = require('fs').readFileSync('/dev/stdin','utf8');
+              const p = JSON.parse(d);
+              console.log('Total cumulé:', p.totalInserted || 0, 'recettes');
+            "
+          fi

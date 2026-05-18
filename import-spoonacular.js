@@ -19,14 +19,10 @@
 const { readFileSync, writeFileSync, existsSync } = require('fs');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────
-const SPOON_KEY = '2fa467ffb8794b7d9c21b76327acc1e1';
+const SPOON_KEY = process.env.SPOON_KEY || '2fa467ffb8794b7d9c21b76327acc1e1';
 const SUPA_URL  = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
-
-// Priorité : variable d'environnement > clé anon
-const SUPA_KEY  = process.env.SUPA_SERVICE_KEY
-               || 'sb_publishable_nUoUhdHUw_Al5fjjswltOQ_mE5phw-u';
-
-const IS_SERVICE = !!process.env.SUPA_SERVICE_KEY;
+const SUPA_KEY  = process.env.SUPA_SERVICE_KEY;
+const IS_SERVICE = true;
 const PROGRESS_FILE = 'import-progress.json';
 
 // Plan Cook $9/mois = 1500 pts/jour
@@ -66,6 +62,8 @@ function supaHeaders() {
 function normalize(r) {
   const get = (name) => r.nutrition?.nutrients?.find(n => n.name === name)?.amount ?? null;
   return {
+    id:               'spoon_' + r.id,
+    source:           'spoonacular',
     title:            r.title,
     image:            r.image || '',
     category:         r.dishTypes?.[0] || '',
@@ -78,10 +76,12 @@ function normalize(r) {
       unit: i.unit || '', original: i.original || ''
     })),
     diet_tags:        r.diets || [],
+    meal_types:       r.dishTypes || [],
     calories:         r.nutrition ? (Math.round(get('Calories') || 0) || null) : null,
     protein_g:        r.nutrition ? get('Protein') : null,
     fat_g:            r.nutrition ? get('Fat') : null,
     carbs_g:          r.nutrition ? get('Carbohydrates') : null,
+    fiber_g:          r.nutrition ? get('Fiber') : null,
     ready_in_minutes: r.readyInMinutes || null,
     servings:         r.servings || 4,
     raw_data: {
@@ -121,7 +121,7 @@ async function getExistingSpoonIds() {
 async function insertBatch(rows) {
   const res = await fetch(`${SUPA_URL}/rest/v1/recipes`, {
     method: 'POST',
-    headers: supaHeaders(),
+    headers: { ...supaHeaders(), 'Prefer': 'return=minimal,resolution=merge-duplicates' },
     body: JSON.stringify(rows)
   });
   if (res.status === 401 || res.status === 403) {
