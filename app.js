@@ -755,7 +755,7 @@ const App = {
         } else if (route === 'culinary-chat') {
           html = Render.featurePage('👨‍🍳 Assistant culinaire', typeof CulinaryChat !== 'undefined' ? CulinaryChat.renderPage() : '');
         } else if (route === 'cooking-groups') {
-          html = Render.featurePage('👥 Groupes de cuisine', typeof CookingGroups !== 'undefined' ? await CookingGroups.renderPage() : '');
+          html = Render.featurePage('👥 Groupes de cuisine', typeof CookingGroups !== 'undefined' ? CookingGroups.renderPage() : '');
         } else if (route === 'badges') {
           html = Render.featurePage('🏅 Mes badges', typeof BadgeSystem !== 'undefined' ? BadgeSystem.renderPage() : '');
         } else if (route === 'wishlist') {
@@ -1413,17 +1413,13 @@ const Render = {
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="10" y="4" width="28" height="40" rx="5" stroke="currentColor" stroke-width="3"/><line x1="10" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="3"/><line x1="18" y1="10" x2="18" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="24" x2="18" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
               <span class="discover-label">${T('discover_fridge')}</span>
             </div>
-            <div class="discover-card" onclick="App.navigate('challenges')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 4L29 16H42L32 24L36 37L24 29L12 37L16 24L6 16H19L24 4Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
-              <span class="discover-label">${T('discover_challenges')}</span>
+            <div class="discover-card" onclick="App.navigate('barcode-scanner')">
+              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+              <span class="discover-label">${T('discover_scanner')}</span>
             </div>
             <div class="discover-card" onclick="App.navigate('leaderboard')">
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="6" y="28" width="10" height="16" rx="2" stroke="currentColor" stroke-width="3"/><rect x="19" y="18" width="10" height="26" rx="2" stroke="currentColor" stroke-width="3"/><rect x="32" y="8" width="10" height="36" rx="2" stroke="currentColor" stroke-width="3"/></svg>
               <span class="discover-label">${T('discover_leaderboard')}</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('barcode-scanner')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
-              <span class="discover-label">${T('discover_scanner')}</span>
             </div>
             <div class="discover-card" onclick="App.navigate('custom-recipes')">
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 13 11 13 17c0 4 2 7.5 5 9.5V30h12v-3.5c3-2 5-5.5 5-9.5 0-6-5-11-11-11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="16" y="30" width="16" height="4" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="18" y="34" width="12" height="8" rx="2" stroke="currentColor" stroke-width="2.5"/></svg>
@@ -1433,49 +1429,13 @@ const Render = {
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M24 24V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>
               <span class="discover-label">${T('discover_nutrition')}</span>
             </div>
-            <div class="discover-card" onclick="App.navigate('world-map')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M6 24h36M24 6c-4 6-6 12-6 18s2 12 6 18M24 6c4 6 6 12 6 18s-2 12-6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">Carte du monde</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('trending')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 36l10-12 8 6 10-14 8-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M34 10h8v8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span class="discover-label">Tendances</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('contests')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M16 6h16v16l-8 6-8-6V6z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M16 12H8v8c0 4 3 7 8 8M32 12h8v8c0 4-3 7-8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="28" x2="24" y2="38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="38" x2="32" y2="38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-              <span class="discover-label">Concours</span>
-            </div>
             <div class="discover-card" onclick="App.navigate('culinary-chat')">
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M8 10h32a3 3 0 013 3v18a3 3 0 01-3 3H16l-8 6V13a3 3 0 013-3z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="16" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="27" x2="26" y2="27" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
               <span class="discover-label">Assistant IA</span>
             </div>
-            <div class="discover-card" onclick="App.navigate('cooking-groups')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="16" cy="18" r="6" stroke="currentColor" stroke-width="3"/><circle cx="32" cy="18" r="6" stroke="currentColor" stroke-width="3"/><path d="M4 40c0-8 5-12 12-12M44 40c0-8-5-12-12-12M20 40c0-7 2-10 4-10s4 3 4 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">Groupes</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('badges')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 4l4 10h11l-9 7 3 11-9-6-9 6 3-11-9-7h11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
-              <span class="discover-label">Badges</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('wishlist')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 38S8 28 8 17a8 8 0 0116-2 8 8 0 0116 2c0 11-16 21-16 21z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="24" y1="10" x2="24" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="15" x2="29" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">À essayer</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('cooking-history')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M24 14v10l6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-              <span class="discover-label">Historique</span>
-            </div>
             <div class="discover-card" onclick="App.navigate('dietary-profile')">
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6c-9 0-16 7-16 14 0 5 3 9 7 11v5h18v-5c4-2 7-6 7-11 0-7-7-14-16-14z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="18" y1="36" x2="30" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
               <span class="discover-label">Régime</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('kitchen-stock')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="8" y="20" width="32" height="24" rx="3" stroke="currentColor" stroke-width="3"/><path d="M16 20v-6a8 8 0 0116 0v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="28" x2="24" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="20" y1="32" x2="28" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">Stock cuisine</span>
-            </div>
-            <div class="discover-card" onclick="App.navigate('meal-budget')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="26" r="5" stroke="currentColor" stroke-width="2.5"/><line x1="6" y1="20" x2="42" y2="20" stroke="currentColor" stroke-width="2"/></svg>
-              <span class="discover-label">Budget repas</span>
             </div>
             <div class="discover-card" onclick="App.navigate('school-planning')">
               <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="34" rx="3" stroke="currentColor" stroke-width="3"/><line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" stroke-width="2.5"/><line x1="16" y1="10" x2="16" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="32" y1="10" x2="32" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="32" x2="26" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -1510,7 +1470,7 @@ const Render = {
       <button class="btn-back" onclick="App.goBack()">← Retour</button>
       <h2 class="page-title" style="margin:12px 0 20px;">${Safe.html(title)}</h2>
     </div>
-    <div style="padding-bottom:80px;">${content || '<div class="container"><div class="empty-state">Chargement...</div></div>'}</div>`;
+    <div style="padding-bottom:80px;">${content || '<div class="container"><div class="empty-state">Fonctionnalité non disponible.</div></div>'}</div>`;
   },
 
   worldCuisines: async (t_world, t_seeAll) => {

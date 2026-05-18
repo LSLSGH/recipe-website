@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mykitch-v1';
+const CACHE_NAME = 'mykitch-v2';
 const ASSETS = [
   '/',
   '/index.html',

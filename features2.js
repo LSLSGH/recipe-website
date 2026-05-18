@@ -617,9 +617,12 @@ const RecipeContests = {
 // 21. COOKING GROUPS
 // ============================================================
 const CookingGroups = {
-  renderPage: async () => {
-    if(!currentUser) return `<div class="container"><div class="empty-state">Connectez-vous pour créer ou rejoindre des groupes de cuisine.</div></div>`;
-    let groups=[]; try { const {data}=await supa.from('cooking_groups').select('*,group_members!inner(user_id)').eq('group_members.user_id',currentUser.id); groups=data||[]; } catch {}
+  _KEY: 'walkart_groups',
+  get: () => JSON.parse(localStorage.getItem('walkart_groups')||'[]'),
+  save: (g) => localStorage.setItem('walkart_groups', JSON.stringify(g)),
+  _code: () => Math.random().toString(36).substr(2,6).toUpperCase(),
+  renderPage: () => {
+    const groups = CookingGroups.get();
     return `<div class="container">
       <div class="groups-actions">
         <button class="btn btn-primary" onclick="CookingGroups.showCreate()">+ Créer un groupe</button>
@@ -629,8 +632,10 @@ const CookingGroups = {
         <div class="group-card">
           <div class="group-icon">${Safe.html(g.emoji||'👨‍🍳')}</div>
           <div class="group-info"><div class="group-name">${Safe.html(g.name)}</div>
-          <div class="group-meta">Code : <b>${Safe.html(g.invite_code||'')}</b></div></div>
-        </div>`).join('')}</div>`:`<div class="empty-state">Rejoignez un groupe pour partager vos recettes et plannings !</div>`}</div>`;
+          <div class="group-meta">Code : <b>${Safe.html(g.invite_code)}</b></div></div>
+          <button class="icon-btn" style="color:var(--danger,#e53)" onclick="CookingGroups.leave('${Safe.attr(g.id)}')">🚪</button>
+        </div>`).join('')}</div>`:`<div class="empty-state">Créez un groupe pour partager vos recettes et plannings !</div>`}
+    </div>`;
   },
   showCreate: () => {
     const em=['👨‍🍳','👩‍🍳','🍕','🍜','🥘','🍣','🥗','🍔','🌮','🍝'];
@@ -643,22 +648,34 @@ const CookingGroups = {
       <button class="btn btn-primary" onclick="CookingGroups.create()">Créer</button></div></div>`;
     document.body.appendChild(m);
   },
-  create: async () => {
-    if(!currentUser) return; const name=document.getElementById('grp-name')?.value?.trim(); const emoji=document.getElementById('grp-emoji')?.value||'👨‍🍳';
+  create: () => {
+    const name=document.getElementById('grp-name')?.value?.trim(); const emoji=document.getElementById('grp-emoji')?.value||'👨‍🍳';
     if(!name){UI.toast?.('Entrez un nom');return;}
-    try { const {data,error}=await supa.from('cooking_groups').insert({name,emoji,created_by:currentUser.id}).select().single(); if(error) throw error; await supa.from('group_members').insert({group_id:data.id,user_id:currentUser.id,role:'admin'}); document.querySelector('.modal-backdrop')?.remove(); UI.toast?.('✅ Groupe créé !'); App.navigate('cooking-groups'); } catch(e){UI.toast?.('Erreur : '+e.message);}
+    const groups=CookingGroups.get();
+    groups.push({id:Date.now().toString(),name,emoji,invite_code:CookingGroups._code(),created:Date.now()});
+    CookingGroups.save(groups);
+    document.querySelector('.modal-backdrop')?.remove(); UI.toast?.('✅ Groupe créé !'); App.navigate('cooking-groups');
   },
   showJoin: () => {
     const m=document.createElement('div'); m.className='modal-backdrop';
     m.innerHTML=`<div class="modal-card"><h3>Rejoindre un groupe</h3>
-      <input type="text" id="join-code" class="input-field" placeholder="Code d'invitation">
+      <p style="color:var(--text-muted);font-size:.9rem;margin:8px 0">Entrez le code partagé par un ami :</p>
+      <input type="text" id="join-code" class="input-field" placeholder="Ex: AB12CD" style="text-transform:uppercase">
       <div class="modal-actions"><button class="btn" onclick="this.closest('.modal-backdrop').remove()">Annuler</button>
       <button class="btn btn-primary" onclick="CookingGroups.join()">Rejoindre</button></div></div>`;
     document.body.appendChild(m);
   },
-  join: async () => {
-    if(!currentUser) return; const code=document.getElementById('join-code')?.value?.trim(); if(!code) return;
-    try { const {data:g}=await supa.from('cooking_groups').select('*').eq('invite_code',code).single(); if(!g){UI.toast?.('Code invalide');return;} await supa.from('group_members').insert({group_id:g.id,user_id:currentUser.id,role:'member'}); document.querySelector('.modal-backdrop')?.remove(); UI.toast?.('✅ Groupe rejoint !'); App.navigate('cooking-groups'); } catch(e){UI.toast?.('Erreur : '+e.message);}
+  join: () => {
+    const code=document.getElementById('join-code')?.value?.trim().toUpperCase(); if(!code) return;
+    const groups=CookingGroups.get();
+    if(groups.find(g=>g.invite_code===code)){UI.toast?.('Déjà dans ce groupe');document.querySelector('.modal-backdrop')?.remove();return;}
+    groups.push({id:'j_'+Date.now(),name:'Groupe '+code,emoji:'👥',invite_code:code,joined:Date.now()});
+    CookingGroups.save(groups);
+    document.querySelector('.modal-backdrop')?.remove(); UI.toast?.('✅ Groupe rejoint !'); App.navigate('cooking-groups');
+  },
+  leave: (id) => {
+    CookingGroups.save(CookingGroups.get().filter(g=>g.id!==id));
+    App.navigate('cooking-groups');
   }
 };
 
