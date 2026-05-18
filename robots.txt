@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /blog/
+Disallow: /import-spoonacular.js
+Disallow: /generate-blog-pages.js
+Disallow: /create-recipes-table.sql
+Disallow: /setup-recipes-rls.sql
 
 Sitemap: https://www.walkart.us/sitemap.xml
