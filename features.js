@@ -1134,8 +1134,15 @@ const FeatureActions = {
     if (resultEl) resultEl.innerHTML = '<div style="text-align:center;padding:20px;"><div class="spinner"></div></div>';
     const product = await BarcodeScanner.lookupProduct(barcode);
     if (!resultEl) return;
+    const scanAgainBtn = `<button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="FeatureActions.scanAgain()">📷 Scanner un autre produit</button>`;
+
     if (!product) {
-      resultEl.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">Produit non trouvé pour ce code-barres.</p>';
+      resultEl.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🔍</div>
+          <p style="color:var(--text-muted);">Produit non trouvé pour ce code-barres.</p>
+          ${scanAgainBtn}
+        </div>`;
       return;
     }
     resultEl.innerHTML = `
@@ -1157,7 +1164,16 @@ const FeatureActions = {
         <button class="btn btn-primary btn-full" onclick="FeatureActions.addScannedToShopping('${Safe.attr(product.name)}')">
           🛒 Ajouter à la liste de courses
         </button>
+        ${scanAgainBtn}
       </div>`;
+  },
+
+  scanAgain: () => {
+    const resultEl = document.getElementById('product-result');
+    if (resultEl) resultEl.innerHTML = '';
+    const manualInput = document.getElementById('barcode-manual');
+    if (manualInput) manualInput.value = '';
+    FeatureActions.startScan();
   },
 
   addScannedToShopping: (name) => {
