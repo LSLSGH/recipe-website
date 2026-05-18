@@ -29,9 +29,9 @@ const SUPA_KEY  = process.env.SUPA_SERVICE_KEY
 const IS_SERVICE = !!process.env.SUPA_SERVICE_KEY;
 const PROGRESS_FILE = 'import-progress.json';
 
-// Plan Spoonacular gratuit ≈ 150 pts/jour, 1 pt/recette
-// Mettez 900 si vous avez un plan payant
-const MAX_PER_RUN  = 140;
+// Plan Cook $9/mois = 1500 pts/jour
+// /random + addRecipeNutrition = ~2 pts/recette → 700 recettes/jour (marge de sécurité)
+const MAX_PER_RUN  = 700;
 const BATCH_SIZE   = 100;  // max par appel Spoonacular
 const INSERT_BATCH =  50;  // taille des lots pour Supabase
 
@@ -242,9 +242,8 @@ async function main() {
   console.log('══════════════════════════════════════════');
 
   if (totalInserted >= MAX_PER_RUN) {
-    console.log('\n💡 Quota de session atteint.');
-    console.log('   Pour augmenter : modifiez MAX_PER_RUN dans le script.');
-    console.log('   Relancez demain pour continuer (le script reprend automatiquement).');
+    console.log('\n💡 Quota journalier atteint (plan Cook $9 → ~700 recettes/jour).');
+    console.log('   Relancez demain — le script reprend automatiquement sans doublons.');
   }
   console.log('\n📄 Progression : import-progress.json\n');
 }
