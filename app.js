@@ -1411,35 +1411,35 @@ const Render = {
           <div class="discover-grid">
             <div class="discover-card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)" onclick="App.navigate('fridge-mode')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="10" y="4" width="28" height="40" rx="5" stroke="currentColor" stroke-width="3"/><line x1="10" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="3"/><line x1="18" y1="10" x2="18" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="24" x2="18" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">${T('discover_fridge')}</div><div class="discover-desc">Cuisinez avec ce que vous avez déjà</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_fridge')}</div><div class="discover-desc">${T('discover_fridge_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)" onclick="App.navigate('barcode-scanner')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">${T('discover_scanner')}</div><div class="discover-desc">Scannez un produit pour ses infos</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_scanner')}</div><div class="discover-desc">${T('discover_scanner_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="App.navigate('leaderboard')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="6" y="28" width="10" height="16" rx="2" stroke="currentColor" stroke-width="3"/><rect x="19" y="18" width="10" height="26" rx="2" stroke="currentColor" stroke-width="3"/><rect x="32" y="8" width="10" height="36" rx="2" stroke="currentColor" stroke-width="3"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">${T('discover_leaderboard')}</div><div class="discover-desc">Les recettes les plus populaires</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_leaderboard')}</div><div class="discover-desc">${T('discover_leaderboard_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="App.navigate('custom-recipes')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 13 11 13 17c0 4 2 7.5 5 9.5V30h12v-3.5c3-2 5-5.5 5-9.5 0-6-5-11-11-11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="16" y="30" width="16" height="4" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="18" y="34" width="12" height="8" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">${T('discover_myrecipes')}</div><div class="discover-desc">Créez et gérez vos propres recettes</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_myrecipes')}</div><div class="discover-desc">${T('discover_myrecipes_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#ef4444,#dc2626)" onclick="App.navigate('nutrition-tracker')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M24 24V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">${T('discover_nutrition')}</div><div class="discover-desc">Suivez calories et macronutriments</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_nutrition')}</div><div class="discover-desc">${T('discover_nutrition_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="App.navigate('culinary-chat')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M8 10h32a3 3 0 013 3v18a3 3 0 01-3 3H16l-8 6V13a3 3 0 013-3z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="16" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="27" x2="26" y2="27" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">Assistant IA</div><div class="discover-desc">Posez vos questions culinaires</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_ai')}</div><div class="discover-desc">${T('discover_ai_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#14b8a6,#0f766e)" onclick="App.navigate('dietary-profile')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6c-9 0-16 7-16 14 0 5 3 9 7 11v5h18v-5c4-2 7-6 7-11 0-7-7-14-16-14z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="18" y1="36" x2="30" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">Régime</div><div class="discover-desc">Végétarien, halal, sans gluten…</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_diet')}</div><div class="discover-desc">${T('discover_diet_desc')}</div></div>
             </div>
             <div class="discover-card" style="background:linear-gradient(135deg,#ec4899,#be185d)" onclick="App.navigate('school-planning')">
               <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="34" rx="3" stroke="currentColor" stroke-width="3"/><line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" stroke-width="2.5"/><line x1="16" y1="10" x2="16" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="32" y1="10" x2="32" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="32" x2="26" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-              <div class="discover-card-body"><div class="discover-label">Planning école</div><div class="discover-desc">Organisez les repas de la semaine</div></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_school')}</div><div class="discover-desc">${T('discover_school_desc')}</div></div>
             </div>
           </div>
         </div>
@@ -1718,6 +1718,10 @@ const Render = {
                     <span class="drawer-icon">📅</span>
                     <span>${Safe.html(t_addPlan)}</span>
                   </button>
+                  ${r.idMeal?.startsWith('custom_') ? `<button class="drawer-action-btn" onclick="App.navigate('edit-custom-recipe', {id: '${r.idMeal.replace('custom_', '')}'})">
+                    <span class="drawer-icon">✏️</span>
+                    <span>${Safe.html(T('edit_recipe') || 'Modifier')}</span>
+                  </button>` : ''}
                   ${r.strYoutube ? `<a href="${Safe.attr(r.strYoutube)}" target="_blank" rel="noopener noreferrer" class="drawer-action-btn">
                     <span class="drawer-icon">▶️</span>
                     <span>YouTube</span>
@@ -2257,15 +2261,50 @@ const Render = {
 
     const done = state.shoppingList.filter(i => i.done).length;
     const pct = Math.round((done / state.shoppingList.length) * 100);
-    const items = state.shoppingList.map(i => `
-      <div class="ingredient-row shopping-item ${i.done ? 'done' : ''}" onclick="Actions.toggleShoppingDone(${i.id})">
+    const sortMode = state._shopSort || 'added';
+
+    const CAT_MAP = {
+      'Fruits & Légumes': ['apple','banana','tomato','carrot','onion','garlic','lemon','orange','potato','spinach','lettuce','cucumber','pepper','mushroom','avocado','tomate','carotte','oignon','ail','pomme','citron','salade','concombre','poivron','champignon','épinard','courgette','aubergine'],
+      'Viandes & Poissons': ['chicken','beef','pork','lamb','salmon','tuna','shrimp','fish','poulet','boeuf','porc','agneau','saumon','thon','crevette','poisson','viande','steak','filet'],
+      'Produits laitiers': ['milk','cream','butter','cheese','yogurt','egg','lait','crème','beurre','fromage','yaourt','oeuf','oeuf','mozzarella','parmesan'],
+      'Épicerie': ['flour','sugar','salt','oil','pasta','rice','bread','sauce','vinegar','farine','sucre','sel','huile','pâtes','riz','pain','vinaigre','miel','honey','chocolate','chocolat','vanilla','vanille','baking','levure'],
+      'Boissons': ['water','juice','wine','beer','coffee','tea','eau','jus','vin','bière','café','thé','lait','milk'],
+    };
+    const getCategory = (name) => {
+      const n = name.toLowerCase();
+      for (const [cat, keys] of Object.entries(CAT_MAP)) { if (keys.some(k => n.includes(k))) return cat; }
+      return 'Autres';
+    };
+
+    let listItems = [...state.shoppingList];
+    if (sortMode === 'alpha') listItems.sort((a,b) => a.name.localeCompare(b.name));
+
+    let itemsHTML = '';
+    if (sortMode === 'category') {
+      const groups = {};
+      listItems.forEach(i => { const c = getCategory(i.name); if (!groups[c]) groups[c] = []; groups[c].push(i); });
+      const order = ['Fruits & Légumes','Viandes & Poissons','Produits laitiers','Épicerie','Boissons','Autres'];
+      order.forEach(cat => {
+        if (!groups[cat]) return;
+        itemsHTML += `<div class="shop-category-divider">📦 ${cat}</div>`;
+        itemsHTML += groups[cat].map(i => renderShopItem(i)).join('');
+      });
+    } else {
+      itemsHTML = listItems.map(i => renderShopItem(i)).join('');
+    }
+
+    function renderShopItem(i) {
+      return `<div class="ingredient-row shopping-item ${i.done ? 'done' : ''}" onclick="Actions.toggleShoppingDone(${i.id})">
         <div style="display:flex; align-items:center; gap:12px;">
           <div class="check-circle ${i.done ? 'checked' : ''}">✓</div>
           <span><b>${Safe.html(i.name)}</b>${i.measure ? ` <small style="color:var(--text-muted)">(${Safe.html(i.measure)})</small>` : ''}</span>
         </div>
         <button class="btn" style="background:rgba(239,68,68,0.1); color:#ef4444; padding:8px 12px; min-width:auto;"
           onclick="event.stopPropagation(); Actions.removeShopping(${i.id})">✕</button>
-      </div>`).join('');
+      </div>`;
+    }
+
+    const t_sort_cat = T('sort_category'), t_sort_alpha = T('sort_alpha'), t_sort_added = T('sort_added');
 
     return `
       <div class="container">
@@ -2278,11 +2317,17 @@ const Render = {
           </div>
         </div>
         ${addForm}
+        <div class="sort-bar">
+          <label>${Safe.html(T('sort_by_category')||'Trier :')}</label>
+          <button class="sort-btn ${sortMode==='added'?'active':''}" onclick="state._shopSort='added';App.navigate('shopping')">${Safe.html(t_sort_added)}</button>
+          <button class="sort-btn ${sortMode==='alpha'?'active':''}" onclick="state._shopSort='alpha';App.navigate('shopping')">${Safe.html(t_sort_alpha)}</button>
+          <button class="sort-btn ${sortMode==='category'?'active':''}" onclick="state._shopSort='category';App.navigate('shopping')">${Safe.html(t_sort_cat)}</button>
+        </div>
         <div class="shopping-progress">
           <div class="shopping-progress-bar" style="width:${pct}%"></div>
         </div>
         <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:16px;">${done}/${state.shoppingList.length} ${Safe.html(t_done)}</p>
-        ${items}
+        ${itemsHTML}
       </div>`;
   },
 
@@ -2361,11 +2406,24 @@ const Render = {
           <button class="btn btn-primary" onclick="App.navigate('home')">${Safe.html(t_explore)}</button>
         </div>`;
     }
-    const cards = await Promise.all(state.favorites.map(r => Render.recipeCard(r)));
+    const PAGE_SIZE = 12;
+    const page = state._favPage || 0;
+    const total = state.favorites.length;
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    const slice = state.favorites.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+    const cards = await Promise.all(slice.map(r => Render.recipeCard(r)));
+    const t_prev = T('prev_page'), t_next = T('next_page'), t_of = T('page_of');
+    const pagination = totalPages > 1 ? `
+      <div class="pagination">
+        <button class="btn" onclick="state._favPage=Math.max(0,(state._favPage||0)-1);App.navigate('favorites')" ${page===0?'disabled':''} style="${page===0?'opacity:.4':''}">${Safe.html(t_prev)}</button>
+        <span class="pagination-info">${page+1} ${Safe.html(t_of)} ${totalPages}</span>
+        <button class="btn" onclick="state._favPage=Math.min(${totalPages-1},(state._favPage||0)+1);App.navigate('favorites')" ${page>=totalPages-1?'disabled':''} style="${page>=totalPages-1?'opacity:.4':''}">${Safe.html(t_next)}</button>
+      </div>` : '';
     return `
       <div class="container">
-        <h2 class="section-title">❤️ ${Safe.html(t_title)} <span style="color:var(--text-muted); font-size:1.2rem;">(${state.favorites.length})</span></h2>
+        <h2 class="section-title">❤️ ${Safe.html(t_title)} <span style="color:var(--text-muted); font-size:1.2rem;">(${total})</span></h2>
         <div class="recipe-grid">${cards.join('')}</div>
+        ${pagination}
       </div>`;
   },
 
@@ -2440,6 +2498,7 @@ const Render = {
         <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
           ${typeof FeatureActions !== 'undefined' ? `<button class="btn btn-secondary" onclick="FeatureActions.generatePlan()">✨ Générer automatiquement</button>` : ''}
           <button class="btn btn-ghost" onclick="App.navigate('plan-share')">🔗 Partager mon plan</button>
+          <button class="btn btn-ghost btn-print-plan no-print" onclick="window.print()">🖨️ ${Safe.html(T('print_plan') || 'Imprimer')}</button>
         </div>
         <div class="planner-scroll"><div class="planner-grid">${dayCols}</div></div>
       </div>`;

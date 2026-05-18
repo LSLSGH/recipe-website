@@ -3151,4 +3151,140 @@ body.dark-mode .badge-card.earned { background:rgba(255,77,109,.1); }
 body.dark-mode .diet-card { background:rgba(255,255,255,.04); }
 body.dark-mode .area-chip { background:rgba(255,255,255,.06); }
 
+/* =========================================================
+   IMPROVEMENTS — responsive, a11y, dark mode, pagination
+   ========================================================= */
 
+/* --- TABLET BREAKPOINT --- */
+@media (min-width: 768px) {
+  .discover-grid { grid-template-columns: repeat(4, 1fr); }
+  .recipe-grid { grid-template-columns: repeat(3, 1fr); }
+  .container { padding: 0 24px; }
+  .detail-card { padding: 32px; }
+  .billboard { height: 420px; }
+  .tab-bar { max-width: 600px; }
+}
+
+/* --- TOUCH TARGET MINIMUM 44px --- */
+.btn, .btn-primary, .btn-outline, .tab-item,
+.icon-btn, .allergen-btn, .chat-suggest-btn,
+.discover-card, .recipe-action-btn {
+  min-height: 44px;
+}
+.tab-item { min-height: 52px; }
+
+/* --- PREFERS-REDUCED-MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .skeleton { animation: none !important; }
+}
+
+/* --- DARK MODE EXTENDED COVERAGE --- */
+body.dark-mode .input-field,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="number"],
+body.dark-mode select,
+body.dark-mode textarea {
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  border-color: rgba(255,255,255,0.12);
+}
+body.dark-mode .input-field:focus,
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  border-color: var(--primary);
+  background: rgba(255,255,255,0.1);
+}
+body.dark-mode .btn { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.15); }
+body.dark-mode .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+body.dark-mode .btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); }
+body.dark-mode .chip { background: rgba(255,255,255,0.07); color: #ccc; }
+body.dark-mode .chip.active { background: var(--primary); color: #fff; }
+body.dark-mode .stat-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .group-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .stock-item { background: rgba(255,255,255,0.06); }
+body.dark-mode .budget-entry { background: rgba(255,255,255,0.06); }
+body.dark-mode .chat-bubble { background: rgba(255,255,255,0.08); }
+body.dark-mode .chat-input-row { background: var(--bg); border-color: rgba(255,255,255,0.1); }
+body.dark-mode .school-day-card { background: rgba(255,255,255,0.06); }
+body.dark-mode .modal-backdrop { background: rgba(0,0,0,0.75); }
+body.dark-mode .vote-btn { color: #fff; border-color: rgba(255,255,255,0.15); }
+body.dark-mode .contest-entry { background: rgba(255,255,255,0.06); }
+body.dark-mode .history-item { background: rgba(255,255,255,0.06); }
+
+/* --- PAGINATION --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0 8px;
+}
+.pagination .btn { min-width: 110px; }
+.pagination-info { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+
+/* --- SHOPPING SORT BAR --- */
+.sort-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sort-bar label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+.sort-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: .2s;
+  min-height: 34px;
+}
+.sort-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+body.dark-mode .sort-btn { background: rgba(255,255,255,0.06); color: #aaa; border-color: rgba(255,255,255,0.1); }
+body.dark-mode .sort-btn.active { background: var(--primary); color: #fff; }
+
+/* --- SHOPPING CATEGORY DIVIDER --- */
+.shop-category-divider {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 12px 4px 4px;
+}
+
+/* --- PRINT PLANNER --- */
+@media print {
+  .header, .tab-bar, .btn-back, .btn, #settings-panel { display: none !important; }
+  body { background: #fff !important; color: #000 !important; font-size: 12px; }
+  .planner-print-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
+  .planner-day { break-inside: avoid; }
+}
+.btn-print-plan {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  transition: .2s;
+  min-height: 36px;
+}
+.btn-print-plan:hover { border-color: var(--primary); color: var(--primary); }
