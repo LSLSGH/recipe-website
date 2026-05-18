@@ -1409,37 +1409,37 @@ const Render = {
         <div class="discover-section">
           <h2 class="section-title" style="margin-bottom:12px;">✨ ${T('discover')}</h2>
           <div class="discover-grid">
-            <div class="discover-card" onclick="App.navigate('fridge-mode')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="10" y="4" width="28" height="40" rx="5" stroke="currentColor" stroke-width="3"/><line x1="10" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="3"/><line x1="18" y1="10" x2="18" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="24" x2="18" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">${T('discover_fridge')}</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)" onclick="App.navigate('fridge-mode')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="10" y="4" width="28" height="40" rx="5" stroke="currentColor" stroke-width="3"/><line x1="10" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="3"/><line x1="18" y1="10" x2="18" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="24" x2="18" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_fridge')}</div><div class="discover-desc">Cuisinez avec ce que vous avez déjà</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('barcode-scanner')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
-              <span class="discover-label">${T('discover_scanner')}</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)" onclick="App.navigate('barcode-scanner')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M6 16V10a4 4 0 014-4h6M42 16V10a4 4 0 00-4-4h-6M6 32v6a4 4 0 004 4h6M42 32v6a4 4 0 01-4 4h-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="13" y1="18" x2="13" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="19" y1="18" x2="19" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="18" x2="25" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="18" x2="31" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="35" y1="18" x2="35" y2="30" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_scanner')}</div><div class="discover-desc">Scannez un produit pour ses infos</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('leaderboard')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="6" y="28" width="10" height="16" rx="2" stroke="currentColor" stroke-width="3"/><rect x="19" y="18" width="10" height="26" rx="2" stroke="currentColor" stroke-width="3"/><rect x="32" y="8" width="10" height="36" rx="2" stroke="currentColor" stroke-width="3"/></svg>
-              <span class="discover-label">${T('discover_leaderboard')}</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="App.navigate('leaderboard')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="6" y="28" width="10" height="16" rx="2" stroke="currentColor" stroke-width="3"/><rect x="19" y="18" width="10" height="26" rx="2" stroke="currentColor" stroke-width="3"/><rect x="32" y="8" width="10" height="36" rx="2" stroke="currentColor" stroke-width="3"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_leaderboard')}</div><div class="discover-desc">Les recettes les plus populaires</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('custom-recipes')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 13 11 13 17c0 4 2 7.5 5 9.5V30h12v-3.5c3-2 5-5.5 5-9.5 0-6-5-11-11-11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="16" y="30" width="16" height="4" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="18" y="34" width="12" height="8" rx="2" stroke="currentColor" stroke-width="2.5"/></svg>
-              <span class="discover-label">${T('discover_myrecipes')}</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="App.navigate('custom-recipes')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 13 11 13 17c0 4 2 7.5 5 9.5V30h12v-3.5c3-2 5-5.5 5-9.5 0-6-5-11-11-11z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="16" y="30" width="16" height="4" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="18" y="34" width="12" height="8" rx="2" stroke="currentColor" stroke-width="2.5"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_myrecipes')}</div><div class="discover-desc">Créez et gérez vos propres recettes</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('nutrition-tracker')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M24 24V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>
-              <span class="discover-label">${T('discover_nutrition')}</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#ef4444,#dc2626)" onclick="App.navigate('nutrition-tracker')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="3"/><path d="M24 24V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">${T('discover_nutrition')}</div><div class="discover-desc">Suivez calories et macronutriments</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('culinary-chat')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M8 10h32a3 3 0 013 3v18a3 3 0 01-3 3H16l-8 6V13a3 3 0 013-3z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="16" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="27" x2="26" y2="27" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">Assistant IA</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="App.navigate('culinary-chat')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M8 10h32a3 3 0 013 3v18a3 3 0 01-3 3H16l-8 6V13a3 3 0 013-3z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="16" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="27" x2="26" y2="27" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">Assistant IA</div><div class="discover-desc">Posez vos questions culinaires</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('dietary-profile')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6c-9 0-16 7-16 14 0 5 3 9 7 11v5h18v-5c4-2 7-6 7-11 0-7-7-14-16-14z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="18" y1="36" x2="30" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-              <span class="discover-label">Régime</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#14b8a6,#0f766e)" onclick="App.navigate('dietary-profile')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><path d="M24 6c-9 0-16 7-16 14 0 5 3 9 7 11v5h18v-5c4-2 7-6 7-11 0-7-7-14-16-14z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><line x1="18" y1="36" x2="30" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">Régime</div><div class="discover-desc">Végétarien, halal, sans gluten…</div></div>
             </div>
-            <div class="discover-card" onclick="App.navigate('school-planning')">
-              <svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="34" rx="3" stroke="currentColor" stroke-width="3"/><line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" stroke-width="2.5"/><line x1="16" y1="10" x2="16" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="32" y1="10" x2="32" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="32" x2="26" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <span class="discover-label">Planning école</span>
+            <div class="discover-card" style="background:linear-gradient(135deg,#ec4899,#be185d)" onclick="App.navigate('school-planning')">
+              <div class="discover-card-icon"><svg class="discover-svg" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="34" rx="3" stroke="currentColor" stroke-width="3"/><line x1="8" y1="18" x2="40" y2="18" stroke="currentColor" stroke-width="2.5"/><line x1="16" y1="10" x2="16" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="32" y1="10" x2="32" y2="18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="32" x2="26" y2="32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+              <div class="discover-card-body"><div class="discover-label">Planning école</div><div class="discover-desc">Organisez les repas de la semaine</div></div>
             </div>
           </div>
         </div>
