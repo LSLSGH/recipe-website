@@ -743,6 +743,10 @@ const App = {
           html = Render.privacy();
         } else if (route === 'about') {
           html = Render.about();
+        } else if (route === 'blog') {
+          html = typeof BlogRender !== 'undefined' ? BlogRender.list() : '';
+        } else if (route === 'article') {
+          html = typeof BlogRender !== 'undefined' ? BlogRender.article(params?.slug) : '';
         } else if (route === 'collections') {
           html = Render.collections();
         // ---- FEATURES V2 ROUTES ----
@@ -1458,6 +1462,7 @@ const Render = {
         <p style="margin-bottom:12px; font-weight:700; color:var(--text,#fff);">🍳 Walkart</p>
         <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
           <a onclick="App.navigate('about')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_about')}</a>
+          <a onclick="App.navigate('blog')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">📝 Blog</a>
           <a onclick="App.navigate('privacy')" style="color:var(--primary,#FF4D6D); cursor:pointer; text-decoration:none;">${T('footer_privacy_link')}</a>
           <a href="mailto:contact@walkart.us" style="color:var(--primary,#FF4D6D); text-decoration:none;">${T('footer_contact')}</a>
         </div>
@@ -2099,36 +2104,66 @@ const Render = {
       <p>${T('privacy_s6_body')} <a href="mailto:contact@walkart.us" style="color:var(--primary);">contact@walkart.us</a></p>
     </div>`,
 
-  about: () => `
-    <div class="container" style="padding:40px 20px; max-width:800px; margin:0 auto;">
-      <button class="btn btn-ghost" onclick="App.goBack()" style="margin-bottom:24px;">${T('btn_back')}</button>
-      <div style="text-align:center; margin-bottom:40px;">
-        <img src="logo.svg" alt="Walkart" style="width:80px; border-radius:20px; margin-bottom:16px;">
-        <h1 style="font-size:2rem;">Walkart</h1>
-        <p style="color:var(--text-muted); font-size:1.1rem;">${T('about_tagline')}</p>
+  about: () => {
+    const lang = state.lang || 'fr';
+    const stats = [
+      { n: '5 000+', l: { fr:'Recettes', en:'Recipes', es:'Recetas', ar:'وصفة', it:'Ricette', ja:'レシピ' } },
+      { n: '6',      l: { fr:'Langues', en:'Languages', es:'Idiomas', ar:'لغات', it:'Lingue', ja:'言語' } },
+      { n: '30+',    l: { fr:'Fonctionnalités', en:'Features', es:'Funciones', ar:'ميزة', it:'Funzioni', ja:'機能' } },
+      { n: '100%',   l: { fr:'Gratuit', en:'Free', es:'Gratis', ar:'مجاني', it:'Gratuito', ja:'無料' } }
+    ];
+    const values = [
+      { e:'🌍', t: { fr:'Cuisine du monde', en:'World cuisine', es:'Cocina del mundo', ar:'مطبخ العالم', it:'Cucina del mondo', ja:'世界の料理' }, d: { fr:'Des recettes authentiques de tous les continents, respectant les traditions culinaires locales.', en:'Authentic recipes from all continents, respecting local culinary traditions.' } },
+      { e:'🥗', t: { fr:'Santé & Bien-être', en:'Health & Wellness', es:'Salud y bienestar', ar:'الصحة والعافية', it:'Salute e benessere', ja:'健康とウェルネス' }, d: { fr:'Chaque recette inclut des informations nutritionnelles détaillées pour vous aider à atteindre vos objectifs.', en:'Each recipe includes detailed nutritional information to help you achieve your goals.' } },
+      { e:'♻️', t: { fr:'Zéro gaspillage', en:'Zero waste', es:'Cero desperdicios', ar:'صفر هدر', it:'Zero sprechi', ja:'食品廃棄ゼロ' }, d: { fr:'Notre mode Frigo vous aide à cuisiner avec ce que vous avez, réduisant le gaspillage alimentaire.', en:'Our Fridge mode helps you cook with what you have, reducing food waste.' } },
+      { e:'📱', t: { fr:'Application mobile', en:'Mobile app', es:'Aplicación móvil', ar:'تطبيق جوال', it:'App mobile', ja:'モバイルアプリ' }, d: { fr:'Disponible sur tous les appareils, même hors connexion grâce à notre technologie PWA.', en:'Available on all devices, even offline thanks to our PWA technology.' } }
+    ];
+    const statCards = stats.map(s => `<div style="text-align:center; padding:16px; background:var(--surface); border-radius:12px;"><div style="font-size:1.8rem; font-weight:800; color:var(--primary);">${s.n}</div><div style="font-size:0.8rem; color:var(--text-muted);">${s.l[lang] || s.l.fr}</div></div>`).join('');
+    const valueCards = values.map(v => `<div style="padding:16px; background:var(--surface); border-radius:12px;"><div style="font-size:1.5rem; margin-bottom:8px;">${v.e}</div><h3 style="font-size:1rem; margin-bottom:6px;">${v.t[lang] || v.t.fr}</h3><p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">${(v.d[lang] || v.d.fr) || v.d.en}</p></div>`).join('');
+
+    return `
+    <div style="max-width:800px; margin:0 auto; padding-bottom:40px;">
+      <div style="background:linear-gradient(135deg,var(--primary),#ff8c42); padding:40px 20px; text-align:center; color:#fff;">
+        <img src="logo.svg" alt="Walkart" style="width:72px; border-radius:18px; margin-bottom:12px; filter:brightness(0) invert(1);">
+        <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:8px;">Walkart</h1>
+        <p style="font-size:1.1rem; opacity:0.9;">${T('about_tagline')}</p>
       </div>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_mission_title')}</h2>
-      <p>${T('about_mission_body')}</p>
+      <div class="container">
+        <button class="btn btn-ghost" onclick="App.goBack()" style="margin:16px 0;">← ${T('btn_back') || 'Back'}</button>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_features_title')}</h2>
-      <ul style="line-height:2; padding-left:20px;">
-        <li>${T('about_feature_1')}</li>
-        <li>${T('about_feature_2')}</li>
-        <li>${T('about_feature_3')}</li>
-        <li>${T('about_feature_4')}</li>
-        <li>${T('about_feature_5')}</li>
-        <li>${T('about_feature_6')}</li>
-      </ul>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px;">${statCards}</div>
 
-      <h2 style="font-size:1.2rem; margin:24px 0 8px;">${T('about_contact_title')}</h2>
-      <p>${T('about_contact_body')}</p>
-      <a href="mailto:contact@walkart.us" style="display:inline-block; margin-top:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:8px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
+        <h2 style="font-size:1.3rem; margin-bottom:12px;">🎯 ${T('about_mission_title')}</h2>
+        <p style="line-height:1.7; margin-bottom:24px;">${T('about_mission_body')}</p>
 
-      <div style="margin-top:48px; padding:20px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.85rem;">
-        <p>${T('footer_copyright')} · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">${T('privacy_title')}</a></p>
+        <h2 style="font-size:1.3rem; margin-bottom:12px;">💡 ${{ fr:'Nos valeurs', en:'Our values', es:'Nuestros valores', ar:'قيمنا', it:'I nostri valori', ja:'私たちの価値観' }[lang] || 'Our values'}</h2>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px;">${valueCards}</div>
+
+        <h2 style="font-size:1.3rem; margin-bottom:12px;">✨ ${T('about_features_title')}</h2>
+        <ul style="line-height:2.2; padding-left:20px; margin-bottom:32px;">
+          <li>${T('about_feature_1')}</li>
+          <li>${T('about_feature_2')}</li>
+          <li>${T('about_feature_3')}</li>
+          <li>${T('about_feature_4')}</li>
+          <li>${T('about_feature_5')}</li>
+          <li>${T('about_feature_6')}</li>
+        </ul>
+
+        <h2 style="font-size:1.3rem; margin-bottom:12px;">📝 ${{ fr:'Notre blog', en:'Our blog', es:'Nuestro blog', ar:'مدونتنا', it:'Il nostro blog', ja:'ブログ' }[lang] || 'Blog'}</h2>
+        <p style="line-height:1.7; margin-bottom:12px;">${{ fr:'Découvrez nos articles sur la nutrition, les conseils culinaires et les tendances alimentaires du monde entier.', en:'Discover our articles on nutrition, culinary tips, and food trends from around the world.', es:'Descubre nuestros artículos sobre nutrición, consejos culinarios y tendencias alimentarias.', ar:'اكتشف مقالاتنا حول التغذية والنصائح الطهوية.', it:'Scopri i nostri articoli su nutrizione, consigli culinari e tendenze alimentari.', ja:'栄養、料理のヒント、世界の食のトレンドに関する記事をご覧ください。' }[lang] || ''}</p>
+        <button class="btn btn-outline" onclick="App.navigate('blog')" style="margin-bottom:32px;">📝 ${{ fr:'Voir tous les articles', en:'See all articles', es:'Ver todos los artículos', ar:'عرض كل المقالات', it:'Vedi tutti gli articoli', ja:'全記事を見る' }[lang] || 'All articles'}</button>
+
+        <h2 style="font-size:1.3rem; margin-bottom:12px;">✉️ ${T('about_contact_title')}</h2>
+        <p style="line-height:1.7; margin-bottom:12px;">${T('about_contact_body')}</p>
+        <a href="mailto:contact@walkart.us" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:10px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
+
+        <div style="margin-top:40px; padding:16px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.82rem;">
+          <p>${T('footer_copyright')} · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">${T('privacy_title')}</a> · <a onclick="App.navigate('blog')" style="color:var(--primary); cursor:pointer;">Blog</a></p>
+        </div>
       </div>
-    </div>`,
+    </div>`;
+  },
 
   collections: () => {
     const cols = Collections.get();
