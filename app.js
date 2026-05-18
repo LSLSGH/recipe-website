@@ -3,8 +3,8 @@
    ===================================================== */
 
 // ---- SUPABASE CLIENT ----
-const SUPA_URL = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
-const SUPA_KEY = 'sb_publishable_nUoUhdHUw_Al5fjjswltOQ_mE5phw-u';
+const SUPA_URL = 'https://bhnslahybcqbfsdmhgsg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJobnNsYWh5YmNxYmZzZG1oZ3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MDY2MDIsImV4cCI6MjA5MTQ4MjYwMn0.bU_gtdZc3o12OORJKEf05hdCME0WlO3slBmJsp8Y7zs';
 const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 
 // ---- SPOONACULAR ----
