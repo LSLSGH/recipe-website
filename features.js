@@ -600,19 +600,15 @@ const FeatureRender = {
             <input id="cr-title" class="form-input" placeholder="Ex: Tarte aux pommes maison" value="${Safe.attr(r.title || '')}">
           </div>
           <div class="form-group">
-            <label class="form-label">Image</label>
+            <label class="form-label">Photo de la recette</label>
             <div class="cr-image-row">
               <div class="cr-image-preview" id="cr-image-preview" ${r.image_url ? `style="background-image:url('${Safe.attr(r.image_url)}')"` : ''}>
                 ${r.image_url ? '' : '<span class="cr-image-placeholder">📷</span>'}
               </div>
-              <div class="cr-image-actions">
-                <label class="btn btn-outline cr-upload-btn" for="cr-image-file">
-                  📁 Depuis l'appareil
-                  <input type="file" id="cr-image-file" accept="image/*" style="display:none" onchange="FeatureActions.previewRecipeImage(this)">
-                </label>
-                <span class="cr-image-or">ou</span>
-                <input id="cr-image-url" class="form-input" placeholder="URL de l'image..." value="${Safe.attr(r.image_url || '')}">
-              </div>
+              <label class="btn btn-outline cr-upload-btn" for="cr-image-file">
+                📁 Choisir une photo
+                <input type="file" id="cr-image-file" accept="image/*" style="display:none" onchange="FeatureActions.previewRecipeImage(this)">
+              </label>
             </div>
           </div>
           <div class="form-group">
@@ -1053,8 +1049,8 @@ const FeatureActions = {
     if (!title) { if (errEl) { errEl.textContent = 'Le nom est requis.'; errEl.style.display = 'block'; } return; }
     if (!instructions) { if (errEl) { errEl.textContent = 'Les instructions sont requises.'; errEl.style.display = 'block'; } return; }
 
-    // Handle image: uploaded file takes priority over URL
-    let image_url = document.getElementById('cr-image-url')?.value?.trim() || '';
+    // Handle image: use existing URL from preview if no new file selected
+    let image_url = '';
     const fileInput = document.getElementById('cr-image-file');
     if (fileInput?.files?.[0]) {
       const file = fileInput.files[0];

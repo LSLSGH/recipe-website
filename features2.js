@@ -894,62 +894,7 @@ document.addEventListener('_recipeRendered', async (e) => {
   }
 });
 
-// ============================================================
-// ROUTE INTEGRATION — extend App.navigate
-// ============================================================
-(function() {
-  const _prev2 = App.navigate.bind(App);
-  App.navigate = async (route, params={}) => {
-    const routes2 = {
-      'wishlist': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">✨ À essayer</h2></div>` + Wishlist.renderPage();
-      },
-      'cooking-history': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🍳 Historique</h2></div>` + CookingHistory.renderPage();
-      },
-      'badges': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🏅 Mes badges</h2></div>` + BadgeSystem.renderPage();
-      },
-      'dietary-profile': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🥗 Profil alimentaire</h2></div>` + DietaryProfile.renderPage();
-      },
-      'world-map': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🌍 Carte du monde</h2></div>` + WorldMapPage.renderPage();
-      },
-      'trending': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🔥 Tendances</h2></div>`;
-        document.getElementById('app-root').innerHTML += await TrendingRecipes.renderPage();
-      },
-      'contests': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🏆 Concours</h2></div>`;
-        document.getElementById('app-root').innerHTML += await RecipeContests.renderPage();
-      },
-      'cooking-groups': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">👨‍🍳 Groupes de cuisine</h2></div>`;
-        document.getElementById('app-root').innerHTML += await CookingGroups.renderPage();
-      },
-      'kitchen-stock': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">📦 Stock cuisine</h2></div>` + KitchenStock.renderPage();
-      },
-      'meal-budget': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">💶 Budget repas</h2></div>` + MealBudget.renderPage();
-      },
-      'culinary-chat': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">👨‍🍳 Assistant culinaire</h2></div>` + CulinaryChat.renderPage();
-      },
-      'school-planning': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🎒 Planning scolaire</h2></div>`;
-        document.getElementById('app-root').innerHTML += await SchoolPlanning.renderPage();
-      },
-      'world-trends': async () => {
-        document.getElementById('app-root').innerHTML = `<div class="container"><h2 class="page-title">🔥 Tendances</h2></div>`;
-        document.getElementById('app-root').innerHTML += await TrendingRecipes.renderPage();
-      },
-    };
-    if (routes2[route]) { try { await routes2[route](); } catch(e) { console.error('Feature route error:', route, e); } return; }
-    _prev2(route, params);
-  };
-})();
+// Routes are handled directly in app.js — no monkey-patch needed.
 
 // ============================================================
 // INIT

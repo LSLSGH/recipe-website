@@ -745,6 +745,31 @@ const App = {
           html = Render.about();
         } else if (route === 'collections') {
           html = Render.collections();
+        // ---- FEATURES V2 ROUTES ----
+        } else if (route === 'world-map') {
+          html = Render.featurePage('🌍 Carte du monde', typeof WorldMapPage !== 'undefined' ? WorldMapPage.renderPage() : '');
+        } else if (route === 'trending') {
+          html = Render.featurePage('🔥 Tendances', typeof TrendingRecipes !== 'undefined' ? await TrendingRecipes.renderPage() : '');
+        } else if (route === 'contests') {
+          html = Render.featurePage('🏆 Concours', typeof RecipeContests !== 'undefined' ? await RecipeContests.renderPage() : '');
+        } else if (route === 'culinary-chat') {
+          html = Render.featurePage('👨‍🍳 Assistant culinaire', typeof CulinaryChat !== 'undefined' ? CulinaryChat.renderPage() : '');
+        } else if (route === 'cooking-groups') {
+          html = Render.featurePage('👥 Groupes de cuisine', typeof CookingGroups !== 'undefined' ? await CookingGroups.renderPage() : '');
+        } else if (route === 'badges') {
+          html = Render.featurePage('🏅 Mes badges', typeof BadgeSystem !== 'undefined' ? BadgeSystem.renderPage() : '');
+        } else if (route === 'wishlist') {
+          html = Render.featurePage('✨ À essayer', typeof Wishlist !== 'undefined' ? Wishlist.renderPage() : '');
+        } else if (route === 'cooking-history') {
+          html = Render.featurePage('🍳 Historique', typeof CookingHistory !== 'undefined' ? CookingHistory.renderPage() : '');
+        } else if (route === 'dietary-profile') {
+          html = Render.featurePage('🥗 Profil alimentaire', typeof DietaryProfile !== 'undefined' ? DietaryProfile.renderPage() : '');
+        } else if (route === 'kitchen-stock') {
+          html = Render.featurePage('📦 Stock cuisine', typeof KitchenStock !== 'undefined' ? KitchenStock.renderPage() : '');
+        } else if (route === 'meal-budget') {
+          html = Render.featurePage('💶 Budget repas', typeof MealBudget !== 'undefined' ? MealBudget.renderPage() : '');
+        } else if (route === 'school-planning') {
+          html = Render.featurePage('🎒 Planning scolaire', typeof SchoolPlanning !== 'undefined' ? await SchoolPlanning.renderPage() : '');
         } else {
           html = await Render.home();
         }
@@ -1478,6 +1503,14 @@ const Render = {
         </div>
         <p>${T('footer_copyright')}</p>
       </footer>`;
+  },
+
+  featurePage: (title, content) => {
+    return `<div class="container" style="padding-top:16px;">
+      <button class="btn-back" onclick="App.goBack()">← Retour</button>
+      <h2 class="page-title" style="margin:12px 0 20px;">${Safe.html(title)}</h2>
+    </div>
+    <div style="padding-bottom:80px;">${content || '<div class="container"><div class="empty-state">Chargement...</div></div>'}</div>`;
   },
 
   worldCuisines: async (t_world, t_seeAll) => {
