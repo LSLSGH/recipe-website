@@ -1848,6 +1848,14 @@ const Render = {
         <button class="btn btn-ghost" onclick="App.navigate('leaderboard')">🥇 Classements</button>
         <button class="btn btn-ghost" onclick="App.navigate('fridge-mode')">🧊 Vider le frigo</button>
         <button class="btn btn-ghost" onclick="App.navigate('barcode-scanner')">📷 Scanner</button>
+        <button class="btn btn-ghost" onclick="App.navigate('wishlist')">✨ À essayer</button>
+        <button class="btn btn-ghost" onclick="App.navigate('badges')">🏅 Mes badges</button>
+        <button class="btn btn-ghost" onclick="App.navigate('cooking-history')">🍳 Historique</button>
+        <button class="btn btn-ghost" onclick="App.navigate('kitchen-stock')">📦 Mon stock</button>
+        <button class="btn btn-ghost" onclick="App.navigate('meal-budget')">💶 Budget repas</button>
+        <button class="btn btn-ghost" onclick="App.navigate('school-planning')">🎒 Planning école</button>
+        <button class="btn btn-ghost" onclick="App.navigate('cooking-groups')">👥 Groupes</button>
+        <button class="btn btn-ghost" onclick="App.navigate('world-map')">🌍 Carte du monde</button>
       </div>
       <button class="btn btn-ghost btn-full" onclick="Actions.doLogout()" style="margin-top:12px; color:#e53935;">🚪 ${T('logout_btn')}</button>
 
@@ -2005,20 +2013,24 @@ const Render = {
       { n: '5 000+', l: { fr:'Recettes', en:'Recipes', es:'Recetas', ar:'وصفة', it:'Ricette', ja:'レシピ' } },
       { n: '6',      l: { fr:'Langues', en:'Languages', es:'Idiomas', ar:'لغات', it:'Lingue', ja:'言語' } },
       { n: '30+',    l: { fr:'Fonctionnalités', en:'Features', es:'Funciones', ar:'ميزة', it:'Funzioni', ja:'機能' } },
-      { n: '100%',   l: { fr:'Gratuit', en:'Free', es:'Gratis', ar:'مجاني', it:'Gratuito', ja:'無料' } }
+      { n: '100%',   l: { fr:'Gratuit', en:'Free', es:'Gratis', ar:'مجاني', it:'Gratuito', ja:'無料' } },
+      { n: '25+',    l: { fr:'Cuisines du monde', en:'World cuisines', es:'Cocinas del mundo', ar:'مطابخ العالم', it:'Cucine del mondo', ja:'世界の料理' } },
+      { n: 'PWA',    l: { fr:'Hors connexion', en:'Offline ready', es:'Sin conexión', ar:'يعمل بلا إنترنت', it:'Offline', ja:'オフライン対応' } }
     ];
     const values = [
-      { e:'🌍', t: { fr:'Cuisine du monde', en:'World cuisine', es:'Cocina del mundo', ar:'مطبخ العالم', it:'Cucina del mondo', ja:'世界の料理' }, d: { fr:'Des recettes authentiques de tous les continents, respectant les traditions culinaires locales.', en:'Authentic recipes from all continents, respecting local culinary traditions.' } },
-      { e:'🥗', t: { fr:'Santé & Bien-être', en:'Health & Wellness', es:'Salud y bienestar', ar:'الصحة والعافية', it:'Salute e benessere', ja:'健康とウェルネス' }, d: { fr:'Chaque recette inclut des informations nutritionnelles détaillées pour vous aider à atteindre vos objectifs.', en:'Each recipe includes detailed nutritional information to help you achieve your goals.' } },
-      { e:'♻️', t: { fr:'Zéro gaspillage', en:'Zero waste', es:'Cero desperdicios', ar:'صفر هدر', it:'Zero sprechi', ja:'食品廃棄ゼロ' }, d: { fr:'Notre mode Frigo vous aide à cuisiner avec ce que vous avez, réduisant le gaspillage alimentaire.', en:'Our Fridge mode helps you cook with what you have, reducing food waste.' } },
-      { e:'📱', t: { fr:'Application mobile', en:'Mobile app', es:'Aplicación móvil', ar:'تطبيق جوال', it:'App mobile', ja:'モバイルアプリ' }, d: { fr:'Disponible sur tous les appareils, même hors connexion grâce à notre technologie PWA.', en:'Available on all devices, even offline thanks to our PWA technology.' } }
+      { e:'🌍', t: { fr:'Cuisine du monde', en:'World cuisine', es:'Cocina del mundo', ar:'مطبخ العالم', it:'Cucina del mondo', ja:'世界の料理' }, d: { fr:'Plus de 25 cuisines du monde avec des recettes authentiques respectant les traditions culinaires locales de chaque pays.', en:'Over 25 world cuisines with authentic recipes respecting each country\'s local culinary traditions.' } },
+      { e:'🥗', t: { fr:'Santé & Bien-être', en:'Health & Wellness', es:'Salud y bienestar', ar:'الصحة والعافية', it:'Salute e benessere', ja:'健康とウェルネス' }, d: { fr:'Suivi des calories, protéines, glucides et lipides. Menus personnalisés selon vos objectifs de perte de poids, maintien ou prise de masse.', en:'Track calories, protein, carbs, and fat. Personalized menus based on your weight loss, maintenance, or muscle gain goals.' } },
+      { e:'♻️', t: { fr:'Zéro gaspillage', en:'Zero waste', es:'Cero desperdicios', ar:'صفر هدر', it:'Zero sprechi', ja:'食品廃棄ゼロ' }, d: { fr:'Le mode Frigo analyse vos ingrédients disponibles et suggère les recettes parfaites pour cuisiner avec ce que vous avez.', en:'Fridge Mode analyzes your available ingredients and suggests perfect recipes to cook with what you have.' } },
+      { e:'📱', t: { fr:'PWA & Hors ligne', en:'PWA & Offline', es:'PWA sin conexión', ar:'تطبيق PWA بلا إنترنت', it:'PWA offline', ja:'PWA＆オフライン' }, d: { fr:'Installez Walkart sur votre téléphone comme une vraie app. Fonctionne hors connexion. Aucun téléchargement sur le store requis.', en:'Install Walkart on your phone like a real app. Works offline. No app store download required.' } },
+      { e:'🤖', t: { fr:'Assistant culinaire', en:'Culinary assistant', es:'Asistente culinario', ar:'مساعد طهوي', it:'Assistente culinario', ja:'料理アシスタント' }, d: { fr:'Posez vos questions de cuisine à notre assistant intégré : techniques, substitutions, températures de cuisson et plus encore.', en:'Ask cooking questions to our built-in assistant: techniques, substitutions, cooking temperatures and more.' } },
+      { e:'🏆', t: { fr:'Communauté active', en:'Active community', es:'Comunidad activa', ar:'مجتمع نشط', it:'Comunità attiva', ja:'アクティブなコミュニティ' }, d: { fr:'Défis hebdomadaires, classements, photos de vos plats, commentaires et collections partagées entre utilisateurs.', en:'Weekly challenges, leaderboards, dish photos, comments, and collections shared between users.' } }
     ];
-    const statCards = stats.map(s => `<div style="text-align:center; padding:16px; background:var(--surface); border-radius:12px;"><div style="font-size:1.8rem; font-weight:800; color:var(--primary);">${s.n}</div><div style="font-size:0.8rem; color:var(--text-muted);">${s.l[lang] || s.l.fr}</div></div>`).join('');
-    const valueCards = values.map(v => `<div style="padding:16px; background:var(--surface); border-radius:12px;"><div style="font-size:1.5rem; margin-bottom:8px;">${v.e}</div><h3 style="font-size:1rem; margin-bottom:6px;">${v.t[lang] || v.t.fr}</h3><p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">${(v.d[lang] || v.d.fr) || v.d.en}</p></div>`).join('');
+    const statCards = stats.map(s => `<div class="about-stat-card"><div class="about-stat-n">${s.n}</div><div class="about-stat-l">${s.l[lang] || s.l.fr}</div></div>`).join('');
+    const valueCards = values.map(v => `<div class="about-value-card"><div style="font-size:1.6rem; margin-bottom:8px;">${v.e}</div><h3 style="font-size:1rem; margin-bottom:6px;">${v.t[lang] || v.t.fr}</h3><p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">${(v.d[lang] || v.d.fr) || v.d.en}</p></div>`).join('');
 
     return `
     <div style="max-width:800px; margin:0 auto; padding-bottom:40px;">
-      <div style="background:linear-gradient(135deg,var(--primary),#ff8c42); padding:40px 20px; text-align:center; color:#fff;">
+      <div class="about-hero">
         <img src="logo.svg" alt="Walkart" style="width:72px; border-radius:18px; margin-bottom:12px; filter:brightness(0) invert(1);">
         <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:8px;">Walkart</h1>
         <p style="font-size:1.1rem; opacity:0.9;">${T('about_tagline')}</p>
@@ -2027,34 +2039,49 @@ const Render = {
       <div class="container">
         <button class="btn btn-ghost" onclick="App.goBack()" style="margin:16px 0;">← ${T('btn_back') || 'Back'}</button>
 
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px;">${statCards}</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:32px;">${statCards}</div>
 
         <h2 style="font-size:1.3rem; margin-bottom:12px;">🎯 ${T('about_mission_title')}</h2>
         <p style="line-height:1.7; margin-bottom:24px;">${T('about_mission_body')}</p>
 
         <h2 style="font-size:1.3rem; margin-bottom:12px;">💡 ${{ fr:'Nos valeurs', en:'Our values', es:'Nuestros valores', ar:'قيمنا', it:'I nostri valori', ja:'私たちの価値観' }[lang] || 'Our values'}</h2>
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px;">${valueCards}</div>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:32px; margin-top:8px;">${valueCards}</div>
 
         <h2 style="font-size:1.3rem; margin-bottom:12px;">✨ ${T('about_features_title')}</h2>
-        <ul style="line-height:2.2; padding-left:20px; margin-bottom:32px;">
-          <li>${T('about_feature_1')}</li>
-          <li>${T('about_feature_2')}</li>
-          <li>${T('about_feature_3')}</li>
-          <li>${T('about_feature_4')}</li>
-          <li>${T('about_feature_5')}</li>
-          <li>${T('about_feature_6')}</li>
-        </ul>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:32px;">
+          ${[1,2,3,4,5,6,7,8,9,10,11,12].map(n => `
+          <div style="background:var(--surface); border-radius:12px; padding:12px 14px; font-size:0.88rem; line-height:1.4; border:1px solid var(--border);">
+            ${T('about_feature_' + n)}
+          </div>`).join('')}
+        </div>
 
         <h2 style="font-size:1.3rem; margin-bottom:12px;">📝 ${{ fr:'Notre blog', en:'Our blog', es:'Nuestro blog', ar:'مدونتنا', it:'Il nostro blog', ja:'ブログ' }[lang] || 'Blog'}</h2>
         <p style="line-height:1.7; margin-bottom:12px;">${{ fr:'Découvrez nos articles sur la nutrition, les conseils culinaires et les tendances alimentaires du monde entier.', en:'Discover our articles on nutrition, culinary tips, and food trends from around the world.', es:'Descubre nuestros artículos sobre nutrición, consejos culinarios y tendencias alimentarias.', ar:'اكتشف مقالاتنا حول التغذية والنصائح الطهوية.', it:'Scopri i nostri articoli su nutrizione, consigli culinari e tendenze alimentari.', ja:'栄養、料理のヒント、世界の食のトレンドに関する記事をご覧ください。' }[lang] || ''}</p>
         <button class="btn btn-outline" onclick="App.navigate('blog')" style="margin-bottom:32px;">📝 ${{ fr:'Voir tous les articles', en:'See all articles', es:'Ver todos los artículos', ar:'عرض كل المقالات', it:'Vedi tutti gli articoli', ja:'全記事を見る' }[lang] || 'All articles'}</button>
 
         <h2 style="font-size:1.3rem; margin-bottom:12px;">✉️ ${T('about_contact_title')}</h2>
-        <p style="line-height:1.7; margin-bottom:12px;">${T('about_contact_body')}</p>
-        <a href="mailto:contact@walkart.us" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--primary); color:#fff; border-radius:10px; font-weight:700; text-decoration:none;">✉️ contact@walkart.us</a>
+        <p style="line-height:1.7; margin-bottom:16px;">${T('about_contact_body')}</p>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:32px;">
+          <a href="mailto:contact@walkart.us" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; background:var(--primary); color:#fff; border-radius:12px; font-weight:700; text-decoration:none; font-size:0.95rem;">
+            ✉️ contact@walkart.us
+          </a>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div style="background:var(--surface); border-radius:12px; padding:16px; text-align:center; border:1px solid var(--border);">
+              <div style="font-size:1.8rem; margin-bottom:6px;">⚡</div>
+              <div style="font-weight:700; margin-bottom:4px;">${{'fr':'Réponse rapide','en':'Quick response','es':'Respuesta rápida','ar':'رد سريع','it':'Risposta rapida','ja':'迅速な返答'}[lang]||'Quick response'}</div>
+              <div style="font-size:0.8rem; color:var(--text-muted);">${{'fr':'Sous 48h','en':'Within 48h','es':'En 48h','ar':'خلال 48 ساعة','it':'Entro 48h','ja':'48時間以内'}[lang]||'Within 48h'}</div>
+            </div>
+            <div style="background:var(--surface); border-radius:12px; padding:16px; text-align:center; border:1px solid var(--border);">
+              <div style="font-size:1.8rem; margin-bottom:6px;">🌐</div>
+              <div style="font-weight:700; margin-bottom:4px;">${{'fr':'Multilingue','en':'Multilingual','es':'Multilingüe','ar':'متعدد اللغات','it':'Multilingue','ja':'多言語対応'}[lang]||'Multilingual'}</div>
+              <div style="font-size:0.8rem; color:var(--text-muted);">FR · EN · ES · AR · IT · JA</div>
+            </div>
+          </div>
+        </div>
 
-        <div style="margin-top:40px; padding:16px; background:var(--surface); border-radius:12px; text-align:center; color:var(--text-muted); font-size:0.82rem;">
-          <p>${T('footer_copyright')} · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">${T('privacy_title')}</a> · <a onclick="App.navigate('blog')" style="color:var(--primary); cursor:pointer;">Blog</a></p>
+        <div style="margin-top:8px; padding:20px; background:var(--surface); border-radius:14px; text-align:center; border:1px solid var(--border);">
+          <div style="font-size:0.9rem; margin-bottom:8px;">${{'fr':'🌟 Walkart est 100% gratuit et open source','en':'🌟 Walkart is 100% free and open source','es':'🌟 Walkart es 100% gratuito y de código abierto','ar':'🌟 Walkart مجاني 100% ومفتوح المصدر','it':'🌟 Walkart è 100% gratuito e open source','ja':'🌟 Walkartは100%無料でオープンソース'}[lang]||''}</div>
+          <p style="color:var(--text-muted); font-size:0.82rem; margin:0;">${T('footer_copyright')} · <a onclick="App.navigate('privacy')" style="color:var(--primary); cursor:pointer;">${T('privacy_title')}</a> · <a onclick="App.navigate('blog')" style="color:var(--primary); cursor:pointer;">Blog</a></p>
         </div>
       </div>
     </div>`;
@@ -3298,7 +3325,7 @@ const UI = {
           <span class="s-chevron" style="color:#ef4444;">›</span>
         </div>
       </div>
-      <p class="settings-version">Walkart · ${Safe.html(t_ver)} 21</p>`;
+      <p class="settings-version">Walkart · ${Safe.html(t_ver)} 30.1</p>`;
     panel.classList.add('open');
   },
 
