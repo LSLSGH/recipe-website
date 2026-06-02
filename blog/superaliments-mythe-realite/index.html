@@ -1,72 +1,189 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Super-aliments : mythe ou vrais bienfaits ? – Blog Walkart</title>
-  <meta name="description" content="Baies de goji, spiruline, quinoa... Les super-aliments font la une des magazines. Qu'en dit la science ?">
+  <title>Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ? – Blog Walkart</title>
+  <meta name="description" content="Baies de goji, spiruline, quinoa, graines de chia... Les super-aliments font régulièrement la une des magazines. Mais qu'en dit vraiment la science ?">
   <link rel="canonical" href="https://www.walkart.us/blog/superaliments-mythe-realite">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Super-aliments : mythe ou vrais bienfaits ? – Walkart">
-  <meta property="og:description" content="Baies de goji, spiruline, quinoa... Les super-aliments font la une des magazines. Qu'en dit la science ?">
-  <meta property="og:url" content="https://www.walkart.us/blog/superaliments-mythe-realite">
-  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:title" content="Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ? – Walkart">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=900&h=400&fit=crop&auto=format">
   <meta property="article:published_time" content="2025-05-18">
-  <meta property="article:author" content="Walkart">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Super-aliments : mythe ou vrais bienfaits ?">
-  <meta name="twitter:description" content="Baies de goji, spiruline, quinoa... Les super-aliments font la une des magazines. Qu'en dit la science ?">
-  <link rel="alternate" hreflang="en" href="https://www.walkart.us/blog/superaliments-mythe-realite">
-  <link rel="alternate" hreflang="fr" href="https://www.walkart.us/blog/superaliments-mythe-realite">
   <link rel="icon" href="/favicon.png">
-  <script>window.location.replace('/#article/superaliments-mythe-realite');</script>
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7}
-    .wrap{max-width:720px;margin:0 auto;padding:32px 20px}
-    .back{display:inline-block;margin-bottom:20px;color:#FF4D6D;text-decoration:none;font-weight:600}
-    .back:hover{text-decoration:underline}
-    .hero{text-align:center;padding:32px 0 24px}
-    .emoji{font-size:4rem;display:block;margin-bottom:16px}
-    h1{font-size:1.9rem;font-weight:800;margin-bottom:12px;line-height:1.3}
-    .meta{color:#888;font-size:0.85rem;margin-bottom:24px}
-    .meta span{margin:0 8px}
-    .excerpt{font-size:1.05rem;color:#555;background:#fff;border-left:4px solid #FF4D6D;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:28px}
-    .cta{background:#FF4D6D;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;margin:24px 0}
-    .cta:hover{background:#c9184a}
-    .articles{display:grid;gap:12px;margin-top:32px}
-    .art-link{background:#fff;border-radius:10px;padding:14px 16px;text-decoration:none;color:#1a1a2e;border:1px solid #eee;display:flex;align-items:center;gap:10px}
-    .art-link:hover{border-color:#FF4D6D}
-    footer{text-align:center;padding:40px 0 20px;color:#aaa;font-size:0.82rem}
-    footer a{color:#FF4D6D;text-decoration:none}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7;font-size:16px}
+    a{color:#FF4D6D;text-decoration:none}a:hover{text-decoration:underline}
+    .site-header{background:#fff;border-bottom:1px solid #eee;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .logo{font-weight:800;font-size:1.2rem;color:#1a1a2e}
+    .header-right{display:flex;align-items:center;gap:10px}
+    .header-right nav a{color:#555;margin-left:10px;font-size:0.88rem}
+    .lang-switcher{display:flex;gap:3px}
+    .lang-btn{background:none;border:1.5px solid #e0e0e0;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:0.95rem;line-height:1.4;transition:all .15s}
+    .lang-btn.active,.lang-btn:hover{border-color:#FF4D6D;background:#fff0f3}
+    .hero-wrap{position:relative;width:100%;height:400px;overflow:hidden;background:#111}
+    .hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+    .hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.65) 100%)}
+    .hero-text{position:absolute;bottom:0;left:0;right:0;padding:28px 24px}
+    .cat-badge{display:inline-block;background:#FF4D6D;color:#fff;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:10px}
+    .hero-text h1{color:#fff;font-size:1.85rem;font-weight:800;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:8px}
+    .hero-meta{display:flex;gap:16px;flex-wrap:wrap}
+    .hero-meta span{color:rgba(255,255,255,.85);font-size:.83rem}
+    .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+    .breadcrumb{font-size:.82rem;color:#888;margin-bottom:20px}
+    .breadcrumb a{color:#FF4D6D}
+    .excerpt{font-size:1.05rem;color:#555;background:#fff;border-left:4px solid #FF4D6D;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px}
+    .article-body{background:#fff;border-radius:12px;padding:32px;margin-bottom:28px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .article-body p{margin-bottom:16px;color:#333}
+    .article-body h3{font-weight:700;margin:24px 0 10px;color:#1a1a2e;font-size:1.1rem}
+    .article-body strong{color:#1a1a2e}
+    .article-body em{font-style:italic}
+    .ad-slot{background:#f0f0f0;border-radius:8px;padding:8px;margin:20px 0;min-height:90px;text-align:center}
+    .cta-box{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:28px 0}
+    .cta-box h3{margin-bottom:8px;font-size:1.1rem}
+    .cta-box p{opacity:.9;font-size:.9rem;margin-bottom:16px}
+    .cta-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:10px 24px;border-radius:8px}
+    .related h2{font-size:1.05rem;font-weight:700;margin-bottom:14px;color:#666}
+    .related-grid{display:grid;gap:10px}
+    .related-card{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #eee;display:flex;align-items:center;gap:12px;color:#1a1a2e}
+    .related-card:hover{border-color:#FF4D6D;text-decoration:none}
+    .related-card .em{font-size:1.5rem;flex-shrink:0}
+    .related-card .ti{font-weight:600;font-size:.9rem;line-height:1.4}
+    footer{background:#1a1a2e;color:#aaa;text-align:center;padding:28px 20px;font-size:.83rem}
+    footer a{color:#FF4D6D}
+    .footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+    @media(max-width:600px){.hero-wrap{height:260px}.hero-text h1{font-size:1.3rem}.header-right nav a{display:none}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="/blog">← Tous les articles</a>
-    <div class="hero">
-      <span class="emoji">🫐</span>
-      <h1>Super-aliments : mythe ou vrais bienfaits ?</h1>
-      <div class="meta">
-        <span>📅 18 mai 2025</span>
-        <span>⏱️ 6 min de lecture</span>
-        <span>✍️ Walkart</span>
-      </div>
-    </div>
-    <div class="excerpt">Baies de goji, spiruline, quinoa... Les super-aliments font la une des magazines. Qu'en dit la science ?</div>
-
-    <p>Cet article est disponible en version interactive sur l'application Walkart avec toutes les fonctionnalités de nutrition, planification et recettes.</p>
-
-    <a class="cta" href="/#article/superaliments-mythe-realite">📖 Lire l'article complet →</a>
-
-    <h2 style="margin:32px 0 12px;font-size:1.1rem">Autres articles</h2>
-    <div class="articles">
-      <a class="art-link" href="/blog/cuisine-mediterraneenne">🫒 Les secrets de la cuisine méditerranéenne</a><a class="art-link" href="/blog/planifier-repas-semaine">📅 Comment planifier ses repas pour toute la semaine</a><a class="art-link" href="/blog/macronutriments-guide">💪 Macronutriments : le guide complet</a><a class="art-link" href="/blog/epices-indispensables">🌶️ Les 10 épices indispensables dans votre cuisine</a>
+<header class="site-header">
+  <a class="logo" href="/">🍽️ Walkart</a>
+  <div class="header-right">
+    <nav><a href="/">Accueil</a><a href="/blog">Blog</a><a href="/recettes">Recettes</a></nav>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español">🇪🇸</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')" title="العربية">🇸🇦</button>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="日本語">🇯🇵</button>
     </div>
   </div>
-  <footer>
-    <p><a href="/">Walkart</a> · <a href="/blog">Blog</a> · <a href="/#about">À propos</a> · <a href="/#privacy">Confidentialité</a></p>
-    <p style="margin-top:8px">© 2026 Walkart – Recettes du Monde</p>
-  </footer>
+</header>
+
+<div class="hero-wrap">
+  <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=900&h=400&fit=crop&auto=format" alt="Super-aliments : fruits, baies et graines nutritifs" loading="eager">
+  <div class="hero-gradient"></div>
+  <div class="hero-text">
+    <span class="cat-badge">Nutrition</span>
+    <div data-lang="fr"><h1>Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ?</h1></div>
+    <div data-lang="en" style="display:none"><h1>Superfoods: Marketing Myth or Real Nutritional Benefits?</h1></div>
+    <div class="hero-meta">
+      <span>📅 18 mai 2025</span>
+      <span>⏱️ 6 min de lecture</span>
+      <span>✍️ Walkart</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">Accueil</a> › <a href="/blog">Blog</a> › <span data-lang="fr">Super-aliments mythe et réalité</span><span data-lang="en" style="display:none">Superfoods Myth vs Reality</span>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- FRENCH CONTENT -->
+  <div data-lang="fr">
+    <p class="excerpt">Baies de goji, spiruline, quinoa, graines de chia... Les super-aliments font régulièrement la une des magazines. Mais qu'en dit vraiment la science ?</p>
+    <div class="article-body">
+      <p>Le terme "super-aliment" n'a aucune définition légale ou scientifique. C'est avant tout un outil marketing inventé dans les années 2000 pour vendre des produits à prix premium. Pourtant, derrière l'effet de mode, certains de ces aliments ont de vraies qualités nutritionnelles. Faisons le tri.</p>
+
+      <h3>Les super-aliments qui tiennent leurs promesses</h3>
+      <p>Les <strong>myrtilles</strong> sont l'un des fruits les plus riches en antioxydants (anthocyanines), avec des effets documentés sur la santé cognitive et cardiovasculaire. L'<strong>avocat</strong> est une source exceptionnelle d'acides gras mono-insaturés, de potassium et de vitamines E et K. Le <strong>saumon sauvage</strong> est l'une des meilleures sources d'oméga-3 à longue chaîne (EPA et DHA). Le <strong>kale</strong> et les autres crucifères sont réellement riches en vitamines C et K, calcium et composés sulforaphane aux propriétés anti-cancer documentées.</p>
+
+      <h3>Les super-aliments surestimés</h3>
+      <p>Les <strong>baies de goji</strong> contiennent des antioxydants, certes, mais pas plus que les myrtilles ordinaires, 10 fois moins chères. La <strong>spiruline</strong> est une source de protéines et de certains nutriments, mais sa biodisponibilité est limitée et les quantités typiquement consommées (quelques grammes par jour) sont trop faibles pour avoir un impact significatif. L'<strong>huile de coco</strong>, longtemps promue comme un super-aliment, est en réalité très riche en acides gras saturés et doit être consommée avec modération.</p>
+
+      <h3>Les vrais super-aliments oubliés</h3>
+      <p>La science nutritionnelle montre que certains aliments ordinaires et peu coûteux sont parmi les plus nutritifs qui soient. Les <strong>sardines en boîte</strong> : exceptionnelles en oméga-3, calcium, vitamine D et B12. Les <strong>lentilles</strong> : protéines, fer, fibres, folates à un coût dérisoire. Les <strong>œufs</strong> : protéines complètes, choline, vitamine D. Les <strong>noix</strong> : oméga-3, magnésium, antioxydants. Les <strong>légumes crucifères</strong> (brocolis, chou, choux de Bruxelles) : composés anticancéreux documentés.</p>
+
+      <h3>La diversité plutôt que les miracles</h3>
+      <p>Aucun aliment seul, aussi "super" soit-il, ne peut compenser une alimentation globalement déséquilibrée. La vraie nutrition préventive repose sur la <strong>diversité alimentaire</strong> : des légumes et fruits variés et colorés, des protéines de qualité variées, des céréales complètes et des bonnes graisses. C'est cette diversité qui assure l'apport complet de tous les micronutriments dont votre corps a besoin.</p>
+
+      <p>Avec Walkart, explorez une diversité de recettes du monde entier pour naturellement enrichir votre alimentation de tous ces nutriments essentiels.</p>
+    </div>
+  </div>
+
+  <!-- ENGLISH CONTENT -->
+  <div data-lang="en" style="display:none">
+    <p class="excerpt">Goji berries, spirulina, quinoa, chia seeds... Superfoods regularly make the magazine headlines. But what does science really say?</p>
+    <div class="article-body">
+      <p>The term "superfood" has no legal or scientific definition. It is primarily a marketing tool invented in the 2000s to sell premium-priced products. Yet behind the trend, some of these foods have real nutritional qualities. Let's sort through them.</p>
+
+      <h3>Superfoods That Deliver on Their Promises</h3>
+      <p><strong>Blueberries</strong> are one of the fruits richest in antioxidants (anthocyanins), with documented effects on cognitive and cardiovascular health. <strong>Avocado</strong> is an exceptional source of monounsaturated fatty acids, potassium, and vitamins E and K. <strong>Wild salmon</strong> is one of the best sources of long-chain omega-3s (EPA and DHA). <strong>Kale</strong> and other cruciferous vegetables are genuinely rich in vitamins C and K, calcium, and sulforaphane compounds with documented anti-cancer properties.</p>
+
+      <h3>Overrated Superfoods</h3>
+      <p><strong>Goji berries</strong> contain antioxidants, yes, but no more than ordinary blueberries, which are 10 times cheaper. <strong>Spirulina</strong> is a source of protein and certain nutrients, but its bioavailability is limited and the quantities typically consumed (a few grams per day) are too small to have a significant impact. <strong>Coconut oil</strong>, long promoted as a superfood, is actually very rich in saturated fatty acids and should be consumed in moderation.</p>
+
+      <h3>The Forgotten Real Superfoods</h3>
+      <p>Nutritional science shows that some ordinary, inexpensive foods are among the most nutritious there are. <strong>Canned sardines</strong>: exceptional in omega-3s, calcium, vitamin D and B12. <strong>Lentils</strong>: protein, iron, fiber, folates at a minimal cost. <strong>Eggs</strong>: complete proteins, choline, vitamin D. <strong>Walnuts</strong>: omega-3s, magnesium, antioxidants. <strong>Cruciferous vegetables</strong> (broccoli, cabbage, Brussels sprouts): documented anti-cancer compounds.</p>
+
+      <h3>Diversity Rather Than Miracles</h3>
+      <p>No single food, however "super," can compensate for an overall unbalanced diet. True preventive nutrition is based on <strong>food diversity</strong>: varied and colorful vegetables and fruits, varied quality proteins, whole grains, and good fats. It is this diversity that ensures the complete supply of all the micronutrients your body needs.</p>
+
+      <p>With Walkart, explore a diversity of recipes from around the world to naturally enrich your diet with all these essential nutrients.</p>
+    </div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="cta-box">
+    <div data-lang="fr"><h3>🍽️ Découvrez des milliers de recettes sur Walkart</h3><p>Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas.</p></div>
+    <div data-lang="en" style="display:none"><h3>🍽️ Discover thousands of recipes on Walkart</h3><p>Plan your meals, generate your shopping list, and cook step by step.</p></div>
+    <a class="cta-btn" href="/">Explorer →</a>
+  </div>
+
+  <div class="related">
+    <h2 data-lang-text data-fr="Articles similaires" data-en="Related articles">Articles similaires</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/macronutriments-guide">
+        <span class="em">💪</span>
+        <span class="ti">Macronutriments : le guide complet pour les comprendre</span>
+      </a>
+      <a class="related-card" href="/blog/lire-etiquette-nutritionnelle">
+        <span class="em">🏷️</span>
+        <span class="ti">Comment lire une étiquette nutritionnelle comme un expert</span>
+      </a>
+      <a class="related-card" href="/blog/regime-vegetarien">
+        <span class="em">🥦</span>
+        <span class="ti">Régime végétarien : avantages, risques et conseils pratiques</span>
+      </a>
+      <a class="related-card" href="/blog/cuisine-mediterraneenne">
+        <span class="em">🫒</span>
+        <span class="ti">Les secrets de la cuisine méditerranéenne</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a><a href="/recettes">Recettes</a><a href="/blog">Blog</a><a href="/about">À propos</a><a href="/privacy">Confidentialité</a><a href="/contact">Contact</a>
+  </div>
+  <p>© 2025 Walkart – Recettes du Monde</p>
+</footer>
+
+<script src="/js/lang.js"></script>
 </body>
 </html>

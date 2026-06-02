@@ -42,10 +42,82 @@
   <meta name="p:domain_verify" content="b25c343f067d7d5f47552361ec81e18d"/>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Static landing page styles (used before JS app loads) -->
+  <style id="sh-css">
+    #sh{font-family:'Outfit','Plus Jakarta Sans',system-ui,sans-serif}
+    .sh-hero{position:relative;background:#1a1a2e;color:#fff;padding:56px 20px 44px;text-align:center;overflow:hidden}
+    .sh-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=700&fit=crop&auto=format') center/cover no-repeat;opacity:.15}
+    .sh-hero-inner{position:relative;max-width:680px;margin:0 auto}
+    .sh-hero h1{font-size:2.2rem;font-weight:800;line-height:1.25;margin-bottom:12px}
+    .sh-hero p{font-size:1.05rem;opacity:.85;margin-bottom:24px}
+    .sh-hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .sh-btn-primary{background:#FF4D6D;color:#fff;font-weight:700;padding:13px 28px;border-radius:12px;font-size:1rem;text-decoration:none;border:none;cursor:pointer}
+    .sh-btn-primary:hover{background:#c9184a;text-decoration:none;color:#fff}
+    .sh-btn-ghost{background:rgba(255,255,255,.12);color:#fff;font-weight:600;padding:13px 28px;border-radius:12px;font-size:1rem;text-decoration:none;border:1.5px solid rgba(255,255,255,.35)}
+    .sh-btn-ghost:hover{background:rgba(255,255,255,.2);text-decoration:none;color:#fff}
+    .sh-ad{padding:12px 20px;text-align:center}
+    .sh-ad ins{display:block}
+    .sh-section{max-width:1100px;margin:0 auto;padding:40px 20px 0}
+    .sh-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    .sh-section-head h2{font-size:1.35rem;font-weight:800;color:#1a1a2e}
+    .sh-section-head a{color:#FF4D6D;font-size:.88rem;font-weight:600;text-decoration:none}
+    /* Categories */
+    .sh-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+    .sh-cat{position:relative;border-radius:14px;overflow:hidden;height:130px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+    .sh-cat img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .sh-cat:hover img{transform:scale(1.06)}
+    .sh-cat::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.02),rgba(0,0,0,.58))}
+    .sh-cat-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;z-index:1;color:#fff;font-weight:700;font-size:.9rem;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+    .sh-cat-count{font-size:.73rem;opacity:.75;font-weight:400;display:block;margin-top:1px}
+    /* Recipe cards */
+    .sh-recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .sh-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s;text-decoration:none;color:inherit;display:block}
+    .sh-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12);text-decoration:none;color:inherit}
+    .sh-card img{width:100%;height:165px;object-fit:cover;display:block}
+    .sh-card-body{padding:13px}
+    .sh-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+    .sh-tag{font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:20px;background:#f0f0f0;color:#555}
+    .sh-tag-v{background:#e8f5e9;color:#2e7d32}
+    .sh-tag-f{background:#fff3e0;color:#e65100}
+    .sh-card h3{font-size:.92rem;font-weight:700;color:#1a1a2e;margin-bottom:5px;line-height:1.3}
+    .sh-card p{font-size:.8rem;color:#888;line-height:1.4}
+    .sh-card-meta{display:flex;gap:10px;margin-top:8px;font-size:.78rem;color:#bbb}
+    /* Blog previews */
+    .sh-blogs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .sh-blog{background:#fff;border-radius:12px;padding:16px;border:1px solid #eee;display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit}
+    .sh-blog:hover{border-color:#FF4D6D;text-decoration:none}
+    .sh-blog .ico{font-size:2rem;flex-shrink:0}
+    .sh-blog .cat{font-size:.7rem;color:#FF4D6D;font-weight:700;text-transform:uppercase;margin-bottom:3px}
+    .sh-blog h3{font-size:.88rem;font-weight:700;color:#1a1a2e;line-height:1.35}
+    .sh-blog .mins{font-size:.75rem;color:#bbb;margin-top:3px}
+    /* Features */
+    .sh-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:4px}
+    .sh-feat{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .sh-feat .ico{font-size:2.4rem;display:block;margin-bottom:10px}
+    .sh-feat h3{font-size:.95rem;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+    .sh-feat p{font-size:.82rem;color:#888;line-height:1.5}
+    /* CTA strip */
+    .sh-strip{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;padding:40px 20px;text-align:center;margin-top:44px}
+    .sh-strip h2{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+    .sh-strip p{opacity:.9;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto}
+    .sh-strip-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none}
+    /* Static footer */
+    .sh-footer{background:#1a1a2e;color:#aaa;text-align:center;padding:28px 20px;font-size:.82rem}
+    .sh-footer a{color:#FF4D6D;text-decoration:none}
+    .sh-footer-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+    @media(max-width:640px){
+      .sh-hero h1{font-size:1.5rem}
+      .sh-cats{grid-template-columns:repeat(2,1fr)}
+      .sh-hero-btns{flex-direction:column;align-items:center}
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- ══════════════════════════════════
+     SPA HEADER (always visible)
+════════════════════════════════════ -->
 <header class="header">
   <div class="header-top">
     <a href="#" class="logo" onclick="App.navigate('home')">
@@ -80,11 +152,234 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════
+     STATIC LANDING PAGE (visible to
+     Google before JS app loads)
+════════════════════════════════════ -->
 <main id="app-root">
-  <div class="container"><div class="spinner"></div></div>
+<div id="sh">
+
+  <!-- ── HERO ── -->
+  <div class="sh-hero">
+    <div class="sh-hero-inner">
+      <h1>🍽️ Des milliers de recettes du monde entier</h1>
+      <p>Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez, planifiez et cuisinez pas à pas.</p>
+      <div class="sh-hero-btns">
+        <button class="sh-btn-primary" onclick="document.getElementById('sh').style.display='none'; App && App.navigate('search')">🔍 Explorer les recettes</button>
+        <a class="sh-btn-ghost" href="/recettes">📖 Voir les catégories</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AD ── -->
+  <div class="sh-ad">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── CATEGORIES ── -->
+  <div class="sh-section">
+    <div class="sh-section-head">
+      <h2>🌍 Cuisines du monde</h2>
+      <a href="/recettes">Voir tout →</a>
+    </div>
+    <div class="sh-cats">
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=260&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
+        <div class="sh-cat-label">Méditerranée<span class="sh-cat-count">Grèce · Italie · Maroc</span></div>
+      </a>
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=260&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
+        <div class="sh-cat-label">Asiatique<span class="sh-cat-count">Japon · Thaï · Inde</span></div>
+      </a>
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=260&fit=crop&auto=format" alt="Végétarien" loading="lazy">
+        <div class="sh-cat-label">Végétarien<span class="sh-cat-count">Sans viande</span></div>
+      </a>
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=260&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
+        <div class="sh-cat-label">Rapide &lt;30 min<span class="sh-cat-count">Soir de semaine</span></div>
+      </a>
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=260&fit=crop&auto=format" alt="Cuisine économique" loading="lazy">
+        <div class="sh-cat-label">Budget<span class="sh-cat-count">Économique</span></div>
+      </a>
+      <a class="sh-cat" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=260&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
+        <div class="sh-cat-label">Vegan<span class="sh-cat-count">100% végétal</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── FEATURED RECIPES ── -->
+  <div class="sh-section" style="padding-top:36px">
+    <div class="sh-section-head">
+      <h2>⭐ Recettes populaires</h2>
+      <a href="/recettes">Voir tout →</a>
+    </div>
+    <div class="sh-recipes">
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=260&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag sh-tag-v">Végétarien</span><span class="sh-tag sh-tag-f">15 min</span></div>
+          <h3>Salade grecque authentique</h3>
+          <p>Tomates, concombres, feta, olives et origan frais.</p>
+          <div class="sh-card-meta"><span>⏱ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
+        </div>
+      </a>
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=260&fit=crop&auto=format" alt="Spaghetti Carbonara" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag sh-tag-f">20 min</span><span class="sh-tag">Italien</span></div>
+          <h3>Spaghetti Carbonara</h3>
+          <p>La vraie recette romaine, œufs, pecorino et guanciale.</p>
+          <div class="sh-card-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+        </div>
+      </a>
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=260&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag sh-tag-v">Vegan</span><span class="sh-tag sh-tag-f">25 min</span></div>
+          <h3>Curry de pois chiches</h3>
+          <p>Épicé, crémeux et nourrissant — comfort food végétalien.</p>
+          <div class="sh-card-meta"><span>⏱ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+        </div>
+      </a>
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=260&fit=crop&auto=format" alt="Sushi maki" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag">Japonais</span></div>
+          <h3>Sushi maki maison</h3>
+          <p>Apprenez à rouler vos propres makis avec saumon frais.</p>
+          <div class="sh-card-meta"><span>⏱ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
+        </div>
+      </a>
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=260&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag sh-tag-f">20 min</span><span class="sh-tag">Mexicain</span></div>
+          <h3>Tacos de bœuf épicés</h3>
+          <p>Viande épicée, avocat, coriandre et salsa maison.</p>
+          <div class="sh-card-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+        </div>
+      </a>
+      <a class="sh-card" href="/recettes">
+        <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=260&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
+        <div class="sh-card-body">
+          <div class="sh-tags"><span class="sh-tag">Classique</span></div>
+          <h3>Poulet rôti aux herbes</h3>
+          <p>Doré et juteux, parfumé au thym et romarin.</p>
+          <div class="sh-card-meta"><span>⏱ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── AD ── -->
+  <div class="sh-ad" style="padding-top:32px">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── BLOG PREVIEWS ── -->
+  <div class="sh-section" style="padding-top:36px">
+    <div class="sh-section-head">
+      <h2>📝 Blog Cuisine & Nutrition</h2>
+      <a href="/blog">Voir le blog →</a>
+    </div>
+    <div class="sh-blogs">
+      <a class="sh-blog" href="/blog/cuisine-mediterraneenne">
+        <div class="ico">🫒</div>
+        <div><div class="cat">Nutrition</div><h3>Les secrets de la cuisine méditerranéenne</h3><div class="mins">6 min · 10 mars 2025</div></div>
+      </a>
+      <a class="sh-blog" href="/blog/macronutriments-guide">
+        <div class="ico">💪</div>
+        <div><div class="cat">Nutrition</div><h3>Macronutriments : le guide complet</h3><div class="mins">8 min · 25 mars 2025</div></div>
+      </a>
+      <a class="sh-blog" href="/blog/epices-indispensables">
+        <div class="ico">🌶️</div>
+        <div><div class="cat">Conseils</div><h3>Les 10 épices indispensables dans votre cuisine</h3><div class="mins">5 min · 2 avril 2025</div></div>
+      </a>
+      <a class="sh-blog" href="/blog/zero-gaspillage">
+        <div class="ico">♻️</div>
+        <div><div class="cat">Conseils</div><h3>Zéro gaspillage : transformer les restes</h3><div class="mins">5 min · 5 mai 2025</div></div>
+      </a>
+      <a class="sh-blog" href="/blog/cuisine-rapide-30-minutes">
+        <div class="ico">⚡</div>
+        <div><div class="cat">Conseils</div><h3>10 repas prêts en 30 minutes</h3><div class="mins">5 min · 1 juin 2025</div></div>
+      </a>
+      <a class="sh-blog" href="/blog/microbiote-intestinal">
+        <div class="ico">🦠</div>
+        <div><div class="cat">Nutrition</div><h3>Microbiote intestinal : soigner sa flore</h3><div class="mins">6 min · 22 mai 2025</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── APP FEATURES ── -->
+  <div class="sh-section" style="padding-top:36px">
+    <div class="sh-section-head">
+      <h2>✨ Tout ce que Walkart fait pour vous</h2>
+    </div>
+    <div class="sh-features">
+      <div class="sh-feat">
+        <span class="ico">🔍</span>
+        <h3>Recherche avancée</h3>
+        <p>Filtrez par ingrédients, cuisine, temps, régime (végétarien, vegan, sans gluten) et valeurs nutritionnelles.</p>
+      </div>
+      <div class="sh-feat">
+        <span class="ico">📅</span>
+        <h3>Planificateur de repas</h3>
+        <p>Organisez votre semaine et générez automatiquement votre liste de courses en quelques secondes.</p>
+      </div>
+      <div class="sh-feat">
+        <span class="ico">💪</span>
+        <h3>Suivi nutritionnel</h3>
+        <p>Analysez les macronutriments et calories de chaque recette. Atteignez vos objectifs santé.</p>
+      </div>
+      <div class="sh-feat">
+        <span class="ico">🛒</span>
+        <h3>Liste de courses</h3>
+        <p>Générée automatiquement à partir de vos recettes, organisée par rayon de supermarché.</p>
+      </div>
+      <div class="sh-feat">
+        <span class="ico">❤️</span>
+        <h3>Favoris & Collections</h3>
+        <p>Sauvegardez vos recettes préférées et créez des collections personnalisées.</p>
+      </div>
+      <div class="sh-feat">
+        <span class="ico">🌍</span>
+        <h3>6 langues</h3>
+        <p>Disponible en français, anglais, espagnol, arabe, italien et japonais.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA STRIP ── -->
+  <div class="sh-strip">
+    <h2>Prêt à cuisiner mieux ?</h2>
+    <p>Rejoignez des milliers d'utilisateurs qui planifient leurs repas et mangent mieux avec Walkart. Gratuit et sans inscription.</p>
+    <button class="sh-strip-btn" onclick="document.getElementById('sh').style.display='none'">Démarrer maintenant →</button>
+  </div>
+
+  <!-- ── STATIC FOOTER ── -->
+  <div class="sh-footer">
+    <div class="sh-footer-links">
+      <a href="/">Accueil</a>
+      <a href="/recettes">Recettes</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">À propos</a>
+      <a href="/privacy">Confidentialité</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+  </div>
+
+</div><!-- end #sh -->
 </main>
 
-<!-- Bottom Tab Bar -->
+<!-- ══════════════════════════════════
+     SPA NAVIGATION (always visible)
+════════════════════════════════════ -->
 <nav class="tab-bar">
   <a class="tab-item active" onclick="App.navigate('home')">
     <span class="tab-icon">🏠</span>

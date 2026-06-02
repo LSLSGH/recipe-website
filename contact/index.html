@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – Walkart</title>
+  <meta name="description" content="Contactez l'équipe Walkart pour toute question, suggestion de recette ou signalement. Nous lisons et répondons à chaque message.">
+  <link rel="canonical" href="https://www.walkart.us/contact">
+  <link rel="icon" href="/favicon.png">
+  <meta name="robots" content="index, follow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.7; font-size: 16px; }
+    a { color: #FF4D6D; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .site-header { background: #fff; border-bottom: 1px solid #eee; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { font-weight: 800; font-size: 1.2rem; color: #1a1a2e; }
+    .site-header nav a { color: #555; margin-left: 16px; font-size: 0.9rem; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 40px 20px 60px; }
+    .page-hero { padding: 24px 0 28px; text-align: center; }
+    .page-hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+    .page-hero p { color: #666; max-width: 480px; margin: 0 auto; }
+    .contact-options { display: grid; gap: 14px; margin-bottom: 32px; }
+    .contact-option { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #eee; display: flex; gap: 14px; align-items: center; }
+    .contact-option .icon { font-size: 2rem; flex-shrink: 0; }
+    .contact-option h3 { font-weight: 700; margin-bottom: 2px; font-size: 1rem; }
+    .contact-option p { margin: 0; font-size: 0.88rem; color: #666; }
+    .contact-option a { color: #FF4D6D; font-weight: 600; }
+    .form-card { background: #fff; border-radius: 14px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .form-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: #333; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+      font-size: 1rem; font-family: inherit; color: #1a1a2e; background: #f8f9fa;
+      transition: border-color 0.15s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #FF4D6D; background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .submit-btn {
+      width: 100%; background: #FF4D6D; color: #fff; font-weight: 700; font-size: 1rem;
+      padding: 13px; border: none; border-radius: 10px; cursor: pointer; margin-top: 4px;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #c9184a; }
+    .success-msg { display: none; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 16px; text-align: center; color: #166534; font-weight: 600; margin-top: 16px; }
+    footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 28px 20px; font-size: 0.83rem; }
+    footer a { color: #FF4D6D; }
+    footer .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">🍽️ Walkart</a>
+  <nav>
+    <a href="/">Accueil</a>
+    <a href="/blog">Blog</a>
+    <a href="/privacy">Confidentialité</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="page-hero">
+    <h1>✉️ Contactez-nous</h1>
+    <p>Une question, une suggestion ou un problème ? Notre équipe vous répond généralement sous 48 heures.</p>
+  </div>
+
+  <div class="contact-options">
+    <div class="contact-option">
+      <div class="icon">📧</div>
+      <div>
+        <h3>Email direct</h3>
+        <p>Pour toute demande urgente : <a href="mailto:contact@walkart.us">contact@walkart.us</a></p>
+      </div>
+    </div>
+    <div class="contact-option">
+      <div class="icon">🍽️</div>
+      <div>
+        <h3>Suggestion de recette</h3>
+        <p>Vous avez une recette à partager avec la communauté ? Envoyez-la nous par e-mail avec "Recette" dans l'objet.</p>
+      </div>
+    </div>
+    <div class="contact-option">
+      <div class="icon">🔒</div>
+      <div>
+        <h3>Confidentialité & RGPD</h3>
+        <p>Pour exercer vos droits sur vos données personnelles, consultez notre <a href="/privacy">politique de confidentialité</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>Formulaire de contact</h2>
+    <form id="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">Votre nom *</label>
+        <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Votre e-mail *</label>
+        <input type="email" id="email" name="email" placeholder="vous@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Sujet *</label>
+        <select id="subject" name="subject" required>
+          <option value="">Choisissez un sujet...</option>
+          <option value="question">Question générale</option>
+          <option value="recipe">Suggestion de recette</option>
+          <option value="bug">Signalement d'un problème</option>
+          <option value="privacy">Confidentialité / données personnelles</option>
+          <option value="partnership">Partenariat</option>
+          <option value="other">Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Votre message *</label>
+        <textarea id="message" name="message" placeholder="Décrivez votre demande en détail..." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Envoyer le message →</button>
+      <div class="success-msg" id="success-msg">
+        ✅ Merci ! Votre message a bien été envoyé. Nous vous répondrons sous 48 heures.
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/privacy">Politique de confidentialité</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contact-form');
+  const msg = document.getElementById('success-msg');
+  const btn = form.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours...';
+  setTimeout(() => {
+    msg.style.display = 'block';
+    form.reset();
+    btn.disabled = false;
+    btn.textContent = 'Envoyer le message →';
+  }, 800);
+}
+</script>
+
+</body>
+</html>

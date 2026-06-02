@@ -1,72 +1,201 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Macronutriments : le guide complet – Blog Walkart</title>
-  <meta name="description" content="Protéines, glucides, lipides : comprenez les macronutriments pour atteindre vos objectifs de santé.">
+  <title>Macronutriments : le guide complet pour les comprendre – Blog Walkart</title>
+  <meta name="description" content="Protéines, glucides, lipides : que sont vraiment les macronutriments et comment les équilibrer pour atteindre vos objectifs de santé ?">
   <link rel="canonical" href="https://www.walkart.us/blog/macronutriments-guide">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Macronutriments : le guide complet – Walkart">
-  <meta property="og:description" content="Protéines, glucides, lipides : comprenez les macronutriments pour atteindre vos objectifs de santé.">
-  <meta property="og:url" content="https://www.walkart.us/blog/macronutriments-guide">
-  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:title" content="Macronutriments : le guide complet pour les comprendre – Walkart">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=400&fit=crop&auto=format">
   <meta property="article:published_time" content="2025-03-25">
-  <meta property="article:author" content="Walkart">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Macronutriments : le guide complet">
-  <meta name="twitter:description" content="Protéines, glucides, lipides : comprenez les macronutriments pour atteindre vos objectifs de santé.">
-  <link rel="alternate" hreflang="en" href="https://www.walkart.us/blog/macronutriments-guide">
-  <link rel="alternate" hreflang="fr" href="https://www.walkart.us/blog/macronutriments-guide">
   <link rel="icon" href="/favicon.png">
-  <script>window.location.replace('/#article/macronutriments-guide');</script>
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7}
-    .wrap{max-width:720px;margin:0 auto;padding:32px 20px}
-    .back{display:inline-block;margin-bottom:20px;color:#FF4D6D;text-decoration:none;font-weight:600}
-    .back:hover{text-decoration:underline}
-    .hero{text-align:center;padding:32px 0 24px}
-    .emoji{font-size:4rem;display:block;margin-bottom:16px}
-    h1{font-size:1.9rem;font-weight:800;margin-bottom:12px;line-height:1.3}
-    .meta{color:#888;font-size:0.85rem;margin-bottom:24px}
-    .meta span{margin:0 8px}
-    .excerpt{font-size:1.05rem;color:#555;background:#fff;border-left:4px solid #FF4D6D;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:28px}
-    .cta{background:#FF4D6D;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;margin:24px 0}
-    .cta:hover{background:#c9184a}
-    .articles{display:grid;gap:12px;margin-top:32px}
-    .art-link{background:#fff;border-radius:10px;padding:14px 16px;text-decoration:none;color:#1a1a2e;border:1px solid #eee;display:flex;align-items:center;gap:10px}
-    .art-link:hover{border-color:#FF4D6D}
-    footer{text-align:center;padding:40px 0 20px;color:#aaa;font-size:0.82rem}
-    footer a{color:#FF4D6D;text-decoration:none}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7;font-size:16px}
+    a{color:#FF4D6D;text-decoration:none}a:hover{text-decoration:underline}
+    .site-header{background:#fff;border-bottom:1px solid #eee;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .logo{font-weight:800;font-size:1.2rem;color:#1a1a2e}
+    .header-right{display:flex;align-items:center;gap:10px}
+    .header-right nav a{color:#555;margin-left:10px;font-size:0.88rem}
+    .lang-switcher{display:flex;gap:3px}
+    .lang-btn{background:none;border:1.5px solid #e0e0e0;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:0.95rem;line-height:1.4;transition:all .15s}
+    .lang-btn.active,.lang-btn:hover{border-color:#FF4D6D;background:#fff0f3}
+    .hero-wrap{position:relative;width:100%;height:400px;overflow:hidden;background:#111}
+    .hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+    .hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.65) 100%)}
+    .hero-text{position:absolute;bottom:0;left:0;right:0;padding:28px 24px}
+    .cat-badge{display:inline-block;background:#FF4D6D;color:#fff;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:10px}
+    .hero-text h1{color:#fff;font-size:1.85rem;font-weight:800;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:8px}
+    .hero-meta{display:flex;gap:16px;flex-wrap:wrap}
+    .hero-meta span{color:rgba(255,255,255,.85);font-size:.83rem}
+    .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+    .breadcrumb{font-size:.82rem;color:#888;margin-bottom:20px}
+    .breadcrumb a{color:#FF4D6D}
+    .excerpt{font-size:1.05rem;color:#555;background:#fff;border-left:4px solid #FF4D6D;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px}
+    .article-body{background:#fff;border-radius:12px;padding:32px;margin-bottom:28px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .article-body p{margin-bottom:16px;color:#333}
+    .article-body h3{font-weight:700;margin:24px 0 10px;color:#1a1a2e;font-size:1.1rem}
+    .article-body strong{color:#1a1a2e}
+    .article-body em{font-style:italic}
+    .ad-slot{background:#f0f0f0;border-radius:8px;padding:8px;margin:20px 0;min-height:90px;text-align:center}
+    .cta-box{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:28px 0}
+    .cta-box h3{margin-bottom:8px;font-size:1.1rem}
+    .cta-box p{opacity:.9;font-size:.9rem;margin-bottom:16px}
+    .cta-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:10px 24px;border-radius:8px}
+    .related h2{font-size:1.05rem;font-weight:700;margin-bottom:14px;color:#666}
+    .related-grid{display:grid;gap:10px}
+    .related-card{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #eee;display:flex;align-items:center;gap:12px;color:#1a1a2e}
+    .related-card:hover{border-color:#FF4D6D;text-decoration:none}
+    .related-card .em{font-size:1.5rem;flex-shrink:0}
+    .related-card .ti{font-weight:600;font-size:.9rem;line-height:1.4}
+    footer{background:#1a1a2e;color:#aaa;text-align:center;padding:28px 20px;font-size:.83rem}
+    footer a{color:#FF4D6D}
+    .footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+    @media(max-width:600px){.hero-wrap{height:260px}.hero-text h1{font-size:1.3rem}.header-right nav a{display:none}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <a class="back" href="/blog">← Tous les articles</a>
-    <div class="hero">
-      <span class="emoji">💪</span>
-      <h1>Macronutriments : le guide complet</h1>
-      <div class="meta">
-        <span>📅 25 mars 2025</span>
-        <span>⏱️ 8 min de lecture</span>
-        <span>✍️ Walkart</span>
-      </div>
-    </div>
-    <div class="excerpt">Protéines, glucides, lipides : comprenez les macronutriments pour atteindre vos objectifs de santé.</div>
-
-    <p>Cet article est disponible en version interactive sur l'application Walkart avec toutes les fonctionnalités de nutrition, planification et recettes.</p>
-
-    <a class="cta" href="/#article/macronutriments-guide">📖 Lire l'article complet →</a>
-
-    <h2 style="margin:32px 0 12px;font-size:1.1rem">Autres articles</h2>
-    <div class="articles">
-      <a class="art-link" href="/blog/cuisine-mediterraneenne">🫒 Les secrets de la cuisine méditerranéenne</a><a class="art-link" href="/blog/planifier-repas-semaine">📅 Comment planifier ses repas pour toute la semaine</a><a class="art-link" href="/blog/epices-indispensables">🌶️ Les 10 épices indispensables dans votre cuisine</a><a class="art-link" href="/blog/lire-etiquette-nutritionnelle">🏷️ Comment lire une étiquette nutritionnelle comme un expert</a>
+<header class="site-header">
+  <a class="logo" href="/">🍽️ Walkart</a>
+  <div class="header-right">
+    <nav><a href="/">Accueil</a><a href="/blog">Blog</a><a href="/recettes">Recettes</a></nav>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español">🇪🇸</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')" title="العربية">🇸🇦</button>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="日本語">🇯🇵</button>
     </div>
   </div>
-  <footer>
-    <p><a href="/">Walkart</a> · <a href="/blog">Blog</a> · <a href="/#about">À propos</a> · <a href="/#privacy">Confidentialité</a></p>
-    <p style="margin-top:8px">© 2026 Walkart – Recettes du Monde</p>
-  </footer>
+</header>
+
+<div class="hero-wrap">
+  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=400&fit=crop&auto=format" alt="Aliments riches en macronutriments équilibrés" loading="eager">
+  <div class="hero-gradient"></div>
+  <div class="hero-text">
+    <span class="cat-badge">Nutrition</span>
+    <div data-lang="fr"><h1>Macronutriments : le guide complet pour les comprendre</h1></div>
+    <div data-lang="en" style="display:none"><h1>Macronutrients: The Complete Guide to Understanding Them</h1></div>
+    <div class="hero-meta">
+      <span>📅 25 mars 2025</span>
+      <span>⏱️ 8 min de lecture</span>
+      <span>✍️ Walkart</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">Accueil</a> › <a href="/blog">Blog</a> › <span data-lang="fr">Guide macronutriments</span><span data-lang="en" style="display:none">Macronutrients Guide</span>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- FRENCH CONTENT -->
+  <div data-lang="fr">
+    <p class="excerpt">Protéines, glucides, lipides : que sont vraiment les macronutriments et comment les équilibrer pour atteindre vos objectifs de santé ?</p>
+    <div class="article-body">
+      <p>Quand on s'intéresse à la nutrition, on entend très souvent parler des macronutriments. Ces trois grandes familles — protéines, glucides et lipides — constituent la totalité de l'énergie que nous apportons à notre organisme. Comprendre leur rôle respectif est la première étape vers une alimentation vraiment équilibrée.</p>
+
+      <h3>Les protéines : les bâtisseurs du corps</h3>
+      <p>Les protéines apportent <strong>4 kilocalories par gramme</strong> et jouent un rôle fondamental dans la construction et la réparation des tissus musculaires, la fabrication des enzymes et des hormones, ainsi que dans le fonctionnement du système immunitaire. On les trouve dans les viandes, poissons, œufs, produits laitiers, mais aussi dans les légumineuses (lentilles, pois chiches, haricots) et le tofu.</p>
+
+      <p>Les recommandations générales sont d'environ <strong>0,8 à 1 g de protéines par kilo de poids corporel</strong> pour une personne sédentaire. Ce chiffre monte à 1,5 à 2 g pour les personnes pratiquant une activité physique intense.</p>
+
+      <h3>Les glucides : le carburant préféré du cerveau</h3>
+      <p>Avec également <strong>4 kcal par gramme</strong>, les glucides sont la principale source d'énergie de l'organisme, et surtout du cerveau qui consomme à lui seul environ 120 g de glucose par jour. Il est important de distinguer les <em>glucides simples</em> (sucres, sucreries, sodas) à absorption rapide, des <em>glucides complexes</em> (céréales complètes, légumineuses, légumes) à absorption lente qui maintiennent une énergie stable tout au long de la journée.</p>
+
+      <p>Les glucides complexes sont aussi riches en fibres, essentielles à une bonne digestion et à la sensation de satiété. Ils devraient représenter la majorité de votre apport glucidique.</p>
+
+      <h3>Les lipides : bien plus qu'une source d'énergie</h3>
+      <p>Long diabolisés, les lipides sont pourtant indispensables. Avec <strong>9 kcal par gramme</strong>, ils constituent la source d'énergie la plus concentrée. Mais leur rôle va bien au-delà : ils participent à la fabrication des membranes cellulaires, à l'absorption des vitamines liposolubles (A, D, E, K), à la production d'hormones et à la protection des organes vitaux.</p>
+
+      <p>La clé est de privilégier les <em>bonnes graisses</em> : acides gras mono-insaturés (huile d'olive, avocat, amandes) et polyinsaturés oméga-3 (poissons gras, graines de lin, noix). À réduire : les graisses saturées en excès et surtout les acides gras trans présents dans les produits ultra-transformés.</p>
+
+      <h3>Comment équilibrer ses macronutriments ?</h3>
+      <p>Une répartition équilibrée classique pour une personne active est d'environ <strong>50-55% de glucides, 20-25% de protéines, 25-30% de lipides</strong>. Ces ratios varient selon vos objectifs : prise de masse musculaire, perte de poids, endurance sportive. L'essentiel est de privilegier la qualité des aliments au-delà des chiffres.</p>
+
+      <p>Le tracker nutritionnel Walkart analyse automatiquement vos recettes et vous donne la répartition exacte des macronutriments de chaque plat.</p>
+    </div>
+  </div>
+
+  <!-- ENGLISH CONTENT -->
+  <div data-lang="en" style="display:none">
+    <p class="excerpt">Proteins, carbohydrates, fats: what are macronutrients really and how to balance them to achieve your health goals?</p>
+    <div class="article-body">
+      <p>When you become interested in nutrition, you very often hear about macronutrients. These three major families — proteins, carbohydrates, and fats — make up all the energy we provide to our body. Understanding their respective roles is the first step toward truly balanced eating.</p>
+
+      <h3>Proteins: The Body's Builders</h3>
+      <p>Proteins provide <strong>4 kilocalories per gram</strong> and play a fundamental role in building and repairing muscle tissue, making enzymes and hormones, and supporting immune system function. They are found in meats, fish, eggs, dairy products, as well as in legumes (lentils, chickpeas, beans) and tofu.</p>
+
+      <p>General recommendations are approximately <strong>0.8 to 1 g of protein per kilogram of body weight</strong> for a sedentary person. This figure rises to 1.5 to 2 g for people engaged in intense physical activity.</p>
+
+      <h3>Carbohydrates: The Brain's Preferred Fuel</h3>
+      <p>Also providing <strong>4 kcal per gram</strong>, carbohydrates are the body's main source of energy, especially for the brain which alone consumes about 120 g of glucose per day. It is important to distinguish <em>simple carbohydrates</em> (sugars, sweets, sodas) with rapid absorption from <em>complex carbohydrates</em> (whole grains, legumes, vegetables) with slow absorption that maintain stable energy throughout the day.</p>
+
+      <p>Complex carbohydrates are also rich in fiber, essential for good digestion and feeling of satiety. They should make up the majority of your carbohydrate intake.</p>
+
+      <h3>Fats: Much More Than an Energy Source</h3>
+      <p>Long demonized, fats are nevertheless indispensable. With <strong>9 kcal per gram</strong>, they constitute the most concentrated energy source. But their role goes much further: they participate in making cell membranes, absorbing fat-soluble vitamins (A, D, E, K), producing hormones, and protecting vital organs.</p>
+
+      <p>The key is to favor <em>good fats</em>: monounsaturated fatty acids (olive oil, avocado, almonds) and polyunsaturated omega-3s (fatty fish, flaxseeds, walnuts). To reduce: excess saturated fats and especially trans fatty acids found in ultra-processed products.</p>
+
+      <h3>How to Balance Your Macronutrients?</h3>
+      <p>A classic balanced distribution for an active person is approximately <strong>50-55% carbohydrates, 20-25% proteins, 25-30% fats</strong>. These ratios vary according to your goals: muscle building, weight loss, sports endurance. The essential thing is to prioritize food quality beyond the numbers.</p>
+
+      <p>The Walkart nutrition tracker automatically analyzes your recipes and gives you the exact macronutrient breakdown of each dish.</p>
+    </div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="cta-box">
+    <div data-lang="fr"><h3>🍽️ Découvrez des milliers de recettes sur Walkart</h3><p>Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas.</p></div>
+    <div data-lang="en" style="display:none"><h3>🍽️ Discover thousands of recipes on Walkart</h3><p>Plan your meals, generate your shopping list, and cook step by step.</p></div>
+    <a class="cta-btn" href="/">Explorer →</a>
+  </div>
+
+  <div class="related">
+    <h2 data-lang-text data-fr="Articles similaires" data-en="Related articles">Articles similaires</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/blog/lire-etiquette-nutritionnelle">
+        <span class="em">🏷️</span>
+        <span class="ti">Comment lire une étiquette nutritionnelle comme un expert</span>
+      </a>
+      <a class="related-card" href="/blog/superaliments-mythe-realite">
+        <span class="em">🫐</span>
+        <span class="ti">Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ?</span>
+      </a>
+      <a class="related-card" href="/blog/regime-vegetarien">
+        <span class="em">🥦</span>
+        <span class="ti">Régime végétarien : avantages, risques et conseils pratiques</span>
+      </a>
+      <a class="related-card" href="/blog/cuisine-mediterraneenne">
+        <span class="em">🫒</span>
+        <span class="ti">Les secrets de la cuisine méditerranéenne</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a><a href="/recettes">Recettes</a><a href="/blog">Blog</a><a href="/about">À propos</a><a href="/privacy">Confidentialité</a><a href="/contact">Contact</a>
+  </div>
+  <p>© 2025 Walkart – Recettes du Monde</p>
+</footer>
+
+<script src="/js/lang.js"></script>
 </body>
 </html>
