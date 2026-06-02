@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recettes du Monde – Walkart</title>
+  <meta name="description" content="Des milliers de recettes authentiques du monde entier : méditerranéenne, asiatique, végétarienne, rapide... Filtrez par cuisine, ingrédient et temps de préparation.">
+  <link rel="canonical" href="https://www.walkart.us/recettes">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Recettes du Monde – Walkart">
+  <meta property="og:description" content="Des milliers de recettes authentiques du monde entier.">
+  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <link rel="icon" href="/favicon.png">
+  <meta name="robots" content="index, follow">
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+    a{text-decoration:none;color:inherit}
+
+    /* ── Header ── */
+    .site-header{background:#fff;border-bottom:1px solid #eee;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+    .logo{font-weight:800;font-size:1.2rem;color:#1a1a2e}
+    .header-right{display:flex;align-items:center;gap:10px}
+    .header-right nav a{color:#555;margin-left:10px;font-size:.88rem}
+    .header-right nav a:hover{color:#FF4D6D}
+    .lang-switcher{display:flex;gap:3px}
+    .lang-btn{background:none;border:1.5px solid #e0e0e0;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:.9rem;line-height:1.5;transition:all .15s}
+    .lang-btn.active,.lang-btn:hover{border-color:#FF4D6D;background:#fff0f3}
+
+    /* ── Hero ── */
+    .hero{position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 50%,#1a1a2e 100%);color:#fff;padding:64px 20px 48px;text-align:center;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=600&fit=crop&auto=format') center/cover no-repeat;opacity:.18}
+    .hero-inner{position:relative;max-width:700px;margin:0 auto}
+    .hero h1{font-size:2.4rem;font-weight:800;margin-bottom:12px;line-height:1.2}
+    .hero p{font-size:1.1rem;opacity:.85;margin-bottom:28px}
+    .hero-search{display:flex;gap:0;max-width:520px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+    .hero-search input{flex:1;padding:14px 20px;border:none;font-size:1rem;outline:none;color:#1a1a2e}
+    .hero-search button{background:#FF4D6D;color:#fff;border:none;padding:14px 24px;font-size:1rem;font-weight:700;cursor:pointer;white-space:nowrap}
+    .hero-search button:hover{background:#c9184a}
+
+    /* ── Sections ── */
+    .section{max-width:1100px;margin:0 auto;padding:48px 20px 0}
+    .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px}
+    .section-head h2{font-size:1.5rem;font-weight:800}
+    .section-head a{color:#FF4D6D;font-size:.88rem;font-weight:600}
+
+    /* ── Category grid ── */
+    .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+    .cat-card{position:relative;border-radius:14px;overflow:hidden;height:140px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+    .cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .cat-card:hover img{transform:scale(1.06)}
+    .cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.6))}
+    .cat-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;z-index:1;color:#fff;font-weight:700;font-size:.95rem;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+    .cat-sub{font-size:.75rem;opacity:.8;font-weight:400;display:block;margin-top:2px}
+
+    /* ── Recipe grid ── */
+    .recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+    .recipe-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s}
+    .recipe-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12)}
+    .recipe-card img{width:100%;height:175px;object-fit:cover;display:block}
+    .recipe-card-body{padding:14px}
+    .recipe-tags{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+    .tag{font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:20px;background:#f0f0f0;color:#555}
+    .tag.veg{background:#e8f5e9;color:#2e7d32}
+    .tag.fast{background:#fff3e0;color:#e65100}
+    .recipe-card h3{font-size:.98rem;font-weight:700;color:#1a1a2e;margin-bottom:6px;line-height:1.3}
+    .recipe-card p{font-size:.82rem;color:#888}
+    .recipe-meta{display:flex;gap:12px;margin-top:8px;font-size:.8rem;color:#aaa}
+
+    /* ── Ad slot ── */
+    .ad-wrap{max-width:1100px;margin:32px auto 0;padding:0 20px}
+    .ad-slot{background:#f0f0f0;border-radius:8px;padding:8px;min-height:90px;text-align:center}
+
+    /* ── Tips strip ── */
+    .tips-strip{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;padding:40px 20px;margin-top:48px;text-align:center}
+    .tips-strip h2{font-size:1.4rem;font-weight:800;margin-bottom:8px}
+    .tips-strip p{opacity:.9;margin-bottom:20px}
+    .tips-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:11px 28px;border-radius:10px}
+    .tips-btn:hover{opacity:.9}
+
+    /* ── Blog previews ── */
+    .blog-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .blog-preview{background:#fff;border-radius:12px;padding:18px;border:1px solid #eee;display:flex;gap:14px;align-items:center}
+    .blog-preview:hover{border-color:#FF4D6D}
+    .blog-preview .icon{font-size:2.2rem;flex-shrink:0}
+    .blog-preview .info .cat{font-size:.72rem;color:#FF4D6D;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+    .blog-preview .info h3{font-size:.92rem;font-weight:700;color:#1a1a2e;line-height:1.4}
+    .blog-preview .info .mins{font-size:.78rem;color:#aaa;margin-top:4px}
+
+    /* ── Footer ── */
+    footer{background:#1a1a2e;color:#aaa;text-align:center;padding:32px 20px;font-size:.83rem;margin-top:48px}
+    footer a{color:#FF4D6D}
+    .footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+
+    @media(max-width:640px){
+      .hero h1{font-size:1.6rem}
+      .header-right nav a{display:none}
+      .cat-grid{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/">🍽️ Walkart</a>
+  <div class="header-right">
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/recettes" style="color:#FF4D6D;font-weight:700">Recettes</a>
+      <a href="/blog">Blog</a>
+    </nav>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español">🇪🇸</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')" title="العربية">🇸🇦</button>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="日本語">🇯🇵</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div data-lang="fr">
+      <h1>🍽️ Des milliers de recettes du monde</h1>
+      <p>Méditerranée, Asie, Végétarien, Budget, Rapide… Trouvez votre prochaine recette préférée.</p>
+    </div>
+    <div data-lang="en" style="display:none">
+      <h1>🍽️ Thousands of World Recipes</h1>
+      <p>Mediterranean, Asian, Vegetarian, Budget, Quick… Find your next favorite recipe.</p>
+    </div>
+    <div data-lang="es" style="display:none">
+      <h1>🍽️ Miles de recetas del mundo</h1>
+      <p>Mediterránea, Asiática, Vegetariana, Económica, Rápida… Encuentra tu próxima receta favorita.</p>
+    </div>
+    <div class="hero-search">
+      <input id="hero-q" type="text" placeholder="Rechercher une recette, un ingrédient…" aria-label="Recherche">
+      <button onclick="window.location.href='/?search='+document.getElementById('hero-q').value">🔍 Chercher</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CATEGORIES ═══════════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2 data-lang="fr">🌍 Cuisines du monde</h2>
+    <h2 data-lang="en" style="display:none">🌍 World Cuisines</h2>
+    <a href="/">Tout voir →</a>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="/?cuisine=mediterranean">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=280&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Méditerranée</span><span data-lang="en" style="display:none">Mediterranean</span>
+        <span class="cat-sub">Grèce · Italie · Maroc</span>
+      </div>
+    </a>
+    <a class="cat-card" href="/?cuisine=asian">
+      <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=280&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Asiatique</span><span data-lang="en" style="display:none">Asian</span>
+        <span class="cat-sub">Japon · Thaï · Inde</span>
+      </div>
+    </a>
+    <a class="cat-card" href="/?diet=vegetarian">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=280&fit=crop&auto=format" alt="Cuisine végétarienne" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Végétarien</span><span data-lang="en" style="display:none">Vegetarian</span>
+        <span class="cat-sub">Sans viande · Équilibré</span>
+      </div>
+    </a>
+    <a class="cat-card" href="/?maxTime=30">
+      <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=280&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Rapide &lt; 30 min</span><span data-lang="en" style="display:none">Quick &lt; 30 min</span>
+        <span class="cat-sub">Soir de semaine</span>
+      </div>
+    </a>
+    <a class="cat-card" href="/?cuisine=european">
+      <img src="https://images.unsplash.com/photo-1559181567-c3190958d3ab?w=400&h=280&fit=crop&auto=format" alt="Cuisine européenne" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Européenne</span><span data-lang="en" style="display:none">European</span>
+        <span class="cat-sub">France · Espagne · Grèce</span>
+      </div>
+    </a>
+    <a class="cat-card" href="/?diet=vegan">
+      <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=280&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
+      <div class="cat-label">
+        <span data-lang="fr">Vegan</span><span data-lang="en" style="display:none">Vegan</span>
+        <span class="cat-sub">100% végétal</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════ AD ═══════════════ -->
+<div class="ad-wrap">
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<!-- ═══════════════ FEATURED RECIPES ═══════════════ -->
+<div class="section" style="padding-top:40px">
+  <div class="section-head">
+    <h2 data-lang="fr">⭐ Recettes populaires</h2>
+    <h2 data-lang="en" style="display:none">⭐ Popular Recipes</h2>
+    <a href="/">Voir tout →</a>
+  </div>
+  <div class="recipe-grid">
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=280&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag fast">15 min</span></div>
+        <h3 data-lang="fr">Salade grecque authentique</h3>
+        <h3 data-lang="en" style="display:none">Authentic Greek Salad</h3>
+        <p data-lang="fr">Tomates, concombres, feta, olives et origan — la fraîcheur de la Méditerranée.</p>
+        <p data-lang="en" style="display:none">Tomatoes, cucumbers, feta, olives and oregano — Mediterranean freshness.</p>
+        <div class="recipe-meta"><span>⏱️ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=280&fit=crop&auto=format" alt="Spaghetti carbonara" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag fast">20 min</span></div>
+        <h3 data-lang="fr">Spaghetti Carbonara</h3>
+        <h3 data-lang="en" style="display:none">Spaghetti Carbonara</h3>
+        <p data-lang="fr">La vraie recette romaine : œufs, pecorino, guanciale et poivre noir.</p>
+        <p data-lang="en" style="display:none">The real Roman recipe: eggs, pecorino, guanciale and black pepper.</p>
+        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">25 min</span></div>
+        <h3 data-lang="fr">Curry de pois chiches</h3>
+        <h3 data-lang="en" style="display:none">Chickpea Curry</h3>
+        <p data-lang="fr">Épicé, crémeux et nourrissant — le comfort food végétalien par excellence.</p>
+        <p data-lang="en" style="display:none">Spicy, creamy and nourishing — the ultimate vegan comfort food.</p>
+        <div class="recipe-meta"><span>⏱️ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=280&fit=crop&auto=format" alt="Sushi maison" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag">Japonais</span></div>
+        <h3 data-lang="fr">Sushi maki maison</h3>
+        <h3 data-lang="en" style="display:none">Homemade Maki Sushi</h3>
+        <p data-lang="fr">Apprenez à rouler vos propres makis avec du riz vinaigré et du saumon frais.</p>
+        <p data-lang="en" style="display:none">Learn to roll your own maki with vinegared rice and fresh salmon.</p>
+        <div class="recipe-meta"><span>⏱️ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=280&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag">Classique</span></div>
+        <h3 data-lang="fr">Poulet rôti aux herbes</h3>
+        <h3 data-lang="en" style="display:none">Herb Roast Chicken</h3>
+        <p data-lang="fr">Doré, juteux, parfumé au thym et au romarin — le grand classique du dimanche.</p>
+        <p data-lang="en" style="display:none">Golden, juicy, flavored with thyme and rosemary — the classic Sunday roast.</p>
+        <div class="recipe-meta"><span>⏱️ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=280&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Mexicain</span></div>
+        <h3 data-lang="fr">Tacos de bœuf épicés</h3>
+        <h3 data-lang="en" style="display:none">Spicy Beef Tacos</h3>
+        <p data-lang="fr">Viande épicée, avocat frais, coriandre et salsa — le Mexique dans votre assiette.</p>
+        <p data-lang="en" style="display:none">Spiced meat, fresh avocado, cilantro and salsa — Mexico on your plate.</p>
+        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=280&fit=crop&auto=format" alt="Soupe à l'oignon" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag">Français</span><span class="tag veg">Végétarien</span></div>
+        <h3 data-lang="fr">Soupe à l'oignon gratinée</h3>
+        <h3 data-lang="en" style="display:none">French Onion Soup</h3>
+        <p data-lang="fr">La soupe réconfort par excellence : bouillon riche, oignons caramélisés et gruyère fondu.</p>
+        <p data-lang="en" style="display:none">The ultimate comfort soup: rich broth, caramelized onions and melted gruyère.</p>
+        <div class="recipe-meta"><span>⏱️ 50 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=280&fit=crop&auto=format" alt="Bowl petit déjeuner" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">10 min</span></div>
+        <h3 data-lang="fr">Açaï bowl énergisant</h3>
+        <h3 data-lang="en" style="display:none">Energizing Açaí Bowl</h3>
+        <p data-lang="fr">Açaï, banane, fruits rouges, granola et graines de chia — le petit-déjeuner parfait.</p>
+        <p data-lang="en" style="display:none">Açaí, banana, berries, granola and chia seeds — the perfect breakfast.</p>
+        <div class="recipe-meta"><span>⏱️ 10 min</span><span>👤 1 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══════════════ AD ═══════════════ -->
+<div class="ad-wrap" style="margin-top:40px">
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<!-- ═══════════════ RECIPES BY TYPE ═══════════════ -->
+<div class="section" style="padding-top:40px">
+  <div class="section-head">
+    <h2 data-lang="fr">🥗 Recettes végétariennes à la une</h2>
+    <h2 data-lang="en" style="display:none">🥗 Featured Vegetarian Recipes</h2>
+    <a href="/?diet=vegetarian">Voir tout →</a>
+  </div>
+  <div class="recipe-grid">
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=280&fit=crop&auto=format" alt="Ratatouille" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag">Provence</span></div>
+        <h3 data-lang="fr">Ratatouille provençale</h3>
+        <h3 data-lang="en" style="display:none">Provençal Ratatouille</h3>
+        <p data-lang="fr">Courgettes, aubergines, poivrons et tomates mijotés à l'huile d'olive.</p>
+        <p data-lang="en" style="display:none">Zucchini, eggplant, peppers and tomatoes simmered in olive oil.</p>
+        <div class="recipe-meta"><span>⏱️ 45 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1529059997568-3d847b1154f8?w=400&h=280&fit=crop&auto=format" alt="Houmous" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">15 min</span></div>
+        <h3 data-lang="fr">Houmous maison onctueux</h3>
+        <h3 data-lang="en" style="display:none">Creamy Homemade Hummus</h3>
+        <p data-lang="fr">Pois chiches, tahini, citron et ail — bien meilleur que le commerce.</p>
+        <p data-lang="en" style="display:none">Chickpeas, tahini, lemon and garlic — far better than store-bought.</p>
+        <div class="recipe-meta"><span>⏱️ 15 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=280&fit=crop&auto=format" alt="Buddha bowl" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">20 min</span></div>
+        <h3 data-lang="fr">Buddha bowl quinoa</h3>
+        <h3 data-lang="en" style="display:none">Quinoa Buddha Bowl</h3>
+        <p data-lang="fr">Quinoa, avocat, légumes rôtis, tahini — nourrissant et coloré.</p>
+        <p data-lang="en" style="display:none">Quinoa, avocado, roasted vegetables, tahini — nourishing and colorful.</p>
+        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
+      </div>
+    </a>
+
+    <a class="recipe-card" href="/">
+      <img src="https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?w=400&h=280&fit=crop&auto=format" alt="Lentilles" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag">Budget</span></div>
+        <h3 data-lang="fr">Dal de lentilles corail</h3>
+        <h3 data-lang="en" style="display:none">Red Lentil Dal</h3>
+        <p data-lang="fr">Lentilles corail au lait de coco, curcuma et gingembre — réconfortant et économique.</p>
+        <p data-lang="en" style="display:none">Red lentils with coconut milk, turmeric and ginger — comforting and budget-friendly.</p>
+        <div class="recipe-meta"><span>⏱️ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══════════════ CTA STRIP ═══════════════ -->
+<div class="tips-strip">
+  <div data-lang="fr">
+    <h2>🛒 Planifiez vos repas et générez votre liste de courses</h2>
+    <p>Walkart organise votre semaine et génère automatiquement votre liste de courses. Gratuit et sans inscription.</p>
+  </div>
+  <div data-lang="en" style="display:none">
+    <h2>🛒 Plan Your Meals and Generate Your Shopping List</h2>
+    <p>Walkart organizes your week and automatically generates your shopping list. Free and no sign-up required.</p>
+  </div>
+  <a class="tips-btn" href="/">Accéder à l'application →</a>
+</div>
+
+<!-- ═══════════════ BLOG PREVIEWS ═══════════════ -->
+<div class="section" style="padding-top:40px">
+  <div class="section-head">
+    <h2 data-lang="fr">📝 Conseils & Nutrition</h2>
+    <h2 data-lang="en" style="display:none">📝 Tips & Nutrition</h2>
+    <a href="/blog">Voir le blog →</a>
+  </div>
+  <div class="blog-list">
+    <a class="blog-preview" href="/blog/cuisine-mediterraneenne">
+      <div class="icon">🫒</div>
+      <div class="info">
+        <div class="cat">Nutrition</div>
+        <h3 data-lang="fr">Les secrets de la cuisine méditerranéenne</h3>
+        <h3 data-lang="en" style="display:none">Secrets of Mediterranean Cuisine</h3>
+        <div class="mins">6 min · 10 mars 2025</div>
+      </div>
+    </a>
+    <a class="blog-preview" href="/blog/macronutriments-guide">
+      <div class="icon">💪</div>
+      <div class="info">
+        <div class="cat">Nutrition</div>
+        <h3 data-lang="fr">Macronutriments : le guide complet</h3>
+        <h3 data-lang="en" style="display:none">Macronutrients: The Complete Guide</h3>
+        <div class="mins">8 min · 25 mars 2025</div>
+      </div>
+    </a>
+    <a class="blog-preview" href="/blog/planifier-repas-semaine">
+      <div class="icon">📅</div>
+      <div class="info">
+        <div class="cat">Conseils</div>
+        <h3 data-lang="fr">Comment planifier ses repas pour la semaine</h3>
+        <h3 data-lang="en" style="display:none">How to Plan Your Meals for the Week</h3>
+        <div class="mins">7 min · 18 mars 2025</div>
+      </div>
+    </a>
+    <a class="blog-preview" href="/blog/superaliments-mythe-realite">
+      <div class="icon">🫐</div>
+      <div class="info">
+        <div class="cat">Nutrition</div>
+        <h3 data-lang="fr">Super-aliments : mythe ou vrais bienfaits ?</h3>
+        <h3 data-lang="en" style="display:none">Superfoods: Myth or Real Benefits?</h3>
+        <div class="mins">6 min · 18 mai 2025</div>
+      </div>
+    </a>
+    <a class="blog-preview" href="/blog/zero-gaspillage">
+      <div class="icon">♻️</div>
+      <div class="info">
+        <div class="cat">Conseils</div>
+        <h3 data-lang="fr">Zéro gaspillage : transformer les restes</h3>
+        <h3 data-lang="en" style="display:none">Zero Waste: Turning Leftovers</h3>
+        <div class="mins">5 min · 5 mai 2025</div>
+      </div>
+    </a>
+    <a class="blog-preview" href="/blog/cuisine-asiatique-debutants">
+      <div class="icon">🍜</div>
+      <div class="info">
+        <div class="cat">Cuisine du monde</div>
+        <h3 data-lang="fr">La cuisine asiatique pour débutants</h3>
+        <h3 data-lang="en" style="display:none">Asian Cuisine for Beginners</h3>
+        <div class="mins">6 min · 12 mai 2025</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════ AD ═══════════════ -->
+<div class="ad-wrap" style="margin-top:40px">
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a>
+    <a href="/recettes">Recettes</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/privacy">Confidentialité</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <p data-lang="fr">© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+  <p data-lang="en" style="display:none">© 2025 Walkart – World Recipes. All rights reserved.</p>
+</footer>
+
+<script src="/js/lang.js"></script>
+</body>
+</html>

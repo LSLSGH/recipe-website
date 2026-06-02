@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" id="html-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,97 +7,91 @@
   <meta name="description" content="La cuisine asiatique semble intimidante au premier abord, mais avec les bons ingrédients de base et quelques techniques simples, vous serez étonné de ce que vous pouvez créer.">
   <link rel="canonical" href="https://www.walkart.us/blog/cuisine-asiatique-debutants">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="La cuisine asiatique pour les débutants – Walkart">
-  <meta property="og:description" content="La cuisine asiatique semble intimidante, mais avec les bons ingrédients de base, vous serez étonné de ce que vous pouvez créer.">
-  <meta property="og:url" content="https://www.walkart.us/blog/cuisine-asiatique-debutants">
-  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:title" content="La cuisine asiatique pour les débutants : par où commencer ? – Walkart">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=900&h=400&fit=crop&auto=format">
   <meta property="article:published_time" content="2025-05-12">
-  <meta property="article:author" content="Walkart">
   <link rel="icon" href="/favicon.png">
   <meta name="google-adsense-account" content="ca-pub-8752256622551534">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.7; font-size: 16px; }
-    a { color: #FF4D6D; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .site-header { background: #fff; border-bottom: 1px solid #eee; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
-    .site-header .logo { font-weight: 800; font-size: 1.2rem; color: #1a1a2e; }
-    .site-header nav a { color: #555; margin-left: 16px; font-size: 0.9rem; }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
-    .breadcrumb { font-size: 0.82rem; color: #888; margin-bottom: 24px; }
-    .breadcrumb a { color: #FF4D6D; }
-    .article-hero { text-align: center; padding: 24px 0 28px; }
-    .article-emoji { font-size: 4rem; display: block; margin-bottom: 16px; }
-    h1 { font-size: 1.9rem; font-weight: 800; line-height: 1.3; margin-bottom: 12px; color: #1a1a2e; }
-    .article-meta { color: #888; font-size: 0.85rem; margin-bottom: 20px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .category-badge { display: inline-block; background: #fff0f3; color: #FF4D6D; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
-    .article-excerpt { font-size: 1.05rem; color: #555; background: #fff; border-left: 4px solid #FF4D6D; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 0 auto 28px; text-align: left; max-width: 680px; }
-    .article-body { background: #fff; border-radius: 12px; padding: 32px; margin-bottom: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .article-body p { margin-bottom: 16px; color: #333; }
-    .article-body h3 { font-weight: 700; margin: 28px 0 12px; color: #1a1a2e; font-size: 1.1rem; }
-    .article-body strong { color: #1a1a2e; }
-    .ingredient-list { display: grid; gap: 10px; margin: 16px 0; }
-    .ing-item { display: flex; gap: 12px; background: #f8f9fa; border-radius: 8px; padding: 12px; align-items: flex-start; }
-    .ing-emoji { font-size: 1.5rem; flex-shrink: 0; }
-    .ing-item h4 { font-weight: 700; margin-bottom: 2px; font-size: 0.95rem; }
-    .ing-item p { margin: 0; font-size: 0.88rem; color: #555; }
-    .flavor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 16px 0; }
-    .flavor-card { border-radius: 8px; padding: 12px; text-align: center; }
-    .flavor-salty { background: #dbeafe; color: #1e40af; }
-    .flavor-sweet { background: #fce7f3; color: #9d174d; }
-    .flavor-sour { background: #ecfdf5; color: #065f46; }
-    .flavor-bitter { background: #f0fdf4; color: #166534; }
-    .flavor-umami { background: #fef3c7; color: #92400e; }
-    .flavor-card .flavor-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-    .flavor-card .flavor-ex { font-size: 0.8rem; opacity: 0.8; }
-    .recipe-grid { display: grid; gap: 10px; margin: 16px 0; }
-    .recipe-item { background: #f8f9fa; border-radius: 8px; padding: 12px 16px; display: flex; gap: 12px; align-items: center; }
-    .recipe-emoji { font-size: 1.5rem; flex-shrink: 0; }
-    .recipe-item h4 { font-weight: 700; margin-bottom: 2px; font-size: 0.95rem; }
-    .recipe-item p { margin: 0; font-size: 0.85rem; color: #888; }
-    .ad-slot { background: #f0f0f0; border-radius: 8px; text-align: center; padding: 8px; margin: 24px 0; min-height: 90px; }
-    .cta-box { background: linear-gradient(135deg, #FF4D6D, #c9184a); color: #fff; border-radius: 12px; padding: 24px; text-align: center; margin: 32px 0; }
-    .cta-box h3 { font-size: 1.1rem; margin-bottom: 8px; }
-    .cta-box p { opacity: 0.9; font-size: 0.9rem; margin-bottom: 16px; }
-    .cta-btn { display: inline-block; background: #fff; color: #FF4D6D; font-weight: 700; padding: 10px 24px; border-radius: 8px; }
-    .related h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: #555; }
-    .related-grid { display: grid; gap: 10px; }
-    .related-card { background: #fff; border-radius: 10px; padding: 14px 16px; border: 1px solid #eee; display: flex; align-items: center; gap: 12px; color: #1a1a2e; }
-    .related-card:hover { border-color: #FF4D6D; text-decoration: none; }
-    .related-card .emoji { font-size: 1.6rem; flex-shrink: 0; }
-    .related-card .title { font-weight: 600; font-size: 0.9rem; line-height: 1.4; }
-    footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 28px 20px; font-size: 0.83rem; }
-    footer a { color: #FF4D6D; }
-    footer .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7;font-size:16px}
+    a{color:#FF4D6D;text-decoration:none}a:hover{text-decoration:underline}
+    .site-header{background:#fff;border-bottom:1px solid #eee;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .logo{font-weight:800;font-size:1.2rem;color:#1a1a2e}
+    .header-right{display:flex;align-items:center;gap:10px}
+    .header-right nav a{color:#555;margin-left:10px;font-size:0.88rem}
+    .lang-switcher{display:flex;gap:3px}
+    .lang-btn{background:none;border:1.5px solid #e0e0e0;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:0.95rem;line-height:1.4;transition:all .15s}
+    .lang-btn.active,.lang-btn:hover{border-color:#FF4D6D;background:#fff0f3}
+    .hero-wrap{position:relative;width:100%;height:400px;overflow:hidden;background:#111}
+    .hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+    .hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.65) 100%)}
+    .hero-text{position:absolute;bottom:0;left:0;right:0;padding:28px 24px}
+    .cat-badge{display:inline-block;background:#FF4D6D;color:#fff;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:10px}
+    .hero-text h1{color:#fff;font-size:1.85rem;font-weight:800;line-height:1.3;text-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:8px}
+    .hero-meta{display:flex;gap:16px;flex-wrap:wrap}
+    .hero-meta span{color:rgba(255,255,255,.85);font-size:.83rem}
+    .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+    .breadcrumb{font-size:.82rem;color:#888;margin-bottom:20px}
+    .breadcrumb a{color:#FF4D6D}
+    .excerpt{font-size:1.05rem;color:#555;background:#fff;border-left:4px solid #FF4D6D;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px}
+    .article-body{background:#fff;border-radius:12px;padding:32px;margin-bottom:28px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .article-body p{margin-bottom:16px;color:#333}
+    .article-body h3{font-weight:700;margin:24px 0 10px;color:#1a1a2e;font-size:1.1rem}
+    .article-body strong{color:#1a1a2e}
+    .article-body em{font-style:italic}
+    .ad-slot{background:#f0f0f0;border-radius:8px;padding:8px;margin:20px 0;min-height:90px;text-align:center}
+    .cta-box{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:28px 0}
+    .cta-box h3{margin-bottom:8px;font-size:1.1rem}
+    .cta-box p{opacity:.9;font-size:.9rem;margin-bottom:16px}
+    .cta-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:10px 24px;border-radius:8px}
+    .related h2{font-size:1.05rem;font-weight:700;margin-bottom:14px;color:#666}
+    .related-grid{display:grid;gap:10px}
+    .related-card{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #eee;display:flex;align-items:center;gap:12px;color:#1a1a2e}
+    .related-card:hover{border-color:#FF4D6D;text-decoration:none}
+    .related-card .em{font-size:1.5rem;flex-shrink:0}
+    .related-card .ti{font-weight:600;font-size:.9rem;line-height:1.4}
+    footer{background:#1a1a2e;color:#aaa;text-align:center;padding:28px 20px;font-size:.83rem}
+    footer a{color:#FF4D6D}
+    .footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+    @media(max-width:600px){.hero-wrap{height:260px}.hero-text h1{font-size:1.3rem}.header-right nav a{display:none}}
   </style>
 </head>
 <body>
-
 <header class="site-header">
   <a class="logo" href="/">🍽️ Walkart</a>
-  <nav>
-    <a href="/">Accueil</a>
-    <a href="/blog">Blog</a>
-    <a href="/privacy">Confidentialité</a>
-  </nav>
+  <div class="header-right">
+    <nav><a href="/">Accueil</a><a href="/blog">Blog</a><a href="/recettes">Recettes</a></nav>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español">🇪🇸</button>
+      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')" title="العربية">🇸🇦</button>
+      <button class="lang-btn" data-lang="it" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="日本語">🇯🇵</button>
+    </div>
+  </div>
 </header>
 
-<div class="wrap">
-  <div class="breadcrumb">
-    <a href="/">Accueil</a> › <a href="/blog">Blog</a> › La cuisine asiatique pour les débutants
-  </div>
-
-  <div class="article-hero">
-    <span class="article-emoji">🍜</span>
-    <span class="category-badge">Cuisine du monde</span>
-    <h1>La cuisine asiatique pour les débutants : par où commencer ?</h1>
-    <div class="article-meta">
+<div class="hero-wrap">
+  <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=900&h=400&fit=crop&auto=format" alt="Plat de nouilles asiatiques fraîchement préparé" loading="eager">
+  <div class="hero-gradient"></div>
+  <div class="hero-text">
+    <span class="cat-badge">Cuisine</span>
+    <div data-lang="fr"><h1>La cuisine asiatique pour les débutants : par où commencer ?</h1></div>
+    <div data-lang="en" style="display:none"><h1>Asian Cuisine for Beginners: Where to Start?</h1></div>
+    <div class="hero-meta">
       <span>📅 12 mai 2025</span>
       <span>⏱️ 6 min de lecture</span>
       <span>✍️ Walkart</span>
     </div>
-    <p class="article-excerpt">La cuisine asiatique semble intimidante au premier abord, mais avec les bons ingrédients de base et quelques techniques simples, vous serez étonné de ce que vous pouvez créer.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">Accueil</a> › <a href="/blog">Blog</a> › <span data-lang="fr">Cuisine asiatique débutants</span><span data-lang="en" style="display:none">Asian Cuisine Beginners</span>
   </div>
 
   <div class="ad-slot">
@@ -105,104 +99,51 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <div class="article-body">
-    <p>La cuisine asiatique regroupe en réalité des dizaines de traditions culinaires différentes — chinoise, japonaise, coréenne, thaïlandaise, vietnamienne, indienne... — mais toutes partagent certains principes fondamentaux : l'équilibre des saveurs, la fraîcheur des ingrédients et des techniques de cuisson rapide qui préservent les nutriments et les textures.</p>
+  <!-- FRENCH CONTENT -->
+  <div data-lang="fr">
+    <p class="excerpt">La cuisine asiatique semble intimidante au premier abord, mais avec les bons ingrédients de base et quelques techniques simples, vous serez étonné de ce que vous pouvez créer.</p>
+    <div class="article-body">
+      <p>La cuisine asiatique regroupe en réalité des dizaines de traditions culinaires différentes — chinoise, japonaise, coréenne, thaïlandaise, vietnamienne, indienne... — mais toutes partagent certains principes fondamentaux : l'équilibre des saveurs, la fraîcheur des ingrédients et des techniques de cuisson rapide qui préservent les nutriments.</p>
 
-    <h3>Les ingrédients indispensables pour débuter</h3>
-    <p>Quelques ingrédients bien choisis vous permettront de cuisiner un large éventail de plats asiatiques :</p>
+      <h3>Les ingrédients indispensables</h3>
+      <p>Quelques ingrédients bien choisis vous permettront de cuisiner un large éventail de plats asiatiques. La <strong>sauce soja</strong> est la base de nombreuses marinades et sauces ; préférez la version à teneur réduite en sodium. L'<strong>huile de sésame</strong> toastée s'utilise en petite quantité en fin de cuisson pour parfumer. Le <strong>gingembre frais</strong> et l'<strong>ail</strong> sont incontournables. La <strong>pâte de piment</strong> (sambal oelek ou gochujang) apporte du piquant. Les <strong>nouilles de riz</strong> et le <strong>riz jasmin</strong> constituent des bases neutres et polyvalentes.</p>
 
-    <div class="ingredient-list">
-      <div class="ing-item">
-        <div class="ing-emoji">🫙</div>
-        <div>
-          <h4>Sauce soja (shoyu)</h4>
-          <p>La base de nombreuses marinades et sauces. Préférez la version à teneur réduite en sodium. La sauce soja japonaise (kikkoman) est plus douce, la chinoise plus salée.</p>
-        </div>
-      </div>
-      <div class="ing-item">
-        <div class="ing-emoji">🌿</div>
-        <div>
-          <h4>Huile de sésame toastée</h4>
-          <p>Utilisée en petite quantité en fin de cuisson pour parfumer. Son goût intense et noiseté est irremplaçable dans les cuisines asiatiques.</p>
-        </div>
-      </div>
-      <div class="ing-item">
-        <div class="ing-emoji">🧄</div>
-        <div>
-          <h4>Gingembre frais et ail</h4>
-          <p>La base aromatique de la majorité des plats asiatiques. Toujours utiliser frais pour un goût optimal. Hachez-les finement ou râpez-les.</p>
-        </div>
-      </div>
-      <div class="ing-item">
-        <div class="ing-emoji">🌶️</div>
-        <div>
-          <h4>Pâte de piment (sambal oelek ou gochujang)</h4>
-          <p>Le sambal est indonésien et très polyvalent. Le gochujang coréen est plus fermenté et umami. Les deux apportent profondeur et piment.</p>
-        </div>
-      </div>
-      <div class="ing-item">
-        <div class="ing-emoji">🍚</div>
-        <div>
-          <h4>Riz jasmin et nouilles de riz</h4>
-          <p>Les bases neutres et polyvalentes. Le riz jasmin est parfumé et légèrement collant. Les nouilles de riz se réhydratent simplement dans l'eau chaude.</p>
-        </div>
-      </div>
+      <h3>Les techniques de base</h3>
+      <p>Le <strong>wok</strong> est l'ustensile roi de la cuisine asiatique. Sa forme particulière permet une cuisson à très haute température avec peu de matière grasse. La clé du succès : le wok doit être très chaud avant d'ajouter les ingrédients, et tout doit être préparé avant de commencer à cuire (mise en place). La cuisson à la vapeur — dans un panier bambou ou une cocotte-minute — est une technique saine et simple pour les poissons, légumes et bao.</p>
+
+      <h3>L'équilibre des cinq saveurs</h3>
+      <p>La cuisine asiatique repose sur l'équilibre de cinq saveurs fondamentales : <strong>salé</strong> (sauce soja, miso), <strong>sucré</strong> (miel, sucre de palme), <strong>acide</strong> (citron vert, vinaigre de riz), <strong>amer</strong> (légumes verts feuillus) et <strong>umami</strong> (champignons shiitake, sauce poisson, miso). Une bonne recette asiatique joue sur plusieurs de ces dimensions simultanément.</p>
+
+      <h3>Recettes pour débuter</h3>
+      <p>Commencez par des classiques accessibles : le <strong>fried rice</strong> (riz cantonais) qui utilise les restes de riz de la veille, les <strong>noodles sautés</strong> avec légumes et sauce soja, le <strong>pad thaï</strong> dont les ingrédients sont disponibles dans tous les supermarchés, ou encore la <strong>soupe miso</strong> qui ne demande que 5 minutes de préparation.</p>
+
+      <h3>Où trouver les ingrédients ?</h3>
+      <p>Les grandes surfaces proposent de plus en plus de produits asiatiques. Pour des ingrédients plus spécifiques (pâte de fermented black beans, feuilles de pandan, galangal), les épiceries asiatiques de votre ville sont souvent très accessibles et leurs prix bien inférieurs aux supermarchés classiques.</p>
+
+      <p>Explorez des centaines de recettes asiatiques authentiques sur Walkart, filtrables par cuisine, difficulté et temps de préparation.</p>
     </div>
+  </div>
 
-    <h3>Les techniques de base</h3>
-    <p>Le <strong>wok</strong> est l'ustensile roi de la cuisine asiatique. Sa forme particulière permet une cuisson à très haute température avec peu de matière grasse. La clé du succès : le wok doit être très chaud (il fume légèrement) avant d'ajouter les ingrédients, et tout doit être préparé à l'avance (la "mise en place") car la cuisson est extrêmement rapide (2 à 3 minutes seulement). Ajoutez les ingrédients en commençant par ceux qui prennent le plus de temps à cuire.</p>
-    <p>La <strong>cuisson à la vapeur</strong> — dans un panier bambou posé sur une casserole d'eau frémissante — est une technique saine et simple pour les poissons, légumes, dim sums et bao. Elle préserve parfaitement les nutriments, les couleurs et les textures.</p>
+  <!-- ENGLISH CONTENT -->
+  <div data-lang="en" style="display:none">
+    <p class="excerpt">Asian cuisine seems intimidating at first, but with the right basic ingredients and a few simple techniques, you'll be amazed at what you can create.</p>
+    <div class="article-body">
+      <p>Asian cuisine actually encompasses dozens of different culinary traditions — Chinese, Japanese, Korean, Thai, Vietnamese, Indian... — but all share certain fundamental principles: balance of flavors, freshness of ingredients, and quick cooking techniques that preserve nutrients.</p>
 
-    <h3>L'équilibre des cinq saveurs</h3>
-    <p>La grande philosophie de la cuisine asiatique repose sur l'équilibre de cinq saveurs fondamentales :</p>
+      <h3>Essential Ingredients</h3>
+      <p>A few well-chosen ingredients will allow you to cook a wide range of Asian dishes. <strong>Soy sauce</strong> is the base of many marinades and sauces; prefer the reduced-sodium version. <strong>Toasted sesame oil</strong> is used in small amounts at the end of cooking for flavoring. Fresh <strong>ginger</strong> and <strong>garlic</strong> are essential. <strong>Chili paste</strong> (sambal oelek or gochujang) adds heat. <strong>Rice noodles</strong> and <strong>jasmine rice</strong> form neutral, versatile bases.</p>
 
-    <div class="flavor-grid">
-      <div class="flavor-card flavor-salty"><div class="flavor-name">🧂 Salé</div><div class="flavor-ex">Sauce soja, miso, nuoc-mâm</div></div>
-      <div class="flavor-card flavor-sweet"><div class="flavor-name">🍯 Sucré</div><div class="flavor-ex">Miel, sucre de palme, hoisin</div></div>
-      <div class="flavor-card flavor-sour"><div class="flavor-name">🍋 Acide</div><div class="flavor-ex">Citron vert, vinaigre de riz</div></div>
-      <div class="flavor-card flavor-bitter"><div class="flavor-name">🥬 Amer</div><div class="flavor-ex">Légumes verts, thé vert</div></div>
-      <div class="flavor-card flavor-umami"><div class="flavor-name">🍄 Umami</div><div class="flavor-ex">Champignons, sauce poisson</div></div>
+      <h3>Basic Techniques</h3>
+      <p>The <strong>wok</strong> is the king utensil of Asian cuisine. Its particular shape allows cooking at very high temperatures with little fat. The key to success: the wok must be very hot before adding ingredients, and everything must be prepared before starting to cook (mise en place). Steaming — in a bamboo basket or pressure cooker — is a healthy and simple technique for fish, vegetables, and bao.</p>
+
+      <h3>The Balance of Five Flavors</h3>
+      <p>Asian cuisine rests on the balance of five fundamental flavors: <strong>salty</strong> (soy sauce, miso), <strong>sweet</strong> (honey, palm sugar), <strong>sour</strong> (lime, rice vinegar), <strong>bitter</strong> (leafy green vegetables), and <strong>umami</strong> (shiitake mushrooms, fish sauce, miso). A good Asian recipe plays on several of these dimensions simultaneously.</p>
+
+      <h3>Recipes to Start With</h3>
+      <p>Start with accessible classics: <strong>fried rice</strong> which uses leftover rice from the previous day, <strong>stir-fried noodles</strong> with vegetables and soy sauce, <strong>pad thai</strong> whose ingredients are available in all supermarkets, or <strong>miso soup</strong> which requires only 5 minutes of preparation.</p>
+
+      <p>Explore hundreds of authentic Asian recipes on Walkart, filterable by cuisine, difficulty, and preparation time.</p>
     </div>
-
-    <p>Une bonne recette asiatique joue sur plusieurs de ces dimensions simultanément. C'est pourquoi un pad thaï associe sauce poisson (salé + umami), sucre de palme (sucré), citron vert (acide) et piment (piquant).</p>
-
-    <h3>Recettes parfaites pour débuter</h3>
-
-    <div class="recipe-grid">
-      <div class="recipe-item">
-        <div class="recipe-emoji">🍳</div>
-        <div>
-          <h4>Fried Rice (riz cantonais)</h4>
-          <p>Idéal avec le riz de la veille. Œufs, légumes, sauce soja. Prêt en 10 minutes.</p>
-        </div>
-      </div>
-      <div class="recipe-item">
-        <div class="recipe-emoji">🍜</div>
-        <div>
-          <h4>Pad Thaï</h4>
-          <p>Nouilles de riz, crevettes ou tofu, œufs, germes de soja, sauce poisson, citron vert. 20 minutes.</p>
-        </div>
-      </div>
-      <div class="recipe-item">
-        <div class="recipe-emoji">🥣</div>
-        <div>
-          <h4>Soupe miso</h4>
-          <p>Bouillon dashi ou légumes, pâte de miso, tofu, algue wakame. 5 minutes, zéro erreur possible.</p>
-        </div>
-      </div>
-      <div class="recipe-item">
-        <div class="recipe-emoji">🥗</div>
-        <div>
-          <h4>Salade thaïe (larb)</h4>
-          <p>Viande hachée, herbes fraîches, citron vert, sauce poisson, piment. Rapide et rafraîchissante.</p>
-        </div>
-      </div>
-    </div>
-
-    <h3>Où trouver les ingrédients</h3>
-    <p>Les grandes surfaces proposent de plus en plus de produits asiatiques (sauce soja, nouilles, gingembre frais). Pour des ingrédients plus spécifiques (pâte de fermented black beans, galangal, feuilles de pandan, vinaigre de riz noir), les épiceries asiatiques dans votre ville sont souvent bien achalandées et leurs prix bien inférieurs aux supermarchés classiques. En cherchant "épicerie asiatique" + votre ville, vous trouverez facilement.</p>
-
-    <p>Explorez des centaines de recettes asiatiques authentiques sur Walkart, filtrables par cuisine (japonaise, thaïlandaise, coréenne...), difficulté et temps de préparation.</p>
   </div>
 
   <div class="ad-slot">
@@ -211,29 +152,29 @@
   </div>
 
   <div class="cta-box">
-    <h3>🍜 Des centaines de recettes asiatiques sur Walkart</h3>
-    <p>Filtrables par cuisine, difficulté et temps de préparation. Découvrez votre prochaine recette.</p>
+    <div data-lang="fr"><h3>🍽️ Découvrez des milliers de recettes sur Walkart</h3><p>Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas.</p></div>
+    <div data-lang="en" style="display:none"><h3>🍽️ Discover thousands of recipes on Walkart</h3><p>Plan your meals, generate your shopping list, and cook step by step.</p></div>
     <a class="cta-btn" href="/">Explorer →</a>
   </div>
 
   <div class="related">
-    <h2>Articles similaires</h2>
+    <h2 data-lang-text data-fr="Articles similaires" data-en="Related articles">Articles similaires</h2>
     <div class="related-grid">
       <a class="related-card" href="/blog/cuisine-mediterraneenne">
-        <span class="emoji">🫒</span>
-        <span class="title">Les secrets de la cuisine méditerranéenne</span>
+        <span class="em">🫒</span>
+        <span class="ti">Les secrets de la cuisine méditerranéenne</span>
       </a>
       <a class="related-card" href="/blog/epices-indispensables">
-        <span class="emoji">🌶️</span>
-        <span class="title">Les 10 épices indispensables dans votre cuisine</span>
-      </a>
-      <a class="related-card" href="/blog/zero-gaspillage">
-        <span class="emoji">♻️</span>
-        <span class="title">Zéro gaspillage : transformer les restes en plats délicieux</span>
+        <span class="em">🌶️</span>
+        <span class="ti">Les 10 épices indispensables dans votre cuisine</span>
       </a>
       <a class="related-card" href="/blog/planifier-repas-semaine">
-        <span class="emoji">📅</span>
-        <span class="title">Comment planifier ses repas pour toute la semaine</span>
+        <span class="em">📅</span>
+        <span class="ti">Comment planifier ses repas pour toute la semaine</span>
+      </a>
+      <a class="related-card" href="/blog/zero-gaspillage">
+        <span class="em">♻️</span>
+        <span class="ti">Zéro gaspillage : transformer les restes en plats délicieux</span>
       </a>
     </div>
   </div>
@@ -241,14 +182,11 @@
 
 <footer>
   <div class="footer-links">
-    <a href="/">Accueil</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">À propos</a>
-    <a href="/privacy">Politique de confidentialité</a>
-    <a href="/contact">Contact</a>
+    <a href="/">Accueil</a><a href="/recettes">Recettes</a><a href="/blog">Blog</a><a href="/about">À propos</a><a href="/privacy">Confidentialité</a><a href="/contact">Contact</a>
   </div>
-  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+  <p>© 2025 Walkart – Recettes du Monde</p>
 </footer>
 
+<script src="/js/lang.js"></script>
 </body>
 </html>
