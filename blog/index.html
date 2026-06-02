@@ -4,28 +4,248 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Cuisine & Nutrition – Walkart</title>
-  <meta name="description" content="Conseils culinaires, nutrition, recettes du monde et art de vivre. Le blog Walkart pour tout savoir sur la cuisine saine.">
+  <meta name="description" content="Conseils culinaires, nutrition, recettes du monde et art de vivre. Le blog Walkart pour tout savoir sur la cuisine saine et équilibrée.">
   <link rel="canonical" href="https://www.walkart.us/blog">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog Cuisine & Nutrition – Walkart">
+  <meta property="og:description" content="Conseils culinaires, nutrition, recettes du monde et art de vivre.">
+  <meta property="og:url" content="https://www.walkart.us/blog">
+  <meta property="og:image" content="https://www.walkart.us/favicon.png">
   <link rel="icon" href="/favicon.png">
-  <script>window.location.replace('/#blog');</script>
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,sans-serif;background:#f8f9fa;display:flex;align-items:center;justify-content:center;min-height:100vh}
-    .c{text-align:center;padding:40px}
-    a{color:#FF4D6D}
-    ul{list-style:none;margin-top:20px;display:grid;gap:8px}
-    li a{display:block;background:#fff;border-radius:8px;padding:12px 16px;text-decoration:none;color:#1a1a2e;border:1px solid #eee}
-    li a:hover{border-color:#FF4D6D}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.7; font-size: 16px; }
+    a { color: #FF4D6D; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .site-header { background: #fff; border-bottom: 1px solid #eee; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .site-header .logo { font-weight: 800; font-size: 1.2rem; color: #1a1a2e; }
+    .site-header nav a { color: #555; margin-left: 16px; font-size: 0.9rem; }
+    .hero-section { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: #fff; padding: 60px 20px; text-align: center; }
+    .hero-section h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; }
+    .hero-section p { font-size: 1.05rem; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 60px; }
+    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #FF4D6D; margin-bottom: 8px; }
+    .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; color: #1a1a2e; }
+    .category-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .cat-badge { padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 2px solid #eee; color: #555; cursor: pointer; }
+    .cat-badge.active, .cat-badge:hover { border-color: #FF4D6D; color: #FF4D6D; background: #fff0f3; text-decoration: none; }
+    .articles-grid { display: grid; gap: 20px; }
+    .article-card { background: #fff; border-radius: 14px; border: 1px solid #eee; overflow: hidden; display: flex; gap: 0; transition: box-shadow 0.15s, border-color 0.15s; }
+    .article-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); border-color: #FF4D6D; text-decoration: none; }
+    .card-emoji-col { width: 100px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-shrink: 0; }
+    .card-body { padding: 20px; flex: 1; }
+    .card-meta { display: flex; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+    .card-cat { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #FF4D6D; }
+    .card-read { font-size: 0.75rem; color: #aaa; }
+    .card-title { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; line-height: 1.4; }
+    .card-excerpt { font-size: 0.88rem; color: #666; line-height: 1.5; margin-bottom: 12px; }
+    .card-link { font-size: 0.85rem; font-weight: 700; color: #FF4D6D; }
+    .ad-slot { background: #f0f0f0; border-radius: 8px; text-align: center; padding: 8px; margin: 28px 0; min-height: 90px; }
+    footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 28px 20px; font-size: 0.83rem; }
+    footer a { color: #FF4D6D; }
+    footer .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    @media (max-width: 500px) {
+      .card-emoji-col { width: 70px; font-size: 2rem; }
+      .hero-section h1 { font-size: 1.6rem; }
+    }
   </style>
 </head>
 <body>
-<div class="c">
-  <h1 style="margin-bottom:8px">📝 Blog Walkart</h1>
-  <p style="color:#888;margin-bottom:16px">Conseils culinaires & nutrition</p>
-  <ul>
-    <li><a href="/blog/cuisine-mediterraneenne">🫒 Les secrets de la cuisine méditerranéenne</a></li><li><a href="/blog/planifier-repas-semaine">📅 Comment planifier ses repas pour toute la semaine</a></li><li><a href="/blog/macronutriments-guide">💪 Macronutriments : le guide complet</a></li><li><a href="/blog/epices-indispensables">🌶️ Les 10 épices indispensables dans votre cuisine</a></li><li><a href="/blog/lire-etiquette-nutritionnelle">🏷️ Comment lire une étiquette nutritionnelle comme un expert</a></li><li><a href="/blog/cuisine-petit-budget">💰 Bien manger avec un petit budget</a></li><li><a href="/blog/regime-vegetarien">🥦 Régime végétarien : avantages, risques et conseils</a></li><li><a href="/blog/zero-gaspillage">♻️ Zéro gaspillage : transformer les restes en plats délicieux</a></li><li><a href="/blog/cuisine-asiatique-debutants">🍜 La cuisine asiatique pour les débutants</a></li><li><a href="/blog/superaliments-mythe-realite">🫐 Super-aliments : mythe ou vrais bienfaits ?</a></li>
-  </ul>
-  <p style="margin-top:20px"><a href="/">← Retour à l'application</a></p>
+
+<header class="site-header">
+  <a class="logo" href="/">🍽️ Walkart</a>
+  <nav>
+    <a href="/">Accueil</a>
+    <a href="/blog">Blog</a>
+    <a href="/privacy">Confidentialité</a>
+  </nav>
+</header>
+
+<div class="hero-section">
+  <h1>📝 Blog Cuisine & Nutrition</h1>
+  <p>Conseils culinaires, nutrition et art de vivre — par l'équipe Walkart</p>
 </div>
+
+<div class="wrap">
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <p class="section-label">Tous nos articles</p>
+  <h2 class="section-title">Conseils, guides et inspiration culinaire</h2>
+
+  <div class="category-filters">
+    <span class="cat-badge active">Tous</span>
+    <span class="cat-badge">Nutrition</span>
+    <span class="cat-badge">Conseils pratiques</span>
+    <span class="cat-badge">Cuisine du monde</span>
+  </div>
+
+  <div class="articles-grid">
+
+    <a class="article-card" href="/blog/cuisine-mediterraneenne">
+      <div class="card-emoji-col">🫒</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Nutrition</span>
+          <span class="card-read">⏱️ 6 min</span>
+          <span class="card-read">📅 10 mars 2025</span>
+        </div>
+        <div class="card-title">Les secrets de la cuisine méditerranéenne</div>
+        <div class="card-excerpt">Découvrez pourquoi la cuisine méditerranéenne est reconnue mondialement pour ses bienfaits sur la santé et comment l'adopter au quotidien.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/planifier-repas-semaine">
+      <div class="card-emoji-col">📅</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Conseils pratiques</span>
+          <span class="card-read">⏱️ 7 min</span>
+          <span class="card-read">📅 18 mars 2025</span>
+        </div>
+        <div class="card-title">Comment planifier ses repas pour toute la semaine</div>
+        <div class="card-excerpt">La planification des repas est la clé pour manger sain, gagner du temps et économiser de l'argent. Notre guide complet en 5 étapes.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/macronutriments-guide">
+      <div class="card-emoji-col">💪</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Nutrition</span>
+          <span class="card-read">⏱️ 8 min</span>
+          <span class="card-read">📅 25 mars 2025</span>
+        </div>
+        <div class="card-title">Macronutriments : le guide complet pour les comprendre</div>
+        <div class="card-excerpt">Protéines, glucides, lipides : que sont vraiment les macronutriments et comment les équilibrer pour atteindre vos objectifs de santé ?</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/epices-indispensables">
+      <div class="card-emoji-col">🌶️</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Conseils pratiques</span>
+          <span class="card-read">⏱️ 5 min</span>
+          <span class="card-read">📅 2 avril 2025</span>
+        </div>
+        <div class="card-title">Les 10 épices indispensables dans votre cuisine</div>
+        <div class="card-excerpt">Transformez vos plats avec les bonnes épices. Voici les 10 incontournables à avoir absolument dans vos placards, avec leurs usages et bienfaits.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/lire-etiquette-nutritionnelle">
+      <div class="card-emoji-col">🏷️</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Nutrition</span>
+          <span class="card-read">⏱️ 6 min</span>
+          <span class="card-read">📅 10 avril 2025</span>
+        </div>
+        <div class="card-title">Comment lire une étiquette nutritionnelle comme un expert</div>
+        <div class="card-excerpt">Les étiquettes nutritionnelles contiennent une mine d'informations. Apprenez à les déchiffrer pour faire de meilleurs choix alimentaires.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/cuisine-petit-budget">
+      <div class="card-emoji-col">💰</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Conseils pratiques</span>
+          <span class="card-read">⏱️ 6 min</span>
+          <span class="card-read">📅 18 avril 2025</span>
+        </div>
+        <div class="card-title">Bien manger avec un petit budget : nos meilleures astuces</div>
+        <div class="card-excerpt">Manger sainement ne coûte pas forcément cher. Nos stratégies pour composer des repas nutritifs et savoureux pour moins de 5€ par jour.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/regime-vegetarien">
+      <div class="card-emoji-col">🥦</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Nutrition</span>
+          <span class="card-read">⏱️ 7 min</span>
+          <span class="card-read">📅 26 avril 2025</span>
+        </div>
+        <div class="card-title">Régime végétarien : avantages, risques et conseils pratiques</div>
+        <div class="card-excerpt">De plus en plus populaire, le régime végétarien offre de nombreux avantages pour la santé et la planète. Mais il nécessite quelques précautions essentielles.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/zero-gaspillage">
+      <div class="card-emoji-col">♻️</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Conseils pratiques</span>
+          <span class="card-read">⏱️ 5 min</span>
+          <span class="card-read">📅 5 mai 2025</span>
+        </div>
+        <div class="card-title">Zéro gaspillage : transformer les restes en plats délicieux</div>
+        <div class="card-excerpt">En France, chaque foyer jette en moyenne 29 kg de nourriture par an. Voici comment transformer vos restes en plats savoureux.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/cuisine-asiatique-debutants">
+      <div class="card-emoji-col">🍜</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Cuisine du monde</span>
+          <span class="card-read">⏱️ 6 min</span>
+          <span class="card-read">📅 12 mai 2025</span>
+        </div>
+        <div class="card-title">La cuisine asiatique pour les débutants : par où commencer ?</div>
+        <div class="card-excerpt">La cuisine asiatique semble intimidante au premier abord, mais avec les bons ingrédients de base et quelques techniques simples, vous serez étonné.</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+    <a class="article-card" href="/blog/superaliments-mythe-realite">
+      <div class="card-emoji-col">🫐</div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Nutrition</span>
+          <span class="card-read">⏱️ 6 min</span>
+          <span class="card-read">📅 18 mai 2025</span>
+        </div>
+        <div class="card-title">Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ?</div>
+        <div class="card-excerpt">Baies de goji, spiruline, quinoa, graines de chia... Les super-aliments font régulièrement la une des magazines. Qu'en dit vraiment la science ?</div>
+        <span class="card-link">Lire l'article →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="ad-slot" style="margin-top: 40px;">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/privacy">Politique de confidentialité</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+</footer>
+
 </body>
 </html>
