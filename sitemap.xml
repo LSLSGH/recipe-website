@@ -1,116 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- ══ PAGE PRINCIPALE ══ -->
   <url>
     <loc>https://www.walkart.us/</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.walkart.us/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.walkart.us/"/>
   </url>
 
   <!-- ══ RECETTES ══ -->
   <url>
-    <loc>https://www.walkart.us/recettes</loc>
-    <lastmod>2025-06-02</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.walkart.us/recettes/</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.walkart.us/recette/</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- ══ BLOG ══ -->
   <url>
     <loc>https://www.walkart.us/blog</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
-
-  <!-- Articles existants -->
   <url>
     <loc>https://www.walkart.us/blog/cuisine-mediterraneenne</loc>
-    <lastmod>2025-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.walkart.us/blog/planifier-repas-semaine</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/macronutriments-guide</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.walkart.us/blog/planifier-repas-semaine</loc>
+    <lastmod>2025-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/epices-indispensables</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-04-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/lire-etiquette-nutritionnelle</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/cuisine-petit-budget</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/regime-vegetarien</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/zero-gaspillage</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/cuisine-asiatique-debutants</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2025-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.walkart.us/blog/superaliments-mythe-realite</loc>
-    <lastmod>2025-06-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Nouveaux articles -->
-  <url>
-    <loc>https://www.walkart.us/blog/cuisine-rapide-30-minutes</loc>
-    <lastmod>2025-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.walkart.us/blog/pain-maison-debutants</loc>
-    <lastmod>2025-05-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.walkart.us/blog/jeune-intermittent</loc>
-    <lastmod>2025-05-25</lastmod>
+    <lastmod>2025-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -126,25 +102,43 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.walkart.us/blog/jeune-intermittent</loc>
+    <lastmod>2025-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.walkart.us/blog/pain-maison-debutants</loc>
+    <lastmod>2025-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.walkart.us/blog/cuisine-rapide-30-minutes</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- ══ PAGES STATIQUES ══ -->
   <url>
     <loc>https://www.walkart.us/about</loc>
-    <lastmod>2025-06-02</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.walkart.us/privacy</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://www.walkart.us/contact</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.walkart.us/contact</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://www.walkart.us/privacy</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
