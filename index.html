@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walkart – Recettes du Monde</title>
   <meta name="description" content="Découvrez des milliers de recettes authentiques du monde entier. Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas avec Walkart.">
   <meta name="keywords" content="recettes, cuisine du monde, recettes faciles, planificateur repas, liste de courses, recettes healthy">
@@ -32,12 +32,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css?v=25.0">
-  <!-- app version 30 -->
+  <link rel="stylesheet" href="css/style.css?v=26.0">
   <meta name="theme-color" content="#FF4D6D">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google-adsense-account" content="ca-pub-8752256622551534">
   <meta name="p:domain_verify" content="b25c343f067d7d5f47552361ec81e18d"/>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
@@ -120,20 +116,36 @@
 ════════════════════════════════════ -->
 <header class="header">
   <div class="header-top">
-    <a href="#" class="logo" onclick="App.navigate('home')">
+    <a href="/" class="logo" onclick="App.navigate('home'); return false;">
       <img src="logo.svg" alt="Walkart" class="logo-img">
     </a>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <button id="pwa-install-btn" class="btn-pwa-install" onclick="Actions.installPWA()" style="display:none;" aria-label="Install app">📲</button>
-      <button id="auth-btn" class="btn-settings" onclick="App.navigate('login')" style="font-size:0.85rem; padding:6px 14px;">🔐 Connexion</button>
-      <button class="btn-settings" onclick="UI.toggleSettings()" aria-label="Paramètres">
-        ⚙️ <span id="current-lang-text" class="settings-lang-badge">FR</span>
+    <nav class="main-nav">
+      <a class="nav-link" onclick="App.navigate('home')" href="/" data-i18n="nav_home">Accueil</a>
+      <a class="nav-link" onclick="App.navigate('search')" href="/recettes" data-i18n="nav_recipes">Recettes</a>
+      <a class="nav-link" onclick="App.navigate('planner')" href="#planifier" data-i18n="tab_plan">Planifier</a>
+      <a class="nav-link" onclick="App.navigate('shopping')" href="#courses" data-i18n="shopping_title">Liste de courses</a>
+      <a class="nav-link" href="/blog">Blog</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-bar-container search-bar-inline">
+        <input type="text" id="header-search-input" class="search-input" placeholder="Rechercher..." data-i18n-placeholder="nav_search_placeholder">
+        <button onclick="App.navigate('search', {query: document.getElementById('header-search-input').value})" class="search-btn-icon">🔍</button>
+      </div>
+      <button id="auth-btn" class="btn-auth" onclick="App.navigate('login')">🔐 Connexion</button>
+      <button class="btn-lang" onclick="UI.toggleSettings()" aria-label="Langue">
+        <span id="current-lang-text" class="settings-lang-badge">FR</span>
       </button>
+      <button class="nav-hamburger" onclick="UI.toggleMobileMenu()" aria-label="Menu">☰</button>
     </div>
   </div>
-  <div class="search-bar-container">
-    <input type="text" id="header-search-input" class="search-input" placeholder="Search recipes, ingredients..." data-i18n-placeholder="nav_search_placeholder">
-    <button onclick="App.navigate('search', {query: document.getElementById('header-search-input').value})" class="search-btn-icon">🔍</button>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a class="mobile-nav-link" onclick="App.navigate('home'); UI.closeMobileMenu();" href="/">Accueil</a>
+    <a class="mobile-nav-link" onclick="App.navigate('search'); UI.closeMobileMenu();" href="/recettes">Recettes</a>
+    <a class="mobile-nav-link" onclick="App.navigate('planner'); UI.closeMobileMenu();" href="#planifier">Planifier</a>
+    <a class="mobile-nav-link" onclick="App.navigate('shopping'); UI.closeMobileMenu();" href="#courses">Liste de courses</a>
+    <a class="mobile-nav-link" href="/blog">Blog</a>
+    <a class="mobile-nav-link" onclick="App.navigate('favorites'); UI.closeMobileMenu();" href="#favoris">Favoris ❤️</a>
   </div>
 </header>
 
@@ -377,32 +389,8 @@
 </div><!-- end #sh -->
 </main>
 
-<!-- ══════════════════════════════════
-     SPA NAVIGATION (always visible)
-════════════════════════════════════ -->
-<nav class="tab-bar">
-  <a class="tab-item active" onclick="App.navigate('home')">
-    <span class="tab-icon">🏠</span>
-    <span data-i18n="nav_home">Home</span>
-  </a>
-  <a class="tab-item" onclick="App.navigate('search')">
-    <span class="tab-icon">🔍</span>
-    <span data-i18n="tab_explore">Explore</span>
-  </a>
-  <a class="tab-item" onclick="App.navigate('planner')">
-    <span class="tab-icon">📅</span>
-    <span data-i18n="tab_plan">Plan</span>
-  </a>
-  <a class="tab-item" onclick="App.navigate('shopping')">
-    <span class="tab-icon">🛒</span>
-    <span data-i18n="shopping_title">Shopping</span>
-  </a>
-  <a class="tab-item" style="position:relative;" onclick="App.navigate('favorites')">
-    <span class="tab-icon">❤️</span>
-    <span data-i18n="nav_favorites">Favorites</span>
-    <span class="fav-tab-badge" id="fav-tab-badge" style="display:none;"></span>
-  </a>
-</nav>
+<!-- Favorites badge (hidden, managed by JS) -->
+<span class="fav-tab-badge" id="fav-tab-badge" style="display:none;"></span>
 
 <!-- Settings Panel -->
 <div id="settings-panel" onclick="if(event.target===this)UI.closeSettings()">
