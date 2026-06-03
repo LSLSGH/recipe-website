@@ -229,6 +229,53 @@
     }
     .stats-row span { display: flex; align-items: center; gap: 5px; }
 
+    /* ── SERVING CONTROL ── */
+    .serving-ctrl {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8f9fa;
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .serving-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #555;
+    }
+    .serving-stepper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .serving-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #FF4D6D;
+      background: transparent;
+      color: #FF4D6D;
+      font-size: 1.3rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.15s;
+    }
+    .serving-btn:hover { background: #FF4D6D; color: #fff; }
+    .serving-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    #serving-count {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #1a1a2e;
+      min-width: 30px;
+      text-align: center;
+    }
+
     /* ── DIET TAGS ── */
     .diet-chips {
       display: flex;
@@ -596,6 +643,16 @@
       <!-- Stats row -->
       <div class="stats-row" id="stats-row"></div>
 
+      <!-- Serving control -->
+      <div class="serving-ctrl" id="serving-ctrl" style="display:none">
+        <span class="serving-label">🍽️ Nombre de portions</span>
+        <div class="serving-stepper">
+          <button class="serving-btn" id="btn-serving-minus" onclick="changeServings(-1)" aria-label="Moins">−</button>
+          <span id="serving-count">4</span>
+          <button class="serving-btn" id="btn-serving-plus" onclick="changeServings(1)" aria-label="Plus">+</button>
+        </div>
+      </div>
+
       <!-- Diet tags -->
       <div class="diet-chips" id="diet-chips"></div>
 
@@ -701,6 +758,18 @@
   const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2eW5nc2twbnlpbXNucW5sYmNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTE2MTUsImV4cCI6MjA5NDU2NzYxNX0.QKRXufgv_bkTRdczwm4WTHIllqgDCRj3a5J1mx0cRF8';
   const SITE_URL = 'https://www.walkart.us';
   const FAV_KEY = 'walkart_favs';
+
+  /* ─────────────────────────────────────────
+     PORTION STATE
+  ───────────────────────────────────────── */
+  let baseServings = 4;
+  let currentServings = 4;
+  let baseIngredients = [];
+  let baseCalories = null;
+  let baseProtein = null;
+  let baseCarbs = null;
+  let baseFat = null;
+  let baseFiber = null;
 
   /* ─────────────────────────────────────────
      INIT: get ?id= from URL
@@ -843,11 +912,27 @@
     // Stats row
     const statsRow = document.getElementById('stats-row');
     const statsHtml = [];
-    if (r.ready_in_minutes) statsHtml.push('<span>&#9201; ' + r.ready_in_minutes + ' min</span>');
-    if (r.servings) statsHtml.push('<span>&#128100; ' + r.servings + ' personne' + (r.servings > 1 ? 's' : '') + '</span>');
+    if (r.ready_in_minutes) statsHtml.push('<span>&#9201; ' + formatTime(r.ready_in_minutes) + '</span>');
+    if (r.servings) statsHtml.push('<span id="stat-servings">&#128100; ' + r.servings + ' personne' + (r.servings > 1 ? 's' : '') + '</span>');
     if (r.area) statsHtml.push('<span>&#127757; ' + escHtml(r.area) + '</span>');
     if (r.category) statsHtml.push('<span>&#127348; ' + escHtml(r.category) + '</span>');
     statsRow.innerHTML = statsHtml.join('');
+
+    // Serving control
+    baseServings = r.servings || 4;
+    currentServings = baseServings;
+    baseIngredients = Array.isArray(r.ingredients) ? r.ingredients : [];
+    baseCalories = r.calories || null;
+    baseProtein = r.protein_g || null;
+    baseCarbs = r.carbs_g || null;
+    baseFat = r.fat_g || null;
+    baseFiber = r.fiber_g || null;
+    if (baseServings) {
+      const ctrl = document.getElementById('serving-ctrl');
+      ctrl.style.display = 'flex';
+      document.getElementById('serving-count').textContent = currentServings;
+      document.getElementById('btn-serving-minus').disabled = currentServings <= 1;
+    }
 
     // Diet chips
     const chipsEl = document.getElementById('diet-chips');
@@ -862,7 +947,7 @@
     }
 
     // Ingredients
-    renderIngredients(ingredients);
+    renderIngredients(baseIngredients, 1);
 
     // Instructions
     renderInstructions(steps, r.instructions);
@@ -882,27 +967,38 @@
   }
 
   /* ─────────────────────────────────────────
-     INGREDIENTS with checkboxes
+     INGREDIENTS with checkboxes + portion ratio
   ───────────────────────────────────────── */
-  function renderIngredients(ingredients) {
+  function renderIngredients(ingredients, ratio) {
     const el = document.getElementById('ingredients-list');
     if (!ingredients || ingredients.length === 0) {
       el.innerHTML = '<p style="color:#aaa;font-size:0.88rem">Aucun ingrédient disponible.</p>';
       return;
     }
+    // Preserve checked states
+    const checked = {};
+    el.querySelectorAll('.ing-row').forEach(function(row) {
+      if (row.classList.contains('checked')) checked[row.dataset.idx] = true;
+    });
+
     el.innerHTML = ingredients.map(function (ing, i) {
+      const isChecked = checked[i] ? ' checked' : '';
       if (typeof ing === 'string') {
-        return '<div class="ing-row" onclick="toggleIng(this)" data-idx="' + i + '">'
+        return '<div class="ing-row' + isChecked + '" onclick="toggleIng(this)" data-idx="' + i + '">'
           + '<div class="ing-checkbox"><div class="ing-checkbox-inner"></div></div>'
           + '<span class="ing-name">' + escHtml(ing) + '</span>'
           + '</div>';
       }
       const name = ing.name || ing.originalName || '';
-      const qty = [ing.amount ? ing.amount : '', ing.unit ? ing.unit : ''].filter(function(s){ return s !== ''; }).join(' ');
-      return '<div class="ing-row" onclick="toggleIng(this)" data-idx="' + i + '">'
+      let displayQty = '';
+      if (ing.amount) {
+        const scaled = Math.round(ing.amount * ratio * 100) / 100;
+        displayQty = formatAmount(scaled) + (ing.unit ? ' ' + ing.unit : '');
+      }
+      return '<div class="ing-row' + isChecked + '" onclick="toggleIng(this)" data-idx="' + i + '">'
         + '<div class="ing-checkbox"><div class="ing-checkbox-inner"></div></div>'
         + '<span class="ing-name">' + escHtml(name) + '</span>'
-        + (qty ? '<span class="ing-qty">' + escHtml(qty) + '</span>' : '')
+        + (displayQty ? '<span class="ing-qty">' + escHtml(displayQty) + '</span>' : '')
         + '</div>';
     }).join('');
   }
@@ -1007,6 +1103,40 @@
     }
   }
 
+  /* ─────────────────────────────────────────
+     PORTION CONTROL
+  ───────────────────────────────────────── */
+  window.changeServings = function (delta) {
+    const next = currentServings + delta;
+    if (next < 1 || next > 99) return;
+    currentServings = next;
+    const ratio = currentServings / baseServings;
+
+    // Update count display
+    document.getElementById('serving-count').textContent = currentServings;
+    document.getElementById('btn-serving-minus').disabled = currentServings <= 1;
+    document.getElementById('btn-serving-plus').disabled = currentServings >= 99;
+
+    // Update stat row servings text
+    const statServ = document.getElementById('stat-servings');
+    if (statServ) statServ.innerHTML = '&#128100; ' + currentServings + ' personne' + (currentServings > 1 ? 's' : '');
+
+    // Re-render ingredients with new ratio
+    renderIngredients(baseIngredients, ratio);
+
+    // Update nutrition strip
+    setText('ns-cal', baseCalories ? Math.round(baseCalories * ratio) + '' : '–');
+    setText('ns-prot', baseProtein ? Math.round(baseProtein * ratio * 10) / 10 + 'g' : '–');
+    setText('ns-carbs', baseCarbs ? Math.round(baseCarbs * ratio * 10) / 10 + 'g' : '–');
+    setText('ns-fat', baseFat ? Math.round(baseFat * ratio * 10) / 10 + 'g' : '–');
+
+    // Update nutrition cards
+    setText('nc-cal', baseCalories ? Math.round(baseCalories * ratio) + ' kcal' : '–');
+    setText('nc-prot', baseProtein ? Math.round(baseProtein * ratio * 10) / 10 + 'g' : '–');
+    setText('nc-carbs', baseCarbs ? Math.round(baseCarbs * ratio * 10) / 10 + 'g' : '–');
+    setText('nc-fat', baseFat ? Math.round(baseFat * ratio * 10) / 10 + 'g' : '–');
+  };
+
   /* exposed globally for inline onclick */
   window.toggleFav = function () {
     if (!recipeId) return;
@@ -1059,9 +1189,33 @@
     if (el) el.setAttribute(attr, val);
   }
 
+  /* ─────────────────────────────────────────
+     FORMAT HELPERS
+  ───────────────────────────────────────── */
+  function formatTime(minutes) {
+    if (!minutes) return null;
+    if (minutes < 60) return minutes + ' min';
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return m > 0 ? h + 'h' + String(m).padStart(2, '0') : h + 'h';
+  }
+
+  function formatAmount(val) {
+    if (!val) return '';
+    // Show as fraction or decimal, max 2 decimal places
+    if (val === Math.floor(val)) return String(val);
+    // Common fractions
+    const fracs = [[0.25,'¼'],[0.33,'⅓'],[0.5,'½'],[0.67,'⅔'],[0.75,'¾']];
+    const dec = val % 1;
+    const whole = Math.floor(val);
+    for (const [f, s] of fracs) {
+      if (Math.abs(dec - f) < 0.04) return (whole > 0 ? whole + ' ' : '') + s;
+    }
+    return String(Math.round(val * 100) / 100);
+  }
+
   function getSummary(r) {
     if (r.raw_data && r.raw_data.summary) {
-      // Strip HTML tags from Spoonacular summary
       return String(r.raw_data.summary).replace(/<[^>]*>/g, '').slice(0, 200).trim();
     }
     const parts = [];
