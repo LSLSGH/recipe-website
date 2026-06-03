@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" id="html-root">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,460 +14,347 @@
   <meta name="robots" content="index, follow">
   <meta name="google-adsense-account" content="ca-pub-8752256622551534">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
-    a{text-decoration:none;color:inherit}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; }
+    a { text-decoration: none; color: inherit; }
 
-    /* ── Header ── */
-    .site-header{background:#fff;border-bottom:1px solid #eee;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-    .logo{font-weight:800;font-size:1.2rem;color:#1a1a2e}
-    .header-right{display:flex;align-items:center;gap:10px}
-    .header-right nav a{color:#555;margin-left:10px;font-size:.88rem}
-    .header-right nav a:hover{color:#FF4D6D}
-    .lang-switcher{display:flex;gap:3px}
-    .lang-btn{background:none;border:1.5px solid #e0e0e0;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:.9rem;line-height:1.5;transition:all .15s}
-    .lang-btn.active,.lang-btn:hover{border-color:#FF4D6D;background:#fff0f3}
+    /* ── HEADER ── */
+    .site-header {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+    .logo img { height: 44px; width: auto; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { color: #555; font-size: 0.9rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; transition: all 0.15s; }
+    .main-nav a:hover, .main-nav a.active { color: #FF4D6D; background: rgba(255,77,109,0.06); }
+    .nav-hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #1a1a2e; padding: 6px; }
+    .mobile-menu { display: none; flex-direction: column; background: #fff; border-top: 1px solid #eee; padding: 12px 20px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { padding: 10px 0; font-weight: 600; font-size: 0.95rem; color: #333; border-bottom: 1px solid #f0f0f0; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #FF4D6D; }
 
-    /* ── Hero ── */
-    .hero{position:relative;background:linear-gradient(135deg,#1a1a2e 0%,#2d1b4e 50%,#1a1a2e 100%);color:#fff;padding:64px 20px 48px;text-align:center;overflow:hidden}
-    .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=600&fit=crop&auto=format') center/cover no-repeat;opacity:.18}
-    .hero-inner{position:relative;max-width:700px;margin:0 auto}
-    .hero h1{font-size:2.4rem;font-weight:800;margin-bottom:12px;line-height:1.2}
-    .hero p{font-size:1.1rem;opacity:.85;margin-bottom:28px}
-    .hero-search{display:flex;gap:0;max-width:520px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
-    .hero-search input{flex:1;padding:14px 20px;border:none;font-size:1rem;outline:none;color:#1a1a2e}
-    .hero-search button{background:#FF4D6D;color:#fff;border:none;padding:14px 24px;font-size:1rem;font-weight:700;cursor:pointer;white-space:nowrap}
-    .hero-search button:hover{background:#c9184a}
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 56px 20px 44px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=600&fit=crop&auto=format') center/cover no-repeat;
+      opacity: 0.15;
+    }
+    .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+    .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 10px; }
+    .hero p { font-size: 1rem; opacity: 0.85; margin-bottom: 24px; }
+    .hero-search {
+      display: flex;
+      max-width: 540px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .hero-search input { flex: 1; padding: 14px 20px; border: none; font-size: 1rem; font-family: inherit; outline: none; color: #1a1a2e; }
+    .hero-search button { background: #FF4D6D; color: #fff; border: none; padding: 14px 24px; font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .hero-search button:hover { background: #c9184a; }
 
-    /* ── Sections ── */
-    .section{max-width:1100px;margin:0 auto;padding:48px 20px 0}
-    .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px}
-    .section-head h2{font-size:1.5rem;font-weight:800}
-    .section-head a{color:#FF4D6D;font-size:.88rem;font-weight:600}
+    /* ── FILTERS ── */
+    .filters-bar {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      padding: 12px 20px;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+    }
+    .filters-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-chip {
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #555;
+      white-space: nowrap;
+    }
+    .filter-chip:hover { border-color: #FF4D6D; color: #FF4D6D; }
+    .filter-chip.active { background: #FF4D6D; color: #fff; border-color: #FF4D6D; }
+    .filter-select {
+      padding: 6px 12px;
+      border-radius: 50px;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #555;
+      outline: none;
+    }
+    .filter-select:focus { border-color: #FF4D6D; }
+    .results-count {
+      margin-left: auto;
+      font-size: 0.82rem;
+      color: #aaa;
+      font-weight: 600;
+      white-space: nowrap;
+    }
 
-    /* ── Category grid ── */
-    .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
-    .cat-card{position:relative;border-radius:14px;overflow:hidden;height:140px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-    .cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-    .cat-card:hover img{transform:scale(1.06)}
-    .cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.6))}
-    .cat-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;z-index:1;color:#fff;font-weight:700;font-size:.95rem;text-shadow:0 1px 4px rgba(0,0,0,.5)}
-    .cat-sub{font-size:.75rem;opacity:.8;font-weight:400;display:block;margin-top:2px}
+    /* ── GRID ── */
+    .main-wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 48px; }
+    .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
 
-    /* ── Recipe grid ── */
-    .recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
-    .recipe-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s}
-    .recipe-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12)}
-    .recipe-card img{width:100%;height:175px;object-fit:cover;display:block}
-    .recipe-card-body{padding:14px}
-    .recipe-tags{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-    .tag{font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:20px;background:#f0f0f0;color:#555}
-    .tag.veg{background:#e8f5e9;color:#2e7d32}
-    .tag.fast{background:#fff3e0;color:#e65100}
-    .recipe-card h3{font-size:.98rem;font-weight:700;color:#1a1a2e;margin-bottom:6px;line-height:1.3}
-    .recipe-card p{font-size:.82rem;color:#888}
-    .recipe-meta{display:flex;gap:12px;margin-top:8px;font-size:.8rem;color:#aaa}
+    /* ── RECIPE CARD ── */
+    .recipe-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+      cursor: pointer;
+    }
+    .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .card-img-wrap { position: relative; width: 100%; height: 175px; overflow: hidden; background: #eee; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .recipe-card:hover .card-img-wrap img { transform: scale(1.05); }
+    .card-body { padding: 13px; }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
+    .tag { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #f0f0f0; color: #555; }
+    .tag.veg { background: #e8f5e9; color: #2e7d32; }
+    .tag.fast { background: #fff3e0; color: #e65100; }
+    .tag.area { background: #e3f2fd; color: #1565c0; }
+    .card-title { font-size: 0.95rem; font-weight: 700; color: #1a1a2e; margin-bottom: 5px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-meta { display: flex; gap: 10px; margin-top: 6px; font-size: 0.78rem; color: #bbb; }
 
-    /* ── Ad slot ── */
-    .ad-wrap{max-width:1100px;margin:32px auto 0;padding:0 20px}
-    .ad-slot{background:#f0f0f0;border-radius:8px;padding:8px;min-height:90px;text-align:center}
+    /* ── SKELETON ── */
+    .skeleton-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .skeleton-img { height: 175px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    .skeleton-body { padding: 13px; }
+    .skeleton-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; margin-bottom: 8px; }
+    .skeleton-line.short { width: 60%; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-    /* ── Tips strip ── */
-    .tips-strip{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;padding:40px 20px;margin-top:48px;text-align:center}
-    .tips-strip h2{font-size:1.4rem;font-weight:800;margin-bottom:8px}
-    .tips-strip p{opacity:.9;margin-bottom:20px}
-    .tips-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:11px 28px;border-radius:10px}
-    .tips-btn:hover{opacity:.9}
+    /* ── EMPTY / ERROR ── */
+    .empty-state { text-align: center; padding: 80px 20px; color: #aaa; }
+    .empty-state .ico { font-size: 3.5rem; display: block; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 1.2rem; color: #555; margin-bottom: 8px; }
+    .empty-state p { font-size: 0.9rem; }
 
-    /* ── Blog previews ── */
-    .blog-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-    .blog-preview{background:#fff;border-radius:12px;padding:18px;border:1px solid #eee;display:flex;gap:14px;align-items:center}
-    .blog-preview:hover{border-color:#FF4D6D}
-    .blog-preview .icon{font-size:2.2rem;flex-shrink:0}
-    .blog-preview .info .cat{font-size:.72rem;color:#FF4D6D;font-weight:700;text-transform:uppercase;margin-bottom:4px}
-    .blog-preview .info h3{font-size:.92rem;font-weight:700;color:#1a1a2e;line-height:1.4}
-    .blog-preview .info .mins{font-size:.78rem;color:#aaa;margin-top:4px}
+    /* ── LOAD MORE ── */
+    .load-more-wrap { text-align: center; margin-top: 36px; }
+    .btn-load-more {
+      background: #FF4D6D;
+      color: #fff;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(255,77,109,0.3);
+    }
+    .btn-load-more:hover { background: #c9184a; transform: translateY(-2px); }
+    .btn-load-more:disabled { background: #ccc; box-shadow: none; transform: none; cursor: not-allowed; }
 
-    /* ── Footer ── */
-    footer{background:#1a1a2e;color:#aaa;text-align:center;padding:32px 20px;font-size:.83rem;margin-top:48px}
-    footer a{color:#FF4D6D}
-    .footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+    /* ── AD ── */
+    .ad-wrap { max-width: 1100px; margin: 0 auto 32px; padding: 0 20px; }
 
-    @media(max-width:640px){
-      .hero h1{font-size:1.6rem}
-      .header-right nav a{display:none}
-      .cat-grid{grid-template-columns:repeat(2,1fr)}
+    /* ── FOOTER ── */
+    footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 32px 20px; font-size: 0.83rem; margin-top: 48px; }
+    footer a { color: #FF4D6D; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+
+    /* ── MODAL RECETTE ── */
+    .recipe-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+      z-index: 9000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .recipe-modal-overlay.open { display: flex; }
+    .recipe-modal {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-hero { position: relative; height: 240px; overflow: hidden; border-radius: 20px 20px 0 0; }
+    .modal-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7)); }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .modal-body { padding: 24px; }
+    .modal-title { font-size: 1.4rem; margin-bottom: 10px; }
+    .modal-meta { display: flex; gap: 14px; font-size: 0.85rem; color: #888; margin-bottom: 16px; flex-wrap: wrap; }
+    .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .modal-section { margin-top: 20px; }
+    .modal-section h3 { font-size: 1rem; margin-bottom: 12px; color: #1a1a2e; }
+    .modal-ingredients { list-style: none; }
+    .modal-ingredients li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; color: #444; display: flex; gap: 8px; }
+    .modal-ingredients li:last-child { border-bottom: none; }
+    .modal-steps { counter-reset: steps; }
+    .modal-step { display: flex; gap: 14px; margin-bottom: 14px; }
+    .step-num { min-width: 28px; height: 28px; background: #FF4D6D; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; flex-shrink: 0; }
+    .step-text { font-size: 0.9rem; color: #444; line-height: 1.55; padding-top: 4px; }
+    .modal-nutr { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+    .nutr-item { background: #f8f9fa; border-radius: 10px; padding: 10px; text-align: center; }
+    .nutr-val { display: block; font-size: 1.15rem; font-weight: 800; color: #FF4D6D; }
+    .nutr-lbl { font-size: 0.7rem; color: #aaa; text-transform: uppercase; margin-top: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .main-nav { display: none; }
+      .nav-hamburger { display: block; }
+      .hero h1 { font-size: 1.6rem; }
+      .filters-bar { top: 68px; }
+      .modal-nutr { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero-search { flex-direction: column; border-radius: 12px; }
+      .recipe-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ═══ HEADER ═══ -->
 <header class="site-header">
-  <a class="logo" href="/">🍽️ Walkart</a>
-  <div class="header-right">
-    <nav>
+  <div class="header-inner">
+    <a class="logo" href="/"><img src="/logo.svg" alt="Walkart"></a>
+    <nav class="main-nav">
       <a href="/">Accueil</a>
-      <a href="/recettes" style="color:#FF4D6D;font-weight:700">Recettes</a>
+      <a href="/recettes" class="active">Recettes</a>
       <a href="/blog">Blog</a>
+      <a href="/about">À propos</a>
+      <a href="/contact">Contact</a>
     </nav>
-    <div class="lang-switcher">
-      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
-      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
-      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Español">🇪🇸</button>
-      <button class="lang-btn" data-lang="ar" onclick="setLang('ar')" title="العربية">🇸🇦</button>
-      <button class="lang-btn" data-lang="it" onclick="setLang('it')" title="Italiano">🇮🇹</button>
-      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="日本語">🇯🇵</button>
-    </div>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">☰</button>
   </div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="/">Accueil</a>
+    <a href="/recettes">Recettes</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/contact">Contact</a>
+  </nav>
 </header>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<div class="hero">
+<!-- ═══ HERO ═══ -->
+<section class="hero">
   <div class="hero-inner">
-    <div data-lang="fr">
-      <h1>🍽️ Des milliers de recettes du monde</h1>
-      <p>Méditerranée, Asie, Végétarien, Budget, Rapide… Trouvez votre prochaine recette préférée.</p>
-    </div>
-    <div data-lang="en" style="display:none">
-      <h1>🍽️ Thousands of World Recipes</h1>
-      <p>Mediterranean, Asian, Vegetarian, Budget, Quick… Find your next favorite recipe.</p>
-    </div>
-    <div data-lang="es" style="display:none">
-      <h1>🍽️ Miles de recetas del mundo</h1>
-      <p>Mediterránea, Asiática, Vegetariana, Económica, Rápida… Encuentra tu próxima receta favorita.</p>
-    </div>
-    <div class="hero-search">
-      <input id="hero-q" type="text" placeholder="Rechercher une recette, un ingrédient…" aria-label="Recherche">
-      <button onclick="window.location.href='/?search='+document.getElementById('hero-q').value">🔍 Chercher</button>
-    </div>
+    <h1>🍽️ Toutes nos recettes du monde</h1>
+    <p>Recherchez parmi des milliers de recettes authentiques. Filtrez par cuisine, régime ou temps de préparation.</p>
+    <form class="hero-search" onsubmit="handleSearch(event)">
+      <input id="search-input" type="text" placeholder="Rechercher une recette, un ingrédient…" autocomplete="off">
+      <button type="submit">🔍 Chercher</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FILTRES ═══ -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <button class="filter-chip active" onclick="setDiet('')">Tout</button>
+    <button class="filter-chip" onclick="setDiet('vegetarian')">🥗 Végétarien</button>
+    <button class="filter-chip" onclick="setDiet('vegan')">🌱 Vegan</button>
+    <button class="filter-chip" onclick="setDiet('gluten free')">🌾 Sans gluten</button>
+    <select class="filter-select" id="time-filter" onchange="setMaxTime(this.value)">
+      <option value="">⏱ Tous les temps</option>
+      <option value="15">≤ 15 min</option>
+      <option value="30">≤ 30 min</option>
+      <option value="45">≤ 45 min</option>
+      <option value="60">≤ 1 heure</option>
+    </select>
+    <select class="filter-select" id="area-filter" onchange="setArea(this.value)">
+      <option value="">🌍 Toutes les cuisines</option>
+    </select>
+    <span class="results-count" id="results-count"></span>
   </div>
 </div>
 
-<!-- ═══════════════ CATEGORIES ═══════════════ -->
-<div class="section">
-  <div class="section-head">
-    <h2 data-lang="fr">🌍 Cuisines du monde</h2>
-    <h2 data-lang="en" style="display:none">🌍 World Cuisines</h2>
-    <a href="/">Tout voir →</a>
-  </div>
-  <div class="cat-grid">
-    <a class="cat-card" href="/?cuisine=mediterranean">
-      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=280&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Méditerranée</span><span data-lang="en" style="display:none">Mediterranean</span>
-        <span class="cat-sub">Grèce · Italie · Maroc</span>
-      </div>
-    </a>
-    <a class="cat-card" href="/?cuisine=asian">
-      <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=280&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Asiatique</span><span data-lang="en" style="display:none">Asian</span>
-        <span class="cat-sub">Japon · Thaï · Inde</span>
-      </div>
-    </a>
-    <a class="cat-card" href="/?diet=vegetarian">
-      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=280&fit=crop&auto=format" alt="Cuisine végétarienne" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Végétarien</span><span data-lang="en" style="display:none">Vegetarian</span>
-        <span class="cat-sub">Sans viande · Équilibré</span>
-      </div>
-    </a>
-    <a class="cat-card" href="/?maxTime=30">
-      <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=280&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Rapide &lt; 30 min</span><span data-lang="en" style="display:none">Quick &lt; 30 min</span>
-        <span class="cat-sub">Soir de semaine</span>
-      </div>
-    </a>
-    <a class="cat-card" href="/?cuisine=european">
-      <img src="https://images.unsplash.com/photo-1559181567-c3190958d3ab?w=400&h=280&fit=crop&auto=format" alt="Cuisine européenne" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Européenne</span><span data-lang="en" style="display:none">European</span>
-        <span class="cat-sub">France · Espagne · Grèce</span>
-      </div>
-    </a>
-    <a class="cat-card" href="/?diet=vegan">
-      <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=280&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
-      <div class="cat-label">
-        <span data-lang="fr">Vegan</span><span data-lang="en" style="display:none">Vegan</span>
-        <span class="cat-sub">100% végétal</span>
-      </div>
-    </a>
+<!-- ═══ GRILLE RECETTES ═══ -->
+<div class="main-wrap">
+  <div class="recipe-grid" id="recipe-grid"></div>
+  <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+    <button class="btn-load-more" id="btn-load-more" onclick="loadMore()">Charger plus de recettes</button>
   </div>
 </div>
 
-<!-- ═══════════════ AD ═══════════════ -->
+<!-- ═══ AD ═══ -->
 <div class="ad-wrap">
-  <div class="ad-slot">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- ═══════════════ FEATURED RECIPES ═══════════════ -->
-<div class="section" style="padding-top:40px">
-  <div class="section-head">
-    <h2 data-lang="fr">⭐ Recettes populaires</h2>
-    <h2 data-lang="en" style="display:none">⭐ Popular Recipes</h2>
-    <a href="/">Voir tout →</a>
-  </div>
-  <div class="recipe-grid">
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=280&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag fast">15 min</span></div>
-        <h3 data-lang="fr">Salade grecque authentique</h3>
-        <h3 data-lang="en" style="display:none">Authentic Greek Salad</h3>
-        <p data-lang="fr">Tomates, concombres, feta, olives et origan — la fraîcheur de la Méditerranée.</p>
-        <p data-lang="en" style="display:none">Tomatoes, cucumbers, feta, olives and oregano — Mediterranean freshness.</p>
-        <div class="recipe-meta"><span>⏱️ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=280&fit=crop&auto=format" alt="Spaghetti carbonara" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag fast">20 min</span></div>
-        <h3 data-lang="fr">Spaghetti Carbonara</h3>
-        <h3 data-lang="en" style="display:none">Spaghetti Carbonara</h3>
-        <p data-lang="fr">La vraie recette romaine : œufs, pecorino, guanciale et poivre noir.</p>
-        <p data-lang="en" style="display:none">The real Roman recipe: eggs, pecorino, guanciale and black pepper.</p>
-        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">25 min</span></div>
-        <h3 data-lang="fr">Curry de pois chiches</h3>
-        <h3 data-lang="en" style="display:none">Chickpea Curry</h3>
-        <p data-lang="fr">Épicé, crémeux et nourrissant — le comfort food végétalien par excellence.</p>
-        <p data-lang="en" style="display:none">Spicy, creamy and nourishing — the ultimate vegan comfort food.</p>
-        <div class="recipe-meta"><span>⏱️ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=280&fit=crop&auto=format" alt="Sushi maison" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag">Japonais</span></div>
-        <h3 data-lang="fr">Sushi maki maison</h3>
-        <h3 data-lang="en" style="display:none">Homemade Maki Sushi</h3>
-        <p data-lang="fr">Apprenez à rouler vos propres makis avec du riz vinaigré et du saumon frais.</p>
-        <p data-lang="en" style="display:none">Learn to roll your own maki with vinegared rice and fresh salmon.</p>
-        <div class="recipe-meta"><span>⏱️ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=280&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag">Classique</span></div>
-        <h3 data-lang="fr">Poulet rôti aux herbes</h3>
-        <h3 data-lang="en" style="display:none">Herb Roast Chicken</h3>
-        <p data-lang="fr">Doré, juteux, parfumé au thym et au romarin — le grand classique du dimanche.</p>
-        <p data-lang="en" style="display:none">Golden, juicy, flavored with thyme and rosemary — the classic Sunday roast.</p>
-        <div class="recipe-meta"><span>⏱️ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=280&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Mexicain</span></div>
-        <h3 data-lang="fr">Tacos de bœuf épicés</h3>
-        <h3 data-lang="en" style="display:none">Spicy Beef Tacos</h3>
-        <p data-lang="fr">Viande épicée, avocat frais, coriandre et salsa — le Mexique dans votre assiette.</p>
-        <p data-lang="en" style="display:none">Spiced meat, fresh avocado, cilantro and salsa — Mexico on your plate.</p>
-        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=280&fit=crop&auto=format" alt="Soupe à l'oignon" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag">Français</span><span class="tag veg">Végétarien</span></div>
-        <h3 data-lang="fr">Soupe à l'oignon gratinée</h3>
-        <h3 data-lang="en" style="display:none">French Onion Soup</h3>
-        <p data-lang="fr">La soupe réconfort par excellence : bouillon riche, oignons caramélisés et gruyère fondu.</p>
-        <p data-lang="en" style="display:none">The ultimate comfort soup: rich broth, caramelized onions and melted gruyère.</p>
-        <div class="recipe-meta"><span>⏱️ 50 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=280&fit=crop&auto=format" alt="Bowl petit déjeuner" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">10 min</span></div>
-        <h3 data-lang="fr">Açaï bowl énergisant</h3>
-        <h3 data-lang="en" style="display:none">Energizing Açaí Bowl</h3>
-        <p data-lang="fr">Açaï, banane, fruits rouges, granola et graines de chia — le petit-déjeuner parfait.</p>
-        <p data-lang="en" style="display:none">Açaí, banana, berries, granola and chia seeds — the perfect breakfast.</p>
-        <div class="recipe-meta"><span>⏱️ 10 min</span><span>👤 1 pers.</span><span>⭐ 4.7</span></div>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- ═══════════════ AD ═══════════════ -->
-<div class="ad-wrap" style="margin-top:40px">
-  <div class="ad-slot">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
-
-<!-- ═══════════════ RECIPES BY TYPE ═══════════════ -->
-<div class="section" style="padding-top:40px">
-  <div class="section-head">
-    <h2 data-lang="fr">🥗 Recettes végétariennes à la une</h2>
-    <h2 data-lang="en" style="display:none">🥗 Featured Vegetarian Recipes</h2>
-    <a href="/?diet=vegetarian">Voir tout →</a>
-  </div>
-  <div class="recipe-grid">
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=280&fit=crop&auto=format" alt="Ratatouille" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag">Provence</span></div>
-        <h3 data-lang="fr">Ratatouille provençale</h3>
-        <h3 data-lang="en" style="display:none">Provençal Ratatouille</h3>
-        <p data-lang="fr">Courgettes, aubergines, poivrons et tomates mijotés à l'huile d'olive.</p>
-        <p data-lang="en" style="display:none">Zucchini, eggplant, peppers and tomatoes simmered in olive oil.</p>
-        <div class="recipe-meta"><span>⏱️ 45 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1529059997568-3d847b1154f8?w=400&h=280&fit=crop&auto=format" alt="Houmous" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">15 min</span></div>
-        <h3 data-lang="fr">Houmous maison onctueux</h3>
-        <h3 data-lang="en" style="display:none">Creamy Homemade Hummus</h3>
-        <p data-lang="fr">Pois chiches, tahini, citron et ail — bien meilleur que le commerce.</p>
-        <p data-lang="en" style="display:none">Chickpeas, tahini, lemon and garlic — far better than store-bought.</p>
-        <div class="recipe-meta"><span>⏱️ 15 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=280&fit=crop&auto=format" alt="Buddha bowl" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">20 min</span></div>
-        <h3 data-lang="fr">Buddha bowl quinoa</h3>
-        <h3 data-lang="en" style="display:none">Quinoa Buddha Bowl</h3>
-        <p data-lang="fr">Quinoa, avocat, légumes rôtis, tahini — nourrissant et coloré.</p>
-        <p data-lang="en" style="display:none">Quinoa, avocado, roasted vegetables, tahini — nourishing and colorful.</p>
-        <div class="recipe-meta"><span>⏱️ 20 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
-      </div>
-    </a>
-
-    <a class="recipe-card" href="/">
-      <img src="https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?w=400&h=280&fit=crop&auto=format" alt="Lentilles" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag">Budget</span></div>
-        <h3 data-lang="fr">Dal de lentilles corail</h3>
-        <h3 data-lang="en" style="display:none">Red Lentil Dal</h3>
-        <p data-lang="fr">Lentilles corail au lait de coco, curcuma et gingembre — réconfortant et économique.</p>
-        <p data-lang="en" style="display:none">Red lentils with coconut milk, turmeric and ginger — comforting and budget-friendly.</p>
-        <div class="recipe-meta"><span>⏱️ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.8</span></div>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- ═══════════════ CTA STRIP ═══════════════ -->
-<div class="tips-strip">
-  <div data-lang="fr">
-    <h2>🛒 Planifiez vos repas et générez votre liste de courses</h2>
-    <p>Walkart organise votre semaine et génère automatiquement votre liste de courses. Gratuit et sans inscription.</p>
-  </div>
-  <div data-lang="en" style="display:none">
-    <h2>🛒 Plan Your Meals and Generate Your Shopping List</h2>
-    <p>Walkart organizes your week and automatically generates your shopping list. Free and no sign-up required.</p>
-  </div>
-  <a class="tips-btn" href="/recettes">Explorer toutes les recettes →</a>
-</div>
-
-<!-- ═══════════════ BLOG PREVIEWS ═══════════════ -->
-<div class="section" style="padding-top:40px">
-  <div class="section-head">
-    <h2 data-lang="fr">📝 Conseils & Nutrition</h2>
-    <h2 data-lang="en" style="display:none">📝 Tips & Nutrition</h2>
-    <a href="/blog">Voir le blog →</a>
-  </div>
-  <div class="blog-list">
-    <a class="blog-preview" href="/blog/cuisine-mediterraneenne">
-      <div class="icon">🫒</div>
-      <div class="info">
-        <div class="cat">Nutrition</div>
-        <h3 data-lang="fr">Les secrets de la cuisine méditerranéenne</h3>
-        <h3 data-lang="en" style="display:none">Secrets of Mediterranean Cuisine</h3>
-        <div class="mins">6 min · 10 mars 2025</div>
-      </div>
-    </a>
-    <a class="blog-preview" href="/blog/macronutriments-guide">
-      <div class="icon">💪</div>
-      <div class="info">
-        <div class="cat">Nutrition</div>
-        <h3 data-lang="fr">Macronutriments : le guide complet</h3>
-        <h3 data-lang="en" style="display:none">Macronutrients: The Complete Guide</h3>
-        <div class="mins">8 min · 25 mars 2025</div>
-      </div>
-    </a>
-    <a class="blog-preview" href="/blog/planifier-repas-semaine">
-      <div class="icon">📅</div>
-      <div class="info">
-        <div class="cat">Conseils</div>
-        <h3 data-lang="fr">Comment planifier ses repas pour la semaine</h3>
-        <h3 data-lang="en" style="display:none">How to Plan Your Meals for the Week</h3>
-        <div class="mins">7 min · 18 mars 2025</div>
-      </div>
-    </a>
-    <a class="blog-preview" href="/blog/superaliments-mythe-realite">
-      <div class="icon">🫐</div>
-      <div class="info">
-        <div class="cat">Nutrition</div>
-        <h3 data-lang="fr">Super-aliments : mythe ou vrais bienfaits ?</h3>
-        <h3 data-lang="en" style="display:none">Superfoods: Myth or Real Benefits?</h3>
-        <div class="mins">6 min · 18 mai 2025</div>
-      </div>
-    </a>
-    <a class="blog-preview" href="/blog/zero-gaspillage">
-      <div class="icon">♻️</div>
-      <div class="info">
-        <div class="cat">Conseils</div>
-        <h3 data-lang="fr">Zéro gaspillage : transformer les restes</h3>
-        <h3 data-lang="en" style="display:none">Zero Waste: Turning Leftovers</h3>
-        <div class="mins">5 min · 5 mai 2025</div>
-      </div>
-    </a>
-    <a class="blog-preview" href="/blog/cuisine-asiatique-debutants">
-      <div class="icon">🍜</div>
-      <div class="info">
-        <div class="cat">Cuisine du monde</div>
-        <h3 data-lang="fr">La cuisine asiatique pour débutants</h3>
-        <h3 data-lang="en" style="display:none">Asian Cuisine for Beginners</h3>
-        <div class="mins">6 min · 12 mai 2025</div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<!-- ═══════════════ AD ═══════════════ -->
-<div class="ad-wrap" style="margin-top:40px">
-  <div class="ad-slot">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-links">
     <a href="/">Accueil</a>
@@ -477,10 +364,287 @@
     <a href="/privacy">Confidentialité</a>
     <a href="/contact">Contact</a>
   </div>
-  <p data-lang="fr">© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
-  <p data-lang="en" style="display:none">© 2025 Walkart – World Recipes. All rights reserved.</p>
+  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
 </footer>
 
-<script src="/js/lang.js"></script>
+<!-- ═══ MODAL RECETTE ═══ -->
+<div class="recipe-modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="recipe-modal" id="recipe-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  const SUPA_URL = 'https://hvyngskpnyimsnqnlbcf.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2eW5nc2twbnlpbXNucW5sYmNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5OTE2MTUsImV4cCI6MjA5NDU2NzYxNX0.QKRXufgv_bkTRdczwm4WTHIllqgDCRj3a5J1mx0cRF8';
+  const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+  const PAGE_SIZE = 24;
+  let currentPage = 0;
+  let currentSearch = '';
+  let currentDiet = '';
+  let currentMaxTime = '';
+  let currentArea = '';
+  let totalCount = 0;
+  let isLoading = false;
+
+  // Lire le paramètre ?search= dans l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('search')) {
+    currentSearch = urlParams.get('search');
+    document.getElementById('search-input').value = currentSearch;
+  }
+
+  async function fetchRecipes(reset = false) {
+    if (isLoading) return;
+    isLoading = true;
+
+    if (reset) {
+      currentPage = 0;
+      document.getElementById('recipe-grid').innerHTML = renderSkeletons(PAGE_SIZE);
+    }
+
+    const from = currentPage * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+
+    let q = supa.from('recipes')
+      .select('id, title, image, calories, protein_g, carbs_g, fat_g, ready_in_minutes, diet_tags, area, category, servings, ingredients, instructions', { count: 'exact' })
+      .range(from, to)
+      .order('title', { ascending: true });
+
+    if (currentSearch) q = q.ilike('title', `%${currentSearch}%`);
+    if (currentDiet)   q = q.contains('diet_tags', [currentDiet]);
+    if (currentMaxTime) q = q.lte('ready_in_minutes', parseInt(currentMaxTime)).not('ready_in_minutes', 'is', null);
+    if (currentArea)   q = q.eq('area', currentArea);
+
+    const { data, error, count } = await q;
+
+    isLoading = false;
+
+    if (error) {
+      document.getElementById('recipe-grid').innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1">
+          <span class="ico">⚠️</span>
+          <h3>Impossible de charger les recettes</h3>
+          <p>${error.message}</p>
+        </div>`;
+      return;
+    }
+
+    totalCount = count || 0;
+    document.getElementById('results-count').textContent =
+      totalCount > 0 ? `${totalCount.toLocaleString()} recette${totalCount > 1 ? 's' : ''}` : '';
+
+    const grid = document.getElementById('recipe-grid');
+    if (reset) grid.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      if (reset) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <span class="ico">🔍</span>
+            <h3>Aucune recette trouvée</h3>
+            <p>Essayez d'autres mots-clés ou retirez des filtres.</p>
+          </div>`;
+      }
+      document.getElementById('load-more-wrap').style.display = 'none';
+      return;
+    }
+
+    data.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'recipe-card';
+      card.onclick = () => openModal(r);
+      card.innerHTML = renderCard(r);
+      grid.appendChild(card);
+    });
+
+    currentPage++;
+    const hasMore = (currentPage * PAGE_SIZE) < totalCount;
+    document.getElementById('load-more-wrap').style.display = hasMore ? 'block' : 'none';
+  }
+
+  function renderCard(r) {
+    const tags = [];
+    if (r.diet_tags?.includes('vegetarian') || r.diet_tags?.includes('vegan')) {
+      tags.push(`<span class="tag veg">${r.diet_tags.includes('vegan') ? 'Vegan' : 'Végétarien'}</span>`);
+    }
+    if (r.ready_in_minutes && r.ready_in_minutes <= 30) {
+      tags.push(`<span class="tag fast">${r.ready_in_minutes} min</span>`);
+    }
+    if (r.area) {
+      tags.push(`<span class="tag area">${r.area}</span>`);
+    } else if (r.category) {
+      tags.push(`<span class="tag">${r.category}</span>`);
+    }
+
+    const img = r.image || `https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=280&fit=crop&auto=format`;
+    const time = r.ready_in_minutes ? `⏱ ${r.ready_in_minutes >= 60 ? Math.floor(r.ready_in_minutes/60)+'h'+(r.ready_in_minutes%60?r.ready_in_minutes%60+'':'') : r.ready_in_minutes+' min'}` : '';
+    const cal = r.calories ? `🔥 ${r.calories} kcal` : '';
+    const serv = r.servings ? `👤 ${r.servings} pers.` : '';
+
+    return `
+      <div class="card-img-wrap">
+        <img src="${r.image || ''}" alt="${escHtml(r.title)}" loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=280&fit=crop&auto=format'">
+      </div>
+      <div class="card-body">
+        ${tags.length ? `<div class="card-tags">${tags.join('')}</div>` : ''}
+        <div class="card-title">${escHtml(r.title)}</div>
+        <div class="card-meta">
+          ${time ? `<span>${time}</span>` : ''}
+          ${cal ? `<span>${cal}</span>` : ''}
+          ${serv ? `<span>${serv}</span>` : ''}
+        </div>
+      </div>`;
+  }
+
+  function renderSkeletons(n) {
+    return Array(n).fill(`
+      <div class="skeleton-card">
+        <div class="skeleton-img"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  function openModal(r) {
+    const ingredients = Array.isArray(r.ingredients) ? r.ingredients : [];
+    const steps = r.instructions
+      ? r.instructions.split(/\r?\n|(?<=\.)\s+(?=[A-ZÀ-Ü])/).filter(s => s.trim().length > 10)
+      : [];
+
+    const tags = [];
+    if (r.diet_tags?.length) r.diet_tags.forEach(t => tags.push(`<span class="tag veg">${t}</span>`));
+    if (r.area) tags.push(`<span class="tag area">${r.area}</span>`);
+    if (r.category) tags.push(`<span class="tag">${r.category}</span>`);
+
+    document.getElementById('modal-content').innerHTML = `
+      <div class="modal-hero">
+        <img src="${r.image || ''}" alt="${escHtml(r.title)}"
+          onerror="this.src='https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=300&fit=crop'">
+        <div class="modal-hero-overlay"></div>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-title">${escHtml(r.title)}</h2>
+        <div class="modal-meta">
+          ${r.ready_in_minutes ? `<span>⏱ ${r.ready_in_minutes} min</span>` : ''}
+          ${r.servings ? `<span>👤 ${r.servings} personnes</span>` : ''}
+          ${r.calories ? `<span>🔥 ${r.calories} kcal</span>` : ''}
+        </div>
+        ${tags.length ? `<div class="modal-tags">${tags.join('')}</div>` : ''}
+
+        ${(r.calories || r.protein_g || r.carbs_g || r.fat_g) ? `
+        <div class="modal-section">
+          <h3>Valeurs nutritionnelles (par portion)</h3>
+          <div class="modal-nutr">
+            ${r.calories ? `<div class="nutr-item"><span class="nutr-val">${r.calories}</span><div class="nutr-lbl">kcal</div></div>` : ''}
+            ${r.protein_g ? `<div class="nutr-item"><span class="nutr-val">${r.protein_g}g</span><div class="nutr-lbl">Protéines</div></div>` : ''}
+            ${r.carbs_g ? `<div class="nutr-item"><span class="nutr-val">${r.carbs_g}g</span><div class="nutr-lbl">Glucides</div></div>` : ''}
+            ${r.fat_g ? `<div class="nutr-item"><span class="nutr-val">${r.fat_g}g</span><div class="nutr-lbl">Lipides</div></div>` : ''}
+          </div>
+        </div>` : ''}
+
+        ${ingredients.length ? `
+        <div class="modal-section">
+          <h3>🛒 Ingrédients</h3>
+          <ul class="modal-ingredients">
+            ${ingredients.map(ing => {
+              if (typeof ing === 'string') return `<li>• ${escHtml(ing)}</li>`;
+              const qty = ing.amount ? `${ing.amount}${ing.unit ? ' '+ing.unit : ''}` : '';
+              return `<li><strong>${escHtml(ing.name || ing.originalName || '')}</strong>${qty ? ' — '+qty : ''}</li>`;
+            }).join('')}
+          </ul>
+        </div>` : ''}
+
+        ${steps.length ? `
+        <div class="modal-section">
+          <h3>👨‍🍳 Préparation</h3>
+          <div class="modal-steps">
+            ${steps.map((s, i) => `
+              <div class="modal-step">
+                <div class="step-num">${i+1}</div>
+                <div class="step-text">${escHtml(s.trim())}</div>
+              </div>`).join('')}
+          </div>
+        </div>` : r.instructions ? `
+        <div class="modal-section">
+          <h3>👨‍🍳 Préparation</h3>
+          <p style="font-size:.9rem;color:#444;line-height:1.6">${escHtml(r.instructions)}</p>
+        </div>` : ''}
+      </div>`;
+
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Fermer modal avec Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function handleSearch(e) {
+    e.preventDefault();
+    currentSearch = document.getElementById('search-input').value.trim();
+    resetAndFetch();
+  }
+
+  function setDiet(diet) {
+    currentDiet = diet;
+    document.querySelectorAll('.filter-chip').forEach(c => {
+      c.classList.toggle('active', c.getAttribute('onclick') === `setDiet('${diet}')`);
+    });
+    resetAndFetch();
+  }
+
+  function setMaxTime(val) {
+    currentMaxTime = val;
+    resetAndFetch();
+  }
+
+  function setArea(val) {
+    currentArea = val;
+    resetAndFetch();
+  }
+
+  function resetAndFetch() {
+    currentPage = 0;
+    fetchRecipes(true);
+  }
+
+  function loadMore() {
+    fetchRecipes(false);
+  }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Charger les zones disponibles pour le filtre
+  async function loadAreas() {
+    const { data } = await supa.from('recipes').select('area').not('area', 'is', null);
+    if (!data) return;
+    const areas = [...new Set(data.map(r => r.area).filter(Boolean))].sort();
+    const sel = document.getElementById('area-filter');
+    areas.forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a;
+      opt.textContent = a;
+      sel.appendChild(opt);
+    });
+  }
+
+  // Init
+  loadAreas();
+  fetchRecipes(true);
+</script>
 </body>
 </html>
