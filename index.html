@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walkart – Recettes du Monde</title>
-  <meta name="description" content="Découvrez des milliers de recettes authentiques du monde entier. Planifiez vos repas, générez votre liste de courses et cuisinez pas à pas avec Walkart.">
+  <meta name="description" content="Découvrez des milliers de recettes authentiques du monde entier. Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez et cuisinez pas à pas avec Walkart.">
   <meta name="keywords" content="recettes, cuisine du monde, recettes faciles, planificateur repas, liste de courses, recettes healthy">
   <meta name="robots" content="index, follow">
   <meta name='impact-site-verification' value='edd4535b-3195-47ec-8942-c80192ce4c63'>
-  <link rel="canonical" href="https://www.walkart.us/" id="canonical-link">
+  <link rel="canonical" href="https://www.walkart.us/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -27,384 +27,584 @@
 
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
+  <meta name="theme-color" content="#FF4D6D">
+  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
+  <meta name="p:domain_verify" content="b25c343f067d7d5f47552361ec81e18d"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=26.0">
-  <meta name="theme-color" content="#FF4D6D">
-  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
-  <meta name="p:domain_verify" content="b25c343f067d7d5f47552361ec81e18d"/>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Static landing page styles (used before JS app loads) -->
-  <style id="sh-css">
-    #sh{font-family:'Outfit','Plus Jakarta Sans',system-ui,sans-serif}
-    .sh-hero{position:relative;background:#1a1a2e;color:#fff;padding:56px 20px 44px;text-align:center;overflow:hidden}
-    .sh-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=700&fit=crop&auto=format') center/cover no-repeat;opacity:.15}
-    .sh-hero-inner{position:relative;max-width:680px;margin:0 auto}
-    .sh-hero h1{font-size:2.2rem;font-weight:800;line-height:1.25;margin-bottom:12px}
-    .sh-hero p{font-size:1.05rem;opacity:.85;margin-bottom:24px}
-    .sh-hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .sh-btn-primary{background:#FF4D6D;color:#fff;font-weight:700;padding:13px 28px;border-radius:12px;font-size:1rem;text-decoration:none;border:none;cursor:pointer}
-    .sh-btn-primary:hover{background:#c9184a;text-decoration:none;color:#fff}
-    .sh-btn-ghost{background:rgba(255,255,255,.12);color:#fff;font-weight:600;padding:13px 28px;border-radius:12px;font-size:1rem;text-decoration:none;border:1.5px solid rgba(255,255,255,.35)}
-    .sh-btn-ghost:hover{background:rgba(255,255,255,.2);text-decoration:none;color:#fff}
-    .sh-ad{padding:12px 20px;text-align:center}
-    .sh-ad ins{display:block}
-    .sh-section{max-width:1100px;margin:0 auto;padding:40px 20px 0}
-    .sh-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-    .sh-section-head h2{font-size:1.35rem;font-weight:800;color:#1a1a2e}
-    .sh-section-head a{color:#FF4D6D;font-size:.88rem;font-weight:600;text-decoration:none}
-    /* Categories */
-    .sh-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-    .sh-cat{position:relative;border-radius:14px;overflow:hidden;height:130px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-    .sh-cat img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-    .sh-cat:hover img{transform:scale(1.06)}
-    .sh-cat::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.02),rgba(0,0,0,.58))}
-    .sh-cat-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;z-index:1;color:#fff;font-weight:700;font-size:.9rem;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-    .sh-cat-count{font-size:.73rem;opacity:.75;font-weight:400;display:block;margin-top:1px}
-    /* Recipe cards */
-    .sh-recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .sh-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .15s,box-shadow .15s;text-decoration:none;color:inherit;display:block}
-    .sh-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.12);text-decoration:none;color:inherit}
-    .sh-card img{width:100%;height:165px;object-fit:cover;display:block}
-    .sh-card-body{padding:13px}
-    .sh-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
-    .sh-tag{font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:20px;background:#f0f0f0;color:#555}
-    .sh-tag-v{background:#e8f5e9;color:#2e7d32}
-    .sh-tag-f{background:#fff3e0;color:#e65100}
-    .sh-card h3{font-size:.92rem;font-weight:700;color:#1a1a2e;margin-bottom:5px;line-height:1.3}
-    .sh-card p{font-size:.8rem;color:#888;line-height:1.4}
-    .sh-card-meta{display:flex;gap:10px;margin-top:8px;font-size:.78rem;color:#bbb}
-    /* Blog previews */
-    .sh-blogs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-    .sh-blog{background:#fff;border-radius:12px;padding:16px;border:1px solid #eee;display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit}
-    .sh-blog:hover{border-color:#FF4D6D;text-decoration:none}
-    .sh-blog .ico{font-size:2rem;flex-shrink:0}
-    .sh-blog .cat{font-size:.7rem;color:#FF4D6D;font-weight:700;text-transform:uppercase;margin-bottom:3px}
-    .sh-blog h3{font-size:.88rem;font-weight:700;color:#1a1a2e;line-height:1.35}
-    .sh-blog .mins{font-size:.75rem;color:#bbb;margin-top:3px}
-    /* Features */
-    .sh-features{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:4px}
-    .sh-feat{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-    .sh-feat .ico{font-size:2.4rem;display:block;margin-bottom:10px}
-    .sh-feat h3{font-size:.95rem;font-weight:700;color:#1a1a2e;margin-bottom:6px}
-    .sh-feat p{font-size:.82rem;color:#888;line-height:1.5}
-    /* CTA strip */
-    .sh-strip{background:linear-gradient(135deg,#FF4D6D,#c9184a);color:#fff;padding:40px 20px;text-align:center;margin-top:44px}
-    .sh-strip h2{font-size:1.5rem;font-weight:800;margin-bottom:8px}
-    .sh-strip p{opacity:.9;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto}
-    .sh-strip-btn{display:inline-block;background:#fff;color:#FF4D6D;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none}
-    /* Static footer */
-    .sh-footer{background:#1a1a2e;color:#aaa;text-align:center;padding:28px 20px;font-size:.82rem}
-    .sh-footer a{color:#FF4D6D;text-decoration:none}
-    .sh-footer-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
-    @media(max-width:640px){
-      .sh-hero h1{font-size:1.5rem}
-      .sh-cats{grid-template-columns:repeat(2,1fr)}
-      .sh-hero-btns{flex-direction:column;align-items:center}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; font-size: 16px; }
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 48px; width: auto; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a {
+      color: #555;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+    .main-nav a:hover, .main-nav a.active { color: #FF4D6D; background: rgba(255,77,109,0.06); }
+    .header-search {
+      display: flex;
+      align-items: center;
+      background: #f0f0f0;
+      border-radius: 50px;
+      padding: 8px 16px;
+      gap: 8px;
+      flex: 1;
+      max-width: 320px;
+    }
+    .header-search input {
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: #1a1a2e;
+      outline: none;
+      width: 100%;
+    }
+    .header-search input::placeholder { color: #aaa; }
+    .header-search button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      line-height: 1;
+      color: #FF4D6D;
+    }
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #1a1a2e;
+      padding: 6px;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #fff;
+      border-top: 1px solid #eee;
+      padding: 12px 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 10px 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: #FF4D6D; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 72px 20px 56px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=700&fit=crop&auto=format') center/cover no-repeat;
+      opacity: 0.15;
+    }
+    .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+    .hero h1 { font-size: 2.6rem; line-height: 1.2; margin-bottom: 14px; }
+    .hero p { font-size: 1.1rem; opacity: 0.85; margin-bottom: 32px; }
+    .hero-search {
+      display: flex;
+      max-width: 540px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .hero-search input {
+      flex: 1;
+      padding: 16px 22px;
+      border: none;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      color: #1a1a2e;
+    }
+    .hero-search button {
+      background: #FF4D6D;
+      color: #fff;
+      border: none;
+      padding: 16px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .hero-search button:hover { background: #c9184a; }
+
+    /* ── SECTIONS ── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 52px 20px 0; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 26px;
+    }
+    .section-head h2 { font-size: 1.5rem; }
+    .section-head a { color: #FF4D6D; font-size: 0.88rem; font-weight: 700; }
+    .section-head a:hover { text-decoration: underline; }
+
+    /* ── CATEGORIES ── */
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+    .cat-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      height: 140px;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .cat-card:hover img { transform: scale(1.06); }
+    .cat-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.62)); }
+    .cat-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 12px; z-index: 1; color: #fff; font-weight: 700; font-size: 0.93rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .cat-sub { font-size: 0.73rem; opacity: 0.8; font-weight: 400; display: block; margin-top: 2px; }
+
+    /* ── RECIPE CARDS ── */
+    .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+    .recipe-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+      color: inherit;
+    }
+    .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .recipe-card img { width: 100%; height: 175px; object-fit: cover; display: block; }
+    .recipe-card-body { padding: 14px; }
+    .recipe-tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .tag { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #f0f0f0; color: #555; }
+    .tag.veg { background: #e8f5e9; color: #2e7d32; }
+    .tag.fast { background: #fff3e0; color: #e65100; }
+    .recipe-card h3 { font-size: 0.98rem; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; line-height: 1.3; }
+    .recipe-card p { font-size: 0.82rem; color: #888; line-height: 1.4; }
+    .recipe-meta { display: flex; gap: 12px; margin-top: 8px; font-size: 0.8rem; color: #aaa; }
+
+    /* ── BLOG PREVIEWS ── */
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .blog-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #eee;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      transition: border-color 0.15s;
+    }
+    .blog-card:hover { border-color: #FF4D6D; }
+    .blog-card .icon { font-size: 2.2rem; flex-shrink: 0; }
+    .blog-card .cat { font-size: 0.7rem; color: #FF4D6D; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .blog-card h3 { font-size: 0.9rem; font-weight: 700; color: #1a1a2e; line-height: 1.35; }
+    .blog-card .mins { font-size: 0.76rem; color: #bbb; margin-top: 4px; }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .feat-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .feat-card .ico { font-size: 2.4rem; display: block; margin-bottom: 12px; }
+    .feat-card h3 { font-size: 0.98rem; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .feat-card p { font-size: 0.83rem; color: #888; line-height: 1.5; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: linear-gradient(135deg, #FF4D6D, #c9184a);
+      color: #fff;
+      padding: 52px 20px;
+      text-align: center;
+      margin-top: 56px;
+    }
+    .cta-strip h2 { font-size: 1.7rem; margin-bottom: 10px; }
+    .cta-strip p { opacity: 0.9; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 1rem; }
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: #FF4D6D;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: opacity 0.15s;
+    }
+    .cta-btn:hover { opacity: 0.92; }
+
+    /* ── AD ── */
+    .ad-wrap { max-width: 1100px; margin: 40px auto 0; padding: 0 20px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 36px 20px;
+      font-size: 0.83rem;
+      margin-top: 56px;
+    }
+    footer a { color: #FF4D6D; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .main-nav { display: none; }
+      .header-search { display: none; }
+      .nav-hamburger { display: block; }
+      .hero h1 { font-size: 1.8rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero-search { flex-direction: column; border-radius: 12px; }
+      .hero-search input { border-radius: 12px 12px 0 0; }
+      .hero-search button { border-radius: 0 0 12px 12px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     SPA HEADER (always visible)
-════════════════════════════════════ -->
-<header class="header">
-  <div class="header-top">
-    <a href="/" class="logo" onclick="App.navigate('home'); return false;">
-      <img src="logo.svg" alt="Walkart" class="logo-img">
+<!-- ═══════════════════════════════════
+     EN-TÊTE
+═══════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <img src="logo.svg" alt="Walkart – Recettes du Monde">
     </a>
     <nav class="main-nav">
-      <a class="nav-link" onclick="App.navigate('home')" href="/" data-i18n="nav_home">Accueil</a>
-      <a class="nav-link" onclick="App.navigate('search')" href="/recettes" data-i18n="nav_recipes">Recettes</a>
-      <a class="nav-link" onclick="App.navigate('planner')" href="#planifier" data-i18n="tab_plan">Planifier</a>
-      <a class="nav-link" onclick="App.navigate('shopping')" href="#courses" data-i18n="shopping_title">Liste de courses</a>
-      <a class="nav-link" href="/blog">Blog</a>
-    </nav>
-    <div class="header-actions">
-      <div class="search-bar-container search-bar-inline">
-        <input type="text" id="header-search-input" class="search-input" placeholder="Rechercher..." data-i18n-placeholder="nav_search_placeholder">
-        <button onclick="App.navigate('search', {query: document.getElementById('header-search-input').value})" class="search-btn-icon">🔍</button>
-      </div>
-      <button id="auth-btn" class="btn-auth" onclick="App.navigate('login')">🔐 Connexion</button>
-      <button class="btn-lang" onclick="UI.toggleSettings()" aria-label="Langue">
-        <span id="current-lang-text" class="settings-lang-badge">FR</span>
-      </button>
-      <button class="nav-hamburger" onclick="UI.toggleMobileMenu()" aria-label="Menu">☰</button>
-    </div>
-  </div>
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a class="mobile-nav-link" onclick="App.navigate('home'); UI.closeMobileMenu();" href="/">Accueil</a>
-    <a class="mobile-nav-link" onclick="App.navigate('search'); UI.closeMobileMenu();" href="/recettes">Recettes</a>
-    <a class="mobile-nav-link" onclick="App.navigate('planner'); UI.closeMobileMenu();" href="#planifier">Planifier</a>
-    <a class="mobile-nav-link" onclick="App.navigate('shopping'); UI.closeMobileMenu();" href="#courses">Liste de courses</a>
-    <a class="mobile-nav-link" href="/blog">Blog</a>
-    <a class="mobile-nav-link" onclick="App.navigate('favorites'); UI.closeMobileMenu();" href="#favoris">Favoris ❤️</a>
-  </div>
-</header>
-
-<!-- Language Selection Modal -->
-<div class="lang-modal" id="lang-modal" onclick="if(event.target===this) UI.toggleLangModal()">
-  <div class="lang-content">
-    <h2 data-i18n="choose_lang">Choose language</h2>
-    <div class="lang-grid">
-      <div class="lang-item" onclick="App.changeLang('fr', 'FR')"><img src="https://flagcdn.com/w40/fr.png" class="lang-flag-img" alt="FR"><span>Français</span></div>
-      <div class="lang-item" onclick="App.changeLang('ar', 'AR')"><img src="https://flagcdn.com/w40/sa.png" class="lang-flag-img" alt="AR"><span>العربية</span></div>
-      <div class="lang-item" onclick="App.changeLang('en', 'EN')"><img src="https://flagcdn.com/w40/us.png" class="lang-flag-img" alt="EN"><span>English</span></div>
-      <div class="lang-item" onclick="App.changeLang('es', 'ES')"><img src="https://flagcdn.com/w40/es.png" class="lang-flag-img" alt="ES"><span>Español</span></div>
-      <div class="lang-item" onclick="App.changeLang('it', 'IT')"><img src="https://flagcdn.com/w40/it.png" class="lang-flag-img" alt="IT"><span>Italiano</span></div>
-      <div class="lang-item" onclick="App.changeLang('ja', 'JA')"><img src="https://flagcdn.com/w40/jp.png" class="lang-flag-img" alt="JA"><span>日本語</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     STATIC LANDING PAGE (visible to
-     Google before JS app loads)
-════════════════════════════════════ -->
-<main id="app-root">
-<div id="sh">
-
-  <!-- ── HERO ── -->
-  <div class="sh-hero">
-    <div class="sh-hero-inner">
-      <h1>🍽️ Des milliers de recettes du monde entier</h1>
-      <p>Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez, planifiez et cuisinez pas à pas.</p>
-      <div class="sh-hero-btns">
-        <button class="sh-btn-primary" onclick="document.getElementById('sh').style.display='none'; App && App.navigate('search')">🔍 Explorer les recettes</button>
-        <a class="sh-btn-ghost" href="/recettes">📖 Voir les catégories</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── AD ── -->
-  <div class="sh-ad">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-  <!-- ── CATEGORIES ── -->
-  <div class="sh-section">
-    <div class="sh-section-head">
-      <h2>🌍 Cuisines du monde</h2>
-      <a href="/recettes">Voir tout →</a>
-    </div>
-    <div class="sh-cats">
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=260&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
-        <div class="sh-cat-label">Méditerranée<span class="sh-cat-count">Grèce · Italie · Maroc</span></div>
-      </a>
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=260&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
-        <div class="sh-cat-label">Asiatique<span class="sh-cat-count">Japon · Thaï · Inde</span></div>
-      </a>
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=260&fit=crop&auto=format" alt="Végétarien" loading="lazy">
-        <div class="sh-cat-label">Végétarien<span class="sh-cat-count">Sans viande</span></div>
-      </a>
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=260&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
-        <div class="sh-cat-label">Rapide &lt;30 min<span class="sh-cat-count">Soir de semaine</span></div>
-      </a>
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&h=260&fit=crop&auto=format" alt="Cuisine économique" loading="lazy">
-        <div class="sh-cat-label">Budget<span class="sh-cat-count">Économique</span></div>
-      </a>
-      <a class="sh-cat" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=260&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
-        <div class="sh-cat-label">Vegan<span class="sh-cat-count">100% végétal</span></div>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── FEATURED RECIPES ── -->
-  <div class="sh-section" style="padding-top:36px">
-    <div class="sh-section-head">
-      <h2>⭐ Recettes populaires</h2>
-      <a href="/recettes">Voir tout →</a>
-    </div>
-    <div class="sh-recipes">
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=260&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag sh-tag-v">Végétarien</span><span class="sh-tag sh-tag-f">15 min</span></div>
-          <h3>Salade grecque authentique</h3>
-          <p>Tomates, concombres, feta, olives et origan frais.</p>
-          <div class="sh-card-meta"><span>⏱ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
-        </div>
-      </a>
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=260&fit=crop&auto=format" alt="Spaghetti Carbonara" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag sh-tag-f">20 min</span><span class="sh-tag">Italien</span></div>
-          <h3>Spaghetti Carbonara</h3>
-          <p>La vraie recette romaine, œufs, pecorino et guanciale.</p>
-          <div class="sh-card-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
-        </div>
-      </a>
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=260&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag sh-tag-v">Vegan</span><span class="sh-tag sh-tag-f">25 min</span></div>
-          <h3>Curry de pois chiches</h3>
-          <p>Épicé, crémeux et nourrissant — comfort food végétalien.</p>
-          <div class="sh-card-meta"><span>⏱ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-        </div>
-      </a>
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=260&fit=crop&auto=format" alt="Sushi maki" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag">Japonais</span></div>
-          <h3>Sushi maki maison</h3>
-          <p>Apprenez à rouler vos propres makis avec saumon frais.</p>
-          <div class="sh-card-meta"><span>⏱ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
-        </div>
-      </a>
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=260&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag sh-tag-f">20 min</span><span class="sh-tag">Mexicain</span></div>
-          <h3>Tacos de bœuf épicés</h3>
-          <p>Viande épicée, avocat, coriandre et salsa maison.</p>
-          <div class="sh-card-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-        </div>
-      </a>
-      <a class="sh-card" href="/recettes">
-        <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=260&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
-        <div class="sh-card-body">
-          <div class="sh-tags"><span class="sh-tag">Classique</span></div>
-          <h3>Poulet rôti aux herbes</h3>
-          <p>Doré et juteux, parfumé au thym et romarin.</p>
-          <div class="sh-card-meta"><span>⏱ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── AD ── -->
-  <div class="sh-ad" style="padding-top:32px">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-  <!-- ── BLOG PREVIEWS ── -->
-  <div class="sh-section" style="padding-top:36px">
-    <div class="sh-section-head">
-      <h2>📝 Blog Cuisine & Nutrition</h2>
-      <a href="/blog">Voir le blog →</a>
-    </div>
-    <div class="sh-blogs">
-      <a class="sh-blog" href="/blog/cuisine-mediterraneenne">
-        <div class="ico">🫒</div>
-        <div><div class="cat">Nutrition</div><h3>Les secrets de la cuisine méditerranéenne</h3><div class="mins">6 min · 10 mars 2025</div></div>
-      </a>
-      <a class="sh-blog" href="/blog/macronutriments-guide">
-        <div class="ico">💪</div>
-        <div><div class="cat">Nutrition</div><h3>Macronutriments : le guide complet</h3><div class="mins">8 min · 25 mars 2025</div></div>
-      </a>
-      <a class="sh-blog" href="/blog/epices-indispensables">
-        <div class="ico">🌶️</div>
-        <div><div class="cat">Conseils</div><h3>Les 10 épices indispensables dans votre cuisine</h3><div class="mins">5 min · 2 avril 2025</div></div>
-      </a>
-      <a class="sh-blog" href="/blog/zero-gaspillage">
-        <div class="ico">♻️</div>
-        <div><div class="cat">Conseils</div><h3>Zéro gaspillage : transformer les restes</h3><div class="mins">5 min · 5 mai 2025</div></div>
-      </a>
-      <a class="sh-blog" href="/blog/cuisine-rapide-30-minutes">
-        <div class="ico">⚡</div>
-        <div><div class="cat">Conseils</div><h3>10 repas prêts en 30 minutes</h3><div class="mins">5 min · 1 juin 2025</div></div>
-      </a>
-      <a class="sh-blog" href="/blog/microbiote-intestinal">
-        <div class="ico">🦠</div>
-        <div><div class="cat">Nutrition</div><h3>Microbiote intestinal : soigner sa flore</h3><div class="mins">6 min · 22 mai 2025</div></div>
-      </a>
-    </div>
-  </div>
-
-  <!-- ── APP FEATURES ── -->
-  <div class="sh-section" style="padding-top:36px">
-    <div class="sh-section-head">
-      <h2>✨ Tout ce que Walkart fait pour vous</h2>
-    </div>
-    <div class="sh-features">
-      <div class="sh-feat">
-        <span class="ico">🔍</span>
-        <h3>Recherche avancée</h3>
-        <p>Filtrez par ingrédients, cuisine, temps, régime (végétarien, vegan, sans gluten) et valeurs nutritionnelles.</p>
-      </div>
-      <div class="sh-feat">
-        <span class="ico">📅</span>
-        <h3>Planificateur de repas</h3>
-        <p>Organisez votre semaine et générez automatiquement votre liste de courses en quelques secondes.</p>
-      </div>
-      <div class="sh-feat">
-        <span class="ico">💪</span>
-        <h3>Suivi nutritionnel</h3>
-        <p>Analysez les macronutriments et calories de chaque recette. Atteignez vos objectifs santé.</p>
-      </div>
-      <div class="sh-feat">
-        <span class="ico">🛒</span>
-        <h3>Liste de courses</h3>
-        <p>Générée automatiquement à partir de vos recettes, organisée par rayon de supermarché.</p>
-      </div>
-      <div class="sh-feat">
-        <span class="ico">❤️</span>
-        <h3>Favoris & Collections</h3>
-        <p>Sauvegardez vos recettes préférées et créez des collections personnalisées.</p>
-      </div>
-      <div class="sh-feat">
-        <span class="ico">🌍</span>
-        <h3>6 langues</h3>
-        <p>Disponible en français, anglais, espagnol, arabe, italien et japonais.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── CTA STRIP ── -->
-  <div class="sh-strip">
-    <h2>Prêt à cuisiner mieux ?</h2>
-    <p>Rejoignez des milliers d'utilisateurs qui planifient leurs repas et mangent mieux avec Walkart. Gratuit et sans inscription.</p>
-    <button class="sh-strip-btn" onclick="document.getElementById('sh').style.display='none'">Démarrer maintenant →</button>
-  </div>
-
-  <!-- ── STATIC FOOTER ── -->
-  <div class="sh-footer">
-    <div class="sh-footer-links">
-      <a href="/">Accueil</a>
+      <a href="/" class="active">Accueil</a>
       <a href="/recettes">Recettes</a>
       <a href="/blog">Blog</a>
       <a href="/about">À propos</a>
-      <a href="/privacy">Confidentialité</a>
       <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-search">
+      <input type="text" id="header-q" placeholder="Rechercher une recette…" aria-label="Recherche">
+      <button onclick="window.location.href='/recettes/?search='+encodeURIComponent(document.getElementById('header-q').value)" aria-label="Chercher">🔍</button>
     </div>
-    <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">☰</button>
   </div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="/">Accueil</a>
+    <a href="/recettes">Recettes</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
 
-</div><!-- end #sh -->
-</main>
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>🍽️ Des milliers de recettes du monde entier</h1>
+    <p>Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez, planifiez et cuisinez pas à pas.</p>
+    <div class="hero-search">
+      <input id="hero-q" type="text" placeholder="Rechercher une recette, un ingrédient…" aria-label="Recherche de recette">
+      <button onclick="window.location.href='/recettes/?search='+encodeURIComponent(document.getElementById('hero-q').value)">🔍 Chercher</button>
+    </div>
+  </div>
+</section>
 
-<!-- Favorites badge (hidden, managed by JS) -->
-<span class="fav-tab-badge" id="fav-tab-badge" style="display:none;"></span>
+<!-- ═══════════════════════════════════
+     PUBLICITÉ
+═══════════════════════════════════ -->
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-<!-- Settings Panel -->
-<div id="settings-panel" onclick="if(event.target===this)UI.closeSettings()">
-  <div class="settings-drawer">
-    <div class="settings-handle-bar"></div>
-    <h2 class="settings-title">⚙️ Paramètres</h2>
-    <div id="settings-content"></div>
+<!-- ═══════════════════════════════════
+     CUISINES DU MONDE
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>🌍 Cuisines du monde</h2>
+    <a href="/recettes">Voir tout →</a>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=260&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
+      <div class="cat-label">Méditerranée<span class="cat-sub">Grèce · Italie · Maroc</span></div>
+    </a>
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=260&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
+      <div class="cat-label">Asiatique<span class="cat-sub">Japon · Thaï · Inde</span></div>
+    </a>
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=260&fit=crop&auto=format" alt="Végétarien" loading="lazy">
+      <div class="cat-label">Végétarien<span class="cat-sub">Sans viande · Équilibré</span></div>
+    </a>
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=260&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
+      <div class="cat-label">Rapide &lt;30 min<span class="cat-sub">Soir de semaine</span></div>
+    </a>
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1488461854538-674ad22f08cd?w=400&h=260&fit=crop&auto=format" alt="Cuisine économique" loading="lazy">
+      <div class="cat-label">Budget<span class="cat-sub">Économique · Simple</span></div>
+    </a>
+    <a class="cat-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=260&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
+      <div class="cat-label">Vegan<span class="cat-sub">100% végétal</span></div>
+    </a>
   </div>
 </div>
 
-<script src="js/i18n.js?v=12.0"></script>
-<script src="app.js?v=30.1"></script>
-<script src="features.js?v=2.0"></script>
-<script src="features2.js?v=3.1"></script>
-<script src="blog.js?v=1.0"></script>
+<!-- ═══════════════════════════════════
+     RECETTES POPULAIRES
+═══════════════════════════════════ -->
+<div class="section" style="padding-top:48px">
+  <div class="section-head">
+    <h2>⭐ Recettes populaires</h2>
+    <a href="/recettes">Voir tout →</a>
+  </div>
+  <div class="recipe-grid">
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=280&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag fast">15 min</span></div>
+        <h3>Salade grecque authentique</h3>
+        <p>Tomates, concombres, feta, olives et origan frais.</p>
+        <div class="recipe-meta"><span>⏱ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
+      </div>
+    </a>
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=280&fit=crop&auto=format" alt="Spaghetti Carbonara" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Italien</span></div>
+        <h3>Spaghetti Carbonara</h3>
+        <p>La vraie recette romaine, œufs, pecorino et guanciale.</p>
+        <div class="recipe-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+      </div>
+    </a>
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">25 min</span></div>
+        <h3>Curry de pois chiches</h3>
+        <p>Épicé, crémeux et nourrissant — comfort food végétalien.</p>
+        <div class="recipe-meta"><span>⏱ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=280&fit=crop&auto=format" alt="Sushi maki" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag">Japonais</span></div>
+        <h3>Sushi maki maison</h3>
+        <p>Apprenez à rouler vos propres makis avec saumon frais.</p>
+        <div class="recipe-meta"><span>⏱ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
+      </div>
+    </a>
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=280&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Mexicain</span></div>
+        <h3>Tacos de bœuf épicés</h3>
+        <p>Viande épicée, avocat, coriandre et salsa maison.</p>
+        <div class="recipe-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      </div>
+    </a>
+    <a class="recipe-card" href="/recettes">
+      <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=280&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
+      <div class="recipe-card-body">
+        <div class="recipe-tags"><span class="tag">Classique</span></div>
+        <h3>Poulet rôti aux herbes</h3>
+        <p>Doré et juteux, parfumé au thym et romarin.</p>
+        <div class="recipe-meta"><span>⏱ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PUBLICITÉ
+═══════════════════════════════════ -->
+<div class="ad-wrap" style="margin-top:48px">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ═══════════════════════════════════
+     BLOG CUISINE & NUTRITION
+═══════════════════════════════════ -->
+<div class="section" style="padding-top:48px">
+  <div class="section-head">
+    <h2>📝 Blog Cuisine &amp; Nutrition</h2>
+    <a href="/blog">Voir le blog →</a>
+  </div>
+  <div class="blog-grid">
+    <a class="blog-card" href="/blog/cuisine-mediterraneenne">
+      <div class="icon">🫒</div>
+      <div>
+        <div class="cat">Nutrition</div>
+        <h3>Les secrets de la cuisine méditerranéenne</h3>
+        <div class="mins">6 min · 10 mars 2025</div>
+      </div>
+    </a>
+    <a class="blog-card" href="/blog/macronutriments-guide">
+      <div class="icon">💪</div>
+      <div>
+        <div class="cat">Nutrition</div>
+        <h3>Macronutriments : le guide complet</h3>
+        <div class="mins">8 min · 25 mars 2025</div>
+      </div>
+    </a>
+    <a class="blog-card" href="/blog/epices-indispensables">
+      <div class="icon">🌶️</div>
+      <div>
+        <div class="cat">Conseils</div>
+        <h3>Les 10 épices indispensables dans votre cuisine</h3>
+        <div class="mins">5 min · 2 avril 2025</div>
+      </div>
+    </a>
+    <a class="blog-card" href="/blog/zero-gaspillage">
+      <div class="icon">♻️</div>
+      <div>
+        <div class="cat">Conseils</div>
+        <h3>Zéro gaspillage : transformer les restes</h3>
+        <div class="mins">5 min · 5 mai 2025</div>
+      </div>
+    </a>
+    <a class="blog-card" href="/blog/cuisine-rapide-30-minutes">
+      <div class="icon">⚡</div>
+      <div>
+        <div class="cat">Conseils</div>
+        <h3>10 repas prêts en 30 minutes</h3>
+        <div class="mins">5 min · 1 juin 2025</div>
+      </div>
+    </a>
+    <a class="blog-card" href="/blog/microbiote-intestinal">
+      <div class="icon">🦠</div>
+      <div>
+        <div class="cat">Nutrition</div>
+        <h3>Microbiote intestinal : soigner sa flore</h3>
+        <div class="mins">6 min · 22 mai 2025</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     FONCTIONNALITÉS
+═══════════════════════════════════ -->
+<div class="section" style="padding-top:48px">
+  <div class="section-head">
+    <h2>✨ Tout ce que Walkart fait pour vous</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="ico">🔍</span>
+      <h3>Recherche avancée</h3>
+      <p>Filtrez par ingrédients, cuisine, temps, régime alimentaire et valeurs nutritionnelles.</p>
+    </div>
+    <div class="feat-card">
+      <span class="ico">📅</span>
+      <h3>Planificateur de repas</h3>
+      <p>Organisez votre semaine et générez automatiquement votre liste de courses.</p>
+    </div>
+    <div class="feat-card">
+      <span class="ico">💪</span>
+      <h3>Suivi nutritionnel</h3>
+      <p>Analysez les macronutriments et calories de chaque recette pour atteindre vos objectifs.</p>
+    </div>
+    <div class="feat-card">
+      <span class="ico">🛒</span>
+      <h3>Liste de courses</h3>
+      <p>Générée automatiquement à partir de vos recettes, organisée par rayon de supermarché.</p>
+    </div>
+    <div class="feat-card">
+      <span class="ico">❤️</span>
+      <h3>Favoris &amp; Collections</h3>
+      <p>Sauvegardez vos recettes préférées et créez des collections personnalisées.</p>
+    </div>
+    <div class="feat-card">
+      <span class="ico">🌍</span>
+      <h3>6 langues</h3>
+      <p>Disponible en français, anglais, espagnol, arabe, italien et japonais.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     CTA
+═══════════════════════════════════ -->
+<div class="cta-strip">
+  <h2>Prêt à cuisiner mieux ?</h2>
+  <p>Rejoignez des milliers de passionnés de cuisine qui planifient leurs repas et mangent mieux avec Walkart. Gratuit et sans inscription.</p>
+  <a class="cta-btn" href="/recettes">Explorer les recettes →</a>
+</div>
+
+<!-- ═══════════════════════════════════
+     PIED DE PAGE
+═══════════════════════════════════ -->
+<footer>
+  <div class="footer-links">
+    <a href="/">Accueil</a>
+    <a href="/recettes">Recettes</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">À propos</a>
+    <a href="/privacy">Confidentialité</a>
+    <a href="/contact">Contact</a>
+  </div>
+  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+</footer>
+
 </body>
 </html>
