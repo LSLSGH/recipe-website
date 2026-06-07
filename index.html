@@ -3,288 +3,645 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkart — Affiliate Marketing Platform for Publishers</title>
-  <meta name="description" content="Walkart helps publishers monetize their commerce traffic with access to 48,500+ merchants and 50+ affiliate networks. Join thousands of editorial and shopping publishers.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Walkart Deals — Best Daily Deals on Amazon &amp; Walmart</title>
+  <meta name="description" content="Shop the best daily deals, clearance finds, and flash sales on baby items, home goods, outdoor furniture, fashion, and electronics. Updated every day.">
+  <meta name="keywords" content="deals, clearance, amazon deals, walmart deals, baby deals, home deals, summer deals, flash sale">
   <meta name="robots" content="index, follow">
   <meta name='impact-site-verification' value='edd4535b-3195-47ec-8942-c80192ce4c63'>
   <link rel="canonical" href="https://www.walkart.us/">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Walkart — Affiliate Marketing Platform for Publishers">
-  <meta property="og:description" content="Monetize your commerce traffic with access to 48,500+ merchants and 50+ networks.">
+  <meta property="og:site_name" content="Walkart Deals">
+  <meta property="og:title" content="Walkart Deals — Best Daily Deals on Amazon &amp; Walmart">
+  <meta property="og:description" content="Shop the best daily deals, clearance finds, and flash sales. Updated every day.">
   <meta property="og:url" content="https://www.walkart.us/">
-  <meta property="og:site_name" content="Walkart">
+  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Walkart Deals — Best Daily Deals">
+  <meta name="twitter:description" content="Shop the best daily deals, clearance finds, and flash sales on Amazon &amp; Walmart.">
+
+  <!-- Affiliate disclosure (FTC) -->
+  <meta name="affiliate-disclosure" content="This site contains affiliate links. We may earn a commission when you click and purchase.">
+
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
+<!-- ── Alert bar ── -->
+<div class="alert-bar">
+  🔥 Flash Deals Updated Daily — Limited Quantities, Shop Before They're Gone!
+</div>
+
 <!-- ── Header ── -->
 <header class="header">
   <div class="container">
     <div class="header-inner">
-      <a href="/" class="logo">Walk<span>art</span></a>
+      <a href="/" class="logo">Walk<span>art</span> <span style="font-size:14px;font-weight:700;color:var(--orange)">DEALS</span></a>
       <nav class="nav">
-        <a href="/how-it-works/">How it works</a>
-        <a href="/publishers/">Publishers</a>
-        <a href="/merchants/">Merchants</a>
-        <a href="/networks/">Networks</a>
-        <a href="/blog/">Resources</a>
+        <a href="/deals/baby-kids/" class="active">👶 Baby &amp; Kids</a>
+        <a href="/deals/home/">🏠 Home</a>
+        <a href="/deals/outdoor/">☀️ Outdoor</a>
+        <a href="/deals/bedding/">🛏️ Bedding</a>
+        <a href="/deals/fashion/">👗 Fashion</a>
+        <a href="/deals/electronics/">📱 Electronics</a>
+        <a href="/blog/">📖 Guides</a>
       </nav>
-      <div class="header-actions">
-        <a href="/login/" class="btn btn-outline">Log in</a>
-        <a href="/publishers/" class="btn btn-primary">Get started</a>
+      <div class="header-search">
+        <div class="search-box">
+          <input type="text" placeholder="Search deals…" aria-label="Search deals">
+          <button aria-label="Search">🔍</button>
+        </div>
       </div>
-      <button class="hamburger" aria-label="Menu">
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open')">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <nav class="mobile-nav">
-    <a href="/how-it-works/">How it works</a>
-    <a href="/publishers/">Publishers</a>
-    <a href="/merchants/">Merchants</a>
-    <a href="/networks/">Networks</a>
-    <a href="/blog/">Resources</a>
-    <a href="/login/" class="btn btn-outline btn-full">Log in</a>
-    <a href="/publishers/" class="btn btn-primary btn-full">Get started free</a>
+    <a href="/deals/baby-kids/">👶 Baby &amp; Kids</a>
+    <a href="/deals/home/">🏠 Home &amp; Storage</a>
+    <a href="/deals/outdoor/">☀️ Outdoor &amp; Summer</a>
+    <a href="/deals/bedding/">🛏️ Bedding &amp; Bath</a>
+    <a href="/deals/fashion/">👗 Fashion &amp; Style</a>
+    <a href="/deals/electronics/">📱 Electronics</a>
+    <a href="/blog/">📖 Deal Guides</a>
   </nav>
 </header>
 
 <!-- ── Hero ── -->
-<section class="hero">
+<section class="hero-banner">
   <div class="container">
     <div class="hero-inner">
-      <div class="hero-text">
-        <span class="hero-badge">Affiliate Platform</span>
-        <h1>Monetize your commerce traffic effortlessly</h1>
-        <p class="hero-sub">Connect your editorial or shopping platform to 48,500+ merchants and 50+ affiliate networks — and start earning in minutes.</p>
-        <div class="hero-actions">
-          <a href="/publishers/" class="btn btn-white btn-lg">Sign up free</a>
-          <a href="/how-it-works/" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;">How it works</a>
+      <div>
+        <span class="hero-tag">🔥 Today's Best Deals</span>
+        <h1>Incredible deals on<br>Amazon &amp; Walmart</h1>
+        <p>Hand-picked clearance finds, flash sales, and price drops — updated daily so you never miss a bargain.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="/deals/baby-kids/" class="btn btn-orange btn-lg">Shop Baby Deals</a>
+          <a href="/deals/outdoor/" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)">Summer Deals ☀️</a>
         </div>
         <div class="hero-stats">
-          <div>
-            <div class="hero-stat-value">48,500+</div>
-            <div class="hero-stat-label">Merchants</div>
+          <div><div class="hero-stat-val">71+</div><div class="hero-stat-lbl">Active deals</div></div>
+          <div><div class="hero-stat-val">Daily</div><div class="hero-stat-lbl">New additions</div></div>
+          <div><div class="hero-stat-val">$0</div><div class="hero-stat-lbl">Cost to use</div></div>
+        </div>
+      </div>
+      <div class="hero-deals-preview">
+        <a href="https://mavely.app.link/FmksXRZcL3b" target="_blank" rel="noopener sponsored" class="hero-deal-card">
+          <span class="hero-deal-icon">🧸</span>
+          <div><div class="hero-deal-title">Baby Hoodie — Only $2.24!</div><div class="hero-deal-price">That's basically FREE 😳</div></div>
+        </a>
+        <a href="https://mavely.app.link/aQVz5DjPK3b" target="_blank" rel="noopener sponsored" class="hero-deal-card">
+          <span class="hero-deal-icon">🛏️</span>
+          <div><div class="hero-deal-title">King Cotton Sheets — 50% OFF</div><div class="hero-deal-price">Huge bedding clearance</div></div>
+        </a>
+        <a href="https://mavely.app.link/U7qkd7fdL3b" target="_blank" rel="noopener sponsored" class="hero-deal-card">
+          <span class="hero-deal-icon">🎧</span>
+          <div><div class="hero-deal-title">Apple AirPods Rollback</div><div class="hero-deal-price">Walmart — major price drop</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Baby & Kids ── -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">👶</span> Baby &amp; Kids Deals</h2>
+      <a href="/deals/baby-kids/" class="view-all">View all →</a>
+    </div>
+    <div class="deals-grid">
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf2f8">🧸</div>
+        <div class="deal-card-badges"><span class="badge badge-free">$2.24</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Soft Baby Hoodie — Almost Free!</div>
+          <div class="deal-card-desc">Incredibly soft hoodie for babies at a price that feels like a mistake. Grab multiple sizes.</div>
+          <div class="deal-card-price"><span class="price-now">$2.24</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/FmksXRZcL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fef9ee">🌙</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">$10.98</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Character Pajama Set — $10.98</div>
+          <div class="deal-card-desc">Fun character PJs perfect for bedtime. Soft, cozy, and kids absolutely love them.</div>
+          <div class="deal-card-price"><span class="price-now">$10.98</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/3k3EWX0cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff0f6">🎀</div>
+        <div class="deal-card-badges"><span class="badge badge-clearance">$5</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Minnie Mouse 2-Piece Outfit — $5</div>
+          <div class="deal-card-desc">A complete Minnie Mouse outfit for only $5! Perfect gift or everyday wear for little girls.</div>
+          <div class="deal-card-price"><span class="price-now">$5.00</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/8aSTLDadL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#f0fdf4">🥤</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">HOT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">25 Kids Cups — Under $4</div>
+          <div class="deal-card-desc">25 cups for less than $4? Insane value! Great for school lunches, parties, and daily use.</div>
+          <div class="deal-card-price"><span class="price-now">Under $4</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/sHB7gV5cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#eff6ff">👖</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">PRICE DROP</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Girls Denim Shorts — Price Drop</div>
+          <div class="deal-card-desc">Summer essential for girls — denim shorts with a huge price drop. All sizes available.</div>
+          <div class="deal-card-price"><span class="price-now">Price Drop ☀️</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/QIizVV3cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf4ff">👶</div>
+        <div class="deal-card-badges"><span class="badge badge-clearance">CLEARANCE</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Baby Trend Nursery Center — On Sale</div>
+          <div class="deal-card-desc">Complete nursery center officially on sale. The perfect setup for new parents — don't wait!</div>
+          <div class="deal-card-price"><span class="price-now">Sale Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/DYY9VLpdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fef3c7">🎁</div>
+        <div class="deal-card-badges"><span class="badge badge-clearance">$5</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Baby Shower Gift Set — $5</div>
+          <div class="deal-card-desc">Show up to the baby shower looking like a big spender — only paid $5. Perfect clearance find.</div>
+          <div class="deal-card-price"><span class="price-now">$5.00</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/Tvve8KiPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#ecfdf5">🌡️</div>
+        <div class="deal-card-badges"><span class="badge badge-new">NEW</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Otter Kids Thermometer</div>
+          <div class="deal-card-desc">Adorable otter-themed thermometer that kids actually enjoy using. A parent-approved must-have.</div>
+          <div class="deal-card-price"><span class="price-now">Great Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/E4mwFDldL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Outdoor & Summer ── -->
+<section class="section" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">☀️</span> Outdoor &amp; Summer Deals</h2>
+      <a href="/deals/outdoor/" class="view-all">View all →</a>
+    </div>
+    <div class="deals-grid">
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff7ed">❄️</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">HOT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Portable Air Cooler — Summer Essential</div>
+          <div class="deal-card-desc">Stay cool all summer with this powerful portable air cooler. Perfect for bedroom, office, or patio.</div>
+          <div class="deal-card-price"><span class="price-now">On Sale 🔥</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/KJnpDqZcL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#f0fdf4">🪿</div>
+        <div class="deal-card-badges"><span class="badge badge-new">TRENDING</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Gary the Porch Goose — Everyone Wants One!</div>
+          <div class="deal-card-desc">The viral porch decoration everyone is obsessed with! Gary the Goose is finally in stock.</div>
+          <div class="deal-card-price"><span class="price-now">Shop Now</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/enoaD72cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff1f2">🪑</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">SUMMER PICK</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Outdoor Rocking Chair — Summer Must-Have</div>
+          <div class="deal-card-desc">This rocking chair deserves its own walk-up song. Stylish, durable, and perfect for the porch.</div>
+          <div class="deal-card-price"><span class="price-now">Great Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/Ociiyp5cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#eff6ff">🏖️</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">GAME CHANGER</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Sand-Free Beach Blanket</div>
+          <div class="deal-card-desc">No more sandy mess! This revolutionary beach blanket keeps sand off you and your family all day long.</div>
+          <div class="deal-card-price"><span class="price-now">On Sale ☀️</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/xd1dqLgPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fefce8">🍖</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">SUMMER</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">BBQ &amp; Camping Accessories</div>
+          <div class="deal-card-desc">Adorable and functional — perfect for BBQs, camping trips, and summer hangouts. US-themed design.</div>
+          <div class="deal-card-price"><span class="price-now">Flash Sale</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/tRpId7bPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#f0fdf4">⛺</div>
+        <div class="deal-card-badges"><span class="badge badge-new">NEW</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Glamping Essentials Set</div>
+          <div class="deal-card-desc">Weekend vibes? Go glamping in style! Everything you need for a luxurious outdoor experience.</div>
+          <div class="deal-card-price"><span class="price-now">Shop Now</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/1cEMywsdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff7ed">💦</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">1K+ BOUGHT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Summer Water Fun — 1,000+ Sold Yesterday!</div>
+          <div class="deal-card-desc">Over 1,000 people bought this since yesterday — must be amazing! Best outdoor toy of the week.</div>
+          <div class="deal-card-price"><span class="price-now">Hot Deal 🔥</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/ufTFJQtdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf4ff">🎪</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">BEST PICK</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Best Outdoor Toy of the Week!</div>
+          <div class="deal-card-desc">The outdoor toy everyone is talking about — fun for the whole family. Won't stay in stock for long.</div>
+          <div class="deal-card-price"><span class="price-now">Limited Stock</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/UFD4egtdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Home & Storage ── -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">🏠</span> Home &amp; Storage Deals</h2>
+      <a href="/deals/home/" class="view-all">View all →</a>
+    </div>
+    <div class="deals-grid">
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#eff6ff">📦</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">ON SALE</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Sterilite 27-Gallon Storage Bin</div>
+          <div class="deal-card-desc">The large 27-gallon Sterilite bin is on sale right now. Perfect for garage, closet, or basement storage.</div>
+          <div class="deal-card-price"><span class="price-now">Sale Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/8U1tNyaPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf2f8">🎀</div>
+        <div class="deal-card-badges"><span class="badge badge-new">CUTE</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Storage Bins with Bow-Printed Lids</div>
+          <div class="deal-card-desc">Storage but make it cute! Bow-printed lids that look great in any room. Functional meets adorable.</div>
+          <div class="deal-card-price"><span class="price-now">Shop Now</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/aHcPzPePK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#f0fdf4">🗂️</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">HOT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Room Organizer Set — Way Less!</div>
+          <div class="deal-card-desc">Organize your entire room for way less than you'd expect. Hurry — this price won't last!</div>
+          <div class="deal-card-price"><span class="price-now">Flash Sale</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/wO0hOIcdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fefce8">🪑</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">$49</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Mainstays 6-Foot Folding Table — $49</div>
+          <div class="deal-card-desc">Walmart rollback on the Mainstays 6-foot white folding table. Perfect for parties, events, and garage sales.</div>
+          <div class="deal-card-price"><span class="price-now">$49.00</span><span class="price-was">$69.99</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/pMEs3agdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Bedding & Bath ── -->
+<section class="section" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">🛏️</span> Bedding &amp; Bath Deals</h2>
+      <a href="/deals/bedding/" class="view-all">View all →</a>
+    </div>
+    <div class="deals-grid">
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#eff6ff">👑</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">50% OFF</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">King Cotton Sheets — 50% OFF!</div>
+          <div class="deal-card-desc">Half off King cotton sheets — jaw-dropping deal on premium bedding. Soft, breathable, and luxurious.</div>
+          <div class="deal-card-price"><span class="price-now">50% OFF</span><span class="price-save">HUGE SAVE</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/aQVz5DjPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf2f8">✨</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">SILKY SOFT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Silky Soft Sheet Set</div>
+          <div class="deal-card-desc">This sheet set is silky smooth and dreamy to sleep on. Don't miss this bedding deal!</div>
+          <div class="deal-card-price"><span class="price-now">Flash Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/Gjfm7PkdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff7ed">🔥</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">HOT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Towel Warmer — Too Good to Ignore!</div>
+          <div class="deal-card-desc">Stop scrolling! This towel warmer on sale is absolutely worth every penny. Spa vibes at home.</div>
+          <div class="deal-card-price"><span class="price-now">On Sale</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/uwNYrrdPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#ecfdf5">😴</div>
+        <div class="deal-card-badges"><span class="badge badge-new">COZY</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Hanes Sleep Shorts — So Soft &amp; Cozy</div>
+          <div class="deal-card-desc">Hanes sleep shorts are back — super soft, cozy, and perfect for warm summer nights. Grab your size!</div>
+          <div class="deal-card-price"><span class="price-now">Sale Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/gmvLQ7bdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Fashion + Electronics ── -->
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+
+      <!-- Fashion -->
+      <div>
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-icon">👗</span> Fashion Deals</h2>
+          <a href="/deals/fashion/" class="view-all">View all →</a>
+        </div>
+        <div class="deals-grid deals-grid-2">
+          <div class="deal-card">
+            <div class="deal-card-img" style="background:#fff0f6">👡</div>
+            <div class="deal-card-badges"><span class="badge badge-hot">$7</span></div>
+            <div class="deal-card-body">
+              <div class="deal-card-title">Women's Sandals — $7!</div>
+              <div class="deal-card-desc">$15 sandals down to just $7. Absolute insanity — grab your size fast!</div>
+              <div class="deal-card-price"><span class="price-now">$7.00</span><span class="price-was">$15.00</span><span class="price-save">Save $8</span></div>
+              <div class="deal-card-cta"><a href="https://mavely.app.link/xX2HePkPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Shop Now 🛒</a></div>
+            </div>
           </div>
-          <div>
-            <div class="hero-stat-value">50+</div>
-            <div class="hero-stat-label">Networks</div>
+          <div class="deal-card">
+            <div class="deal-card-img" style="background:#fef9ee">👙</div>
+            <div class="deal-card-badges"><span class="badge badge-deal">SUMMER</span></div>
+            <div class="deal-card-body">
+              <div class="deal-card-title">Hot Weather Outfit — Summer Drop</div>
+              <div class="deal-card-desc">Perfect fits for hot weather. Fresh summer styles — comfortable and totally on trend.</div>
+              <div class="deal-card-price"><span class="price-now">Price Drop</span></div>
+              <div class="deal-card-cta"><a href="https://mavely.app.link/LEh2Zf3cL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Shop Now 🛒</a></div>
+            </div>
           </div>
-          <div>
-            <div class="hero-stat-value">100K+</div>
-            <div class="hero-stat-label">Publishers</div>
+        </div>
+      </div>
+
+      <!-- Electronics -->
+      <div>
+        <div class="section-header">
+          <h2 class="section-title"><span class="title-icon">📱</span> Electronics Deals</h2>
+          <a href="/deals/electronics/" class="view-all">View all →</a>
+        </div>
+        <div class="deals-grid deals-grid-2">
+          <div class="deal-card">
+            <div class="deal-card-img" style="background:#f0f9ff">🎧</div>
+            <div class="deal-card-badges"><span class="badge badge-hot">ROLLBACK</span></div>
+            <div class="deal-card-body">
+              <div class="deal-card-title">Apple AirPods — Walmart Rollback</div>
+              <div class="deal-card-desc">Apple AirPods at a Walmart rollback price. I'd grab them SO fast — this never lasts long!</div>
+              <div class="deal-card-price"><span class="price-now">Rollback 🎧</span></div>
+              <div class="deal-card-cta"><a href="https://mavely.app.link/U7qkd7fdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Shop Now 🛒</a></div>
+            </div>
+          </div>
+          <div class="deal-card">
+            <div class="deal-card-img" style="background:#fff7ed">🍳</div>
+            <div class="deal-card-badges"><span class="badge badge-clearance">CLEARANCE</span></div>
+            <div class="deal-card-body">
+              <div class="deal-card-title">Cute Air Fryer on Clearance!</div>
+              <div class="deal-card-desc">A stylish and functional air fryer at clearance prices. Compact, cute, and a kitchen game-changer.</div>
+              <div class="deal-card-price"><span class="price-now">Clearance</span></div>
+              <div class="deal-card-cta"><a href="https://mavely.app.link/DtVbtshdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Shop Now 🛒</a></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Publisher card (mirrors the SkimSource UI) -->
-      <div class="hero-card">
-        <h2>I am a Publisher</h2>
-        <p class="card-desc">Join us to effortlessly monetize your commerce traffic with access to 48,500 merchants and 50+ networks.</p>
-        <a href="/publishers/" class="btn btn-primary btn-full btn-lg" style="margin-bottom:20px">Sign up</a>
-        <ul class="checklist">
-          <li>Editorial publishers</li>
-          <li>Shopping platforms (deal, wishlist, payment)</li>
-          <li>Content creators &amp; influencers</li>
-          <li>Coupon &amp; cashback sites</li>
-        </ul>
-        <p class="card-note">Free to join — no minimum traffic requirement</p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ── Stats bar ── -->
-<section class="stats-bar">
+<!-- ── More Deals ── -->
+<section class="section" style="background:var(--bg)">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-value" data-count="48500" data-suffix="+">48,500+</div>
-        <div class="stat-label">Merchants worldwide</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" data-count="50" data-suffix="+">50+</div>
-        <div class="stat-label">Affiliate networks</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" data-count="100000" data-suffix="+">100,000+</div>
-        <div class="stat-label">Active publishers</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" data-count="99" data-suffix="%">99%</div>
-        <div class="stat-label">Link coverage rate</div>
-      </div>
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">💥</span> More Flash Deals</h2>
     </div>
-  </div>
-</section>
+    <div class="deals-grid">
 
-<!-- ── How it works ── -->
-<section class="section">
-  <div class="container text-center">
-    <span class="section-tag">Simple &amp; fast</span>
-    <h2 class="section-title">Start earning in 3 steps</h2>
-    <p class="section-sub">No complex integrations. One script, one account, automatic monetization across all your content.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Sign up as a publisher</h3>
-        <p>Create your free account and add your website. Approval typically takes under 24 hours.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Add one line of code</h3>
-        <p>Paste our lightweight JavaScript snippet before the closing &lt;/body&gt; tag. That's it — no plugins needed.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Earn commissions automatically</h3>
-        <p>Every eligible product link on your site is automatically converted into an affiliate link. Watch your revenue grow.</p>
-      </div>
-    </div>
-    <div style="margin-top:40px">
-      <a href="/publishers/" class="btn btn-primary btn-lg">Get started for free</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Publisher types ── -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="text-center" style="margin-bottom:48px">
-      <span class="section-tag">Who we work with</span>
-      <h2 class="section-title">Built for every type of publisher</h2>
-      <p class="section-sub">Whether you run a blog, a deal site, or a shopping app — Walkart has you covered.</p>
-    </div>
-    <div class="pub-types">
-      <div class="pub-type-card">
-        <div class="pub-type-icon">✍️</div>
-        <h3>Editorial Publishers</h3>
-        <p>Transform your product mentions, reviews, and buying guides into revenue. Our technology automatically detects merchant links and converts them — no manual work required.</p>
-        <div class="tag-list">
-          <span class="tag">Blogs &amp; magazines</span>
-          <span class="tag">News sites</span>
-          <span class="tag">Review sites</span>
-          <span class="tag">Tech media</span>
-          <span class="tag">Lifestyle content</span>
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf4ff">🎁</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">$5</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Baby Shower Gift — Baby Clearance</div>
+          <div class="deal-card-desc">Clear the shelf on this baby shower clearance gift. Smart find at an incredible price.</div>
+          <div class="deal-card-price"><span class="price-now">$5.00</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/oYqPWjgPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
         </div>
       </div>
-      <div class="pub-type-card">
-        <div class="pub-type-icon">🛍️</div>
-        <h3>Shopping Platforms</h3>
-        <p>Power your deals engine, wishlist feature, or checkout flow with our affiliate infrastructure. Access real-time product data and commission rates from 48,500+ merchants.</p>
-        <div class="tag-list">
-          <span class="tag">Deal sites</span>
-          <span class="tag">Wishlists</span>
-          <span class="tag">Price comparison</span>
-          <span class="tag">Cashback apps</span>
-          <span class="tag">Browser extensions</span>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#ecfdf5">💚</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">DEAL</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Perfect Outdoor Night Set</div>
+          <div class="deal-card-desc">Perfect for chill outdoor nights — cozy, fun, and great for summer evenings on the porch.</div>
+          <div class="deal-card-price"><span class="price-now">Flash Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/0lfl36mPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
         </div>
       </div>
-      <div class="pub-type-card">
-        <div class="pub-type-icon">📱</div>
-        <h3>Content Creators</h3>
-        <p>Turn your audience into income. Share curated product recommendations, shoppable posts, and personalized storefronts — all tracked and paid through one dashboard.</p>
-        <div class="tag-list">
-          <span class="tag">Influencers</span>
-          <span class="tag">YouTubers</span>
-          <span class="tag">Podcasters</span>
-          <span class="tag">Newsletter writers</span>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff0f6">💝</div>
+        <div class="deal-card-badges"><span class="badge badge-new">GIFT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Perfect Gift for Him — He'll Smile for Weeks</div>
+          <div class="deal-card-desc">Open this gift and your husband will be smiling for weeks! Brilliant pick for any occasion.</div>
+          <div class="deal-card-price"><span class="price-now">Shop Now</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/HUKLgyidL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
         </div>
       </div>
-      <div class="pub-type-card">
-        <div class="pub-type-icon">💰</div>
-        <h3>Coupon &amp; Loyalty Sites</h3>
-        <p>Serve your deal-seeking audience with verified coupon codes and cashback offers from thousands of merchants. Our feed updates in real time so your offers never expire.</p>
-        <div class="tag-list">
-          <span class="tag">Coupon aggregators</span>
-          <span class="tag">Loyalty programs</span>
-          <span class="tag">Rebate sites</span>
-          <span class="tag">Reward apps</span>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#eff6ff">😂</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">BACK IN STOCK</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">It's Back! Sold Out Last Time</div>
+          <div class="deal-card-desc">This item sold out incredibly fast last time. It's back — don't wait to grab yours this time!</div>
+          <div class="deal-card-price"><span class="price-now">Limited Stock</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/6kGfRgedL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
         </div>
       </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fefce8">📦</div>
+        <div class="deal-card-badges"><span class="badge badge-clearance">$100 OFF</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Massive $100.99 Off — Won't Last Long!</div>
+          <div class="deal-card-desc">$100.99 off a major item! This price will not last long at all — run before it's gone.</div>
+          <div class="deal-card-price"><span class="price-now">$100.99 OFF</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/6Di3I4nPK3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#f0fdf4">🍊</div>
+        <div class="deal-card-badges"><span class="badge badge-deal">AMAZING</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Amazing Walmart Deal — Today Only</div>
+          <div class="deal-card-desc">Walmart just dropped a crazy deal — my wallet is ready! Must-see offer before it disappears.</div>
+          <div class="deal-card-price"><span class="price-now">Today Only</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/9BhSUnodL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fff7ed">🔮</div>
+        <div class="deal-card-badges"><span class="badge badge-hot">HOT</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Wildly Good Walmart Find</div>
+          <div class="deal-card-desc">Seriously freaking out over this deal — the price is incredible and the quality is top notch.</div>
+          <div class="deal-card-price"><span class="price-now">Crazy Price</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/yHKmd4odL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
+      <div class="deal-card">
+        <div class="deal-card-img" style="background:#fdf4ff">✨</div>
+        <div class="deal-card-badges"><span class="badge badge-new">TRENDING</span></div>
+        <div class="deal-card-body">
+          <div class="deal-card-title">Hot Deal — Everyone's Buying It</div>
+          <div class="deal-card-desc">The way everyone is buying this means it's probably amazing. Join thousands of happy shoppers!</div>
+          <div class="deal-card-price"><span class="price-now">Hot Seller</span></div>
+          <div class="deal-card-cta"><a href="https://mavely.app.link/9Vv70PgdL3b" target="_blank" rel="noopener sponsored" class="btn btn-orange btn-full btn-sm">Get This Deal 🛒</a></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ── Features ── -->
-<section class="section">
+<!-- ── Articles/Guides ── -->
+<section class="section" style="background:#fff">
   <div class="container">
-    <div class="text-center" style="margin-bottom:48px">
-      <span class="section-tag">Features</span>
-      <h2 class="section-title">Everything you need to succeed</h2>
-      <p class="section-sub">Powerful tools built for publishers who take monetization seriously.</p>
+    <div class="section-header">
+      <h2 class="section-title"><span class="title-icon">📖</span> Deal Guides &amp; Tips</h2>
+      <a href="/blog/" class="view-all">View all guides →</a>
     </div>
-    <div class="features">
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Automatic link conversion</h3>
-        <p>Our script scans your existing content and converts eligible links to affiliate links instantly — across all pages, automatically.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Real-time dashboard</h3>
-        <p>Track clicks, conversions, and earnings in real time. Drill down by merchant, page, or link to optimize your content strategy.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <h3>Global merchant coverage</h3>
-        <p>48,500+ merchants across fashion, electronics, travel, beauty, home and more — in every major market worldwide.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3>Single integration</h3>
-        <p>One JavaScript snippet gives you access to all networks simultaneously. No need to manage individual affiliate program accounts.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <h3>Fraud protection</h3>
-        <p>Enterprise-grade fraud detection protects your commissions. Every conversion is validated before payment is processed.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💳</div>
-        <h3>Flexible payouts</h3>
-        <p>Get paid monthly via bank transfer, PayPal, or check. Low minimum threshold of $10 — you earn, we pay.</p>
-      </div>
+    <div class="article-grid">
+      <a href="/blog/best-baby-deals/" class="article-card" style="color:inherit;text-decoration:none">
+        <div class="article-card-img">👶</div>
+        <div class="article-card-body">
+          <div class="article-cat">Baby &amp; Kids</div>
+          <h3>Best Baby Deals This Week — From $2.24</h3>
+          <p>From a $2.24 hoodie to a full nursery center, we've rounded up the best baby deals you can find right now.</p>
+        </div>
+      </a>
+      <a href="/blog/summer-outdoor-deals/" class="article-card" style="color:inherit;text-decoration:none">
+        <div class="article-card-img">☀️</div>
+        <div class="article-card-body">
+          <div class="article-cat">Outdoor &amp; Summer</div>
+          <h3>Top 8 Summer Outdoor Deals You Need Right Now</h3>
+          <p>Air coolers, beach blankets, rocking chairs and more — the ultimate summer deals guide for 2025.</p>
+        </div>
+      </a>
+      <a href="/blog/walmart-clearance-finds/" class="article-card" style="color:inherit;text-decoration:none">
+        <div class="article-card-img">🛒</div>
+        <div class="article-card-body">
+          <div class="article-cat">Walmart Deals</div>
+          <h3>Walmart Clearance &amp; Rollback Finds — Don't Miss These</h3>
+          <p>The best Walmart clearance finds this week, including a $49 folding table and Apple AirPods rollback.</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ── Networks ── -->
-<section class="section section-alt">
-  <div class="container text-center">
-    <span class="section-tag">Networks</span>
-    <h2 class="section-title">50+ networks, one integration</h2>
-    <p class="section-sub">We aggregate the world's leading affiliate networks so you don't have to manage them separately.</p>
-    <div class="networks-grid">
-      <div class="network-badge">Amazon Associates</div>
-      <div class="network-badge">CJ Affiliate</div>
-      <div class="network-badge">ShareASale</div>
-      <div class="network-badge">Rakuten</div>
-      <div class="network-badge">Awin</div>
-      <div class="network-badge">Impact</div>
-      <div class="network-badge">FlexOffers</div>
-      <div class="network-badge">ClickBank</div>
-      <div class="network-badge">Partnerize</div>
-      <div class="network-badge">Tradedoubler</div>
-      <div class="network-badge">Webgains</div>
-      <div class="network-badge">+ 40 more</div>
-    </div>
-    <div style="margin-top:36px">
-      <a href="/networks/" class="btn btn-outline">View all networks</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA ── -->
-<section class="cta-banner">
+<!-- ── Email signup ── -->
+<section class="email-signup">
   <div class="container">
-    <h2>Ready to monetize your traffic?</h2>
-    <p>Join 100,000+ publishers already earning with Walkart. Setup takes less than 5 minutes.</p>
-    <div class="cta-actions">
-      <a href="/publishers/" class="btn btn-white btn-lg">Sign up as Publisher</a>
-      <a href="/merchants/" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;">I am a Merchant</a>
+    <h2>🔔 Never Miss a Deal</h2>
+    <p>Get the best deals delivered to your inbox every morning — before they sell out!</p>
+    <div class="email-form">
+      <input type="email" placeholder="Your email address…" aria-label="Email address">
+      <button type="button">Get Deals Free</button>
     </div>
+    <p style="font-size:12px;opacity:.6;margin-top:12px">No spam. Unsubscribe anytime. Deals update daily.</p>
   </div>
 </section>
 
@@ -293,33 +650,39 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="/" class="logo">Walk<span style="color:#8899aa">art</span></a>
-        <p>The affiliate marketing platform connecting publishers with the world's largest merchant network.</p>
+        <a href="/" class="logo">Walk<span style="color:#6b7280">art</span> Deals</a>
+        <p>Your daily source for the best clearance finds, flash sales, and price drops on Amazon and Walmart.</p>
       </div>
       <div class="footer-col">
-        <h4>Publishers</h4>
-        <a href="/publishers/">Get started</a>
-        <a href="/how-it-works/">How it works</a>
-        <a href="/networks/">Networks</a>
-        <a href="/blog/">Resources</a>
+        <h4>Categories</h4>
+        <a href="/deals/baby-kids/">👶 Baby &amp; Kids</a>
+        <a href="/deals/home/">🏠 Home &amp; Storage</a>
+        <a href="/deals/outdoor/">☀️ Outdoor &amp; Summer</a>
+        <a href="/deals/bedding/">🛏️ Bedding &amp; Bath</a>
+        <a href="/deals/fashion/">👗 Fashion</a>
+        <a href="/deals/electronics/">📱 Electronics</a>
       </div>
       <div class="footer-col">
-        <h4>Merchants</h4>
-        <a href="/merchants/">Advertise</a>
-        <a href="/merchants/#pricing">Pricing</a>
-        <a href="/merchants/#contact">Contact sales</a>
+        <h4>Guides</h4>
+        <a href="/blog/best-baby-deals/">Best Baby Deals</a>
+        <a href="/blog/summer-outdoor-deals/">Summer Outdoor Deals</a>
+        <a href="/blog/walmart-clearance-finds/">Walmart Clearance</a>
+        <a href="/blog/">All Guides</a>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Info</h4>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
-        <a href="/privacy/">Privacy policy</a>
-        <a href="/terms/">Terms of service</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms</a>
       </div>
     </div>
+    <div class="footer-disclosure">
+      <strong>Affiliate Disclosure:</strong> Walkart Deals participates in affiliate marketing programs. When you click our links and make a purchase, we may earn a small commission at no extra cost to you. This helps us keep the site free and updated daily. We only share deals we genuinely recommend. This site uses Skimlinks technology to automatically identify and monetize qualifying product links.
+    </div>
     <div class="footer-bottom">
-      <span>© 2025 Walkart. All rights reserved.</span>
-      <span>walkart.us — Affiliate Marketing Platform</span>
+      <span>© 2025 Walkart Deals · walkart.us</span>
+      <span><a href="/privacy/" style="color:#6b7280">Privacy</a> · <a href="/terms/" style="color:#6b7280">Terms</a> · <a href="/contact/" style="color:#6b7280">Contact</a></span>
     </div>
   </div>
 </footer>
