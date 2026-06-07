@@ -1,9 +1,68 @@
 /* Walkart Deals — Main JS */
 
+/* ── Stores ticker data ── */
+const STORES = [
+  { name: 'Walmart',       abbr: 'W',    bg: '#0071CE' },
+  { name: 'Amazon',        abbr: 'A',    bg: '#FF9900' },
+  { name: 'Target',        abbr: 'T',    bg: '#CC0000' },
+  { name: 'Best Buy',      abbr: 'BB',   bg: '#0046BE' },
+  { name: 'Home Depot',    abbr: 'HD',   bg: '#F96302' },
+  { name: "Lowe's",        abbr: 'L',    bg: '#004990' },
+  { name: 'Costco',        abbr: 'C',    bg: '#005DAA' },
+  { name: "Kohl's",        abbr: 'K',    bg: '#1A5EA3' },
+  { name: "Macy's",        abbr: 'M',    bg: '#E31837' },
+  { name: 'Nordstrom',     abbr: 'N',    bg: '#111111' },
+  { name: 'TJ Maxx',       abbr: 'TJM',  bg: '#CE0000' },
+  { name: 'Nike',          abbr: 'NK',   bg: '#111111' },
+  { name: 'Adidas',        abbr: 'ADI',  bg: '#000000' },
+  { name: 'Wayfair',       abbr: 'W',    bg: '#7B2D8B' },
+  { name: 'eBay',          abbr: 'eB',   bg: '#E53238' },
+  { name: 'Etsy',          abbr: 'E',    bg: '#F1641E' },
+  { name: 'Sephora',       abbr: 'S',    bg: '#000000' },
+  { name: 'Ulta',          abbr: 'U',    bg: '#F96302' },
+  { name: 'Apple',         abbr: '',     bg: '#555555' },
+  { name: "Dick's",        abbr: 'D',    bg: '#1E3A5F' },
+  { name: 'Gap',           abbr: 'GAP',  bg: '#000000' },
+  { name: 'Old Navy',      abbr: 'ON',   bg: '#1F3762' },
+  { name: 'H&M',           abbr: 'H&M',  bg: '#E50010' },
+  { name: 'Zara',          abbr: 'ZARA', bg: '#111111' },
+  { name: 'IKEA',          abbr: 'IKEA', bg: '#0058A3' },
+  { name: 'Dollar Tree',   abbr: '$1',   bg: '#8CC63F' },
+  { name: 'Dollar General',abbr: 'DG',   bg: '#FFCC00', color: '#000' },
+  { name: 'CVS',           abbr: 'CVS',  bg: '#CC0000' },
+  { name: 'Walgreens',     abbr: 'WG',   bg: '#E31837' },
+  { name: 'PetSmart',      abbr: 'PS',   bg: '#003087' },
+  { name: 'Petco',         abbr: 'PC',   bg: '#0069B4' },
+  { name: 'Michaels',      abbr: 'M',    bg: '#BE0D34' },
+  { name: 'Hobby Lobby',   abbr: 'HL',   bg: '#006341' },
+  { name: 'Bath & Body',   abbr: 'BBW',  bg: '#9B0D2B' },
+  { name: 'REI',           abbr: 'REI',  bg: '#007847' },
+  { name: 'AutoZone',      abbr: 'AZ',   bg: '#FF6200' },
+  { name: "Sam's Club",    abbr: 'SC',   bg: '#0071CE' },
+  { name: 'Staples',       abbr: 'S',    bg: '#CC0000' },
+  { name: 'GameStop',      abbr: 'GS',   bg: '#003087' },
+  { name: "Victoria's",    abbr: 'VS',   bg: '#BA0060' },
+];
+
 // ── Replace this with your email to receive newsletter signups ──
 const NEWSLETTER_EMAIL = 'little93savage@gmail.com';
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Build store ticker ── */
+  const track = document.getElementById('ticker-track');
+  if (track && STORES.length) {
+    const buildItems = () => STORES.map(s => {
+      const icon = s.abbr === '' ? '🍎' : s.abbr;
+      const textColor = s.color || '#fff';
+      return `<div class="ticker-item">
+        <div class="ticker-badge" style="background:${s.bg};color:${textColor}">${icon}</div>
+        <span class="ticker-name">${s.name}</span>
+      </div>`;
+    }).join('');
+    // Duplicate for seamless infinite loop
+    track.innerHTML = buildItems() + buildItems();
+  }
 
   /* ── Newsletter forms (all pages) ── */
   document.querySelectorAll('.email-form, #newsletter-form').forEach(form => {
