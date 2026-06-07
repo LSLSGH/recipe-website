@@ -22,24 +22,35 @@
 <header class="header">
   <div class="container">
     <div class="header-inner">
-      <a href="/" class="logo">Walk<span>art</span></a>
+      <a href="/" class="logo">Walk<span>art</span> <span style="font-size:14px;font-weight:700;color:var(--orange)">DEALS</span></a>
       <nav class="nav">
-        <a href="/how-it-works/">How it works</a>
-        <a href="/publishers/">Publishers</a>
-        <a href="/merchants/">Merchants</a>
-        <a href="/networks/">Networks</a>
+        <a href="/deals/baby-kids/">&#x1F476; Baby &amp; Kids</a>
+        <a href="/deals/home/">&#x1F3E0; Home</a>
+        <a href="/deals/outdoor/">&#x2600;&#xFE0F; Outdoor</a>
+        <a href="/deals/bedding/">&#x1F6CF;&#xFE0F; Bedding</a>
+        <a href="/deals/fashion/">&#x1F457; Fashion</a>
+        <a href="/deals/electronics/">&#x1F4F1; Electronics</a>
+        <a href="/blog/">&#x1F4D6; Guides</a>
       </nav>
-      <div class="header-actions">
-        <a href="/login/" class="btn btn-outline">Log in</a>
-        <a href="/publishers/" class="btn btn-primary">Get started</a>
+      <div class="header-actions" style="margin-left:auto">
+        <a href="/about/" class="btn btn-outline">About</a>
+        <a href="/contact/" class="btn btn-orange">Contact</a>
       </div>
-      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
   <nav class="mobile-nav">
-    <a href="/publishers/">Publishers</a>
-    <a href="/merchants/">Merchants</a>
-    <a href="/login/" class="btn btn-outline btn-full">Log in</a>
+    <a href="/">&#x1F3E0; Home</a>
+    <a href="/deals/baby-kids/">&#x1F476; Baby &amp; Kids</a>
+    <a href="/deals/outdoor/">&#x2600;&#xFE0F; Outdoor</a>
+    <a href="/deals/bedding/">&#x1F6CF;&#xFE0F; Bedding</a>
+    <a href="/deals/fashion/">&#x1F457; Fashion</a>
+    <a href="/deals/electronics/">&#x1F4F1; Electronics</a>
+    <a href="/blog/">&#x1F4D6; Guides</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
   </nav>
 </header>
 <div class="container">
@@ -91,9 +102,41 @@
 </div>
 <footer class="footer">
   <div class="container">
-    <div class="footer-bottom" style="border-top:none;padding-top:32px">
-      <span>© 2025 Walkart. All rights reserved.</span>
-      <span><a href="/privacy/" style="color:#8899aa">Privacy</a> · <a href="/terms/" style="color:#8899aa">Terms</a> · <a href="/contact/" style="color:#8899aa">Contact</a></span>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">Walk<span style="color:#6b7280">art</span> Deals</a>
+        <p>Your daily source for the best clearance finds, flash sales, and price drops on Amazon and Walmart.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <a href="/deals/baby-kids/">Baby &amp; Kids</a>
+        <a href="/deals/home/">Home &amp; Storage</a>
+        <a href="/deals/outdoor/">Outdoor &amp; Summer</a>
+        <a href="/deals/bedding/">Bedding &amp; Bath</a>
+        <a href="/deals/fashion/">Fashion</a>
+        <a href="/deals/electronics/">Electronics</a>
+      </div>
+      <div class="footer-col">
+        <h4>Guides</h4>
+        <a href="/blog/best-baby-deals/">Best Baby Deals</a>
+        <a href="/blog/summer-outdoor-deals/">Summer Outdoor Deals</a>
+        <a href="/blog/walmart-clearance-finds/">Walmart Clearance</a>
+        <a href="/blog/">All Guides</a>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </div>
+    <div class="footer-disclosure">
+      <strong>Affiliate Disclosure:</strong> Walkart Deals participates in affiliate marketing programs. When you click our links and make a purchase, we may earn a small commission at no extra cost to you. This site uses Skimlinks technology.
+    </div>
+    <div class="footer-bottom">
+      <span>&#169; 2025 Walkart Deals &middot; walkart.us</span>
+      <span><a href="/privacy/" style="color:#6b7280">Privacy</a> &middot; <a href="/terms/" style="color:#6b7280">Terms</a> &middot; <a href="/contact/" style="color:#6b7280">Contact</a></span>
     </div>
   </div>
 </footer>
