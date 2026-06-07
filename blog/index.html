@@ -1,322 +1,225 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Cuisine & Nutrition – Walkart</title>
-  <meta name="description" content="Conseils culinaires, nutrition, recettes du monde et art de vivre. Le blog Walkart pour tout savoir sur la cuisine saine et équilibrée.">
-  <link rel="canonical" href="https://www.walkart.us/blog">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Blog Cuisine & Nutrition – Walkart">
-  <meta property="og:description" content="Conseils culinaires, nutrition, recettes du monde et art de vivre.">
-  <meta property="og:url" content="https://www.walkart.us/blog">
-  <meta property="og:image" content="https://www.walkart.us/favicon.png">
-  <link rel="icon" href="/favicon.png">
-  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
+  <title>Publisher Resources — Walkart Affiliate Platform</title>
+  <meta name="description" content="Guides, tips, and strategies to help publishers maximize their affiliate earnings with Walkart.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.walkart.us/blog/">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.7; font-size: 16px; }
-    a { color: #FF4D6D; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .site-header { background: #fff; border-bottom: 1px solid #eee; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
-    .site-header .logo { font-weight: 800; font-size: 1.2rem; color: #1a1a2e; }
-    .site-header nav a { color: #555; margin-left: 16px; font-size: 0.9rem; }
-    .hero-section { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%); color: #fff; padding: 60px 20px; text-align: center; }
-    .hero-section h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; }
-    .hero-section p { font-size: 1.05rem; opacity: 0.8; max-width: 500px; margin: 0 auto; }
-    .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 60px; }
-    .section-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #FF4D6D; margin-bottom: 8px; }
-    .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; color: #1a1a2e; }
-    .category-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-    .cat-badge { padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 2px solid #eee; color: #555; cursor: pointer; }
-    .cat-badge.active, .cat-badge:hover { border-color: #FF4D6D; color: #FF4D6D; background: #fff0f3; text-decoration: none; }
-    .articles-grid { display: grid; gap: 20px; }
-    .article-card { background: #fff; border-radius: 14px; border: 1px solid #eee; overflow: hidden; display: flex; gap: 0; transition: box-shadow 0.15s, border-color 0.15s; }
-    .article-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); border-color: #FF4D6D; text-decoration: none; }
-    .card-emoji-col { width: 100px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-shrink: 0; }
-    .card-body { padding: 20px; flex: 1; }
-    .card-meta { display: flex; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
-    .card-cat { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #FF4D6D; }
-    .card-read { font-size: 0.75rem; color: #aaa; }
-    .card-title { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; line-height: 1.4; }
-    .card-excerpt { font-size: 0.88rem; color: #666; line-height: 1.5; margin-bottom: 12px; }
-    .card-link { font-size: 0.85rem; font-weight: 700; color: #FF4D6D; }
-    .ad-slot { background: #f0f0f0; border-radius: 8px; text-align: center; padding: 8px; margin: 28px 0; min-height: 90px; }
-    footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 28px 20px; font-size: 0.83rem; }
-    footer a { color: #FF4D6D; }
-    footer .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
-    @media (max-width: 500px) {
-      .card-emoji-col { width: 70px; font-size: 2rem; }
-      .hero-section h1 { font-size: 1.6rem; }
-    }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .blog-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .blog-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .blog-card-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 52px; }
+    .blog-card-body { padding: 20px 22px 24px; }
+    .blog-tag { display: inline-block; background: var(--blue-light); color: var(--blue); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
+    .blog-card h3 { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+    .blog-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .blog-meta { font-size: 12px; color: var(--text-muted); display: flex; gap: 12px; }
+    .featured-post { background: linear-gradient(135deg, #003d82, #0057b8); border-radius: 16px; padding: 48px; color: #fff; margin-bottom: 56px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .featured-post h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+    .featured-post p { font-size: 16px; opacity: .85; line-height: 1.6; margin-bottom: 24px; }
+    .featured-icon { font-size: 80px; flex-shrink: 0; }
+    @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr 1fr; } .featured-post { grid-template-columns: 1fr; } .featured-icon { display: none; } }
+    @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-<header class="site-header">
-  <a class="logo" href="/">🍽️ Walkart</a>
-  <nav>
-    <a href="/">Accueil</a>
-    <a href="/blog">Blog</a>
-    <a href="/privacy">Confidentialité</a>
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">Walk<span>art</span></a>
+      <nav class="nav">
+        <a href="/how-it-works/">How it works</a>
+        <a href="/publishers/">Publishers</a>
+        <a href="/merchants/">Merchants</a>
+        <a href="/networks/">Networks</a>
+        <a href="/blog/" class="active">Resources</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/login/" class="btn btn-outline">Log in</a>
+        <a href="/publishers/" class="btn btn-primary">Get started</a>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="/how-it-works/">How it works</a>
+    <a href="/publishers/">Publishers</a>
+    <a href="/merchants/">Merchants</a>
+    <a href="/blog/" class="active">Resources</a>
+    <a href="/login/" class="btn btn-outline btn-full">Log in</a>
   </nav>
 </header>
 
-<div class="hero-section">
-  <h1>📝 Blog Cuisine & Nutrition</h1>
-  <p>Conseils culinaires, nutrition et art de vivre — par l'équipe Walkart</p>
-</div>
-
-<div class="wrap">
-
-  <div class="ad-slot">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<section class="page-hero">
+  <div class="container">
+    <h1>Publisher Resources</h1>
+    <p>Guides, strategies, and best practices to help you maximize your affiliate earnings.</p>
   </div>
+</section>
 
-  <p class="section-label">Tous nos articles</p>
-  <h2 class="section-title">Conseils, guides et inspiration culinaire</h2>
+<section class="section">
+  <div class="container">
 
-  <div class="category-filters">
-    <span class="cat-badge active">Tous</span>
-    <span class="cat-badge">Nutrition</span>
-    <span class="cat-badge">Conseils pratiques</span>
-    <span class="cat-badge">Cuisine du monde</span>
-    <span class="cat-badge">Cuisine</span>
-  </div>
-
-  <div class="articles-grid">
-
-    <a class="article-card" href="/blog/cuisine-rapide-30-minutes">
-      <div class="card-emoji-col">⚡</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 5 min</span>
-          <span class="card-read">📅 01 juin 2025</span>
-        </div>
-        <div class="card-title">10 repas prêts en 30 minutes : vite, bon et nutritif</div>
-        <div class="card-excerpt">Pas le temps de cuisiner ? Ces 10 recettes rapides et équilibrées vous prouvent qu'un repas sain peut être prêt en moins de 30 minutes.</div>
-        <span class="card-link">Lire l'article →</span>
+    <!-- Featured -->
+    <div class="featured-post">
+      <div>
+        <span style="display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Getting started</span>
+        <h2>Complete guide: Setting up Walkart on your site in 5 minutes</h2>
+        <p>Step-by-step instructions for adding the Walkart script, verifying your integration, and checking your first tracked clicks in the dashboard.</p>
+        <a href="/how-it-works/" class="btn btn-white">Read the guide →</a>
       </div>
-    </a>
+      <div class="featured-icon">🚀</div>
+    </div>
 
-    <a class="article-card" href="/blog/pain-maison-debutants">
-      <div class="card-emoji-col">🍞</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Cuisine</span>
-          <span class="card-read">⏱️ 7 min</span>
-          <span class="card-read">📅 28 mai 2025</span>
+    <!-- Articles grid -->
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#eff6ff">💰</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Strategy</span>
+          <h3>How to choose the highest-paying merchants for your niche</h3>
+          <p>Not all affiliate programs are equal. Here's how to identify merchants with the best commission rates and conversion performance for your audience.</p>
+          <div class="blog-meta"><span>5 min read</span><span>June 2025</span></div>
         </div>
-        <div class="card-title">Faire son pain maison : le guide complet pour débutants</div>
-        <div class="card-excerpt">Le pain maison, c'est plus simple que vous ne le pensez. Avec seulement 4 ingrédients, vous pouvez créer une miche croustillante qui impressionnera tout le monde.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/jeune-intermittent">
-      <div class="card-emoji-col">⏰</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 7 min</span>
-          <span class="card-read">📅 25 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#f0fdf4">📝</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Editorial</span>
+          <h3>Writing product reviews that convert: the editorial publisher playbook</h3>
+          <p>The structure, tone, and SEO tactics that turn product review articles into consistent affiliate revenue without sacrificing editorial integrity.</p>
+          <div class="blog-meta"><span>8 min read</span><span>May 2025</span></div>
         </div>
-        <div class="card-title">Jeûne intermittent : bienfaits, risques et guide pratique</div>
-        <div class="card-excerpt">Le jeûne intermittent est l'une des approches alimentaires les plus étudiées ces dernières années. Voici ce que la science dit vraiment.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/microbiote-intestinal">
-      <div class="card-emoji-col">🦠</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 22 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#fefce8">🛍️</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Shopping</span>
+          <h3>Deal sites in 2025: how top publishers drive $1M+ in annual commissions</h3>
+          <p>An inside look at the deal-site playbook — content cadence, merchant relationships, and the traffic channels that generate the highest EPC.</p>
+          <div class="blog-meta"><span>10 min read</span><span>May 2025</span></div>
         </div>
-        <div class="card-title">Microbiote intestinal : comment prendre soin de sa flore</div>
-        <div class="card-excerpt">Votre intestin abrite 100 000 milliards de bactéries qui influencent votre santé bien au-delà de la digestion. Voici comment les nourrir.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/cuisiner-avec-enfants">
-      <div class="card-emoji-col">👨‍👩‍👧</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 5 min</span>
-          <span class="card-read">📅 20 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#fdf4ff">📊</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Analytics</span>
+          <h3>Understanding your Walkart dashboard: clicks, EPC, and conversion rate explained</h3>
+          <p>A plain-English breakdown of every metric in your publisher dashboard and what to do when your numbers are underperforming.</p>
+          <div class="blog-meta"><span>6 min read</span><span>April 2025</span></div>
         </div>
-        <div class="card-title">Cuisiner avec les enfants : plaisir, créativité et bons souvenirs</div>
-        <div class="card-excerpt">Inviter les enfants aux fourneaux est l'une des meilleures façons de leur transmettre le goût de la cuisine et de manger sainement ensemble.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/superaliments-mythe-realite">
-      <div class="card-emoji-col">🫐</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 18 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#fff1f2">⚡</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Technical</span>
+          <h3>Does the Walkart script affect Core Web Vitals? A real performance test</h3>
+          <p>We ran Lighthouse and WebPageTest benchmarks with and without the Walkart script. Here are the actual numbers and what they mean for your SEO.</p>
+          <div class="blog-meta"><span>4 min read</span><span>April 2025</span></div>
         </div>
-        <div class="card-title">Super-aliments : mythe marketing ou vrais bienfaits nutritionnels ?</div>
-        <div class="card-excerpt">Baies de goji, spiruline, quinoa, graines de chia... Les super-aliments font régulièrement la une des magazines. Qu'en dit vraiment la science ?</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/cuisine-asiatique-debutants">
-      <div class="card-emoji-col">🍜</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Cuisine du monde</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 12 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#f0f9ff">🌍</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Global</span>
+          <h3>Monetizing international traffic: geo-targeting and local merchant programs</h3>
+          <p>If your audience spans multiple countries, you're leaving money on the table. Here's how Walkart's geo-routing serves the right merchant to the right visitor.</p>
+          <div class="blog-meta"><span>7 min read</span><span>March 2025</span></div>
         </div>
-        <div class="card-title">La cuisine asiatique pour les débutants : par où commencer ?</div>
-        <div class="card-excerpt">La cuisine asiatique semble intimidante au premier abord, mais avec les bons ingrédients de base et quelques techniques simples, vous serez étonné.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/zero-gaspillage">
-      <div class="card-emoji-col">♻️</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 5 min</span>
-          <span class="card-read">📅 5 mai 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#f0fdf4">📱</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Mobile</span>
+          <h3>Affiliate monetization for mobile apps and AMP pages</h3>
+          <p>Standard JavaScript won't work in AMP or native apps. This guide covers the amp-skimlinks component and the Walkart mobile SDK for app developers.</p>
+          <div class="blog-meta"><span>6 min read</span><span>March 2025</span></div>
         </div>
-        <div class="card-title">Zéro gaspillage : transformer les restes en plats délicieux</div>
-        <div class="card-excerpt">En France, chaque foyer jette en moyenne 29 kg de nourriture par an. Voici comment transformer vos restes en plats savoureux.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/regime-vegetarien">
-      <div class="card-emoji-col">🥦</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 7 min</span>
-          <span class="card-read">📅 26 avril 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#fff7ed">📬</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Email</span>
+          <h3>Can you use affiliate links in newsletters? A complete guide</h3>
+          <p>Most email platforms strip tracking redirects. We cover the right approach for Substack, Mailchimp, Beehiiv, and hosted newsletter landing pages.</p>
+          <div class="blog-meta"><span>5 min read</span><span>February 2025</span></div>
         </div>
-        <div class="card-title">Régime végétarien : avantages, risques et conseils pratiques</div>
-        <div class="card-excerpt">De plus en plus populaire, le régime végétarien offre de nombreux avantages pour la santé et la planète. Mais il nécessite quelques précautions essentielles.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
 
-    <a class="article-card" href="/blog/cuisine-petit-budget">
-      <div class="card-emoji-col">💰</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 18 avril 2025</span>
+      <div class="blog-card">
+        <div class="blog-card-img" style="background:#eff6ff">⚖️</div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Compliance</span>
+          <h3>FTC disclosure requirements for affiliate publishers: what you need to know in 2025</h3>
+          <p>The updated FTC guidelines on endorsements and affiliate disclosure — what's required, what language to use, and where to place disclosures.</p>
+          <div class="blog-meta"><span>7 min read</span><span>January 2025</span></div>
         </div>
-        <div class="card-title">Bien manger avec un petit budget : nos meilleures astuces</div>
-        <div class="card-excerpt">Manger sainement ne coûte pas forcément cher. Nos stratégies pour composer des repas nutritifs et savoureux pour moins de 5€ par jour.</div>
-        <span class="card-link">Lire l'article →</span>
       </div>
-    </a>
-
-    <a class="article-card" href="/blog/lire-etiquette-nutritionnelle">
-      <div class="card-emoji-col">🏷️</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 10 avril 2025</span>
-        </div>
-        <div class="card-title">Comment lire une étiquette nutritionnelle comme un expert</div>
-        <div class="card-excerpt">Les étiquettes nutritionnelles contiennent une mine d'informations. Apprenez à les déchiffrer pour faire de meilleurs choix alimentaires.</div>
-        <span class="card-link">Lire l'article →</span>
-      </div>
-    </a>
-
-    <a class="article-card" href="/blog/epices-indispensables">
-      <div class="card-emoji-col">🌶️</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 5 min</span>
-          <span class="card-read">📅 2 avril 2025</span>
-        </div>
-        <div class="card-title">Les 10 épices indispensables dans votre cuisine</div>
-        <div class="card-excerpt">Transformez vos plats avec les bonnes épices. Voici les 10 incontournables à avoir absolument dans vos placards, avec leurs usages et bienfaits.</div>
-        <span class="card-link">Lire l'article →</span>
-      </div>
-    </a>
-
-    <a class="article-card" href="/blog/macronutriments-guide">
-      <div class="card-emoji-col">💪</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 8 min</span>
-          <span class="card-read">📅 25 mars 2025</span>
-        </div>
-        <div class="card-title">Macronutriments : le guide complet pour les comprendre</div>
-        <div class="card-excerpt">Protéines, glucides, lipides : que sont vraiment les macronutriments et comment les équilibrer pour atteindre vos objectifs de santé ?</div>
-        <span class="card-link">Lire l'article →</span>
-      </div>
-    </a>
-
-    <a class="article-card" href="/blog/planifier-repas-semaine">
-      <div class="card-emoji-col">📅</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Conseils pratiques</span>
-          <span class="card-read">⏱️ 7 min</span>
-          <span class="card-read">📅 18 mars 2025</span>
-        </div>
-        <div class="card-title">Comment planifier ses repas pour toute la semaine</div>
-        <div class="card-excerpt">La planification des repas est la clé pour manger sain, gagner du temps et économiser de l'argent. Notre guide complet en 5 étapes.</div>
-        <span class="card-link">Lire l'article →</span>
-      </div>
-    </a>
-
-    <a class="article-card" href="/blog/cuisine-mediterraneenne">
-      <div class="card-emoji-col">🫒</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <span class="card-cat">Nutrition</span>
-          <span class="card-read">⏱️ 6 min</span>
-          <span class="card-read">📅 10 mars 2025</span>
-        </div>
-        <div class="card-title">Les secrets de la cuisine méditerranéenne</div>
-        <div class="card-excerpt">Découvrez pourquoi la cuisine méditerranéenne est reconnue mondialement pour ses bienfaits sur la santé et comment l'adopter au quotidien.</div>
-        <span class="card-link">Lire l'article →</span>
-      </div>
-    </a>
+    </div>
 
   </div>
+</section>
 
-  <div class="ad-slot" style="margin-top: 40px;">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to monetize your traffic?</h2>
+    <p>Create your free publisher account and start earning commissions in minutes.</p>
+    <div class="cta-actions">
+      <a href="/publishers/" class="btn btn-white btn-lg">Sign up free</a>
+      <a href="/how-it-works/" class="btn btn-lg" style="border:2px solid rgba(255,255,255,.4);color:#fff">How it works</a>
+    </div>
   </div>
+</section>
 
-</div>
-
-<footer>
-  <div class="footer-links">
-    <a href="/">Accueil</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">À propos</a>
-    <a href="/privacy">Politique de confidentialité</a>
-    <a href="/contact">Contact</a>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">Walk<span style="color:#8899aa">art</span></a>
+        <p>The affiliate marketing platform connecting publishers with the world's largest merchant network.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Publishers</h4>
+        <a href="/publishers/">Get started</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/networks/">Networks</a>
+        <a href="/blog/">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h4>Merchants</h4>
+        <a href="/merchants/">Advertise</a>
+        <a href="/merchants/#pricing">Pricing</a>
+        <a href="/merchants/#contact">Contact sales</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Walkart. All rights reserved.</span>
+      <span>walkart.us</span>
+    </div>
   </div>
-  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
 </footer>
 
+<script src="/js/main.js"></script>
+<script type="text/javascript" src="https://s.skimresources.com/js/304338X1792508.skimlinks.js"></script>
 </body>
 </html>

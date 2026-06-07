@@ -1,645 +1,330 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkart – Recettes du Monde</title>
-  <meta name="description" content="Découvrez des milliers de recettes authentiques du monde entier. Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez et cuisinez pas à pas avec Walkart.">
-  <meta name="keywords" content="recettes, cuisine du monde, recettes faciles, planificateur repas, liste de courses, recettes healthy">
+  <title>Walkart — Affiliate Marketing Platform for Publishers</title>
+  <meta name="description" content="Walkart helps publishers monetize their commerce traffic with access to 48,500+ merchants and 50+ affiliate networks. Join thousands of editorial and shopping publishers.">
   <meta name="robots" content="index, follow">
   <meta name='impact-site-verification' value='edd4535b-3195-47ec-8942-c80192ce4c63'>
   <link rel="canonical" href="https://www.walkart.us/">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Walkart">
-  <meta property="og:title" content="Walkart – Recettes du Monde">
-  <meta property="og:description" content="Découvrez des milliers de recettes authentiques du monde entier. Planifiez vos repas et cuisinez pas à pas.">
-  <meta property="og:image" content="https://www.walkart.us/favicon.png">
+  <meta property="og:title" content="Walkart — Affiliate Marketing Platform for Publishers">
+  <meta property="og:description" content="Monetize your commerce traffic with access to 48,500+ merchants and 50+ networks.">
   <meta property="og:url" content="https://www.walkart.us/">
-  <meta property="og:locale" content="fr_FR">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Walkart – Recettes du Monde">
-  <meta name="twitter:description" content="Des milliers de recettes authentiques du monde entier.">
-  <meta name="twitter:image" content="https://www.walkart.us/favicon.png">
-
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <meta name="theme-color" content="#FF4D6D">
-  <meta name="google-adsense-account" content="ca-pub-8752256622551534">
-  <meta name="p:domain_verify" content="b25c343f067d7d5f47552361ec81e18d"/>
-
-  <!-- JSON-LD: WebSite + SearchAction (Google Sitelinks Search) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Walkart",
-    "url": "https://www.walkart.us",
-    "description": "Des milliers de recettes authentiques du monde entier. Méditerranée, Asie, Végétarien, Rapide, Budget…",
-    "inLanguage": "fr",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.walkart.us/recettes/?search={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Walkart",
-    "url": "https://www.walkart.us",
-    "logo": "https://www.walkart.us/favicon.png",
-    "sameAs": [],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "url": "https://www.walkart.us/contact"
-    }
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8752256622551534" crossorigin="anonymous"></script>
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; font-size: 16px; }
-    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
-    a { text-decoration: none; color: inherit; }
-
-    /* ── HEADER ── */
-    .site-header {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      padding: 0 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-    }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-      gap: 16px;
-    }
-    .logo { display: flex; align-items: center; }
-    .logo img { height: 48px; width: auto; display: block; }
-    .main-nav { display: flex; align-items: center; gap: 4px; }
-    .main-nav a {
-      color: #555;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 8px 14px;
-      border-radius: 8px;
-      transition: all 0.15s;
-    }
-    .main-nav a:hover, .main-nav a.active { color: #FF4D6D; background: rgba(255,77,109,0.06); }
-    .header-search {
-      display: flex;
-      align-items: center;
-      background: #f0f0f0;
-      border-radius: 50px;
-      padding: 8px 16px;
-      gap: 8px;
-      flex: 1;
-      max-width: 320px;
-    }
-    .header-search input {
-      border: none;
-      background: transparent;
-      font-family: inherit;
-      font-size: 0.88rem;
-      color: #1a1a2e;
-      outline: none;
-      width: 100%;
-    }
-    .header-search input::placeholder { color: #aaa; }
-    .header-search button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0;
-      line-height: 1;
-      color: #FF4D6D;
-    }
-    .nav-hamburger {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #1a1a2e;
-      padding: 6px;
-    }
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background: #fff;
-      border-top: 1px solid #eee;
-      padding: 12px 20px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      padding: 10px 0;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #333;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: #FF4D6D; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      background: #1a1a2e;
-      color: #fff;
-      padding: 72px 20px 56px;
-      text-align: center;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=700&fit=crop&auto=format') center/cover no-repeat;
-      opacity: 0.15;
-    }
-    .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
-    .hero h1 { font-size: 2.6rem; line-height: 1.2; margin-bottom: 14px; }
-    .hero p { font-size: 1.1rem; opacity: 0.85; margin-bottom: 32px; }
-    .hero-search {
-      display: flex;
-      max-width: 540px;
-      margin: 0 auto;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-    }
-    .hero-search input {
-      flex: 1;
-      padding: 16px 22px;
-      border: none;
-      font-size: 1rem;
-      font-family: inherit;
-      outline: none;
-      color: #1a1a2e;
-    }
-    .hero-search button {
-      background: #FF4D6D;
-      color: #fff;
-      border: none;
-      padding: 16px 26px;
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
-    }
-    .hero-search button:hover { background: #c9184a; }
-
-    /* ── SECTIONS ── */
-    .section { max-width: 1100px; margin: 0 auto; padding: 52px 20px 0; }
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 26px;
-    }
-    .section-head h2 { font-size: 1.5rem; }
-    .section-head a { color: #FF4D6D; font-size: 0.88rem; font-weight: 700; }
-    .section-head a:hover { text-decoration: underline; }
-
-    /* ── CATEGORIES ── */
-    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-    .cat-card {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      height: 140px;
-      display: block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-    .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-    .cat-card:hover img { transform: scale(1.06); }
-    .cat-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0.62)); }
-    .cat-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 12px; z-index: 1; color: #fff; font-weight: 700; font-size: 0.93rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
-    .cat-sub { font-size: 0.73rem; opacity: 0.8; font-weight: 400; display: block; margin-top: 2px; }
-
-    /* ── RECIPE CARDS ── */
-    .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
-    .recipe-card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      transition: transform 0.15s, box-shadow 0.15s;
-      display: block;
-      color: inherit;
-    }
-    .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .recipe-card img { width: 100%; height: 175px; object-fit: cover; display: block; }
-    .recipe-card-body { padding: 14px; }
-    .recipe-tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
-    .tag { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #f0f0f0; color: #555; }
-    .tag.veg { background: #e8f5e9; color: #2e7d32; }
-    .tag.fast { background: #fff3e0; color: #e65100; }
-    .recipe-card h3 { font-size: 0.98rem; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; line-height: 1.3; }
-    .recipe-card p { font-size: 0.82rem; color: #888; line-height: 1.4; }
-    .recipe-meta { display: flex; gap: 12px; margin-top: 8px; font-size: 0.8rem; color: #aaa; }
-
-    /* ── BLOG PREVIEWS ── */
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-    .blog-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px;
-      border: 1px solid #eee;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      transition: border-color 0.15s;
-    }
-    .blog-card:hover { border-color: #FF4D6D; }
-    .blog-card .icon { font-size: 2.2rem; flex-shrink: 0; }
-    .blog-card .cat { font-size: 0.7rem; color: #FF4D6D; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
-    .blog-card h3 { font-size: 0.9rem; font-weight: 700; color: #1a1a2e; line-height: 1.35; }
-    .blog-card .mins { font-size: 0.76rem; color: #bbb; margin-top: 4px; }
-
-    /* ── FEATURES ── */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-    .feat-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .feat-card .ico { font-size: 2.4rem; display: block; margin-bottom: 12px; }
-    .feat-card h3 { font-size: 0.98rem; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
-    .feat-card p { font-size: 0.83rem; color: #888; line-height: 1.5; }
-
-    /* ── CTA STRIP ── */
-    .cta-strip {
-      background: linear-gradient(135deg, #FF4D6D, #c9184a);
-      color: #fff;
-      padding: 52px 20px;
-      text-align: center;
-      margin-top: 56px;
-    }
-    .cta-strip h2 { font-size: 1.7rem; margin-bottom: 10px; }
-    .cta-strip p { opacity: 0.9; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 1rem; }
-    .cta-btn {
-      display: inline-block;
-      background: #fff;
-      color: #FF4D6D;
-      font-weight: 800;
-      font-family: 'Outfit', sans-serif;
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-size: 1rem;
-      transition: opacity 0.15s;
-    }
-    .cta-btn:hover { opacity: 0.92; }
-
-    /* ── AD ── */
-    .ad-wrap { max-width: 1100px; margin: 40px auto 0; padding: 0 20px; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #1a1a2e;
-      color: #aaa;
-      text-align: center;
-      padding: 36px 20px;
-      font-size: 0.83rem;
-      margin-top: 56px;
-    }
-    footer a { color: #FF4D6D; }
-    footer a:hover { text-decoration: underline; }
-    .footer-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .main-nav { display: none; }
-      .header-search { display: none; }
-      .nav-hamburger { display: block; }
-      .hero h1 { font-size: 1.8rem; }
-      .cat-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .hero-search { flex-direction: column; border-radius: 12px; }
-      .hero-search input { border-radius: 12px 12px 0 0; }
-      .hero-search button { border-radius: 0 0 12px 12px; }
-    }
-  </style>
+  <meta property="og:site_name" content="Walkart">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════
-     EN-TÊTE
-═══════════════════════════════════ -->
-<header class="site-header">
-  <div class="header-inner">
-    <a class="logo" href="/">
-      <img src="logo.svg" alt="Walkart – Recettes du Monde">
-    </a>
-    <nav class="main-nav">
-      <a href="/" class="active">Accueil</a>
-      <a href="/recettes">Recettes</a>
-      <a href="/blog">Blog</a>
-      <a href="/about">À propos</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="header-search">
-      <input type="text" id="header-q" placeholder="Rechercher une recette…" aria-label="Recherche">
-      <button onclick="window.location.href='/recettes/?search='+encodeURIComponent(document.getElementById('header-q').value)" aria-label="Chercher">🔍</button>
+<!-- ── Header ── -->
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">Walk<span>art</span></a>
+      <nav class="nav">
+        <a href="/how-it-works/">How it works</a>
+        <a href="/publishers/">Publishers</a>
+        <a href="/merchants/">Merchants</a>
+        <a href="/networks/">Networks</a>
+        <a href="/blog/">Resources</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/login/" class="btn btn-outline">Log in</a>
+        <a href="/publishers/" class="btn btn-primary">Get started</a>
+      </div>
+      <button class="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="nav-hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">☰</button>
   </div>
-  <nav class="mobile-menu" id="mobile-menu">
-    <a href="/">Accueil</a>
-    <a href="/recettes">Recettes</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">À propos</a>
-    <a href="/contact">Contact</a>
+  <nav class="mobile-nav">
+    <a href="/how-it-works/">How it works</a>
+    <a href="/publishers/">Publishers</a>
+    <a href="/merchants/">Merchants</a>
+    <a href="/networks/">Networks</a>
+    <a href="/blog/">Resources</a>
+    <a href="/login/" class="btn btn-outline btn-full">Log in</a>
+    <a href="/publishers/" class="btn btn-primary btn-full">Get started free</a>
   </nav>
 </header>
 
-<!-- ═══════════════════════════════════
-     HERO
-═══════════════════════════════════ -->
+<!-- ── Hero ── -->
 <section class="hero">
-  <div class="hero-inner">
-    <h1>🍽️ Des milliers de recettes du monde entier</h1>
-    <p>Méditerranée, Asie, Végétarien, Rapide, Budget… Explorez, planifiez et cuisinez pas à pas.</p>
-    <div class="hero-search">
-      <input id="hero-q" type="text" placeholder="Rechercher une recette, un ingrédient…" aria-label="Recherche de recette">
-      <button onclick="window.location.href='/recettes/?search='+encodeURIComponent(document.getElementById('hero-q').value)">🔍 Chercher</button>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-badge">Affiliate Platform</span>
+        <h1>Monetize your commerce traffic effortlessly</h1>
+        <p class="hero-sub">Connect your editorial or shopping platform to 48,500+ merchants and 50+ affiliate networks — and start earning in minutes.</p>
+        <div class="hero-actions">
+          <a href="/publishers/" class="btn btn-white btn-lg">Sign up free</a>
+          <a href="/how-it-works/" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;">How it works</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-value">48,500+</div>
+            <div class="hero-stat-label">Merchants</div>
+          </div>
+          <div>
+            <div class="hero-stat-value">50+</div>
+            <div class="hero-stat-label">Networks</div>
+          </div>
+          <div>
+            <div class="hero-stat-value">100K+</div>
+            <div class="hero-stat-label">Publishers</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Publisher card (mirrors the SkimSource UI) -->
+      <div class="hero-card">
+        <h2>I am a Publisher</h2>
+        <p class="card-desc">Join us to effortlessly monetize your commerce traffic with access to 48,500 merchants and 50+ networks.</p>
+        <a href="/publishers/" class="btn btn-primary btn-full btn-lg" style="margin-bottom:20px">Sign up</a>
+        <ul class="checklist">
+          <li>Editorial publishers</li>
+          <li>Shopping platforms (deal, wishlist, payment)</li>
+          <li>Content creators &amp; influencers</li>
+          <li>Coupon &amp; cashback sites</li>
+        </ul>
+        <p class="card-note">Free to join — no minimum traffic requirement</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PUBLICITÉ
-═══════════════════════════════════ -->
-<div class="ad-wrap">
-  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- ═══════════════════════════════════
-     CUISINES DU MONDE
-═══════════════════════════════════ -->
-<div class="section">
-  <div class="section-head">
-    <h2>🌍 Cuisines du monde</h2>
-    <a href="/recettes">Voir tout →</a>
-  </div>
-  <div class="cat-grid">
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=260&fit=crop&auto=format" alt="Cuisine méditerranéenne" loading="lazy">
-      <div class="cat-label">Méditerranée<span class="cat-sub">Grèce · Italie · Maroc</span></div>
-    </a>
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=260&fit=crop&auto=format" alt="Cuisine asiatique" loading="lazy">
-      <div class="cat-label">Asiatique<span class="cat-sub">Japon · Thaï · Inde</span></div>
-    </a>
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=260&fit=crop&auto=format" alt="Végétarien" loading="lazy">
-      <div class="cat-label">Végétarien<span class="cat-sub">Sans viande · Équilibré</span></div>
-    </a>
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=260&fit=crop&auto=format" alt="Recettes rapides" loading="lazy">
-      <div class="cat-label">Rapide &lt;30 min<span class="cat-sub">Soir de semaine</span></div>
-    </a>
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1488461854538-674ad22f08cd?w=400&h=260&fit=crop&auto=format" alt="Cuisine économique" loading="lazy">
-      <div class="cat-label">Budget<span class="cat-sub">Économique · Simple</span></div>
-    </a>
-    <a class="cat-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&h=260&fit=crop&auto=format" alt="Cuisine vegan" loading="lazy">
-      <div class="cat-label">Vegan<span class="cat-sub">100% végétal</span></div>
-    </a>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     RECETTES POPULAIRES
-═══════════════════════════════════ -->
-<div class="section" style="padding-top:48px">
-  <div class="section-head">
-    <h2>⭐ Recettes populaires</h2>
-    <a href="/recettes">Voir tout →</a>
-  </div>
-  <div class="recipe-grid">
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=280&fit=crop&auto=format" alt="Salade grecque" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Végétarien</span><span class="tag fast">15 min</span></div>
-        <h3>Salade grecque authentique</h3>
-        <p>Tomates, concombres, feta, olives et origan frais.</p>
-        <div class="recipe-meta"><span>⏱ 15 min</span><span>👤 2 pers.</span><span>⭐ 4.8</span></div>
+<!-- ── Stats bar ── -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value" data-count="48500" data-suffix="+">48,500+</div>
+        <div class="stat-label">Merchants worldwide</div>
       </div>
-    </a>
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=280&fit=crop&auto=format" alt="Spaghetti Carbonara" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Italien</span></div>
-        <h3>Spaghetti Carbonara</h3>
-        <p>La vraie recette romaine, œufs, pecorino et guanciale.</p>
-        <div class="recipe-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
+      <div class="stat-item">
+        <div class="stat-value" data-count="50" data-suffix="+">50+</div>
+        <div class="stat-label">Affiliate networks</div>
       </div>
-    </a>
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop&auto=format" alt="Curry de pois chiches" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag veg">Vegan</span><span class="tag fast">25 min</span></div>
-        <h3>Curry de pois chiches</h3>
-        <p>Épicé, crémeux et nourrissant — comfort food végétalien.</p>
-        <div class="recipe-meta"><span>⏱ 25 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
+      <div class="stat-item">
+        <div class="stat-value" data-count="100000" data-suffix="+">100,000+</div>
+        <div class="stat-label">Active publishers</div>
       </div>
-    </a>
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=280&fit=crop&auto=format" alt="Sushi maki" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag">Japonais</span></div>
-        <h3>Sushi maki maison</h3>
-        <p>Apprenez à rouler vos propres makis avec saumon frais.</p>
-        <div class="recipe-meta"><span>⏱ 45 min</span><span>👤 2 pers.</span><span>⭐ 4.6</span></div>
+      <div class="stat-item">
+        <div class="stat-value" data-count="99" data-suffix="%">99%</div>
+        <div class="stat-label">Link coverage rate</div>
       </div>
-    </a>
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1551504734-5da0b8b21f9a?w=400&h=280&fit=crop&auto=format" alt="Tacos mexicains" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag fast">20 min</span><span class="tag">Mexicain</span></div>
-        <h3>Tacos de bœuf épicés</h3>
-        <p>Viande épicée, avocat, coriandre et salsa maison.</p>
-        <div class="recipe-meta"><span>⏱ 20 min</span><span>👤 4 pers.</span><span>⭐ 4.7</span></div>
-      </div>
-    </a>
-    <a class="recipe-card" href="/recettes">
-      <img src="https://images.unsplash.com/photo-1598515215532-9b64ba41b11a?w=400&h=280&fit=crop&auto=format" alt="Poulet rôti" loading="lazy">
-      <div class="recipe-card-body">
-        <div class="recipe-tags"><span class="tag">Classique</span></div>
-        <h3>Poulet rôti aux herbes</h3>
-        <p>Doré et juteux, parfumé au thym et romarin.</p>
-        <div class="recipe-meta"><span>⏱ 1h30</span><span>👤 4 pers.</span><span>⭐ 4.9</span></div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     PUBLICITÉ
-═══════════════════════════════════ -->
-<div class="ad-wrap" style="margin-top:48px">
-  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8752256622551534" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-
-<!-- ═══════════════════════════════════
-     BLOG CUISINE & NUTRITION
-═══════════════════════════════════ -->
-<div class="section" style="padding-top:48px">
-  <div class="section-head">
-    <h2>📝 Blog Cuisine &amp; Nutrition</h2>
-    <a href="/blog">Voir le blog →</a>
-  </div>
-  <div class="blog-grid">
-    <a class="blog-card" href="/blog/cuisine-mediterraneenne">
-      <div class="icon">🫒</div>
-      <div>
-        <div class="cat">Nutrition</div>
-        <h3>Les secrets de la cuisine méditerranéenne</h3>
-        <div class="mins">6 min · 10 mars 2025</div>
-      </div>
-    </a>
-    <a class="blog-card" href="/blog/macronutriments-guide">
-      <div class="icon">💪</div>
-      <div>
-        <div class="cat">Nutrition</div>
-        <h3>Macronutriments : le guide complet</h3>
-        <div class="mins">8 min · 25 mars 2025</div>
-      </div>
-    </a>
-    <a class="blog-card" href="/blog/epices-indispensables">
-      <div class="icon">🌶️</div>
-      <div>
-        <div class="cat">Conseils</div>
-        <h3>Les 10 épices indispensables dans votre cuisine</h3>
-        <div class="mins">5 min · 2 avril 2025</div>
-      </div>
-    </a>
-    <a class="blog-card" href="/blog/zero-gaspillage">
-      <div class="icon">♻️</div>
-      <div>
-        <div class="cat">Conseils</div>
-        <h3>Zéro gaspillage : transformer les restes</h3>
-        <div class="mins">5 min · 5 mai 2025</div>
-      </div>
-    </a>
-    <a class="blog-card" href="/blog/cuisine-rapide-30-minutes">
-      <div class="icon">⚡</div>
-      <div>
-        <div class="cat">Conseils</div>
-        <h3>10 repas prêts en 30 minutes</h3>
-        <div class="mins">5 min · 1 juin 2025</div>
-      </div>
-    </a>
-    <a class="blog-card" href="/blog/microbiote-intestinal">
-      <div class="icon">🦠</div>
-      <div>
-        <div class="cat">Nutrition</div>
-        <h3>Microbiote intestinal : soigner sa flore</h3>
-        <div class="mins">6 min · 22 mai 2025</div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     FONCTIONNALITÉS
-═══════════════════════════════════ -->
-<div class="section" style="padding-top:48px">
-  <div class="section-head">
-    <h2>✨ Tout ce que Walkart fait pour vous</h2>
-  </div>
-  <div class="features-grid">
-    <div class="feat-card">
-      <span class="ico">🔍</span>
-      <h3>Recherche avancée</h3>
-      <p>Filtrez par ingrédients, cuisine, temps, régime alimentaire et valeurs nutritionnelles.</p>
-    </div>
-    <div class="feat-card">
-      <span class="ico">📅</span>
-      <h3>Planificateur de repas</h3>
-      <p>Organisez votre semaine et générez automatiquement votre liste de courses.</p>
-    </div>
-    <div class="feat-card">
-      <span class="ico">💪</span>
-      <h3>Suivi nutritionnel</h3>
-      <p>Analysez les macronutriments et calories de chaque recette pour atteindre vos objectifs.</p>
-    </div>
-    <div class="feat-card">
-      <span class="ico">🛒</span>
-      <h3>Liste de courses</h3>
-      <p>Générée automatiquement à partir de vos recettes, organisée par rayon de supermarché.</p>
-    </div>
-    <div class="feat-card">
-      <span class="ico">❤️</span>
-      <h3>Favoris &amp; Collections</h3>
-      <p>Sauvegardez vos recettes préférées et créez des collections personnalisées.</p>
-    </div>
-    <div class="feat-card">
-      <span class="ico">🌍</span>
-      <h3>6 langues</h3>
-      <p>Disponible en français, anglais, espagnol, arabe, italien et japonais.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ═══════════════════════════════════
-     CTA
-═══════════════════════════════════ -->
-<div class="cta-strip">
-  <h2>Prêt à cuisiner mieux ?</h2>
-  <p>Rejoignez des milliers de passionnés de cuisine qui planifient leurs repas et mangent mieux avec Walkart. Gratuit et sans inscription.</p>
-  <a class="cta-btn" href="/recettes">Explorer les recettes →</a>
-</div>
-
-<!-- ═══════════════════════════════════
-     PIED DE PAGE
-═══════════════════════════════════ -->
-<footer>
-  <div class="footer-links">
-    <a href="/">Accueil</a>
-    <a href="/recettes">Recettes</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">À propos</a>
-    <a href="/privacy">Confidentialité</a>
-    <a href="/contact">Contact</a>
+<!-- ── How it works ── -->
+<section class="section">
+  <div class="container text-center">
+    <span class="section-tag">Simple &amp; fast</span>
+    <h2 class="section-title">Start earning in 3 steps</h2>
+    <p class="section-sub">No complex integrations. One script, one account, automatic monetization across all your content.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Sign up as a publisher</h3>
+        <p>Create your free account and add your website. Approval typically takes under 24 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Add one line of code</h3>
+        <p>Paste our lightweight JavaScript snippet before the closing &lt;/body&gt; tag. That's it — no plugins needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Earn commissions automatically</h3>
+        <p>Every eligible product link on your site is automatically converted into an affiliate link. Watch your revenue grow.</p>
+      </div>
+    </div>
+    <div style="margin-top:40px">
+      <a href="/publishers/" class="btn btn-primary btn-lg">Get started for free</a>
+    </div>
   </div>
-  <p>© 2025 Walkart – Recettes du Monde. Tous droits réservés.</p>
+</section>
+
+<!-- ── Publisher types ── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <span class="section-tag">Who we work with</span>
+      <h2 class="section-title">Built for every type of publisher</h2>
+      <p class="section-sub">Whether you run a blog, a deal site, or a shopping app — Walkart has you covered.</p>
+    </div>
+    <div class="pub-types">
+      <div class="pub-type-card">
+        <div class="pub-type-icon">✍️</div>
+        <h3>Editorial Publishers</h3>
+        <p>Transform your product mentions, reviews, and buying guides into revenue. Our technology automatically detects merchant links and converts them — no manual work required.</p>
+        <div class="tag-list">
+          <span class="tag">Blogs &amp; magazines</span>
+          <span class="tag">News sites</span>
+          <span class="tag">Review sites</span>
+          <span class="tag">Tech media</span>
+          <span class="tag">Lifestyle content</span>
+        </div>
+      </div>
+      <div class="pub-type-card">
+        <div class="pub-type-icon">🛍️</div>
+        <h3>Shopping Platforms</h3>
+        <p>Power your deals engine, wishlist feature, or checkout flow with our affiliate infrastructure. Access real-time product data and commission rates from 48,500+ merchants.</p>
+        <div class="tag-list">
+          <span class="tag">Deal sites</span>
+          <span class="tag">Wishlists</span>
+          <span class="tag">Price comparison</span>
+          <span class="tag">Cashback apps</span>
+          <span class="tag">Browser extensions</span>
+        </div>
+      </div>
+      <div class="pub-type-card">
+        <div class="pub-type-icon">📱</div>
+        <h3>Content Creators</h3>
+        <p>Turn your audience into income. Share curated product recommendations, shoppable posts, and personalized storefronts — all tracked and paid through one dashboard.</p>
+        <div class="tag-list">
+          <span class="tag">Influencers</span>
+          <span class="tag">YouTubers</span>
+          <span class="tag">Podcasters</span>
+          <span class="tag">Newsletter writers</span>
+        </div>
+      </div>
+      <div class="pub-type-card">
+        <div class="pub-type-icon">💰</div>
+        <h3>Coupon &amp; Loyalty Sites</h3>
+        <p>Serve your deal-seeking audience with verified coupon codes and cashback offers from thousands of merchants. Our feed updates in real time so your offers never expire.</p>
+        <div class="tag-list">
+          <span class="tag">Coupon aggregators</span>
+          <span class="tag">Loyalty programs</span>
+          <span class="tag">Rebate sites</span>
+          <span class="tag">Reward apps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <span class="section-tag">Features</span>
+      <h2 class="section-title">Everything you need to succeed</h2>
+      <p class="section-sub">Powerful tools built for publishers who take monetization seriously.</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Automatic link conversion</h3>
+        <p>Our script scans your existing content and converts eligible links to affiliate links instantly — across all pages, automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real-time dashboard</h3>
+        <p>Track clicks, conversions, and earnings in real time. Drill down by merchant, page, or link to optimize your content strategy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Global merchant coverage</h3>
+        <p>48,500+ merchants across fashion, electronics, travel, beauty, home and more — in every major market worldwide.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Single integration</h3>
+        <p>One JavaScript snippet gives you access to all networks simultaneously. No need to manage individual affiliate program accounts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Fraud protection</h3>
+        <p>Enterprise-grade fraud detection protects your commissions. Every conversion is validated before payment is processed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <h3>Flexible payouts</h3>
+        <p>Get paid monthly via bank transfer, PayPal, or check. Low minimum threshold of $10 — you earn, we pay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Networks ── -->
+<section class="section section-alt">
+  <div class="container text-center">
+    <span class="section-tag">Networks</span>
+    <h2 class="section-title">50+ networks, one integration</h2>
+    <p class="section-sub">We aggregate the world's leading affiliate networks so you don't have to manage them separately.</p>
+    <div class="networks-grid">
+      <div class="network-badge">Amazon Associates</div>
+      <div class="network-badge">CJ Affiliate</div>
+      <div class="network-badge">ShareASale</div>
+      <div class="network-badge">Rakuten</div>
+      <div class="network-badge">Awin</div>
+      <div class="network-badge">Impact</div>
+      <div class="network-badge">FlexOffers</div>
+      <div class="network-badge">ClickBank</div>
+      <div class="network-badge">Partnerize</div>
+      <div class="network-badge">Tradedoubler</div>
+      <div class="network-badge">Webgains</div>
+      <div class="network-badge">+ 40 more</div>
+    </div>
+    <div style="margin-top:36px">
+      <a href="/networks/" class="btn btn-outline">View all networks</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to monetize your traffic?</h2>
+    <p>Join 100,000+ publishers already earning with Walkart. Setup takes less than 5 minutes.</p>
+    <div class="cta-actions">
+      <a href="/publishers/" class="btn btn-white btn-lg">Sign up as Publisher</a>
+      <a href="/merchants/" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:#fff;">I am a Merchant</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">Walk<span style="color:#8899aa">art</span></a>
+        <p>The affiliate marketing platform connecting publishers with the world's largest merchant network.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Publishers</h4>
+        <a href="/publishers/">Get started</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/networks/">Networks</a>
+        <a href="/blog/">Resources</a>
+      </div>
+      <div class="footer-col">
+        <h4>Merchants</h4>
+        <a href="/merchants/">Advertise</a>
+        <a href="/merchants/#pricing">Pricing</a>
+        <a href="/merchants/#contact">Contact sales</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Walkart. All rights reserved.</span>
+      <span>walkart.us — Affiliate Marketing Platform</span>
+    </div>
+  </div>
 </footer>
 
+<script src="/js/main.js"></script>
+<script type="text/javascript" src="https://s.skimresources.com/js/304338X1792508.skimlinks.js"></script>
 </body>
 </html>
