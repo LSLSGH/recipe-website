@@ -172,6 +172,93 @@ img{max-width:100%;display:block}
 .mobile-nav a{padding:9px 12px;border-radius:6px;font-size:14px;color:var(--text);text-decoration:none}
 .mobile-nav a:hover{background:var(--orange-light);color:var(--orange)}
 
+/* ── Stores ticker ── */
+.stores-ticker {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stores-ticker::before,
+.stores-ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.stores-ticker::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
+.stores-ticker::after  { right: 0; background: linear-gradient(to left, #fff, transparent); }
+
+.ticker-label {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding-left: 24px;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.ticker-wrapper {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  animation: ticker-scroll 60s linear infinite;
+  width: max-content;
+}
+
+.ticker-track:hover { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 20px;
+  min-width: 90px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.ticker-item:hover { transform: scale(1.1); }
+
+.ticker-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 3px;
+}
+
+.ticker-item span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 /* ── Responsive ── */
 @media(max-width:1024px){.deals-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){
