@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Ma Boutique — Sélection Mode & Lifestyle</title>
+  <title>La Boutique — Sélection Mode & Lifestyle</title>
   <meta name="description"
     content="Découvrez ma sélection Mode & Lifestyle. Mes coups de cœur mis à jour quotidiennement.">
   <meta name="robots" content="index, follow">
@@ -21,10 +21,23 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
       padding: 40px;
-      margin: -20px auto 60px;
+      margin: 40px auto 60px;
       position: relative;
       z-index: 10;
       border: 1px solid var(--border);
+    }
+    .breadcrumb {
+      padding: 20px 0 0;
+      font-size: 14px;
+      color: #9d174d;
+      font-weight: 600;
+    }
+    .breadcrumb a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
     }
     .adblock-warning {
       text-align: center;
@@ -66,26 +79,20 @@
     </nav>
   </header>
 
-  <!-- ── Hero ── -->
-  <section class="hero-banner" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); color: #831843;">
+  <!-- ── Main Content ── -->
+  <main style="background: var(--bg); min-height: 70vh;">
     <div class="container">
-      <div class="hero-inner" style="grid-template-columns: 1fr; text-align: center;">
-        <div style="max-width: 700px; margin: 0 auto;">
-          <span class="hero-tag" style="background: #db2777; color: white;">Nouvelle Collection</span>
-          <h1 style="color: #831843;">Ma Sélection Mode & Lifestyle</h1>
-          <p style="color: #9d174d; font-size: 18px;">
-            Découvrez mes tenues préférées, mes indispensables beauté et mes trouvailles déco. Cliquez sur un article pour le shopper !
-          </p>
-        </div>
+      <div class="breadcrumb">
+        <a href="/">Accueil</a> › <span>La Boutique</span>
       </div>
-    </div>
-  </section>
 
-  <!-- ── Boutique Section ── -->
-  <section class="section" style="background: var(--bg); padding-top: 0;">
-    <div class="container">
       <div class="boutique-container">
         
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #831843; font-size: 32px; margin-bottom: 10px;">Ma Sélection du Moment</h1>
+          <p style="color: #9d174d; font-size: 16px;">Cliquez sur les articles pour découvrir où les acheter !</p>
+        </div>
+
         <!-- Code du Widget rewardStyle -->
         <div class="boutique-widget" data-widget-id="1305544">
           <script type="text/javascript">
@@ -122,20 +129,7 @@
 
       </div>
     </div>
-  </section>
-
-  <!-- ── Email signup ── -->
-  <section class="email-signup" style="background: linear-gradient(135deg, #831843, #be185d);">
-    <div class="container">
-      <h2>💌 Rejoignez la Newsletter</h2>
-      <p>Recevez mes derniers looks et bons plans directement dans votre boîte mail.</p>
-      <form class="email-form" novalidate>
-        <input type="email" placeholder="Votre adresse email…" aria-label="Email address">
-        <button type="submit" style="background: #fbcfe8; color: #831843;">S'inscrire</button>
-      </form>
-      <p style="font-size:12px;opacity:.8;margin-top:12px;color: #fce7f3;">Aucun spam. Désinscription à tout moment.</p>
-    </div>
-  </section>
+  </main>
 
   <!-- ── Footer ── -->
   <footer class="footer">
